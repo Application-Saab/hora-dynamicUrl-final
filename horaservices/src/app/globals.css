@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -85,20 +87,6 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -125,6 +113,10 @@ body {
   align-items: center;
   margin: 23px auto 14px;
   width: 93%;
+}
+
+a {
+  text-decoration: none;
 }
 
 
@@ -519,13 +511,6 @@ img.dish-image.selected {
   /* Adjust color as needed */
 }
 
-a.whatappicon {
-  position: fixed;
-  right: 20px;
-  bottom: 60px;
-  z-index: 11111111;
-  width: 60px;
-}
 p.ordersummeryname , .ordersummeryprice{
   font-size: 12px;
   margin: 10px 0 0;

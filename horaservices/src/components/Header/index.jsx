@@ -12,7 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 // import useScrollToTop from './useScrollToTop'; // Import the custom hook
 // import ChefCitypage from "../pages/ChefCitypage";
-// import Popup from "../utills/popup";
+ import Popup from "../../utils/popup";
 
 // import styles from "./header.module.css";
 
@@ -54,6 +54,7 @@ function Header() {
   const openCatItems = (subCategory) => {
     router.push(`/decoration-cat-page/${subCategory}`);
   };
+  const isLoggedIn = typeof window !== 'undefined' && localStorage.getItem("isLoggedIn") === "true";
 
 
 useEffect(() => {
@@ -202,7 +203,7 @@ useEffect(() => {
           <div>
             <ul style={styles.desktopMenu}>
               <li style={styles.desktopMenuli1}>
-                {localStorage.getItem("isLoggedIn") !== "true" ? (
+              {!isLoggedIn ? (
                   <Link href="/login" style={styles.linkicon}>
                     <FontAwesomeIcon icon={faUser} style={styles.icon} />
                     <span style={{ marginLeft: "3px" }}>Login</span>

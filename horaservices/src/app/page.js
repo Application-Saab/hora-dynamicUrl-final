@@ -30,6 +30,7 @@ import service5Image from "../assets/hospitality-services.png";
 import service7Image from "../assets/entertainment-home-banner-sec.png";
 import service6Image from "../assets/return-home-banner-sec.png";
 import downloadAppImage from "../assets/download-app-sec.png";
+import whatsppicon from "../assets/whatsapp-icon.png";
 // import HomeSlider from "../component/HomeSlider";
 import { Helmet } from "react-helmet";
 import { getHomeOrganizationSchema } from "../utils/schema";
@@ -38,10 +39,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
+import Footer from "@/components/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './globals.css';
 
 export default function Home() {
   const router = useRouter();
-  // const [showButton, setShowButton] = useState(window.innerWidth > 800);
+  const [showButton, setShowButton] = useState(window.innerWidth > 800);
   const openLink = () => {
     window.open(
       "https://play.google.com/store/apps/details?id=com.hora",
@@ -121,94 +125,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <main className={styles.main}>
-        {/* <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div> */}
         <div>
           <Helmet>
             <title>
@@ -246,10 +163,10 @@ export default function Home() {
             className={styles.homebanner}
           >
             <div
-            className={styles.bgImg}
-            style={{
-              backgroundImage: `url(${bannerSvgImage.src})`
-            }}
+              className={styles.bgImg}
+              style={{
+                backgroundImage: `url(${bannerSvgImage.src})`
+              }}
             >
               <div className={styles.pageWidth}>
                 <div className={styles.textContainer}>
@@ -285,7 +202,7 @@ export default function Home() {
                     <Image
                       src={bannerDecorationImage}
                       alt="Decoration Near me"
-                      style={{height:'200px'}}
+                      style={{ height: '200px' }}
 
                     />
                     <h2
@@ -303,7 +220,7 @@ export default function Home() {
                 </div>
                 <div className={styles.bannerDecorationImage}>
                   <Link href="/book-chef-cook-for-party">
-                    <Image src={bannerChefImage} alt="Chef Near me"  style={{height:'200px'}} />
+                    <Image src={bannerChefImage} alt="Chef Near me" style={{ height: '200px' }} />
                     <h2
                       style={{
                         fontSize: "16px",
@@ -321,8 +238,8 @@ export default function Home() {
                   <Link href="/party-food-delivery-live-catering-buffet/party-food-delivery">
                     <Image
                       src={bannerFoodDeliveryImage}
-                      alt="Food Delivery Near me" 
-                      style={{height:'200px'}}
+                      alt="Food Delivery Near me"
+                      style={{ height: '200px' }}
                     />
                     <h2
                       style={{
@@ -339,7 +256,7 @@ export default function Home() {
                 </div>
                 <div className={styles.bannerDecorationImage}>
                   <Link href="/party-food-delivery-live-catering-buffet/party-live-buffet-catering">
-                    <Image src={service4Image} alt="Return Gift Near me"  style={{height:'200px'}} />
+                    <Image src={service4Image} alt="Return Gift Near me" style={{ height: '200px' }} />
                     <h2
                       style={{
                         fontSize: "16px",
@@ -358,7 +275,7 @@ export default function Home() {
                     <Image
                       src={bannerEntertainmentImage}
                       alt="Entertainment Near me"
-                      style={{height:'200px'}}
+                      style={{ height: '200px' }}
                     />
                     <h2
                       style={{
@@ -653,8 +570,8 @@ export default function Home() {
             style={{
               justifyContent: "center",
               alignContent: "center",
-              fontSize: "5px",
-              padding: "0 2px",
+              fontSize: "14px",
+              padding: "0 16px",
             }}
           >
             <p>
@@ -781,6 +698,11 @@ export default function Home() {
               Mumbai, Looking for cook in Mumbai, Mini cater
             </p>
           </div>
+        </div>
+        <div>
+          <Link href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">
+            <Image className={styles.whatappicon} src={whatsppicon} alt="WhatsApp Icon" />
+          </Link>
         </div>
       </main>
     </>
