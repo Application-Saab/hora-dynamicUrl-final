@@ -40,7 +40,7 @@ export const getDecorationOrganizationSchema = () => ({
     ],
     "description": `Book the Coolest Birthday Decorations for Kids in Bangalore. Themed, balloon decorations, or activities for kids, get only the best for your kid with Hora Services.`,
     "brand": "Horservices.com",
-    "sku": `${categoryName.toLowerCase().replace(/\s/g, '-')}`,
+    "sku": `${categoryName?.toLowerCase().replace(/\s/g, '-')}`,
     "priceRange": "999-39999",
     "aggregateRating": {
       "@type": "AggregateRating",
