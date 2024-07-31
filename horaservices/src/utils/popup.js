@@ -40,9 +40,9 @@ const Popup = ({ onClose, popupMessage }) => {
             className="popup-image"
           />*/}
 
-          {popupMessage?.image ? (
+          {popupMessage?.img ? (
               <Image
-                  src={popupMessage.image}
+                  src={popupMessage.img}
                   alt="Popup"
                   className="popup-image"
               />

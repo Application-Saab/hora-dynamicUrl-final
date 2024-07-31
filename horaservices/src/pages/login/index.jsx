@@ -55,7 +55,7 @@ const Login = () => {
         localStorage.setItem("isLoggedIn", "false");
         localStorage.clear();
         setPopupMessage({
-            image: logoutImage,
+            img: logoutImage,
             title: "Logout Successful",
             body: "You have been logged out successfully.",
             button: "OK"
@@ -75,7 +75,7 @@ const Login = () => {
 
     const handleOtpSuccess = () => {
         setPopupMessage({
-            image: logoutImage,
+            img: logoutImage,
             title: "Logout Successful",
             body: "You have been logged out successfully.",
             button: "OK"
@@ -85,7 +85,7 @@ const Login = () => {
 
     const handleOrderWarning = () => {
         setPopupMessage({
-            image: orderWarning,
+            img: orderWarning,
             title: "Total Order Amount is less than ₹700",
             body: "Total Order amount can not be less than ₹700, Add more to continue",
             button: "Add More",

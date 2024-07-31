@@ -110,7 +110,7 @@ useEffect(() => {
     localStorage.setItem("isLoggedIn", "false");
     localStorage.clear();
     setPopupMessage({
-      image: logoutImage,
+      img: logoutImage,
       title: "Logout Successful",
       body: "You have been logged out successfully.",
       button: "OK"
