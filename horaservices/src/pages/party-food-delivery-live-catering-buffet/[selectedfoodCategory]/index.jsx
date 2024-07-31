@@ -25,7 +25,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     const viewBottomSheetRef = useRef(null);
     const bottomSheetRef = useRef(null);
     const router = useRouter();
-    let { selectedfoodCategory } = router.query;
+    let  { selectedfoodCategory }  = router.query;
     const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
     const [orderType, setOrderType] = useState(2);
     const [isDishSelected, setIsDishSelected] = useState(false);
@@ -64,7 +64,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
         setWarningVisibleForCuisineCount(false);
         setWarningVisibleForTotalAmount(false);
       };
-
+      console.log(selectedOption)
    
   // get category of cuisines
 
@@ -382,7 +382,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
           });
             // router.push(`/party-food-delivery-live-catering-buffet-select-date/${selectedOption}`, { state: { selectedDishDictionary, selectedDishPrice, selectedDishes, orderType , isDishSelected , selectedCount , selectedDishQuantities  , selectedOption} });
             router.push({
-                pathname: `/party-food-delivery-live-catering-buffet-select-date/party-food-delivery`,
+                pathname: `/party-food-delivery-live-catering-buffet-select-date/${selectedOption}`,
                 query: {
                     selectedDishDictionary: JSON.stringify(selectedDishDictionary),
                     selectedDishPrice,
