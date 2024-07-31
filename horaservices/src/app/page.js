@@ -31,21 +31,19 @@ import service7Image from "../assets/entertainment-home-banner-sec.png";
 import service6Image from "../assets/return-home-banner-sec.png";
 import downloadAppImage from "../assets/download-app-sec.png";
 import whatsppicon from "../assets/whatsapp-icon.png";
-// import HomeSlider from "../component/HomeSlider";
+// import HomeSlider from "../components/HomeSlider";
 import { Helmet } from "react-helmet";
 import { getHomeOrganizationSchema } from "../utils/schema";
-import Header from "@/components/Header";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Footer from "@/components/Footer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
 
 export default function Home() {
   const router = useRouter();
-  const [showButton, setShowButton] = useState(window.innerWidth > 800);
+  const [showButton, setShowButton] = useState(false);
   const openLink = () => {
     window.open(
       "https://play.google.com/store/apps/details?id=com.hora",
@@ -54,11 +52,12 @@ export default function Home() {
   };
   const schemaOrg = getHomeOrganizationSchema();
   const scriptTag = JSON.stringify(schemaOrg);
+
   useEffect(() => {
+    setShowButton(window.innerWidth > 800);
     function handleResize() {
       setShowButton(window.innerWidth > 800);
-    }
-
+    };
     window.addEventListener("resize", handleResize);
 
     return () => {

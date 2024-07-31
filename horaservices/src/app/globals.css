@@ -11,30 +11,24 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
+  --primary-glow: conic-gradient(from 180deg at 50% 50%,
+      #16abff33 0deg,
+      #0885ff33 55deg,
+      #54d6ff33 120deg,
+      #0071ff33 160deg,
+      transparent 360deg);
+  --secondary-glow: radial-gradient(rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0));
 
   --tile-start-rgb: 239, 245, 249;
   --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
+  --tile-border: conic-gradient(#00000080,
+      #00000040,
+      #00000030,
+      #00000020,
+      #00000010,
+      #00000010,
+      #00000080);
 
   --callout-rgb: 238, 240, 241;
   --callout-border-rgb: 172, 175, 176;
@@ -49,24 +43,20 @@
     --background-end-rgb: 0, 0, 0;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
+    --secondary-glow: linear-gradient(to bottom right,
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0),
+        rgba(1, 65, 255, 0.3));
 
     --tile-start-rgb: 2, 13, 46;
     --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
+    --tile-border: conic-gradient(#ffffff80,
+        #ffffff40,
+        #ffffff30,
+        #ffffff20,
+        #ffffff10,
+        #ffffff10,
+        #ffffff80);
 
     --callout-rgb: 20, 20, 20;
     --callout-border-rgb: 108, 108, 108;
@@ -93,6 +83,7 @@ body {
     color-scheme: dark;
   }
 }
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -270,6 +261,7 @@ li.inclusionstyle {
   padding-top: 4px;
   margin-left: 1px;
 }
+
 .tabButton {
   border: none;
 }
@@ -511,31 +503,39 @@ img.dish-image.selected {
   /* Adjust color as needed */
 }
 
-p.ordersummeryname , .ordersummeryprice{
+p.ordersummeryname,
+.ordersummeryprice {
   font-size: 12px;
   margin: 10px 0 0;
 }
+
 .ordersummaryproduct {
   border: 1px solid #efefef;
-    padding: 10px;
-    width: 15%;
-    margin: 0 10px 13px 10px;
+  padding: 10px;
+  width: 15%;
+  margin: 0 10px 13px 10px;
 }
+
 .ordersummaryproduct img {
   height: auto;
 }
+
 .footerheading {
   font-size: 20px;
 }
+
 p.pro_name {
   min-height: 34px;
 }
+
 p.m-0.p-0.fw-bold.filter-price-tag {
   padding: 0 15px !important;
 }
+
 .prod-details {
   padding: 0 0 0 19px;
 }
+
 /* login form css */
 
 .input-field {
@@ -560,20 +560,25 @@ p.m-0.p-0.fw-bold.filter-price-tag {
 .phone-number-span {
   color: #9252aa !important;
 }
+
 .timepkerSec {
   width: 49% !important;
   padding: 5px 18px 9px !important;
 }
+
 .otp-failed {
   border: 1px solid #ff6666;
   background-color: #ffe0e0;
 }
+
 .prod-detailsp {
   padding-left: 22px;
 }
+
 .bannerDecorationImage a {
   text-decoration: none;
 }
+
 button.dec-continueButton {
   border-radius: 18px !important;
   width: 306px !important;
@@ -581,20 +586,25 @@ button.dec-continueButton {
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
 button.dec-continueButton {
   margin: 16px auto 12px !important;
 }
+
 .no-orders {
   padding: 100px 30px;
 }
+
 .left-details {
   text-align: left;
 }
+
 main.order-list .order-container {
   justify-content: center;
   align-items: center;
   display: flex;
 }
+
 .price-para {
   text-align: end !important;
 }
@@ -604,14 +614,17 @@ main.order-list .order-container {
   div#faqQ {
     padding: 0 20px;
   }
-.order-detail-page-decoration{
-  width: 100% !important;
-  padding: 0 !important;
-}
+
+  .order-detail-page-decoration {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
   /* My order mobile view */
   .order-list {
     width: 100% !important;
   }
+
   .order-card {
     width: 100% !important;
   }
@@ -631,6 +644,7 @@ main.order-list .order-container {
     cursor: pointer;
     margin-top: 10px !important;
   }
+
   .send-invite {
     color: white;
     border: 1px solid #9252aa;
@@ -649,6 +663,7 @@ main.order-list .order-container {
     padding: 0px !important;
     margin-top: 5px;
   }
+
   /* Order Header mobile view css */
 
   .order-header {
@@ -667,12 +682,13 @@ main.order-list .order-container {
   .order-status-button {
     font-size: 10px !important;
   }
- 
+
 
   .header-icons {
     height: 10px !important;
     width: 10px !important;
   }
+
   .order-info-div p {
     text-align: start !important;
     font-size: 11px !important;
@@ -691,6 +707,7 @@ main.order-list .order-container {
     justify-content: space-between;
     padding: 10px !important;
   }
+
   .tab.active {
     width: 33% !important;
     border-top-right-radius: 15px !important;
@@ -706,15 +723,18 @@ main.order-list .order-container {
     color: #823d9d;
     font-size: 11px;
   }
+
   .tabs {
     margin-bottom: 8px !important;
-}
+  }
+
   .advance-preparations-title {
     color: #9252aa;
     font-size: 20px;
     font-weight: 700;
     margin-top: 10px !important;
   }
+
   .category-title {
     color: #000;
     font-family: Roboto;
@@ -748,6 +768,7 @@ main.order-list .order-container {
     border-radius: 36px !important;
     margin-bottom: 8px;
   }
+
   .menu-item-details {
     width: 48.212px;
     height: 70.87px;
@@ -942,18 +963,22 @@ main.order-list .order-container {
     flex-direction: column;
     align-items: center;
   }
+
   .contact-us-main-heading {
     width: 90%;
     align-items: center;
   }
+
   .contact-us-secRight {
     flex-direction: column;
     align-items: center;
   }
+
   .contact-us-boxsection {
     width: 90% !important;
     margin-top: 15px;
   }
+
   .contact-us-second-heading {
     padding: 30px !important;
   }
@@ -967,9 +992,11 @@ main.order-list .order-container {
     width: 100%;
     margin-top: 10px;
   }
+
   .contact-us-img {
     border-radius: 5px;
   }
+
   .contact-us-heading {
     text-align: center;
     margin-top: 10px;
@@ -979,45 +1006,58 @@ main.order-list .order-container {
   p#city-description {
     padding: 0 20px;
   }
+
   .contactus-redirection {
     font-size: 12px;
     font-weight: 600;
   }
+
   .pri_details {
     margin: 15px 0 0;
   }
+
   .prod-detailsp {
     padding-left: 0px;
   }
+
   .checoutSec.my-3.gap-5.overflow-x-hidden.overflow-y-auto {
     margin-top: 9px !important;
   }
+
   .filter-price-tag {
     font-size: 10px !important;
   }
+
   .svg-inline--fa {
     height: 12px;
     margin: 8px 0 0;
   }
+
   p.ordersummeryname {
     font-size: 11px;
     min-height: 52px;
   }
+
   p#city-area-title {
     font-size: 20px !important;
   }
+
   p.other-cities {
     font-size: 24px !important;
   }
+
   #faqQ h1 {
     font-size: 20px !important;
   }
+
   #faqQ p {
     font-size: 11px !important;
   }
+
   .des-city-area h1 {
     font-size: 20px !important;
   }
+
   button.continuebtnchef.btn.btn-primary {
     width: 84% !important;
   }
@@ -1039,6 +1079,7 @@ main.order-list .order-container {
   .personsectionprice p {
     font-size: 61% !important;
   }
+
   .billheading {
     font-size: 79% !important;
   }
@@ -1086,6 +1127,7 @@ main.order-list .order-container {
   .order-container {
     padding: 9px 9px;
   }
+
   .mobileViewHeader {
     color: #fff;
     display: flex !important;
@@ -1182,7 +1224,7 @@ main.order-list .order-container {
     padding: 0 16px !important;
   }
 
- 
+
   .decDetails {
     margin-top: 0 !important;
     flex-direction: column !important;
@@ -1257,10 +1299,12 @@ main.order-list .order-container {
   .checoutSec {
     flex-direction: column !important;
   }
+
   .rightSeccheckout {
     width: 95% !important;
     margin: 0 2%;
   }
+
   .leftSeccheckout {
     padding: 13px 16px !important;
     box-sizing: border-box;
@@ -1273,6 +1317,7 @@ main.order-list .order-container {
   .checkoutInputType {
     flex-direction: column !important;
   }
+
   .checkoutProblemWhatsappButton {
     border-radius: 10px;
     width: 77%;
@@ -1334,6 +1379,7 @@ main.order-list .order-container {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
   }
+
   .checkoutmobileview {
     position: relative;
 
@@ -1341,13 +1387,16 @@ main.order-list .order-container {
       width: 48% !important;
       background-color: #fff;
     }
+
     .checoutSec {
       padding: 0 5px !important;
       margin-top: 7px !important;
     }
+
     .decoratore-note {
       font-size: 11px !important;
     }
+
     .rightSeccheckout {
       width: 98% !important;
       margin: 14px 1% 0 3px !important;
@@ -1355,14 +1404,17 @@ main.order-list .order-container {
       box-shadow: none !important;
       padding: 7px 21px !important;
     }
+
     .checkoutRightImg {
       height: auto;
       border-radius: 10px;
     }
+
     .decor-commemnts {
       font-size: 12px !important;
       font-weight: 400 !important;
     }
+
     .ordersummaryproduct {
       width: 22% !important;
     }
@@ -1373,7 +1425,9 @@ main.order-list .order-container {
   .textContainerhome h2 {
     padding: 4px 8% 5px !important;
   }
-  p.ordersummeryname , .ordersummeryprice{
+
+  p.ordersummeryname,
+  .ordersummeryprice {
     font-size: 10px;
 
   }
@@ -1383,61 +1437,73 @@ main.order-list .order-container {
   .order-header-left {
     padding: 12px 13px !important;
     border-radius: 0 !important;
-}
-h5.order-id-h {
-  margin-bottom: 0;
-  font-size: 9px;
-}
+  }
+
+  h5.order-id-h {
+    margin-bottom: 0;
+    font-size: 9px;
+  }
 
   .personsectionprice p {
     font-size: 65% !important;
   }
+
   .tabButton {
     padding: 7px 8% !important;
   }
+
   button.viewbtn.btn.btn-primary {
     border-radius: 42px !important;
     padding: 0px 9px !important;
     font-size: 11px !important;
     height: 21px;
   }
+
   button.cuisinebtn {
     width: 78px;
-        padding: 3px 0 !important;
-        font-size: 12px !important;
+    padding: 3px 0 !important;
+    font-size: 12px !important;
   }
+
   button.cusinebtn {
     border-radius: 27px !important;
     padding: 3px 8px !important;
     font-size: 12px !important;
     border: 1px solid !important;
   }
+
   .dish-item-inner {
     height: 134px;
   }
+
   .d-flex.justify-content-between.w-100.px-3.dishPrice {
     padding-left: 10px !important;
     padding-right: 10px !important;
     align-items: end;
   }
+
   .dish-price {
     font-size: 93%;
     padding: 2px 0 0px;
   }
+
   button.pluBtn.btn.btn-primary img {
     width: 19px !important;
     height: 19px !important;
   }
+
   .order-container .dish-name {
     font-size: 62%;
     min-height: 45px;
     padding: 13px 11px 7px;
   }
+
   p.subheading {
     font-size: 12px;
     line-height: 16px;
     padding: 0px 10px 13px !important;
   }
+
   .filterdropdown {
     select {
       width: 97%;
@@ -1447,36 +1513,45 @@ h5.order-id-h {
       padding: 0;
     }
   }
+
   p.m-0.p-0.fw-bold.filter-price-tag {
     padding: 0 8px !important;
     font-size: 63% !important;
   }
+
   p.totalcount {
     margin-bottom: 0 !important;
   }
+
   .ingredientsec {
     padding: 11px 5px !important;
     margin-bottom: 10px !important;
     width: 45% !important;
     margin-right: 11px;
   }
+
   p.req-sec {
     font-size: 14px !important;
   }
+
   p.req-des {
     font-size: 12px !important;
   }
+
   .ingredientrightsecheading {
     font-size: 65% !important;
     line-height: 13px;
   }
+
   .ingredientleftsec {
     margin-right: 8% !important;
     width: 50% !important;
   }
+
   .ingredientrightsecsibheading {
     font-size: 70% !important;
   }
+
   .req-applicance-details p {
     padding: 2px 0 !important;
     font-size: 12px !important;
@@ -1485,26 +1560,32 @@ h5.order-id-h {
 }
 
 @media (max-width: 380px) {
-  .order-header-right{
+  .order-header-right {
     padding-left: 0 !important;
   }
+
   .order-header-left {
     padding: 12px 8px !important;
   }
+
   h5.order-id-h {
     margin-bottom: 0;
     font-size: 8px;
-}
-.checkoutInputType textarea {
-  font-size: 13px !important;
-  color: #222 !important;
-}
+  }
+
+  .checkoutInputType textarea {
+    font-size: 13px !important;
+    color: #222 !important;
+  }
+
   .personsectionprice p {
     font-size: 58% !important;
   }
+
   .dish-item-inner {
     height: 123px;
   }
+
   .dish-image {
     width: 70px;
     height: 64px;
@@ -1516,16 +1597,18 @@ h5.order-id-h {
     font-size: 14px;
     margin-bottom: 1px;
     font-weight: 600;
-}
-h6.order-otp{
-  font-size: 14px !important;
-  font-weight: 600;
-}
+  }
+
+  h6.order-otp {
+    font-size: 14px !important;
+    font-weight: 600;
+  }
 
   .ingredientrightsecheading {
     font-size: 104% !important;
     line-height: 13px;
   }
+
   .ingredientrightsecsibheading {
     font-size: 100% !important;
   }
@@ -1563,6 +1646,7 @@ h6.order-otp{
     min-height: 43px;
     padding: 9px 11px 0;
   }
+
   .dish-item-inner {
     height: 115px;
   }
@@ -1610,6 +1694,7 @@ h6.order-otp{
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
 .order-otp {
   align-items: flex-start;
   margin: 0;
@@ -1628,14 +1713,16 @@ h6.order-otp{
   flex-direction: column;
   align-items: flex-end;
 }
+
 /* .right-details , p{
   text-align: end;
 } */
-.left-details{
+.left-details {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 .left-details div,
 .right-details div {
   margin-bottom: 10px;
@@ -1660,11 +1747,13 @@ h6.order-otp{
   cursor: pointer;
   /* margin-top: 42px !important; */
 }
+
 .button-div {
   padding: 10px;
   justify-content: space-between;
   margin-top: 5px;
 }
+
 /* .view-details:hover {
   background-color: #5753d6;
 } */
@@ -1672,9 +1761,11 @@ h6.order-otp{
 .status.cancelled {
   color: red;
 }
+
 .status.fooddelivery {
   color: orange;
 }
+
 .status.livecatering {
   color: green;
 }
@@ -1775,9 +1866,10 @@ h6.order-otp{
   /*margin-left: 20px;*/
   color: #fff;
   font-family: Roboto;
-  font-size: 10px ;
+  font-size: 10px;
   font-weight: 700;
 }
+
 .order-status-button {
   display: inline-block;
   padding: 3px 10px;
@@ -1790,6 +1882,7 @@ h6.order-otp{
   border-radius: 19px;
   margin-bottom: 10px;
 }
+
 .order-header-left p {
   margin: 0;
 }
@@ -1922,7 +2015,8 @@ h6.order-otp{
   /* flex-direction: column; */
   align-items: center;
   justify-content: space-between;
-  width: calc(33.333% - 16px); /* 3 columns */
+  width: calc(33.333% - 16px);
+  /* 3 columns */
   padding: 16px;
   border: 1px solid #b8b8b8;
   border-radius: 8px;
@@ -2171,10 +2265,11 @@ h6.order-otp{
 .product-container {
   display: flex;
   align-items: flex-start;
- 
+
   gap: 5%;
 }
-.decoration-container{
+
+.decoration-container {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -2229,11 +2324,13 @@ h6.order-otp{
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
 .comment-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 .comments-header {
   font-size: 16px;
   font-weight: bold;
@@ -2256,20 +2353,24 @@ h6.order-otp{
   background-color: #ffffff;
   padding: 10px;
 }
+
 .food-delivert-inclusions-container h5 {
   color: #9252aa;
   font-weight: 700;
   font-size: 1.2em;
 }
+
 .list-unstyled-inclusion {
   list-style-type: none;
   padding-left: 0;
 }
+
 .list-unstyled-inclusion li {
   display: flex;
   align-items: center;
   color: #b16bcb;
 }
+
 .list-unstyled-inclusion span {
   margin-right: 0.5rem;
 }
@@ -2283,11 +2384,13 @@ h6.order-otp{
   background-color: #ffffff;
   padding: 10px;
 }
+
 .live-catering-title {
   font-size: 1.2em;
   margin-bottom: 0.5rem;
   color: #b16bcb;
 }
+
 .live-catering-inclusions {
   list-style-type: none;
   padding-left: 0;
@@ -2329,6 +2432,8 @@ h6.order-otp{
 /* View button for chef page */
 
 .viewbtn.clickedviewAll {
-  background-color: #fff !important; /* Background color when clicked */
-  color: purple !important; /* Font color when clicked */
+  background-color: #fff !important;
+  /* Background color when clicked */
+  color: purple !important;
+  /* Font color when clicked */
 }

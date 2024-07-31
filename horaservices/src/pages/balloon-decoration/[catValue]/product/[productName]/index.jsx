@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import buynowImage from '../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../assets/service.png';
-import checkImage from '../../../../../assets/tick.jpeg.jpeg';
+import checkImage from '../../../../../assets/tick.jpeg';
 import { getDecorationProductOrganizationSchema } from "../../../../../utils/schema";
 import '../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
