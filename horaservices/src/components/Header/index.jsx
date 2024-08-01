@@ -209,10 +209,10 @@ useEffect(() => {
                     <span style={{ marginLeft: "3px" }}>Login</span>
                   </Link>
                 ) : (
-                  <a style={styles.linkicon} onClick={handleLogout}>
+                  <Link style={styles.linkicon} onClick={handleLogout}>
                     <FontAwesomeIcon icon={faUser} style={styles.icon} />
                     <span style={{ marginLeft: "3px" }}>Logout</span>
-                  </a>
+                  </Link>
                 )}
               </li>
             </ul>

@@ -44,27 +44,27 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
     useState(false);
 
-    let {
-        selectedOption,
-        selectedDishDictionary,
-        selectedDishPrice,
-        selectedDishes,
-        isDishSelected,
-        selectedCount,
-        selectedDishQuantities,
-      } = router.query;
-      
-      if (selectedDishDictionary) {
-        try {
-        selectedDishDictionary = JSON.parse(selectedDishDictionary);
-        } catch (error) {
-          console.error('Error parsing selectedDishDictionary:', error);
-        }
-      } // Accessing subCategory and itemName safely
+  let {
+    selectedOption,
+    selectedDishDictionary,
+    selectedDishPrice,
+    selectedDishes,
+    isDishSelected,
+    selectedCount,
+    selectedDishQuantities,
+  } = router.query;
+
+  if (selectedDishDictionary) {
+    try {
+      selectedDishDictionary = JSON.parse(selectedDishDictionary);
+      selectedDishQuantities = JSON.parse(selectedDishQuantities)
+    } catch (error) {
+      console.error('Error parsing selectedDishDictionary:', error);
+    }
+  } // Accessing subCategory and itemName safely
+  // selectedDishQuantities = Array.isArray(selectedDishQuantities) ? selectedDishQuantities : [];
   const data = selectedDishDictionary;
   const [dishPrice, setDishPrice] = useState(selectedDishPrice);
-
-  console.log(data,'data')
 
   // Container for the whole component
   const MainContainer = styled.div`
@@ -335,11 +335,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={checkImage}
-                  alt="Info"
-                  style={{ height: 13, width: 13, marginRight: 10 }}
-                />
+                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -360,11 +356,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={checkImage}
-                  alt="Info"
-                  style={{ height: 13, width: 13, marginRight: 10 }}
-                />
+                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -385,11 +377,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={checkImage}
-                  alt="Info"
-                  style={{ height: 13, width: 13, marginRight: 10 }}
-                />
+                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -417,11 +405,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -441,11 +425,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -468,11 +448,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -492,11 +468,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -516,11 +488,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIocn}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -541,11 +509,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -565,11 +529,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -589,11 +549,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -613,11 +569,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   width: "100%",
                 }}
               >
-                <Image
-                  src={TickIcon}
-                  alt="tick"
-                  style={{ height: 16, width: 16 }}
-                />
+                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
                 <p
                   style={{
                     color: "#9252AA",
@@ -710,40 +662,23 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     );
   };
 
-  const RenderDishQuantity = ({ item, data, peopleCount }) => {
-    const validData = data || {};
-
-    const isValidMealId = (mealId) =>
-      Array.isArray(mealId) && mealId.length > 0;
-
-    const itemCount = Object.values(validData).filter(
-      (x) =>
-        isValidMealId(x.mealId) &&
-        (x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
-          x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
-          x.mealId[0] === "63edc4757e1b370928b149b3")
+  const RenderDishQuantity = ({ item }) => {
+    const itemCount = Object.values(data).filter(x =>
+      x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
+      x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
+      x.mealId[0] === "63edc4757e1b370928b149b3"
     ).length;
 
-    const mainCourseItemCount = Object.values(validData).filter(
-      (x) =>
-        isValidMealId(x.mealId) && x.mealId[0] === "63f1b6b7ed240f7a09f7e2de"
-    ).length;
-    const appetizerItemCount = Object.values(validData).filter(
-      (x) =>
-        isValidMealId(x.mealId) && x.mealId[0] === "63f1b39a4082ee76673a0a9f"
-    ).length;
-    const breadItemCount = Object.values(validData).filter(
-      (x) =>
-        isValidMealId(x.mealId) && x.mealId[0] === "63edc4757e1b370928b149b3"
-    ).length;
+    const mainCourseItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de").length;
+    const appetizerItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b39a4082ee76673a0a9f").length;
+    const breadItemCount = Object.values(data).filter(x => x.mealId[0] === "63edc4757e1b370928b149b3").length;
 
     let quantity = item.quantity * peopleCount;
 
-    if (
-      Array.isArray(item.id) &&
-      ((item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
-        (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
-        (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1))
+    if (item.id && (
+      (item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
+      (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
+      (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1))
     ) {
       if (itemCount <= 5) {
         quantity = quantity;
@@ -754,9 +689,9 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       } else if (itemCount === 9 || itemCount === 10) {
         quantity = quantity * (1 - 0.35);
       } else if (itemCount === 11) {
-        quantity = quantity * (1 - 0.4);
+        quantity = quantity * (1 - 0.40);
       } else if (itemCount === 12) {
-        quantity = quantity * (1 - 0.5);
+        quantity = quantity * (1 - 0.50);
       } else if (itemCount === 13) {
         quantity = quantity * (1 - 0.53);
       } else if (itemCount === 15) {
@@ -769,60 +704,20 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
 
     if (quantity >= 1000) {
       quantity = quantity / 1000;
-      if (unit === "Gram") {
-        unit = "KG";
-      } else if (unit === "ml") {
-        unit = "L";
+      if (unit === 'Gram') {
+        unit = 'KG';
+      } else if (unit === 'ml') {
+        unit = 'L';
       }
     }
-    console.log(item, "item");
-    console.log(data, "item");
+
     return (
-      <div
-        style={{
-          width: "23%",
-          alignItems: "center",
-          borderRadius: 5,
-          border: "1px solid #DADADA",
-          flexDirection: "row",
-          padding: "10px",
-          display: "flex",
-          marginBottom: "20px",
-        }}
-        className="ingredientsec"
-      >
-        <div
-          style={{
-            marginLeft: 5,
-            width: "45%",
-            height: "auto",
-            backgroundColor: "#F0F0F0",
-            borderRadius: "10px",
-            alignItems: "center",
-            padding: "5%",
-            justifyContent: "center",
-            marginRight: 15,
-          }}
-          className="ingredientleftsec"
-        >
-          <Image
-            src={`https://horaservices.com/api/uploads/${item.image}`}
-            alt={item.name}
-            style={styles.image}
-            width={60}
-            height={60}
-          />
+      <div style={{ width: "23%", alignItems: 'center', borderRadius: 5, border: "1px solid #DADADA", flexDirection: 'row', padding: "10px", display: "flex", marginBottom: "20px" }} className='ingredientsec'>
+        <div style={{ marginLeft: 5, width: "45%", height: "auto", backgroundColor: '#F0F0F0', borderRadius: "10px", alignItems: 'center', padding: "5%", justifyContent: 'center', marginRight: 15 }} className='ingredientleftsec'>
+          <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} style={styles.image} width={100} height={60} />
         </div>
-        <div
-          style={{ flexDirection: "column", marginLeft: 1, width: 80 }}
-          className="ingredientrightsec"
-        >
-          <div
-            style={{ fontSize: "80%", fontWeight: "500", color: "#414141" }}
-            className="ingredientrightsecheading"
-          >
-            {item.name}
-          </div>
+        <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
+          <div style={{ fontSize: "80%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
           {/* <div style={{ fontSize: "140%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div> */}
         </div>
       </div>
@@ -830,6 +725,10 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   };
 
   const RightTabContent = ({ selectedDishQuantities }) => {
+    if (!selectedDishQuantities || typeof selectedDishQuantities !== 'object') {
+      console.error('selectedDishQuantities is not an object:', selectedDishQuantities);
+      return null;
+    }
     return (
       <div
         style={{
@@ -859,14 +758,14 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
               alignItems: "center",
             }}
           >
-            {selectedDishQuantities &&
-              Array.isArray(selectedDishQuantities) &&
-              selectedDishQuantities.map((item, index) => (
+            {Object.keys(selectedDishQuantities).length > 0 ? (
+              Object.keys(selectedDishQuantities).map((key, index) => (
                 <RenderDishQuantity
-                  key={item.name}
-                  item={item}
+                  key={index}
+                  item={selectedDishQuantities[key]}
                 />
-              ))}
+              ))
+            ) : null}
           </div>
         </div>
 
@@ -926,10 +825,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
           padding: "10px 0",
         }}
       >
-        <Image
-          style={{ width: "20px", height: "20px", marginRight: "10px" }}
-          src={InfoIcon}
-        />
+        <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
         <p
           style={{
             color: "#676767",
@@ -944,26 +840,18 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       </div>
 
       <Container>
-        <Step active>
+        <Step active={true.toString()}>
           <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
-          <Label active>Select Dishes</Label>
+          <Label active={true.toString()}>Select Dishes</Label>
         </Step>
-        <Line active />
+        <Line active={true.toString()} />
         <Step>
-          <Image
-            src={SelectDateTime}
-            alt="Select Date & Time"
-            style={styles.dish}
-          />
-          <Label active>Select Date & Time</Label>
+          <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
+          <Label active={true.toString()}>Select Date & Time</Label>
         </Step>
         <Line />
         <Step>
-          <Image
-            src={SelectConfirmOrder}
-            alt="Confirm Order"
-            style={styles.dish}
-          />
+          <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
           <Label>Select Confirm Order</Label>
         </Step>
       </Container>
@@ -991,11 +879,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
             className="peoplecontsec"
           >
             <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: 13,
-              }}
+              style={{ display: "flex", flexDirection: "column", marginTop: 13 }}
             >
               <div>
                 <div
@@ -1073,7 +957,6 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                     onChange={handleRangeChange}
                     className="range-input"
                     style={{
-                      // CSS styles inline for the range input
                       "--range-color": "rgb(146, 82, 170)", // Custom color variable
                       "--range-track-height": "6px", // Custom track height
                       "--range-thumb-size": "14px", // Custom thumb (handle) size

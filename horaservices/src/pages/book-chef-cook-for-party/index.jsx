@@ -505,7 +505,7 @@ const CreateOrder = ({ history, currentStep }) => {
             pathname: '/book-chef-cook-for-party/order-details',
             query: {
                 orderType,
-                selectedDishDictionary,
+                selectedDishDictionary: JSON.stringify(selectedDishDictionary),
                 selectedDishPrice,
                 selectedDishes,
                 isDishSelected,
@@ -606,9 +606,9 @@ const CreateOrder = ({ history, currentStep }) => {
                     <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
                 </div>
                 <div className="range-bar">
-                    <Step active className="step1">
+                    <Step active={true.toString()} className="step1">
                         <Image src={SelectDishes} alt="Select Dishes" />
-                        <Label active>Select Dishes</Label>
+                        <Label active={true.toString()}>Select Dishes</Label>
                     </Step>
                     <div className="sep-image">
                         <Image src={separator} />
@@ -677,7 +677,7 @@ const CreateOrder = ({ history, currentStep }) => {
                         {selectedCuisines.length > 0 && (
                             <ListGroup className="dish-list">
                                 {mealList.map((meal) => (
-                                    <div>
+                                    <div className='w-100'>
                                         <ListGroupItem key={meal._id} className="dish-item">
                                             {renderDishItem({ item: meal })}
                                         </ListGroupItem>

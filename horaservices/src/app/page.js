@@ -569,7 +569,7 @@ export default function Home() {
             style={{
               justifyContent: "center",
               alignContent: "center",
-              fontSize: "14px",
+              fontSize: "5px",
               padding: "0 16px",
             }}
           >
