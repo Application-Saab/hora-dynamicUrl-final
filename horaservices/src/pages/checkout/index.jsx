@@ -359,10 +359,9 @@ const Checkout = () => {
                   <CustomTimePicker handleTimeSlotChange={handleTimeSlotChange} generateTimeSlots={generateTimeSlots} selectedTimeSlot={selectedTimeSlot} combinedDateTimeError={combinedDateTimeError} selectedTimeSlotError={selectedTimeSlotError} />
                 </div>
                 {combinedDateTimeError && <p className="text-danger" style={{ fontSize: '12px', marginBottom: "0px" }}>The selected date and time must be at least 24 hours from now.</p>}
-
                 <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                   <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                  <textarea className=' rounded border border-1 p-1 bg-white'
+                  <textarea className=' rounded border border-1 p-1 bg-white text-black'
                     value={comment}
                     onChange={handleComment}
                     rows={3}
@@ -374,7 +373,7 @@ const Checkout = () => {
                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                     <textarea
                       type="text"
-                      className=' rounded border border-1 p-1 bg-white'
+                      className='rounded border border-1 p-1 bg-white text-black'
                       value={address}
                       onChange={handleAddressChange}
                       rows={3}
@@ -385,7 +384,7 @@ const Checkout = () => {
                   <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                     <input
-                      type="text" className=' rounded border border-1 p-1 bg-white'
+                      type="text" className=' rounded border border-1 p-1 bg-white text-black'
                       value={pinCode}
                       onChange={handlePinCodeChange}
                     />
@@ -394,7 +393,7 @@ const Checkout = () => {
                   </div>
                   <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                    <select value={city} className=' rounded border border-1 p-1 bg-white' onChange={handleCityChange}>
+                    <select value={city} className=' rounded border border-1 p-1 bg-white text-black' onChange={handleCityChange}>
                       <option value="">Select City</option>
                       <option value="Bangalore">Bangalore</option>
                       <option value="Delhi">Delhi</option>
@@ -407,13 +406,12 @@ const Checkout = () => {
                 <button onClick={onContinueClick} className="blue-btn chkeoutBottun">Confirm Order</button>
               </div>
 
-
               <div className="rightSeccheckout" style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18) ", padding: "20px", backgroundColor: "#fff", borderRadius: "20px", width: "59%" }} >
                 <div className='rightsecdecinner decoration'>
                   <h3 style={{ fontSize: "22px", fontWeight: "400", color: "#222", borderBottom: "1px solid #f0f0f0", margin: "0 0 11px 0", lineHeight: "35px", width: "100%" }}>Order Summary</h3>
                   <div className='d-flex flex-column flex-lg-row'>
                     <div>
-                      <Image className='checkoutRightImg' src={`https://horaservices.com/api/uploads/${product?.featured_image}`} alt="image" width={300} height={300} />
+                      <Image className='checkoutRightImg' src={`https://horaservices.com/api/uploads/${product?.featured_image}`} alt="image" style={{ width: "100%", height: "auto" }} width={300} height={300} />
                     </div>
                     <div className='prod-detailsp'>
 
@@ -432,12 +430,10 @@ const Checkout = () => {
                     </div>
                   </div>
                   <div >
-
                     <div className='d-flex flex-wrap justify-content-center align-items-center need-more-info-sec'>
                       <h5 className='mt-2'>Need more info?</h5>
-                      <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px"}} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
+                      <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
                     </div>
-
                     <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
                       background: "rgb(157, 74,147, 28%)"
                     }}>
@@ -445,15 +441,10 @@ const Checkout = () => {
                       <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
                       <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
                     </div>
-
-
                   </div>
                 </div>
               </div>
-
-
             </div>
-
           </div>
           :
           <div style={{ padding: "1% 2%", backgroundColor: "#edededc9", position: "relative" }} className='checkoutmobileview'>
@@ -494,7 +485,7 @@ const Checkout = () => {
                       <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                       <textarea
                         type="text"
-                        className=' rounded border border-1 p-1 bg-white'
+                        className=' rounded border border-1 p-1 bg-white text-black'
                         value={address}
                         onChange={handleAddressChange}
                         rows={3}
@@ -505,7 +496,7 @@ const Checkout = () => {
                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                       <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                       <input
-                        type="text" className=' rounded border border-1 p-1 bg-white'
+                        type="text" className=' rounded border border-1 p-1 bg-white text-black'
                         value={pinCode}
                         onChange={handlePinCodeChange}
                       />
@@ -514,7 +505,7 @@ const Checkout = () => {
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                       <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                      <select value={city} className=' rounded border border-1 p-1 bg-white' onChange={handleCityChange}>
+                      <select value={city} className=' rounded border border-1 p-1 bg-white text-black' onChange={handleCityChange}>
                         <option value="">Select City</option>
                         <option value="Bangalore">Bangalore</option>
                         <option value="Delhi">Delhi</option>
@@ -525,7 +516,7 @@ const Checkout = () => {
                     </div>
                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", margin: "20px 0 0" }}>
                       <div style={{ width: "50%" }}>
-                        <Image className='checkoutRightImg' src={`https://horaservices.com/api/uploads/${product?.featured_image}`} alt='decoration-image' width={300} height={300} />
+                        <Image className='checkoutRightImg' src={`https://horaservices.com/api/uploads/${product?.featured_image}`} alt='decoration-image' style={{ width: "100%", height: "auto" }} width={300} height={300} />
                       </div>
                       <div style={{ width: "50%", paddingLeft: "10px" }}>
                         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", margin: "20px 0 20px 0" }}>
@@ -537,7 +528,7 @@ const Checkout = () => {
 
                     <div className='checkoutInputType border-1 rounded-4  my-3' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                       <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                      <textarea className='rounded border border-1 p-1 bg-white decor-commemnts'
+                      <textarea className='rounded border border-1 p-1 bg-white text-black decor-commemnts'
                         value={comment}
                         onChange={handleComment}
                         rows={3}
@@ -559,13 +550,8 @@ const Checkout = () => {
                   <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
                   <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
                 </div>
-
               </div>
-
-
-
             </div>
-
             {isMobile ?
               <div style={{
                 position: "fixed",
@@ -577,18 +563,13 @@ const Checkout = () => {
                 backgroundColor: "#EDEDED"
               }}
               >
-
                 <button className="blue-btn chkeoutBottun" onClick={onContinueClick}>Confirm Order</button>
               </div>
               :
               null
             }
-
           </div>
-
       }
-
-
     </div>
   );
 }

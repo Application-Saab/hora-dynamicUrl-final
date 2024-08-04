@@ -41,8 +41,8 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [showCookingTime, setShowCookingTime] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTab, setSelectedTab] = useState("Appliances");
-  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
-    useState(false);
+  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   let {
     selectedOption,
@@ -306,19 +306,28 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     } else {
       router.push({
         pathname: "/party-food-delivery-live-catering-buffet-checkout",
-        query:{
-        from: window.location.pathname,
-        peopleCount: peopleCount,
-        selectedDeliveryOption: selectedOption,
-        selectedDishesFoodDelivery: JSON.stringify(data),
-        totalOrderAmount: totalOrderAmount,
-        selectedDishQuantities: JSON.stringify(selectedDishQuantities),
-        selectedOption: selectedOption,
+        query: {
+          from: window.location.pathname,
+          peopleCount: peopleCount,
+          selectedDeliveryOption: selectedOption,
+          selectedDishesFoodDelivery: JSON.stringify(data),
+          totalOrderAmount: totalOrderAmount,
+          selectedDishQuantities: JSON.stringify(selectedDishQuantities),
+          selectedOption: selectedOption,
         }
-    });
+      });
     }
   };
-  console.log("dsata",data)
+  console.log("dsata", data)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+    handleResize(); // Check initial size
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const LeftTabContent = ({ selectedOption }) => {
     return (
@@ -850,17 +859,17 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
 
       <Container>
         <Step active={true.toString()}>
-          <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
+          <Image src={SelectDishes} alt="Select Dishes" style={isMobile ? styles.mobileDish : styles.webDish} />
           <Label active={true.toString()}>Select Dishes</Label>
         </Step>
         <Line active={true.toString()} />
         <Step>
-          <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
+          <Image src={SelectDateTime} alt="Select Date & Time" style={isMobile ? styles.mobileDish : styles.webDish} />
           <Label active={true.toString()}>Select Date & Time</Label>
         </Step>
         <Line />
         <Step>
-          <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
+          <Image src={SelectConfirmOrder} alt="Confirm Order" style={isMobile ? styles.mobileDish : styles.webDish} />
           <Label>Select Confirm Order</Label>
         </Step>
       </Container>
@@ -1145,7 +1154,6 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
           </div>
         </div>
       </div>
-
       <Row>
         <Col>
           <div
@@ -1215,7 +1223,11 @@ const styles = {
     width: "56px",
     margin: "10px 0 0",
   },
-  dish: {
+  mobileDish: {
+    width: "32px",
+    height: "32px",
+  },
+  webDish: {
     width: "48px",
     height: "48px",
   },

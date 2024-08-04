@@ -21,7 +21,6 @@ import styled from "styled-components";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-
 const ChefCheckout = () => {
     //   let { peopleCount, orderType, selectedDishDictionary, selectedDishPrice, selectedCount , selectedDishes } = useLocation().state || {}; // Accessing subCategory and itemName safely
     // const { subCategory, product } = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -431,7 +430,7 @@ const ChefCheckout = () => {
                             {combinedDateTimeError && <p className="text-danger" style={{ fontSize: '12px', margin: "5px 0 0 0" }}>The selected date and time must be at least 24 hours from now.</p>}
                             <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                                 <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                <textarea className=' rounded border border-1 p-1 '
+                                <textarea className=' rounded border border-1 p-1 bg-white text-black'
                                     value={comment}
                                     onChange={handleComment}
                                     rows={4}
@@ -443,7 +442,7 @@ const ChefCheckout = () => {
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                                     <textarea
                                         type="text"
-                                        className=' rounded border border-1 p-1'
+                                        className=' rounded border border-1 p-1 bg-white text-black'
                                         value={address}
                                         onChange={handleAddressChange}
                                         rows={4}
@@ -454,7 +453,7 @@ const ChefCheckout = () => {
                                 <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                                     <input
-                                        type="text" className=' rounded border border-1 p-1'
+                                        type="text" className=' rounded border border-1 p-1 bg-white text-black'
                                         value={pinCode}
                                         onChange={handlePinCodeChange}
                                     />
@@ -463,7 +462,7 @@ const ChefCheckout = () => {
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                    <select value={city} className=' rounded border border-1 p-1 select-city' onChange={handleCityChange}>
+                                    <select value={city} className=' rounded border border-1 p-1 select-city bg-white text-black' onChange={handleCityChange}>
                                         <option value="">Select City</option>
                                         <option value="Bangalore">Bangalore</option>
                                         <option value="Delhi">Delhi</option>
@@ -522,7 +521,7 @@ const ChefCheckout = () => {
                                         return (
                                             <div className="ordersummaryproduct">
                                                 <div>
-                                                    <img className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} />
+                                                    <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} style={{ width: "100%", height: "auto" }} width={300} height={300} />
                                                 </div>
                                                 <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}>
                                                     <p style={{ margin: "0 0 0 0", padding: "0" }} className="ordersummeryname">{item.name}</p>
@@ -536,8 +535,8 @@ const ChefCheckout = () => {
                             </div>
 
                             <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                <h5 className=''>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
+                                <h5 className='mt-2'>Need more info?</h5>
+                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
                             </div>
 
                             <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
@@ -556,17 +555,17 @@ const ChefCheckout = () => {
                         <div>
                             <Container>
                                 <Step active={true.toString()}>
-                                    <Image src={SelectDishes} alt="Select Dishes" />
+                                    <Image src={SelectDishes} alt="Select Dishes" height={32} width={32}/>
                                     <Label active={true.toString()}>Select Dishes</Label>
                                 </Step>
                                 <Line active={true.toString()} />
                                 <Step>
-                                    <Image src={SelectDateTime} alt="Select Date & Time" />
+                                    <Image src={SelectDateTime} alt="Select Date & Time" height={32} width={32}/>
                                     <Label active={true.toString()}>Select Date & Time</Label>
                                 </Step>
                                 <Line />
                                 <Step>
-                                    <Image src={SelectConfirmOrder} alt="Confirm Order" />
+                                    <Image src={SelectConfirmOrder} alt="Confirm Order" height={32} width={32}/>
                                     <Label>Select Confirm Order</Label>
                                 </Step>
                             </Container>
@@ -621,7 +620,7 @@ const ChefCheckout = () => {
                                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                                         <textarea
                                             type="text"
-                                            className=' rounded border border-1 p-1'
+                                            className=' rounded border border-1 p-1 bg-white text-black'
                                             value={address}
                                             onChange={handleAddressChange}
                                             rows={3}
@@ -632,7 +631,7 @@ const ChefCheckout = () => {
                                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                                         <input
-                                            type="text" className=' rounded border border-1 p-1'
+                                            type="text" className='rounded border border-1 p-1 bg-white text-black'
                                             value={pinCode}
                                             onChange={handlePinCodeChange}
                                         />
@@ -641,7 +640,7 @@ const ChefCheckout = () => {
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                        <select value={city} className=' rounded border border-1 p-1 select-city' onChange={handleCityChange}>
+                                        <select value={city} className='rounded border border-1 p-1 select-city bg-white text-black' onChange={handleCityChange}>
                                             <option value="">Select City</option>
                                             <option value="Bangalore">Bangalore</option>
                                             <option value="Delhi">Delhi</option>
@@ -659,7 +658,7 @@ const ChefCheckout = () => {
                                                 return (
                                                     <div style={{ width: "48%", border: "1px solid rgb(149 142 142 / 73%)", flexDirection: "row", display: "flex", borderRadius: "10px", padding: "6px 10px", boxSizing: "border-box" }} className='dishes-checkout-page'>
                                                         <div style={{ marginRight: 2, width: "90%" }}>
-                                                            <img className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} />
+                                                            <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} style={{ width: "100%", height: "auto" }} width={300} height={300} />
                                                         </div>
                                                         <div style={{ color: "rgb(146, 82, 170)", fontWeight: "500", fontSize: "12px" }}>
                                                             <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.name}</p>
@@ -673,7 +672,7 @@ const ChefCheckout = () => {
                                     </div>
                                     <div className='checkoutInputType border-1 rounded-4  my-3' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                                         <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                        <textarea className=' rounded border border-1 p-1 bg-white decor-commemnts'
+                                        <textarea className='rounded border border-1 p-1 bg-white text-black decor-commemnts'
                                             value={comment}
                                             onChange={handleComment}
                                             rows={4}
@@ -684,8 +683,8 @@ const ChefCheckout = () => {
                             </div>
 
                             <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                <h5 className=''>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)" }} className=' rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
+                                <h5 className='fs-6 mt-2'>Need more info?</h5>
+                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", lineHeight: "1.5" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
                             </div>
 
                             <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
@@ -720,10 +719,6 @@ const ChefCheckout = () => {
 }
 
 export default ChefCheckout;
-
-
-
-
 
 export const CustomDatePicker = ({ handleDateChange, selectedDate, showDatePicker, setShowDatePicker, selectedDateError, combinedDateTimeError }) => {
 

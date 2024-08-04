@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
-import buynowImage from '../../../../../assets/experts.png';
-import buynowImage1 from '../../../../../assets/secured.png';
-import buynowImage2 from '../../../../../assets/service.png';
-import checkImage from '../../../../../assets/tick.jpeg';
-import { getDecorationProductOrganizationSchema } from "../../../../../utils/schema";
-import '../../../../../css/decoration.css';
+import buynowImage from '../../../../../../assets/experts.png';
+import buynowImage1 from '../../../../../../assets/secured.png';
+import buynowImage2 from '../../../../../../assets/service.png';
+import checkImage from '../../../../../../assets/tick.jpeg';
+import { getDecorationProductOrganizationSchema } from "../../../../../../utils/schema";
+import '../../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
 import { Helmet } from "react-helmet";
 import { useRouter } from "next/router";

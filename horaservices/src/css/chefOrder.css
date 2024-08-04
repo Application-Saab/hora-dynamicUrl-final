@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     padding: 14px 0 0;
+    text-align: center;
 }
 
 .sep-image {
@@ -226,6 +227,7 @@
     .sep-image img {
         width: 80px;
         padding: 0 10px;
+        height: auto;
     }
 
     .range-bar .label {

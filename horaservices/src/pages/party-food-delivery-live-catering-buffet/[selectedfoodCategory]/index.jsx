@@ -20,6 +20,7 @@ import separator from "../../../assets/separator.png";
 import InfoIcon from '../../../assets/info.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import '../../../css/chefOrder.css';
 
 const FoodDeliveryCreateOrder = (currentStep) => {
   const viewBottomSheetRef = useRef(null);
@@ -158,7 +159,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
           setSelectedDishPrice(updatedPrice);
         }
       }
-
       setSelectedDishes(updatedSelectedDishes);
       setSelectedCount(updatedSelectedDishes.length);
 
@@ -171,7 +171,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
       setIsDishSelected(updatedSelectedDishes.length > 0);
     }
   };
-
 
   //handleCuisinePress is used to handle cuisine clicks and called from above function
   const handleCuisinePress = cuisineId => {
@@ -227,7 +226,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     }
   };
 
-
   useEffect(() => {
     if (selectedCuisines.length > 0 && selectedCuisines.length <= 3) {
       fetchMealBasedOnCuisine();
@@ -240,7 +238,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
       setSelectedDishPrice(0);
     }
   }, [selectedCuisines, isNonVegSelected]);
-
 
   const renderDishItem = ({ item }) => (
     <div className='w-100'>
@@ -393,13 +390,10 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     });
   };
 
-
   const closeBottomSheet = () => {
     setDishDetail(null);
     bottomSheetRef.current.close();
   };
-
-
 
   const addDishAndCloseBottomSheet = () => {
     closeBottomSheet();
@@ -478,31 +472,30 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   return (
     <div className="chef-create-order">
       <div className="order-container chef">
-
-        <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
+        <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
           <Image style={{ width: "20px", height: '20px', marginRight: "10px" }} src={InfoIcon} />
           <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
         </div>
-        {/* <div className="range-bar">
-          <Step active className="step1">
-            <Image  src={SelectDishes} alt="Select Dishes" />
-            <Label active>Select Dishes</Label>
+        <div className="range-bar">
+          <Step active={true.toString()} className="step1">
+            <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
+            <Label active={true.toString()}>Select Dishes</Label>
           </Step>
-          <div  className="sep-image">
-          <Image src={separator}/>
+          <div className="sep-image">
+            <Image src={separator} />
           </div>
           <Step className="step2">
-            <Image src={SelectDateTime} alt = "Select Date & Time"/>
+            <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
             <Label>Select Date & Time</Label>
           </Step>
-          <div  className="sep-image">
-          <Image src={separator}/>
+          <div className="sep-image">
+            <Image src={separator} />
           </div>
           <Step className="step3">
-            <Image src={SelectConfirmOrder} alt= "Confirm Order"/>
+            <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
             <Label>Select Confirm Order</Label>
           </Step>
-      </div> */}
+        </div>
       </div>
       <div className="order-container chef-bottum">
         <Row className="d-flex justify-content-start">
@@ -624,6 +617,10 @@ const styles = {
     transition: "transform 0.3s ease-in-out",
     margin: "10px 12px 20px",
     padding: "6px 5px 10px",
+  },
+  dish: {
+    width: "32px",
+    height: "32px",
   },
 };
 

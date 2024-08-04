@@ -7,27 +7,28 @@ import backIcon from '../../assets/back_arrow1.png';
 // import { useLocation } from "react-router-dom";
 import logoutImage from '../../assets/logout.png';
 import logoWhite from '../../../public/assets/logo_white.svg'
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-// import useScrollToTop from './useScrollToTop'; // Import the custom hook
+import useScrollToTop from '../useScrollToTop'; // Import the custom hook
 // import ChefCitypage from "../pages/ChefCitypage";
  import Popup from "../../utils/popup";
-
+import { usePathname, useRouter } from "next/navigation";
 // import styles from "./header.module.css";
 
 function Header() {
-//   useScrollToTop(); // Use the custo hook
+  useScrollToTop(); // Use the custo hook
 
 //   const location = useLocation();
   const router = useRouter();
+  const routerPathname = usePathname();
   const [showDrawer, setShowDrawer] = useState(false);
   const [showDecorationSubMenu, setShowDecorationSubMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [pageTitle, setPageTitle] = useState("");
   const [isMounted, setIsMounted] = useState(false); // State to check if component has mounted
 //   const navigate = useNavigate();
-  const isHomePage = router.pathname === '/';
+  const isHomePage = routerPathname === '/';
+
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
@@ -64,7 +65,7 @@ function Header() {
 
 useEffect(() => {
   const getTitle = () => {
-    const pathname = router.pathname;
+    const pathname = routerPathname;
 
     switch (true) {
       case pathname === "/balloon-decoration":
@@ -102,10 +103,10 @@ useEffect(() => {
     }
   };
 
-  if (router.pathname) {
+  if (routerPathname) {
     setPageTitle(getTitle());
   }
-}, [router.pathname]);
+}, [routerPathname]);
 
   const openLink = () => {
     window.open("https://play.google.com/store/apps/details?id=com.hora", "_blank");
@@ -226,7 +227,7 @@ useEffect(() => {
         <div style={styles.mobileViewHeader} className='mobileViewHeader py-2'>
           <div className="d-flex align-items-center gap-3" style={{ width:"100%"}}>
             {
-            isHomePage && ChefCitypage ? (
+            isHomePage ? (
               <>
                 <FontAwesomeIcon
                   icon={faBars}
@@ -235,12 +236,12 @@ useEffect(() => {
                   onClick={toggleDrawer}
                 />
                 <Link href="/" style={{ display:"flex" , width:"80%" , textAlign:"center"}}>
-                  <img src={logoWhite} alt="Logo" style={{ width: "85px", height: "auto", margin:"0 auto"}} />
+                  <Image src={logoWhite} alt="Logo" style={{ width: "85px", height: "auto", margin:"0 auto"}} />
                 </Link>
               </>
             ) : (
               <>
-                <img
+                <Image
                   src={backIcon}
                   alt="Back"
                   style={{

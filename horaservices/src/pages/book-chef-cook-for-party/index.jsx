@@ -607,21 +607,21 @@ const CreateOrder = ({ history, currentStep }) => {
                 </div>
                 <div className="range-bar">
                     <Step active={true.toString()} className="step1">
-                        <Image src={SelectDishes} alt="Select Dishes" />
+                        <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
                         <Label active={true.toString()}>Select Dishes</Label>
                     </Step>
                     <div className="sep-image">
                         <Image src={separator} />
                     </div>
                     <Step className="step2">
-                        <Image src={SelectDateTime} alt="Select Date & Time" />
+                        <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
                         <Label>Select Date & Time</Label>
                     </Step>
                     <div className="sep-image">
                         <Image src={separator} />
                     </div>
                     <Step className="step3">
-                        <Image src={SelectConfirmOrder} alt="Confirm Order" />
+                        <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
                         <Label>Select Confirm Order</Label>
                     </Step>
                 </div>
@@ -687,12 +687,6 @@ const CreateOrder = ({ history, currentStep }) => {
                         )}
                     </Col>
                 </Row>
-                <div
-                    className={`toggle-switch ${isVegSelected ? 'active normal' : 'normal'} ${isNonVegSelected ? '' : 'disabled'}`}
-                    onClick={isNonVegSelected ? handleVegSwitch : undefined} // Only allow click if Non-Veg is selected
-                >
-                    <div className={`toggle-slider ${isVegSelected ? 'active' : ''}`}></div>
-                </div>
                 <Row>
                     <Col>
                         <div
@@ -755,6 +749,10 @@ const styles = {
         transition: "transform 0.3s ease-in-out",
         margin: "10px 12px 20px",
         padding: "6px 5px 10px",
+    },
+    dish: {
+        width: "32px",
+        height: "32px",
     },
 };
 

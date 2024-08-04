@@ -31,7 +31,6 @@ const FoodDeliveryCheckout = () => {
     const [cityError, setCityError] = useState(false);
     const router = useRouter();
     const [showDatePicker, setShowDatePicker] = useState(false);
-
     const [deliveryCharges, setDeliveryCharges] = useState(250);
     const [packingCost, setpackingCost] = useState(200);
     const [includeDisposable, setIncludeDisposable] = useState(true); // State for checkbox
@@ -75,18 +74,17 @@ const FoodDeliveryCheckout = () => {
 
     console.log("selectedDishesFoodDelivery", selectedDishesFoodDelivery)
 
-
-
-    const selectedMealList = Object.values(selectedDishesFoodDelivery).map(dish => {
-        return {
-            name: dish.name,
-            image: dish.image,
-            price: Number(dish.cuisineArray[0]),
-            id: dish._id,
-            mealId: dish.mealId
-        };
-    });
-
+    const selectedMealList = selectedDishesFoodDelivery
+        ? Object.values(selectedDishesFoodDelivery).map(dish => {
+            return {
+                name: dish.name,
+                image: dish.image,
+                price: Number(dish.cuisineArray[0]),
+                id: dish._id,
+                mealId: dish.mealId
+            };
+        })
+        : [];
 
     const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
     function calculateDiscountPercentage(peopleCount, dishCount) {
@@ -323,27 +321,20 @@ const FoodDeliveryCheckout = () => {
     }
 
     // Assuming selectedMealList, peopleCount, and dishCount are defined earlier
-
     const dishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
     console.log("dishPrice" + dishPrice)
     var totalPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((dishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : dishPrice * peopleCount;
-
-
     const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
     console.log("discountPercentage" + discountPercentage)
     var discountedPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
-
     const calculateFinalTotal = () => {
         let finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
         console.log(totalPrice, discountedPrice);
-
         console.log("finalTotal: " + finalTotal);
-
         if (selectedDeliveryOption === 'party-food-delivery') {
             finalTotal += parseFloat(packingCost);
             console.log("finalTotal after packing cost: " + finalTotal);
-
             if (includeDisposable) {
                 finalTotal += parseFloat((20 * peopleCount).toFixed(0));
                 console.log("finalTotal after disposable cost: " + finalTotal);
@@ -354,17 +345,14 @@ const FoodDeliveryCheckout = () => {
                 console.log("finalTotal after table cost: " + finalTotal);
             }
         }
-
         console.log("finalTotal after adjustments: " + finalTotal.toFixed(0));
         return finalTotal.toFixed(0);
     };
-
 
     // Function to calculate the advance payment
     const calculateAdvancePayment = () => {
         return Math.round(calculateFinalTotal() * 0.65);
     };
-
 
     // useEffect(() => {
     //     Object.values(selectedDishData).map((item) => cat.push(item.cuisineId[0]));
@@ -372,7 +360,6 @@ const FoodDeliveryCheckout = () => {
 
     const RenderDishQuantity = ({ item }) => {
         const itemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b6b7ed240f7a09f7e2de" || meal.id[0] === "63f1b39a4082ee76673a0a9f" || meal.id[0] === "63edc4757e1b370928b149b3").length
-
         const mainCourseItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b6b7ed240f7a09f7e2de").length
         const appetizerItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b39a4082ee76673a0a9f").length
         const breadItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63edc4757e1b370928b149b3").length
@@ -431,13 +418,13 @@ const FoodDeliveryCheckout = () => {
         return (
             <div className='ordersummaryproduct'>
                 <div>
-                    <img
+                    <Image
                         src={`https://horaservices.com/api/uploads/${item.image}`}
                         alt={item.name}
                         className='checkoutRightImg chef'
+                        width={300} height={300}
                     />
                 </div>
-
                 <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}>
                     <p className='ordersummeryname'>{item.name}</p>
 
@@ -445,8 +432,6 @@ const FoodDeliveryCheckout = () => {
             </div>
         );
     };
-
-
 
     const handleDateChange = (date) => {
         console.log(`Date selected: ${date}`);
@@ -635,26 +620,16 @@ const FoodDeliveryCheckout = () => {
 
 
     const onContinueClick = async () => {
-
         const apiUrl = BASE_URL + PAYMENT;
-
-
-
         const storedUserID = await localStorage.getItem('userID');
         const phoneNumber = await localStorage.getItem('mobileNumber')
-
         let merchantTransactionId;
-
         const advance = calculateAdvancePayment();
         const total = calculateFinalTotal();
-
         console.log(selectedTimeSlot);
-
         try {
-
             const addressID = await saveAddress();
             const storedUserID = await localStorage.getItem('userID');
-
             const url = BASE_URL + CONFIRM_ORDER_ENDPOINT;
             const requestData = {
                 "toId": "",
@@ -690,8 +665,6 @@ const FoodDeliveryCheckout = () => {
         } catch (error) {
             console.log('Error Confirming Order:', error.message);
         }
-
-
 
         const requestData2 = {
             user_id: storedUserID,
@@ -741,10 +714,6 @@ const FoodDeliveryCheckout = () => {
 
     }
 
-
-
-
-
     return (
         <div className="App">
             {window.innerWidth > 800 ?
@@ -761,7 +730,7 @@ const FoodDeliveryCheckout = () => {
 
                             <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                                 <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                <textarea className=' rounded border border-1 p-1 '
+                                <textarea className='rounded border border-1 p-1 bg-white text-black'
                                     value={comment}
                                     onChange={handleComment}
                                     rows={4}
@@ -773,7 +742,7 @@ const FoodDeliveryCheckout = () => {
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                                     <textarea
                                         type="text"
-                                        className=' rounded border border-1 p-1'
+                                        className='rounded border border-1 p-1 bg-white text-black'
                                         value={address}
                                         onChange={handleAddressChange}
                                         rows={4}
@@ -784,7 +753,7 @@ const FoodDeliveryCheckout = () => {
                                 <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                                     <input
-                                        type="text" className=' rounded border border-1 p-1'
+                                        type="text" className='bg-white text-black rounded border border-1 p-1'
                                         value={pinCode}
                                         onChange={handlePinCodeChange}
                                     />
@@ -792,7 +761,7 @@ const FoodDeliveryCheckout = () => {
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                     <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                    <select value={city} className=' rounded border border-1 p-1' onChange={handleCityChange}>
+                                    <select value={city} className='bg-white text-black rounded border border-1 p-1' onChange={handleCityChange}>
                                         <option value="">Select City</option>
                                         <option value="Bangalore">Bangalore</option>
                                         <option value="Delhi">Delhi</option>
@@ -877,12 +846,9 @@ const FoodDeliveryCheckout = () => {
                                                         )}
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     )}
-
                                     {selectedDeliveryOption === 'party-live-buffet-catering' && (
                                         <div>
                                             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4 }}>
@@ -904,8 +870,6 @@ const FoodDeliveryCheckout = () => {
                                             {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
                                         </div>
                                     )}
-
-
                                     {/* Calculation for final total amount */}
                                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
@@ -917,8 +881,6 @@ const FoodDeliveryCheckout = () => {
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Advance Payment</p>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateAdvancePayment()}</p>
                                     </div>
-
-
                                 </div>
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: 7, borderTop: "1px solid #efefef" }}>
@@ -931,20 +893,14 @@ const FoodDeliveryCheckout = () => {
                                         <RenderDishQuantity key={index} item={item} />
                                     ))}
                                 </div>
-
-
-
                             </div>
                             <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                <h5 className=''>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)" }} className=' rounded-5 ms-1 contactus-redirection'>Contact Us</button>
+                                <h5 className='mt-2'>Need more info?</h5>
+                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className=' rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
                 :
                 <div style={{ padding: "1% 2%", backgroundColor: "#edededc9" }} className='checkoutmobileview'>
                     <div className='checoutSec my-3 gap-3'>
@@ -966,14 +922,13 @@ const FoodDeliveryCheckout = () => {
                                             <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Total Dishes</label>
                                             <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {Object.keys(selectedDishesFoodDelivery).length}</p>
                                         </div>
-                                        {
-                                            peopleCount > 0 ?
-                                                <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-                                                    <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Number of people</label>
-                                                    <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}>{peopleCount}</p>
-                                                </div>
-                                                :
-                                                null
+                                        {peopleCount > 0 ?
+                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
+                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Number of people</label>
+                                                <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}>{peopleCount}</p>
+                                            </div>
+                                            :
+                                            null
                                         }
                                     </div>
                                     <div className='chef-divider' style={{ marginTop: "10px", marginBottom: "10px" }}></div>
@@ -982,7 +937,6 @@ const FoodDeliveryCheckout = () => {
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
                                         </div>
-
                                         {discountedPrice > 0 && (
                                             <div>
                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center" }}>
@@ -1003,7 +957,7 @@ const FoodDeliveryCheckout = () => {
                                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                         <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                             <div style={{ width: 19, height: 19, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                                {includeDisposable && <img src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
+                                                                {includeDisposable && <Image src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
                                                             </div>
                                                         </button>
                                                         <div>
@@ -1038,10 +992,7 @@ const FoodDeliveryCheckout = () => {
                                                             )}
                                                         </div>
                                                     </div>
-
-
                                                 </div>
-
                                             </div>
                                         )}
 
@@ -1051,7 +1002,7 @@ const FoodDeliveryCheckout = () => {
                                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                         <button onClick={() => setIncludeTables(!includeTables)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                             <div style={{ width: 19, height: 19, borderWidth: 1, border: includeTables ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                                {includeTables && <img src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
+                                                                {includeTables && <Image src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
                                                             </div>
                                                         </button>
                                                         <div>
@@ -1080,7 +1031,7 @@ const FoodDeliveryCheckout = () => {
 
                                         <div className='checkoutInputType border-1 rounded-4  my-3' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                                             <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                            <textarea className=' rounded border border-1 p-1 decor-commemnts'
+                                            <textarea className='bg-white text-black rounded border border-1 p-1 decor-commemnts'
                                                 value={comment}
                                                 onChange={handleComment}
                                                 rows={4}
@@ -1091,7 +1042,7 @@ const FoodDeliveryCheckout = () => {
                                             <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
                                             <textarea
                                                 type="text"
-                                                className=' rounded border border-1 p-1'
+                                                className='bg-white text-black rounded border border-1 p-1'
                                                 value={address}
                                                 onChange={handleAddressChange}
                                                 rows={4}
@@ -1102,7 +1053,7 @@ const FoodDeliveryCheckout = () => {
                                         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                             <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
                                             <input
-                                                type="text" className=' rounded border border-1 p-1'
+                                                type="text" className='bg-white text-black rounded border border-1 p-1'
                                                 value={pinCode}
                                                 onChange={handlePinCodeChange}
                                             />
@@ -1110,7 +1061,7 @@ const FoodDeliveryCheckout = () => {
                                         </div>
                                         <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
                                             <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                            <select value={city} className=' rounded border border-1 p-1' onChange={handleCityChange}>
+                                            <select value={city} className='bg-white text-black rounded border border-1 p-1' onChange={handleCityChange}>
                                                 <option value="">Select City</option>
                                                 <option value="Bangalore">Bangalore</option>
                                                 <option value="Delhi">Delhi</option>
@@ -1120,14 +1071,11 @@ const FoodDeliveryCheckout = () => {
                                             {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}
                                         </div>
                                         <div>
-                                            <h1 style={{ padding: 4, color: '#000', fontSize: 13, fontWeight: '600', margin: 0, padding: "10px 0" }}>
-                                                Dishes Selected
-                                            </h1>
                                             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }}>
                                                 {selectedDishQuantities.map((item, index) => (
                                                     <div style={{ width: "48%", border: "1px solid rgb(149 142 142 / 73%)", flexDirection: "row", display: "flex", borderRadius: "10px", padding: "6px 10px", boxSizing: "border-box" }} className='dishes-checkout-page'>
                                                         <div style={{ marginRight: 2, width: "90%" }}>
-                                                            <img className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} />
+                                                            <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} width={300} height={300} />
                                                         </div>
                                                         <div style={{ color: "rgb(146, 82, 170)", fontWeight: "500", fontSize: "12px" }}>
                                                             <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.name}</p>
@@ -1137,13 +1085,11 @@ const FoodDeliveryCheckout = () => {
                                                 ))}
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                    <h5 className=''>Need more info?</h5>
-                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)" }} className=' rounded-5 ms-1 '>Contact Us</button>
+                                    <h5 className='fs-6 mt-2'>Need more info?</h5>
+                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", lineHeight: "1.5" }} className='bg-white rounded-5 ms-1 '>Contact Us</button>
                                 </div>
 
                                 <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
@@ -1166,26 +1112,18 @@ const FoodDeliveryCheckout = () => {
                                     backgroundColor: "#EDEDED"
                                 }}
                                 >
-
                                     <button onClick={onContinueClick} className="blue-btn chkeoutBottun">Confirm Order</button>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
             }
-
         </div>
     );
 }
 
 export default FoodDeliveryCheckout;
-
-
-
-
 
 export const CustomDatePicker = ({ handleDateChange, selectedDate, showDatePicker, setShowDatePicker, selectedDateError, combinedDateTimeError }) => {
 
