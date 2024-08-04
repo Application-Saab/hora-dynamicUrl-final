@@ -8,6 +8,7 @@ import {
   UPDATE_ORDER_STATUS,
 } from "../utils/apiconstants";
 import axios from "axios";
+import Head from "next/head";
 // import Success from './Success';
 // import Failure from './Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
@@ -126,7 +127,7 @@ export default function Home() {
     <>
       <main className={styles.main}>
         <div>
-          <Helmet>
+          <Head>
             <title>
               Chef for Party | Balloon Decoration for Party | food Delivery for
               Party | chef Near me | Decoration at home | Ballon Decoration Near
@@ -157,7 +158,7 @@ export default function Home() {
             <meta name="author" content="Hora Services" />
             <meta property="og:url" content="https://horaservices.com" />
             <meta property="og:type" content="website" />
-          </Helmet>
+          </Head>
           <div
             className={styles.homebanner}
           >

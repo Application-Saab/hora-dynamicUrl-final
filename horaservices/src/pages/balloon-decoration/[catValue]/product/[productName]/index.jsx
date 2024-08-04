@@ -34,7 +34,16 @@ function DecorationCatDetails() {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       router.push('/login', { state: stateData });
     } else {
-      router.push('/checkout', { state: { subCategory, product, orderType } });
+      router.push({
+        pathname: '/checkout',  
+        query: { 
+          from: window.location.pathname, 
+          subCategory, 
+          product: JSON.stringify(product), 
+          orderType, 
+          catValue  
+        } 
+      });
     }
   };
 
@@ -108,12 +117,10 @@ function DecorationCatDetails() {
         <meta property="og:type" content="website" />
       </Helmet>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-
         <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "10px", position: "relative" }} className="decDetails">
-
           <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">
             <div style={{ width: "80%", boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", margin: "0 auto", position: "relative" }} className="decDetailsImage">
-              <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} style={{ width: "100%" }} width={300} height={300} />
+              <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} alt="decoration-image" style={{ width: "100%" }} width={300} height={300} />
               <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                 <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
               </div>
@@ -136,25 +143,23 @@ function DecorationCatDetails() {
               {isClient && window.innerWidth > 800 ?
                 <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleCheckout(subCategory, product)}>Continue</button>
                 : null}
-
             </div>
 
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "10px", backgroundColor: "#fff" }} className="whyHoraSec">
               <p style={{ fontSize: "21px", color: "rgb(34, 34, 34)", borderBottom: "1px solid #e7eff9" }} className="whyHoraHeading">Why Hora</p>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }} className="whyHoraSecInner">
                 <div className="whyHoraSecBox">
-                  <Image src={buynowImage} />
+                  <Image src={buynowImage} alt="buy-now" />
                   <p style={{ color: "gray", fontSize: "12px" }} className="whyHoraSubheading">Experts Decorations</p>
                 </div>
                 <div className="whyHoraSecBox">
-                  <Image src={buynowImage1} />
+                  <Image src={buynowImage1} alt="buy-now" />
                   <p style={{ color: "gray", fontSize: "12px" }} className="whyHoraSubheading">Secured Transactions</p>
                 </div>
                 <div className="whyHoraSecBox">
-                  <Image src={buynowImage2} />
+                  <Image src={buynowImage2} alt="buy-now" />
                   <p style={{ color: "gray", fontSize: "12px" }} className="whyHoraSubheading">100% Service Guaranteed</p>
                 </div>
-
               </div>
             </div>
 
@@ -163,14 +168,8 @@ function DecorationCatDetails() {
               <p className="cancelltionPolicySecSubHeading">- Till the order is not assigned to service provider, 100% of the amount will be refunded, otherwise 50% of advance will be deducted as cancellation charges to compensate the service provider.</p>
               <p className="cancelltionPolicySecSubHeading">- The order cannot be edited after paying advance. Customer can cancel the order and replace the new order with required changes.</p>
             </div>
-
-
           </div>
-
-
-
         </div>
-
       </div>
 
       {isClient && window.innerWidth < 800 ?
@@ -187,11 +186,9 @@ function DecorationCatDetails() {
         :
         null
       }
-
     </div>
   );
-}
-
+};
 
 const styles = {
   Buttonstyle: {
@@ -207,6 +204,6 @@ const styles = {
     margin: "23px auto 14px",
     width: "93%",
   },
-}
+};
 
 export default DecorationCatDetails;

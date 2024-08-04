@@ -18,17 +18,17 @@ import Link from "next/link";
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-//   let { city } = useParams();
-const { city, catValue } = router.query;
+  //   let { city } = useParams();
+  const { city, catValue } = router.query;
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
-//   const { catValue } = useParams();
+  //   const { catValue } = useParams();
   const [selCat, setSelCat] = useState("");
   const [catId, setCatId] = useState("");
   const [loading, setLoading] = useState(true);
   const [catalogueData, setCatalogueData] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const [priceFilter, setPriceFilter] = useState("all"); // Default: Show all
   const [themeFilter, setThemeFilter] = useState("all"); // Default: Show all
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
@@ -60,11 +60,11 @@ const { city, catValue } = router.query;
     { label: 'Super dogs theme', value: 'dogs' },
     { label: 'Super Hero theme', value: 'Hero' },
     { label: 'Sport Football theme', value: 'Football' },
-    { label: 'Unicorn Theme', value: 'Unicorn' },  
+    { label: 'Unicorn Theme', value: 'Unicorn' },
   ];
   function getSubCategory(catValue) {
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
-    
+
     if (catValue === 'birthday-decoration') {
       return 'Birthday';
     } else if (catValue === 'anniversary-decoration') {
@@ -76,7 +76,7 @@ const { city, catValue } = router.query;
         .join(''); // Join parts together without spaces
     }
   }
-  
+
   // UseSelector to get state from Redux
   const { subCategory: stateSubCategory, imgAlt: stateImgAlt } = useSelector((state) => state.state || {});
   // Determine the value for subCategory and imgAlt
@@ -136,7 +136,6 @@ const { city, catValue } = router.query;
     // Return true if either price or theme condition is met
     return priceCondition && themeCondition;
   });
-  console.log(filteredData)
 
   function addSpaces(subCategory) {
     let result = "";
@@ -152,7 +151,7 @@ const { city, catValue } = router.query;
   const getSubCatId = async (subCategory) => {
     try {
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ID + subCategory);
-      const categoryId = response.data.data._id;
+      const categoryId = response.data.data?._id;
       setCatId(categoryId);
     } catch (error) {
       console.log("Error:", error.message);
@@ -204,7 +203,7 @@ const { city, catValue } = router.query;
 
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
-       <Helmet>
+      <Helmet>
         <title>Balloon and Flower Decoration @999</title>
         <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
@@ -220,7 +219,7 @@ const { city, catValue } = router.query;
       <>
         <div style={{ textAlign: "center", justifyContent: "center", alignItems: "center" }}>
           <div style={{ marginTop: "0px" }}>
-            <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0" , color: '#9252AA'}}>{selCat} {'Balloon Decoration'} </h1>
+            <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0", color: '#9252AA' }}>{selCat} {'Balloon Decoration'} </h1>
             <p style={{ padding: "0px 0px 16px", margin: "0px" }} className="subheading">{trimText('Balloon Decoration and Room Decoration Services for Anniversary, Birthdays, Kids Parties, Baby Showers and more!')}</p>
             <div style={{ marginBottom: "15px" }} className="filterdropdown d-flex flex-column flex-lg-row align-items-center justify-content-center gap-3" >
 
@@ -251,9 +250,9 @@ const { city, catValue } = router.query;
           </div>
         </div>
         <div style={styles.decContainer} className="decContainer">
-          {loading ? ([1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-            <div className="decimagecontainer" style={styles.imageContainer}>
-              <CardSkeleton key={index} />
+          {loading ? ([1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+            <div className="decimagecontainer" key={index} style={styles.imageContainer}>
+              <CardSkeleton />
             </div>
           ))) :
             (
@@ -272,7 +271,7 @@ const { city, catValue } = router.query;
                     className="decimagecontainer"
                   >
                     <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={imgAlt} style={styles.decCatimage} width={300} height={300}/>
+                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={imgAlt} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
                       <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
@@ -288,35 +287,35 @@ const { city, catValue } = router.query;
                           fontSize: "16px",
                           marginTop: "4px",
                           color: '#9252AA',
-            
+
                           lineHeight: "18px",
                           marginBottom: "0px",
                           textAlign: "left",
                         }}
                         className="pro_name"
                       >
-                         {item.name}
+                        {item.name}
                       </p>
-                      <div style={{ display:"flex" , flexDirection:"row" , justifyContent:"space-between" , alignItems:"top"}} className="pri_details">
+                      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
                         <div style={{ flexDirection: 'row', alignItems: 'left', justifyContent: 'space-between' }} className="pro_price">
                           <p style={{
-                           color: '#9252AA',
+                            color: '#9252AA',
                             fontWeight: '700',
                             fontSize: 17,
                             textAlign: "left",
                             margin: "10px 0px 7px",
                           }}
-                          class="pro_price"
+                            className="pro_price"
                           > ₹ {item.price}</p>
                         </div>
                         <div className="d-flex align-items-center rating-sec">
-                          <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA'}}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0 , height:"14px" }} icon={faStar} /></span></p>
+                          <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
                         </div>
                       </div>
                     </div>
 
-                   
+
 
                   </div>
                 ))
@@ -324,14 +323,14 @@ const { city, catValue } = router.query;
                 <div style={{ textAlign: "center", width: "100%", padding: "20px 0" }}>
                   <span>Reach out to our support team for this</span>
                   <span style={{ marginLeft: "10px" }}>
-                    <Link class="conactus" href="https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
+                    <Link className="conactus" href="https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
                   </span>
                 </div>
               )
             )
           }
           |<div>
-          {/* <div>
+            {/* <div>
                       {
                          filteredData.map((item, index) => (
                          

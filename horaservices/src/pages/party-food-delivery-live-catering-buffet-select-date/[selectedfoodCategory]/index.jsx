@@ -304,12 +304,21 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       router.push("/login", navigateState);
     } else {
-      router.push(
-        "/party-food-delivery-live-catering-buffet-checkout",
-        navigateState
-      );
+      router.push({
+        pathname: "/party-food-delivery-live-catering-buffet-checkout",
+        query:{
+        from: window.location.pathname,
+        peopleCount: peopleCount,
+        selectedDeliveryOption: selectedOption,
+        selectedDishesFoodDelivery: JSON.stringify(data),
+        totalOrderAmount: totalOrderAmount,
+        selectedDishQuantities: JSON.stringify(selectedDishQuantities),
+        selectedOption: selectedOption,
+        }
+    });
     }
   };
+  console.log("dsata",data)
 
   const LeftTabContent = ({ selectedOption }) => {
     return (

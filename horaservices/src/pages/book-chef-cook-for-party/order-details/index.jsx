@@ -274,22 +274,25 @@ const onContinueClick = () => {
 
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const navigateState = {
-        state: {
+        
             from: window.location.pathname,
             peopleCount,
-            selectedDishDictionary,
+            selectedDishDictionary: JSON.stringify(selectedDishDictionary),
             selectedDishPrice,
-            selectedDishes,
+            selectedDishes: JSON.stringify(selectedDishes),
             orderType,
             isDishSelected,
             selectedCount
-        }
+        
     };
 
     if (!isLoggedIn) {
         router.push('/login', navigateState);
     } else {
-        router.push('/book-chef-checkout', navigateState);
+        router.push({
+            pathname: '/book-chef-checkout', 
+            query: navigateState
+    });
     }
 };
 

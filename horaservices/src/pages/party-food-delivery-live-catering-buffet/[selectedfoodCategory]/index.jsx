@@ -25,8 +25,10 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const viewBottomSheetRef = useRef(null);
   const bottomSheetRef = useRef(null);
   const router = useRouter();
+  console.log(router)
   let { selectedfoodCategory } = router.query;
-  const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
+  // const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
+  const selectedOption = router.asPath.split('/').pop();
   const [orderType, setOrderType] = useState(2);
   const [isDishSelected, setIsDishSelected] = useState(false);
   const [selected, setSelected] = useState('veg');
@@ -385,7 +387,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
         orderType,
         isDishSelected,
         selectedCount,
-        selectedDishQuantities: JSON.stringify(selectedDishDictionary),
+        selectedDishQuantities: JSON.stringify(selectedDishQuantities),
         selectedOption
       },
     });

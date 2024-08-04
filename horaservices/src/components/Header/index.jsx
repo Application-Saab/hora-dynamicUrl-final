@@ -25,6 +25,7 @@ function Header() {
   const [showDecorationSubMenu, setShowDecorationSubMenu] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [pageTitle, setPageTitle] = useState("");
+  const [isMounted, setIsMounted] = useState(false); // State to check if component has mounted
 //   const navigate = useNavigate();
   const isHomePage = router.pathname === '/';
   const toggleDrawer = () => {
@@ -50,6 +51,10 @@ function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [drawerRef]);
+
+  useEffect(() => {
+    setIsMounted(true); // Set the component as mounted
+  }, []);
 
   const openCatItems = (subCategory) => {
     router.push(`/decoration-cat-page/${subCategory}`);
@@ -203,7 +208,7 @@ useEffect(() => {
           <div>
             <ul style={styles.desktopMenu}>
               <li style={styles.desktopMenuli1}>
-              {!isLoggedIn ? (
+              {isMounted && (!isLoggedIn ? (
                   <Link href="/login" style={styles.linkicon}>
                     <FontAwesomeIcon icon={faUser} style={styles.icon} />
                     <span style={{ marginLeft: "3px" }}>Login</span>
@@ -213,7 +218,7 @@ useEffect(() => {
                     <FontAwesomeIcon icon={faUser} style={styles.icon} />
                     <span style={{ marginLeft: "3px" }}>Logout</span>
                   </a>
-                )}
+                ))}
               </li>
             </ul>
           </div>
