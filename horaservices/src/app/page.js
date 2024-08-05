@@ -8,8 +8,9 @@ import {
   UPDATE_ORDER_STATUS,
 } from "../utils/apiconstants";
 import axios from "axios";
-// import Success from './Success';
-// import Failure from './Failure';
+import Head from "next/head";
+import Success from '../pages/Success';
+import Failure from '../pages/Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
 import bannerSvgImage from "../../public/assets/banner-home-bg.svg";
 import bannerDecorationImage from "../assets/decoration-home-banner.png";
@@ -31,7 +32,7 @@ import service7Image from "../assets/entertainment-home-banner-sec.png";
 import service6Image from "../assets/return-home-banner-sec.png";
 import downloadAppImage from "../assets/download-app-sec.png";
 import whatsppicon from "../assets/whatsapp-icon.png";
-// import HomeSlider from "../components/HomeSlider";
+import HomeSlider from "../components/HomeSlider";
 import { Helmet } from "react-helmet";
 import { getHomeOrganizationSchema } from "../utils/schema";
 import { useRouter } from "next/navigation";
@@ -124,9 +125,8 @@ export default function Home() {
 
   return (
     <>
-      <main className={styles.main}>
         <div>
-          <Helmet>
+          <Head>
             <title>
               Chef for Party | Balloon Decoration for Party | food Delivery for
               Party | chef Near me | Decoration at home | Ballon Decoration Near
@@ -157,18 +157,18 @@ export default function Home() {
             <meta name="author" content="Hora Services" />
             <meta property="og:url" content="https://horaservices.com" />
             <meta property="og:type" content="website" />
-          </Helmet>
+          </Head>
           <div
-            className={styles.homebanner}
+            className={`${styles.homebanner} homebanner`}
           >
             <div
-              className={styles.bgImg}
+              className={`${styles.bgImg} bgImg`}
               style={{
                 backgroundImage: `url(${bannerSvgImage.src})`
               }}
             >
               <div className={styles.pageWidth}>
-                <div className={styles.textContainer}>
+                <div className={`${styles.textContainer} textContainerhome`} >
                   <h1
                     style={{ fontSize: "40px", fontWeight: "500", margin: "0" }}
                   >
@@ -195,8 +195,8 @@ export default function Home() {
                             )} */}
                 </div>
               </div>
-              <div className={styles.bannerBottomSec}>
-                <div className={styles.bannerDecorationImage}>
+              <div className={`${styles.bannerBottomSec} bannerBottomSec`}>
+                <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/balloon-decoration">
                     <Image
                       src={bannerDecorationImage}
@@ -217,7 +217,7 @@ export default function Home() {
                     </h2>
                   </Link>
                 </div>
-                <div className={styles.bannerDecorationImage}>
+                <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/book-chef-cook-for-party">
                     <Image src={bannerChefImage} alt="Chef Near me" style={{ height: '200px' }} />
                     <h2
@@ -233,7 +233,7 @@ export default function Home() {
                     </h2>
                   </Link>
                 </div>
-                <div className={styles.bannerDecorationImage}>
+                <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/party-food-delivery-live-catering-buffet/party-food-delivery">
                     <Image
                       src={bannerFoodDeliveryImage}
@@ -253,7 +253,7 @@ export default function Home() {
                     </h2>
                   </Link>
                 </div>
-                <div className={styles.bannerDecorationImage}>
+                <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/party-food-delivery-live-catering-buffet/party-live-buffet-catering">
                     <Image src={service4Image} alt="Return Gift Near me" style={{ height: '200px' }} />
                     <h2
@@ -269,7 +269,7 @@ export default function Home() {
                     </h2>
                   </Link>
                 </div>
-                <div className={styles.bannerDecorationImage}>
+                <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <a href="/" style={{ textDecoration: "none" }}>
                     <Image
                       src={bannerEntertainmentImage}
@@ -292,7 +292,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className={styles.celebrateWithUs}>
+          <div className={`${styles.celebrateWithUs} celebrateWithUs`}>
             <div style={{ padding: "0 6%" }}>
               <h3
                 style={{
@@ -305,8 +305,8 @@ export default function Home() {
               >
                 CELEBRATE WITH US
               </h3>
-              <div className={styles.celebrateBottomSec}>
-                <div className={styles.celebrateBox}>
+              <div className={`${styles.celebrateBottomSec} celebrateBottomSec`}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate1Image}
                     alt="Birthday and Anniversary"
@@ -325,7 +325,7 @@ export default function Home() {
                     {"Birthday and Anniversary"}
                   </h3>
                 </div>
-                <div className={styles.celebrateBox}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate2Image}
                     alt="House Parties"
@@ -344,7 +344,7 @@ export default function Home() {
                     {"House Parties"}
                   </h3>
                 </div>
-                <div className={styles.celebrateBox}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate3Image}
                     alt="Corporate Events"
@@ -363,7 +363,7 @@ export default function Home() {
                     {"Corporate Events"}
                   </h3>
                 </div>
-                <div className={styles.celebrateBox}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate4Image}
                     alt="Wedding Events"
@@ -382,7 +382,7 @@ export default function Home() {
                     {"Wedding Events"}
                   </h3>
                 </div>
-                <div className={styles.celebrateBox}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate5Image}
                     alt="Gatherings"
@@ -401,7 +401,7 @@ export default function Home() {
                     {"Gatherings"}
                   </h3>
                 </div>
-                <div className={styles.celebrateBox}>
+                <div className={`${styles.celebrateBox} celebrateBox`}>
                   <Image
                     src={Celebrate6Image}
                     alt="Kids Events"
@@ -569,7 +569,7 @@ export default function Home() {
             style={{
               justifyContent: "center",
               alignContent: "center",
-              fontSize: "14px",
+              fontSize: "5px",
               padding: "0 16px",
             }}
           >
@@ -700,10 +700,9 @@ export default function Home() {
         </div>
         <div>
           <Link href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">
-            <Image className={styles.whatappicon} src={whatsppicon} alt="WhatsApp Icon" />
+            <Image className='whatappicon' src={whatsppicon} alt="WhatsApp Icon" />
           </Link>
         </div>
-      </main>
     </>
   );
 }

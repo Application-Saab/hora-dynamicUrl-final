@@ -10,13 +10,19 @@ import SelectDishes from "../../../assets/selectDish.png";
 import SelectDateTime from "../../../assets/event2.png";
 import SelectConfirmOrder from "../../../assets/confirm_order.png";
 import { useRouter } from "next/router";
+import Image from 'next/image';
+import info from '../../../assets/info.png';
+import verticalSeparator from '../../../assets/verticalSeparator.png';
+import minusIcon from '../../../assets/ic_minus.png';
+import plusIcon from '../../../assets/plus.png';
+import burner from '../../../assets/burner.png';
 
 const orangeColor = '#FF6F61';
 const defaultColor = '#B0BEC5';
 
 const SelectDate = ({ history, currentStep }) => {
     const router = useRouter();
-    const { orderType, selectedDishDictionary, selectedDishPrice, selectedDishes, isDishSelected, selectedCount } = router.query || {}; // Accessing subCategory and itemName safely
+    // const { orderType, selectedDishDictionary, selectedDishPrice, selectedDishes, isDishSelected, selectedCount } = router.query || {}; // Accessing subCategory and itemName safely
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -35,6 +41,25 @@ const SelectDate = ({ history, currentStep }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedTab, setSelectedTab] = useState('Appliances');
     const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    let {
+        orderType,
+        selectedDishDictionary,
+        selectedDishPrice,
+        selectedDishes,
+        isDishSelected,
+        selectedCount,
+    } = router.query;
+
+    if (selectedDishDictionary) {
+        try {
+            selectedDishDictionary = JSON.parse(selectedDishDictionary);
+        } catch (error) {
+            console.error('Error parsing selectedDishDictionary:', error);
+        }
+    }
+
     const data = selectedDishDictionary;
     const [dishPrice, setDishPrice] = useState(selectedDishPrice);
 
@@ -180,17 +205,17 @@ const SelectDate = ({ history, currentStep }) => {
       }
     `;
 
-    const Image = styled.img`
-      width: 48px;       // Default size for mobile view
-      height: 48px;
+    // const Image = styled.img`
+    //   width: 48px;       // Default size for mobile view
+    //   height: 48px;
 
-      ${(props) => props.active && `border: 2px solid #000;`};
+    //   ${(props) => props.active && `border: 2px solid #000;`};
 
-      @media (max-width: 600px) {
-      width: 32px;     // Smaller width for mobile view
-      height: 32px;    // Maintain aspect ratio
-    }
-    `;
+    //   @media (max-width: 600px) {
+    //   width: 32px;     // Smaller width for mobile view
+    //   height: 32px;    // Maintain aspect ratio
+    // }
+    // `;
 
     const Label = styled.div`
       margin-top: 5px;
@@ -204,9 +229,8 @@ const SelectDate = ({ history, currentStep }) => {
       }
     `;
 
-
     const [popupMessage, setPopupMessage] = useState({
-        image: "",
+        img: "",
         title: "",
         body: "",
         button: "",
@@ -218,7 +242,7 @@ const SelectDate = ({ history, currentStep }) => {
 
     const increasePeopleCount = () => {
         setPeopleCount(peopleCount + 1)
-        setDishPrice(dishPrice + 49)
+        setDishPrice(parseInt(dishPrice) + 49)
     }
 
     const decreasePeopleCount = () => {
@@ -241,7 +265,7 @@ const SelectDate = ({ history, currentStep }) => {
         if (dishPrice < 700) {
             setWarningVisibleForTotalAmount(true);
             setPopupMessage({
-                image: orderWarning,
+                img: orderWarning,
                 title: "Total Order Amount is less than ₹700",
                 body: "Total Order amount can not be less than ₹700, Add more to continue",
                 button: "Add More",
@@ -251,22 +275,25 @@ const SelectDate = ({ history, currentStep }) => {
 
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
         const navigateState = {
-            state: {
-                from: window.location.pathname,
-                peopleCount,
-                selectedDishDictionary,
-                selectedDishPrice,
-                selectedDishes,
-                orderType,
-                isDishSelected,
-                selectedCount
-            }
+
+            from: window.location.pathname,
+            peopleCount,
+            selectedDishDictionary: JSON.stringify(selectedDishDictionary),
+            selectedDishPrice,
+            selectedDishes: JSON.stringify(selectedDishes),
+            orderType,
+            isDishSelected,
+            selectedCount
+
         };
 
         if (!isLoggedIn) {
             router.push('/login', navigateState);
         } else {
-            router.push('/book-chef-checkout', navigateState);
+            router.push({
+                pathname: '/book-chef-checkout',
+                query: navigateState
+            });
         }
     };
 
@@ -331,6 +358,7 @@ const SelectDate = ({ history, currentStep }) => {
                 });
             }
         }
+        console.log('totalIngredients', totalIngredients)
         return Object.values(totalIngredients);
     };
 
@@ -338,7 +366,7 @@ const SelectDate = ({ history, currentStep }) => {
         return (
             <div style={{ height: '51px', paddingRight: '2px', alignItems: 'center', borderRadius: '5px', borderColor: '#DADADA', borderWidth: '0.5px', flexDirection: 'row', marginRight: '6px', marginBottom: '8px', display: 'flex', borderStyle: 'solid' }}>
                 <div style={{ marginLeft: '5px', width: '40px', height: '40px', backgroundColor: '#F0F0F0', borderRadius: '3px', alignItems: 'center', justifyContent: 'center', marginRight: '5px', display: 'flex' }}>
-                    <img src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} style={{ width: '33px', height: '34px' }} />
+                    <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} height={34} width={34} />
                 </div>
 
                 <div style={{ flexDirection: 'column', marginLeft: '1px', width: '43px', display: 'flex' }}>
@@ -349,7 +377,6 @@ const SelectDate = ({ history, currentStep }) => {
     };
 
     const RenderIngredients = ({ key, item }) => {
-console.log('shivam', item)
         let quantity = item.qty * peopleCount;
 
         if (item.count == 4) {
@@ -391,12 +418,11 @@ console.log('shivam', item)
                 width: "23%", alignItems: 'center', borderRadius: 5, border: "1px solid #DADADA",
                 flexDirection: 'row', padding: "10px", display: "flex", marginBottom: "20px", marginRight: "10px"
             }} className='ingredientsec'>
-                <div><h1>Shivam</h1></div>
                 <div style={{
                     marginLeft: 5, width: "45%", height: "auto", backgroundColor: '#F0F0F0', borderRadius: "10px",
                     alignItems: 'center', padding: "5%", justifyContent: 'center', marginRight: 15
                 }} className='ingredientleftsec'>
-                    <img src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} style={{ width: "100%", height: "100%" }} />
+                    <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} width={120} height={27} />
                 </div>
                 <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
                     <div style={{ fontSize: "70%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
@@ -419,7 +445,7 @@ console.log('shivam', item)
 
                     <div style={{ width: 90, height: 54, flexDirection: 'column', borderColor: "#DADADA", borderWidth: 0.5, borderRadius: 5 }}>
                         <div style={{ flexDirection: 'row' }}>
-                            <img style={styles.burner} src={require('../../../assets/burner.png')} alt="burner" />
+                            <Image style={styles.burner} src={burner} alt="burner" />
                             <span style={{ marginInlineStart: 12, marginBlock: 6, fontSize: 26, color: "#9252AA" }}>{burnerCount}</span>
                         </div>
                     </div>
@@ -435,7 +461,7 @@ console.log('shivam', item)
 
                     {ApplianceList.length > 0 && (
                         <div style={{ flexDirection: 'row', marginTop: 11 }}>
-                            <img style={styles.verticalSeparator} src={require('../../../assets/verticalSeparator.png')} alt="separator" />
+                            <Image style={styles.verticalSeparator} src={verticalSeparator} alt="separator" />
                         </div>
                     )}
 
@@ -467,6 +493,7 @@ console.log('shivam', item)
     }
 
     const RightTabContent = ({ ingredientList, preparationTextList, toggleShowAll, showAll, renderPreparationText }) => {
+        console.log('ingredientList', ingredientList)
         return (
             <div style={{ overflowY: 'auto', height: '100%', borderRadius: "4px 13px 13px 13px" }}>
                 <div style={{ padding: "0px 20px 20px 20px", flexDirection: 'column', boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1)', backgroundColor: 'white', borderBottomRightRadius: '15px', borderBottomLeftRadius: '15px', display: 'flex', border: "1px solid #efefef" }}>
@@ -514,33 +541,40 @@ console.log('shivam', item)
             );
         } else if (activeTab === 'right') {
             const totalIngredientsList = getTotalIngredients();
+            console.log('totalIngredientsList', totalIngredientsList)
             return <RightTabContent ingredientList={totalIngredientsList} />;
         }
     };
 
-
-
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 800);
+        };
+        handleResize(); // Check initial size
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <div style={{ width: "90%", margin: "0 auto", backgroundColor: "#EDEDED", marginBottom: "10px" }} className='selectdatesecouter'>
             <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-                <img style={{ width: "20px", marginRight: "10px" }} src={require('../../../assets/info.png')} />
+                <Image style={{ width: "20px", marginRight: "10px", height: "20px" }} src={info} />
                 <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
             </div>
 
             <Container>
-                <Step active>
-                    <Image src={SelectDishes} alt="Select Dishes" />
-                    <Label active>Select Dishes</Label>
+                <Step active={true.toString()}>
+                    {isMobile ? <Image src={SelectDishes} alt="Select Dishes" width={32} height={32} /> : <Image src={SelectDishes} alt="Select Dishes" width={48} height={48} />}
+                    <Label active={true.toString()}>Select Dishes</Label>
                 </Step>
-                <Line active />
+                <Line active={true.toString()} />
                 <Step>
-                    <Image src={SelectDateTime} alt="Select Date & Time" />
-                    <Label active>Select Date & Time</Label>
+                    {isMobile ? <Image src={SelectDateTime} alt="Select Date & Time" width={32} height={32} /> : <Image src={SelectDateTime} alt="Select Date & Time" width={48} height={48} />}
+                    <Label active={true.toString()}>Select Date & Time</Label>
                 </Step>
                 <Line />
                 <Step>
-                    <Image src={SelectConfirmOrder} alt="Confirm Order" />
+                    {isMobile ? <Image src={SelectConfirmOrder} alt="Confirm Order" width={32} height={32} /> : <Image src={SelectConfirmOrder} alt="Confirm Order" width={48} height={48} />}
                     <Label>Select Confirm Order</Label>
                 </Step>
             </Container>
@@ -558,11 +592,11 @@ console.log('shivam', item)
                             <div className="heading">How many people you are hosting?</div>
                             <div className="control-buttons">
                                 <button onClick={decreasePeopleCount} className="control-button">
-                                    <img src={require('../../../assets/ic_minus.png')} alt="minus icon" />
+                                    <Image src={minusIcon} alt="minus icon" />
                                 </button>
-                                <div className="count-text">{peopleCount}</div>
+                                <div className="count-text mx-2">{peopleCount}</div>
                                 <button onClick={increasePeopleCount} className="control-button">
-                                    <img src={require('../../../assets/plus.png')} alt="plus icon" />
+                                    <Image src={plusIcon} alt="plus icon" />
                                 </button>
                             </div>
                         </div>
@@ -591,7 +625,7 @@ console.log('shivam', item)
                             </div>
                         </div>
                         <div className='personsectionprice'>
-                            <img src={require('../../../assets/info.png')} className="info-icon" alt="info icon" />
+                            <Image src={info} className="info-icon" alt="info icon" />
                             <p className="info-text">₹ 49/person would be added to bill value in addition to dish price</p>
                         </div>
                     </div>
@@ -711,6 +745,7 @@ const styles = {
     },
     burner: {
         width: "56px",
+        height: "56px",
         margin: "10px 0 0"
     }
 }

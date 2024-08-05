@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
-import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../utils/apiconstants';
+import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../../utils/apiconstants';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
-import { CardSkeleton } from "../../../components/CardSkeleton";
-import { getDecorationCatOrganizationSchema } from "../../../utils/schema";
-import '../../../css/decoration.css';
-import { setState } from '../../../actions/action';
+import { CardSkeleton } from "../../../../components/CardSkeleton";
+import { getDecorationCatOrganizationSchema } from "../../../../utils/schema";
+import '../../../../css/decoration.css';
+import { setState } from '../../../../actions/action';
 import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -18,8 +18,9 @@ import Link from "next/link";
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  //   let { city } = useParams();
+    // let { city } = useParams();
   const { city, catValue } = router.query;
+  console.log(router)
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();

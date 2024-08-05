@@ -5,18 +5,14 @@ import axios from 'axios';
 // import { useLocation } from 'react-router-dom';
 import { Col, Form, Row } from "react-bootstrap";
 import { useTimer } from "../../utils/useTimer";
-
 import Popup from "../../utils/popup";
 import logoutImage from '../../assets/logout.png'
-
 import orderWarning from "../../assets/OrderWarning.png";
 import { useRouter } from "next/navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
-
-    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
-        useState(false);
+    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
     const [mobileNumber, setMobileNumber] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
     const [otp, setOtp] = useState(['', '', '', '']);
@@ -47,7 +43,6 @@ const Login = () => {
     const [validMobileNumber, setValidMobileNumber] = useState(false); // Add state for valid mobile number
     const otpRefs = useRef([React.createRef(), React.createRef(), React.createRef(), React.createRef()]);
     const { time, isTimeUp, resetTimer } = useTimer(25);
-
     const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
     const [popupMessage, setPopupMessage] = useState({}); // State for popup message
 
@@ -63,7 +58,6 @@ const Login = () => {
         setShowPopup(true); // Show the popup
         router.push("/");
     };
-
 
     const handleWarningClose = () => {
         setWarningVisibleForTotalAmount(false);
@@ -92,8 +86,6 @@ const Login = () => {
         });
         setWarningVisibleForTotalAmount(true); // Ensure this is set to true to display the popup
     }
-
-
 
     const handleMobileNumberChange = (e) => {
         const value = e.target.value.trim();
@@ -134,7 +126,6 @@ const Login = () => {
         console.log('Show popup state changed:', showPopup);
     }, [popupMessage, showPopup]);
 
-
     const validateOtp = async (enteredOtp) => {
         try {
             if (enteredOtp === fetchedOtp.toString()) {
@@ -151,9 +142,7 @@ const Login = () => {
                 });
 
                 if (response.data.status === API_SUCCESS_CODE) {
-
                     handleLogout();
-
                     setLoginMsg("Successfully logged in");
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem("mobileNumber", mobileNumber);
@@ -203,7 +192,6 @@ const Login = () => {
                         // For example, navigate to a default page or show an error message
                         router.push('/');
                     }
-
                 } else {
                     setLoginMsg(" ");
                     setOtpError('Failed to verify OTP. Please try again.');
@@ -283,8 +271,10 @@ const Login = () => {
     };
 
     return (
-        <div className="login-page" style={{ display: "flex", justifyContent: "center", flexDirection: "column",
-            textAlign: "center", margin: "50px 0 0"}}>
+        <div className="login-page" style={{
+            display: "flex", justifyContent: "center", flexDirection: "column",
+            textAlign: "center", margin: "50px 0 0"
+        }}>
             {!loggedIn ? (
                 <form className="loginform" style={!otpSent ? { maxWidth: '36rem' } : { maxWidth: '30rem' }}>
                     {!otpSent ? (
@@ -342,43 +332,36 @@ const Login = () => {
                         <div className="d-flex justify-content-between mt-4">
                             <p className="m-0 p-0 text-danger font-13px">*Wrong OTP</p>
                             <p className="m-0 p-0 font-13px" style={{ color: '#9252AA', cursor: "pointer" }} onClick={fetchOtp}>
-                      Resend Code
-                    </p>
-                  </div>
-              ) : (
-                  otpSent &&
-                  <div className="d-flex justify-content-center mt-4">
-                    <p className="m-0 p-0 font-13px text-center" style={{ color: '#8A8A8A' }}>
-                      Resend Code in {time} sec
-                    </p>
-                  </div>
-              )}
-            </form>
-        ) : (
-            <div>
-              <p>Welcome! You have successfully logged in.</p>
-            </div>
-
-        )}
-
-
-
-        {showPopup && (
-            <Popup onClose={() => setShowPopup(false)} popupMessage={popupMessage} />
-        )}
-
-      </div>
-  );
+                                Resend Code
+                            </p>
+                        </div>
+                    ) : (
+                        otpSent &&
+                        <div className="d-flex justify-content-center mt-4">
+                            <p className="m-0 p-0 font-13px text-center" style={{ color: '#8A8A8A' }}>
+                                Resend Code in {time} sec
+                            </p>
+                        </div>
+                    )}
+                </form>
+            ) : (
+                <div>
+                    <p>Welcome! You have successfully logged in.</p>
+                </div>
+            )}
+            {showPopup && (
+                <Popup onClose={() => setShowPopup(false)} popupMessage={popupMessage} />
+            )}
+        </div>
+    );
 }
 
 const styles = {
-  pageWidth: {
-    margin: "0 auto",
-    maxWidth: "1200px",
-    textAlign: "center"
-  },
+    pageWidth: {
+        margin: "0 auto",
+        maxWidth: "1200px",
+        textAlign: "center"
+    },
 }
 
-
 export default Login;
-

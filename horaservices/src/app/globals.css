@@ -2414,7 +2414,6 @@ main.order-list .order-container {
 }
 
 /* Loader css */
-
 .custom-spinner {
   display: flex;
   justify-content: center;
@@ -2428,12 +2427,23 @@ main.order-list .order-container {
   margin-bottom: 1rem;
 }
 
-
 /* View button for chef page */
-
 .viewbtn.clickedviewAll {
   background-color: #fff !important;
   /* Background color when clicked */
   color: purple !important;
   /* Font color when clicked */
+}
+
+.celebrateDecorationImage {
+  height: auto;
+}
+
+.whatappicon {
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
+  z-index: 11111111;
+  width: 60px;
+  height: 60px;
 }
