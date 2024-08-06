@@ -489,7 +489,7 @@ const FoodDeliveryCheckout = () => {
     const generateTimeSlots = () => {
         const startTime = 7; // Starting hour
         const endTime = 22; // Ending hour
-        const interval = orderType === 2 ? 1 : 3; // Interval in hours
+        const interval = orderType == 2 ? 1 : 3; // Interval in hours
 
         const timeSlots = [];
         for (let hour = startTime; hour < endTime; hour += interval) {
@@ -497,10 +497,8 @@ const FoodDeliveryCheckout = () => {
             const endTimeFormatted = hour + interval < 10 ? `0${hour + interval}:00 AM` : `${(hour + interval) % 12 || 12}:00 ${hour + interval < 12 ? 'AM' : 'PM'}`;
             timeSlots.push(`${startTimeFormatted} - ${endTimeFormatted}`);
         }
-
         return timeSlots;
     };
-
 
     const pincodes = [
         "560063", "560030", "560034", "560007", "560092", "560024", "560045", "560003", "560050", "562107",
@@ -574,10 +572,8 @@ const FoodDeliveryCheckout = () => {
         window.open('https://wa.me/917338584828?text=Hello%20I%20have%20some%20queries%20for%20food%20delivery%20and%20live%20Catering%20service', '_blank');
     };
 
-
     const saveAddress = async () => {
         try {
-
             const url = BASE_URL + SAVE_LOCATION_ENDPOINT;
 
             // Retrieve userID from localStorage
@@ -589,8 +585,6 @@ const FoodDeliveryCheckout = () => {
             }
 
             const address2 = address + pinCode;
-
-
             const requestData = {
                 address1: address2,
                 address2: address2,
@@ -1089,7 +1083,7 @@ const FoodDeliveryCheckout = () => {
                                 </div>
                                 <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
                                     <h5 className='fs-6 mt-2'>Need more info?</h5>
-                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", lineHeight: "1.5" }} className='bg-white rounded-5 ms-1 '>Contact Us</button>
+                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", fontSize: "13px" }} className='bg-white rounded-5 ms-1 '>Contact Us</button>
                                 </div>
 
                                 <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{

@@ -192,7 +192,7 @@ const ChefCheckout = () => {
     const generateTimeSlots = () => {
         const startTime = 7; // Starting hour
         const endTime = 22; // Ending hour
-        const interval = orderType === 2 ? 1 : 3; // Interval in hours
+        const interval = orderType == 2 ? 1 : 3; // Interval in hours
 
         const timeSlots = [];
         for (let hour = startTime; hour < endTime; hour += interval) {
@@ -555,17 +555,17 @@ const ChefCheckout = () => {
                         <div>
                             <Container>
                                 <Step active={true.toString()}>
-                                    <Image src={SelectDishes} alt="Select Dishes" height={32} width={32}/>
+                                    <Image src={SelectDishes} alt="Select Dishes" height={32} width={32} />
                                     <Label active={true.toString()}>Select Dishes</Label>
                                 </Step>
                                 <Line active={true.toString()} />
                                 <Step>
-                                    <Image src={SelectDateTime} alt="Select Date & Time" height={32} width={32}/>
+                                    <Image src={SelectDateTime} alt="Select Date & Time" height={32} width={32} />
                                     <Label active={true.toString()}>Select Date & Time</Label>
                                 </Step>
                                 <Line />
                                 <Step>
-                                    <Image src={SelectConfirmOrder} alt="Confirm Order" height={32} width={32}/>
+                                    <Image src={SelectConfirmOrder} alt="Confirm Order" height={32} width={32} />
                                     <Label>Select Confirm Order</Label>
                                 </Step>
                             </Container>
@@ -684,7 +684,7 @@ const ChefCheckout = () => {
 
                             <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
                                 <h5 className='fs-6 mt-2'>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", lineHeight: "1.5" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
+                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", fontSize: "13px" }} className='rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
                             </div>
 
                             <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{

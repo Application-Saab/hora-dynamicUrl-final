@@ -10,7 +10,7 @@ import logoWhite from '../../../public/assets/logo_white.svg'
 import Link from "next/link";
 import Image from "next/image";
 import useScrollToTop from '../useScrollToTop'; // Import the custom hook
-// import ChefCitypage from "../pages/ChefCitypage";
+import ChefCitypage from "../../pages/[city]/chef-near-me";
  import Popup from "../../utils/popup";
 import { usePathname, useRouter } from "next/navigation";
 // import styles from "./header.module.css";
@@ -130,7 +130,7 @@ useEffect(() => {
     <header style={styles.headerContainer}>
       <div className="pageWidth">
         <div style={styles.headerContainerinner} className="headerContainerinner">
-          <div>
+          <div className="z-1">
             <Link href="/">
               <Image src={logoWhite} alt="Logo" style={styles.logo} />
             </Link>
@@ -225,9 +225,8 @@ useEffect(() => {
           </div>
         </div>
         <div style={styles.mobileViewHeader} className='mobileViewHeader py-2'>
-          <div className="d-flex align-items-center gap-3" style={{ width:"100%"}}>
-            {
-            isHomePage ? (
+          <div className="d-flex align-items-center gap-3 z-1" style={{ width:"100%"}}>
+            {isHomePage && ChefCitypage ? (
               <>
                 <FontAwesomeIcon
                   icon={faBars}
@@ -236,7 +235,7 @@ useEffect(() => {
                   onClick={toggleDrawer}
                 />
                 <Link href="/" style={{ display:"flex" , width:"80%" , textAlign:"center"}}>
-                  <Image src={logoWhite} alt="Logo" style={{ width: "85px", height: "auto", margin:"0 auto"}} />
+                  <Image src={logoWhite} alt="Logo" style={{ width: "85px", height: "auto", margin:"0px auto"}} />
                 </Link>
               </>
             ) : (

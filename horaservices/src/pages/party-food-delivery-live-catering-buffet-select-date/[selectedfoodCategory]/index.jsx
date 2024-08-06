@@ -290,19 +290,20 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     }
 
     const navigateState = {
-      state: {
-        from: window.location.pathname,
-        peopleCount: peopleCount,
-        selectedDeliveryOption: selectedOption,
-        selectedDishesFoodDelivery: data,
-        totalOrderAmount: totalOrderAmount,
-        selectedDishQuantities: selectedDishQuantities,
-        selectedOption: selectedOption,
-      },
+      from: window.location.pathname,
+      peopleCount: peopleCount,
+      selectedDeliveryOption: selectedOption,
+      selectedDishesFoodDelivery: JSON.stringify(data),
+      totalOrderAmount: totalOrderAmount,
+      selectedDishQuantities: JSON.stringify(selectedDishQuantities),
+      selectedOption: selectedOption,
     };
 
     if (localStorage.getItem("isLoggedIn") !== "true") {
-      router.push("/login", navigateState);
+      router.push({
+        pathname: "/login",
+        query: { navigateState }
+        });
     } else {
       router.push({
         pathname: "/party-food-delivery-live-catering-buffet-checkout",
@@ -940,11 +941,10 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                       marginLeft: 5,
                       lineHeight: "23px",
                       fontSize: 18,
-                      marginTop: 2,
+                      marginTop: "15px",
                       width: 22,
                       textAlign: "center",
                       color: "black",
-                      marginBottom: "10px",
                     }}
                     className="totalcount"
                   >

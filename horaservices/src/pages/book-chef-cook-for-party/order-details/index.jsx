@@ -275,7 +275,6 @@ const SelectDate = ({ history, currentStep }) => {
 
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
         const navigateState = {
-
             from: window.location.pathname,
             peopleCount,
             selectedDishDictionary: JSON.stringify(selectedDishDictionary),
@@ -284,11 +283,13 @@ const SelectDate = ({ history, currentStep }) => {
             orderType,
             isDishSelected,
             selectedCount
-
         };
 
         if (!isLoggedIn) {
-            router.push('/login', navigateState);
+            router.push({
+                pathname: '/login',
+                query: navigateState
+            });
         } else {
             router.push({
                 pathname: '/book-chef-checkout',

@@ -178,10 +178,9 @@ export default function Home() {
                     style={{
                       fontSize: "72px",
                       fontWeight: "900",
-                      margin: "0 0 10px",
                       lineHeight: "77px",
-                      margin: "0px 0 10px",
-                      padding: "3px 14% 5px 14%",
+                      margin: "0px 0px 10px",
+                      padding: "3px 14% 5px",
                     }}
                   >
                     {"ALL PARTY SERVICE ONE PLATFORM"}

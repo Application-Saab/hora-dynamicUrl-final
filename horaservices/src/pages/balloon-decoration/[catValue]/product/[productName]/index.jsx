@@ -29,10 +29,21 @@ function DecorationCatDetails() {
   const scriptTag = JSON.stringify(schemaOrg);
   const [isClient, setIsClient] = useState(false);
   const handleCheckout = (subCategory, product) => {
-    const stateData = { from: window.location.pathname, subCategory, product, orderType, catValue };
+    const stateData = { 
+      from: window.location.pathname,
+      subCategory,
+      product: JSON.stringify(product),
+      orderType,
+      catValue 
+    };
 
     if (localStorage.getItem("isLoggedIn") !== "true") {
-      router.push('/login', { state: stateData });
+      router.push({
+        pathname: '/login',
+        query: {
+          stateData
+        }
+      });
     } else {
       router.push({
         pathname: '/checkout',
