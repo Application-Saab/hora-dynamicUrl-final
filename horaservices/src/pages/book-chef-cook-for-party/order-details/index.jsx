@@ -422,7 +422,7 @@ const SelectDate = ({ history, currentStep }) => {
                     marginLeft: 5, width: "45%", height: "auto", backgroundColor: '#F0F0F0', borderRadius: "10px",
                     alignItems: 'center', padding: "5%", justifyContent: 'center', marginRight: 15
                 }} className='ingredientleftsec'>
-                    <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} width={120} height={27} />
+                    <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} width={120} height={isMobile ? 27 : 44} />
                 </div>
                 <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
                     <div style={{ fontSize: "70%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>

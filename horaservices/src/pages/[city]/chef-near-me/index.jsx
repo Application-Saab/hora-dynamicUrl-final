@@ -2,30 +2,30 @@ import React, { useState, useEffect } from "react";
 // import { useLocation } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import { useParams } from "react-router-dom";
-import service4Image from '../../assets/live-buffet-service.png';
-import bannerSvgImage from '../../../public/assets/banner-home-bg.svg';
-import bannerDecorationImage from '../../assets/decoration-home-banner.png';
-import bannerChefImage from '../../assets/chef-home-banner.png';
-import bannerHospitalityImage from '../../assets/hospitality.png';
-import bannerReturnGiftImage from '../../assets/return-gift-banner-home.png';
-import bannerEntertainmentImage from '../../assets/entertainment-banner-home.png';
-import bannerFoodDeliveryImage from '../../assets/food-delivery-home-banner.png';
-import Celebrate1Image from '../../assets/Birthday&Celebration.png';
-import Celebrate2Image from '../../assets/corporate-party.png';
-import Celebrate3Image from '../../assets/house-party.png';
-import Celebrate4Image from '../../assets/wedding-event.png';
-import Celebrate5Image from '../../assets/gathering.png';
-import Celebrate6Image from '../../assets/kids-event.png';
+import bannerSvgImage from '../../../../public/assets/banner-home-bg.svg';
+import bannerDecorationImage from '../../../assets/decoration-home-banner.png';
+import bannerChefImage from '../../../assets/chef-home-banner.png';
+import bannerHospitalityImage from '../../../assets/hospitality.png';
+import bannerReturnGiftImage from '../../../assets/return-gift-banner-home.png';
+import bannerEntertainmentImage from '../../../assets/entertainment-banner-home.png';
+import bannerFoodDeliveryImage from '../../../assets/food-delivery-home-banner.png';
+import Celebrate1Image from '../../../assets/Birthday&Celebration.png';
+import Celebrate2Image from '../../../assets/corporate-party.png';
+import Celebrate3Image from '../../../assets/house-party.png';
+import Celebrate4Image from '../../../assets/wedding-event.png';
+import Celebrate5Image from '../../../assets/gathering.png';
+import Celebrate6Image from '../../../assets/kids-event.png';
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
-const DecorationCity = () => {
+const ChefCitypage = () => {
     const [showButton, setShowButton] = useState(false);
     const [city, setCity] = useState("");
     const openLink = () => {
         window.open("https://play.google.com/store/apps/details?id=com.hora", "_blank");
     };
+
     useEffect(() => {
         setShowButton(window.innerWidth > 800);
         function handleResize() {
@@ -37,6 +37,7 @@ const DecorationCity = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
     const cityData = {
         Delhi: {
             bannerImage: "OIP1.jpg",
@@ -848,9 +849,10 @@ const DecorationCity = () => {
             bannerImage: "OIP1.jpg",
         }
     };
-    // const location = useLocation();
     const router = useRouter();
-    // const { city } = router.query;
+    // const  city  = router.query.city;
+    // const city = router.asPath.split('/')[1];
+
     useEffect(() => {
         if (router.isReady) {
             const { city } = router.query;
@@ -862,48 +864,48 @@ const DecorationCity = () => {
         return <div>Loading...</div>;
     }
 
+    console.log(router)
     return (
-        <div className="p-0">
-            <div style={styles.homebanner} className="homebanner">
-                <div style={styles.bgImg} className="bgImg">
+        <div>
+            <div style={styles.homebanner} className="homebanner citypage">
+                <div style={{ ...styles.bgImg, backgroundImage: `url(${bannerSvgImage.src})` }} className="bgImg">
                     <div style={styles.pageWidth}>
                         <div style={styles.textContainer} className="textContainerhome">
                             <h1 style={{ fontSize: "40px", fontWeight: "500", margin: "0" }}>{"Simplifying and Enhancing celebrations."}</h1>
-                            <h2 style={{ fontSize: "72px", fontWeight: "900", margin: "0 0 10px", lineHeight: "77px", margin: "0px 0 10px", padding: "3px 14% 5px 14%", textTransform: "uppercase" }}>{"ALL PARTY SERVICE ONE PLATFORM"}</h2>
+                            <h2 style={{ fontSize: "72px", fontWeight: "900", margin: "0 0 10px", lineHeight: "77px", margin: "0px 0 10px", padding: "3px 14% 5px 14%", textTransform: "uppercase" }}>{"ALL PARTY SERVICES IN YOUR "}{city}</h2>
                         </div>
                     </div>
                     <div style={styles.bannerBottomSec} className="bannerBottomSec">
                         <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
                             <Link href={`/${city}/balloon-decoration`} style={{ textDecoration: "none" }}>
-                                <Image src={bannerDecorationImage} alt="Decoration Near me" style={{ height: 'auto' }} />
+                                <Image src={bannerDecorationImage} alt="Decoration Near me" style={{ height: "auto" }} />
                                 <h2 style={{ fontSize: "16px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Decoration</h2>
                             </Link>
                         </div>
                         <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
                             <Link href={`/${city}/book-chef-cook-for-party`} style={{ textDecoration: "none" }}>
-                                <Image src={bannerChefImage} alt="Chef Near me" style={{ height: 'auto' }} />
+                                <Image src={bannerChefImage} alt="Chef Near me" style={{ height: "auto" }} />
                                 <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Hire Chef</h2>
                             </Link>
                         </div>
                         <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
-                            <Link href="/party-food-delivery-live-catering-buffet/party-food-delivery" style={{ textDecoration: "none" }}>
-                                <Image src={bannerFoodDeliveryImage} alt="Food Delivery Near me" style={{ height: 'auto' }} />
-                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Food Delivery</h2>
+                            <Link href="/" style={{ textDecoration: "none" }}>
+                                <Image src={bannerReturnGiftImage} alt="Return Gift Near me" style={{ height: "auto" }} />
+                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Gift & Party Supplies</h2>
                             </Link>
                         </div>
                         <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
-                            <Link href="/party-food-delivery-live-catering-buffet/party-live-buffet-catering" style={{ textDecoration: "none" }}>
-                                <Image src={service4Image} alt="Return Gift Near me" style={{ height: 'auto' }} />
-                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Live Catering</h2>
-                            </Link>
-                        </div>
-                        <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
-                            <Link href="/party-food-delivery-live-catering-buffet/party-food-delivery" style={{ textDecoration: "none" }}>
-                                <Image src={bannerEntertainmentImage} alt="Entertainment Near me" style={{ height: 'auto' }} />
+                            <Link href="/" style={{ textDecoration: "none" }}>
+                                <Image src={bannerEntertainmentImage} alt="Entertainment Near me" style={{ height: "auto" }} />
                                 <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Entertainment</h2>
                             </Link>
                         </div>
-
+                        <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
+                            <Link href="/" style={{ textDecoration: "none" }}>
+                                <Image src={bannerFoodDeliveryImage} alt="Food Delivery Near me" style={{ height: "auto" }} />
+                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Food Delivery</h2>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -946,53 +948,108 @@ const DecorationCity = () => {
                             <h1 style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 0px", textAlign: "center" }}>Faq</h1>
                         </div>
                         <div>
-                            <strong>1: Do you provide Balloon Room Decoration Services in {city?.toUpperCase()}?</strong>
-                            <p>A: Yes, we have a huge range to offer Room Balloon Decoration services in the vibrant city of  {city?.toUpperCase()} </p>
-                            <p>A: Our skilled and well-experienced team can beautifully transform any room with balloons as per your occasion and your mood of celebration.</p>
+                            <strong>1: How can I hire an online chef for my event in {city.toUpperCase()}?</strong>
+                            <p>A: Hiring an online chef in {city.toUpperCase()} is easy!</p>
+                            <p>A: Visit our website or download our app and place the order by selecting your dish, number of people, date, and time of the event to secure their services for your event.</p>
                         </div>
                         <div>
-                            <strong>2: Do you offer same-day bookings for Birthday Decoration at Home in {city?.toUpperCase()}?</strong>
-                            <p>A:Yes, we understand that plans can change, and sometimes you need decorations on short notice. At HORA, we strive to accommodate same-day birthday decoration bookings possible. Contact our customer support team, and we'll do our best to make your event special, even on short notice..</p>
+                            <strong>2: What makes your catering services the best for small parties in {city.toUpperCase()}?</strong>
+                            <p>A: Our catering services in {city.toUpperCase()} are tailored for small parties , We offer personalized options to make your event unforgettable.</p>
                         </div>
                         <div>
-                            <strong>3: Can you provide me some budget-friendly suggestions for 1st Birthday Party Decorations?</strong>
-                            <p>A: Of course! Consider themes for a first birthday such as Jungle Theme, Princess or Barbie Theme, Unicorn Theme, Space Theme and many more. For wonderful photo options, add bright colors, balloons, customized banners, and a cake smash setup. Visit our website and explore a wide range of decoration options for first birthday.</p>
+                            <strong>3: Can I book a private chef for a day or night in {city.toUpperCase()}?</strong>
+                            <p>A: Absolutely! Our private chefs are available for hire in {city.toUpperCase()}, ensuring a unique dining experience for any occasion.</p>
                         </div>
                         <div>
-                            <strong>4: What is the cost of Anniversary Balloon Decoration in  {city?.toUpperCase()}?</strong>
-                            <p>A: The cost of our Anniversary Decoration services depends on various factors such as the type of decoration, the size of the event, and the location. We offer packages starting from Rs.1200 for a simple yet elegant Anniversary Decoration.</p>
+                            <strong>4: How do I find a trained verified cook near me in {city.toUpperCase()}?</strong>
+                            <p>A: Finding a trained verified cook near you is simple. Enter your location on our platform, and choose from a list of dishes, number of people, date and time of event.</p>
                         </div>
                         <div>
-                            <strong>5: How can I arrange for Balloon Decoration at Home in {city?.toUpperCase()} for any celebration?</strong>
-                            <p>A: 7eventzz makes it simple to bring the joy of Balloon Decoration to your doorstep for any celebration in Bangalore. Our website serves as your guide to planning memorable parties from the comfort of your own home. Choose the "Balloon Decoration at Home" option, enter the event details, modify your requirements, and complete the simple booking process. Our skilled team will handle all of the details, ensuring that your celebration is both seamless and extraordinary.</p>
+                            <strong>5: Is Book a cook in {city.toUpperCase()} suitable for last-minute chef bookings?</strong>
+                            <p>A: Yes, our platform allows for convenient and quick bookings, you can book the order 24 hours in advance.</p>
                         </div>
                         <div>
-                            <strong>6: Areas we provide our services across {city?.toUpperCase()} </strong>
-                            <p>A: We provide decorations in all areas of Bengaluru- Sarjapur, Bellandur, Marathahalli, HSR Layout, Madiwala, MG Road, Kundalahalli, Brookefield, Defence Colony Bagalagunte, Bannerghatta, Azad Nagar, Banashankari, Banaswadi, Bapuji Nagar, Basavanagar, Bhuvaneshwari Nagar, Bidadi, Bommasandra, BTM Layout, Chandapura, Chandra Layout, Electronic City, Frazer Town, Ganga Nagar, HBR Layout, Hebbal, Hegde Nagar, Hennur, HRBR Layout, Indira Nagar, Jagajeevanram Nagar, Jayanagar, Jayamahal, Kalyan Nagar, Kammanahalli, Kanakapura, Hebbal Kempapura, Koramangala, Kothanur, LB Shastri Nagar, Mahadevpura, Malleshpalya, Malleshwaram, Sahakara Nagar, Sarjapur, Shanthi Nagar, Shivaji Nagar, Ulsoor, Uttarahalli, Whitefield, Williams Town, K R Puram, Vijayanagar, JP Nagar, Vittal Nagar, Bellandur, Prashanth Nagar, Vijaypura, Kamala Nagar, Gandhi Nagar, HSR Layout, Rajiv Gandhi Nagar, Chinnapa Garden, Raghavendra Colony, Madhava Nagar, Munireddypalya, Kartik Nagar, Bikasipura, Essel Gardens, Nehru Nagar, Shankarapura, Tilak Nagar, Ayyappa Nagar, ITPL, Budigere Cross and Nearby Locations in Bengaluru.</p>
+                            <strong>6: What sets your chefs for hire in {city.toUpperCase()} apart from others?</strong>
+                            <p>A: Our chefs in {city.toUpperCase()} are not only skilled but also verified, ensuring a high standard of service and culinary expertise.</p>
                         </div>
                         <div>
-                            <strong>6: Our Services in  {city?.toUpperCase()} </strong>
-                            <p>A: We provide decorations in all areas of Bengaluru - Sarjapur, Bellandur, Marathahalli, HSR Layout, Madiwala, MG Road, Kundalahalli, Brookefield, Defence Colony Bagalagunte, Bannerghatta, Azad Nagar, Banashankari, Banaswadi, Bapuji Nagar, Basavanagar, Bhuvaneshwari Nagar, Bidadi, Bommasandra, BTM Layout, Chandapura, Chandra Layout, Electronic City, Frazer Town, Ganga Nagar, HBR Layout, Hebbal, Hegde Nagar, Hennur, HRBR Layout, Indira Nagar, Jagajeevanram Nagar, Jayanagar, Jayamahal, Kalyan Nagar, Kammanahalli, Kanakapura, Hebbal Kempapura, Koramangala, Kothanur, LB Shastri Nagar, Mahadevpura, Malleshpalya, Malleshwaram, Sahakara Nagar, Sarjapur, Shanthi Nagar, Shivaji Nagar, Ulsoor, Uttarahalli, Whitefield, Williams Town, K R Puram, Vijayanagar, JP Nagar, Vittal Nagar, Bellandur, Prashanth Nagar, Vijaypura, Kamala Nagar, Gandhi Nagar, HSR Layout, Rajiv Gandhi Nagar, Chinnapa Garden, Raghavendra Colony, Madhava Nagar, Munireddypalya, Kartik Nagar, Bikasipura, Essel Gardens, Nehru Nagar, Shankarapura, Tilak Nagar, Ayyappa Nagar, ITPL, Budigere Cross and Nearby Locations in Bengaluru.</p>
+                            <strong>7: Can I hire a cook at home for a special occasion in {city.toUpperCase()}?</strong>
+                            <p>A: Certainly! Explore our selection of cooks available for hire at home in {city.toUpperCase()} to make your event memorable.</p>
                         </div>
                         <div>
-                            <p>
-                                Decorator near me in {city?.toUpperCase()},
-                                Balloon Decorator near me in {city?.toUpperCase()},
-                                Flower Decorator near me in {city?.toUpperCase()},
-                                Decoration service near me in {city?.toUpperCase()},
-                                Balloon Decoration service near me in {city?.toUpperCase()},
-                                Flower Decoration service near me in {city?.toUpperCase()},
-                                Birthday Decoration service near me in {city?.toUpperCase()},
-                                Anniversary decoration service near me in {city?.toUpperCase()},
-                                baby shower Decoration service near me in {city?.toUpperCase()},
-                                Baby welome Decoration service near me in {city?.toUpperCase()},
-                                Online balloon decoration in {city?.toUpperCase()};
-                                Best balloon decorations{city?.toUpperCase()};
-                                Kids birthday decoration service near me in {city?.toUpperCase()}
-                            </p>
+                            <strong>8: How do I take a chef in {city.toUpperCase()} for a personalized cooking experience?</strong>
+                            <p>A: Taking a chef in {city.toUpperCase()} is simple. Choose a chef, specify your preferences, and enjoy a personalized cooking experience in the comfort of your home.</p>
+                        </div>
+                        <div>
+                            <strong>9: Are your party caterers in {city.toUpperCase()} suitable for both small and large events?</strong>
+                            <p>A: Yes, our party caterers in {city.toUpperCase()} cater to a variety of events, from intimate gatherings to larger celebrations.</p>
+                        </div>
+                        <div>
+                            <strong>10: Can I hire a professional chef for a night in {city.toUpperCase()}?</strong>
+                            <p>A: Absolutely! Explore our options to hire a professional chef for a night in {city.toUpperCase()} and create a culinary experience to remember.</p>
+                        </div>
+                        <div>
+                            <strong>11: Is it possible to hire someone to cook for me in {city.toUpperCase()} regularly?</strong>
+                            <p>A: Yes, you can hire a cook near you in {city.toUpperCase()} for regular cooking services. Choose a cook that fits your preferences and schedule.</p>
+                        </div>
+                        <div>
+                            <strong>12: What is the process for hiring a private personal chef in {city.toUpperCase()}?</strong>
+                            <p>A: Hiring a private personal chef is easy. Browse through our profiles, select your preferred chef, and book their services for a personalized culinary experience.</p>
+                        </div>
+                        <div>
+                            <strong>13: : How can I find the best home caterers in {city.toUpperCase()}?</strong>
+                            <p>A: Finding the best home caterers in {city.toUpperCase()} is simple with our platform. Explore our options and choose the one that suits your needs.</p>
+                        </div>
+                        <div>
+                            <strong>14: Do you have top-rated cooks in {city.toUpperCase()} available for hire?</strong>
+                            <p>A: Yes, we have a selection of top-rated cooks in {city.toUpperCase()} available for hire. Explore their profiles and book the one that meets your requirements.</p>
+                        </div>
+                        <div>
+                            <strong>15: Can I hire a chef at home in {city.toUpperCase()} for a cooking demonstration?</strong>
+                            <p>A: Absolutely! Hire a chef at home in {city.toUpperCase()} for a cooking demonstration and learn culinary skills from a professional.</p>
+                        </div>
+                        <div>
+                            <strong>16: What is the difference between a private chef and a personal cook in {city.toUpperCase()}?</strong>
+                            <p>A: A private chef typically offers a more personalized and upscale dining experience, while a personal cook provides regular cooking services. Choose based on your specific needs.</p>
+                        </div>
+                        <div>
+                            <strong>17: Can I hire cooks on demand in {city.toUpperCase()} for last-minute gatherings?</strong>
+                            <p>A: Yes, our platform allows you to hire cooks on demand in {city.toUpperCase()}, making it convenient for spontaneous events.</p>
+                        </div>
+                        <div>
+                            <strong>18: How can I find local chefs for hire in {city.toUpperCase()} for a regional cuisine?</strong>
+                            <p>A: Finding local chefs for hire in {city.toUpperCase()} is easy. Specify your cuisine preferences, and our platform will display chefs with expertise in that cuisine.</p>
+                        </div>
+                        <div>
+                            <strong>19: Are there cooking maids near me in {city.toUpperCase()} available for hire?</strong>
+                            <p>A: Yes, you can find cooking maids near you in {city.toUpperCase()} available for hire. Explore their profiles and choose the one that suits your needs.</p>
+                        </div>
+                        <div>
+                            <strong>20: Can I hire a personal chef for a night in {city.toUpperCase()} for a romantic dinner?</strong>
+                            <p>A: Certainly! Hire a personal chef for a night in {city.toUpperCase()} and create a romantic dining experience in the comfort of your home</p>
+                        </div>
+                        <div>
+                            <strong>21: How do I hire a cook online in {city.toUpperCase()} for virtual cooking sessions?</strong>
+                            <p>A: Hiring a cook online in {city.toUpperCase()} for virtual cooking sessions is simple. Browse through available cooks, choose one, and arrange for an online cooking session.</p>
+                        </div>
+                        <div>
+                            <strong>22: : What makes your home cooking service in {city.toUpperCase()} unique?</strong>
+                            <p>A: Our home cooking service in {city.toUpperCase()} is unique due to our diverse selection of trained and verified cooks, ensuring a high-quality culinary experience</p>
+                        </div>
+                        <div>
+                            <strong>23: Can I book mini caterers in {city.toUpperCase()} for a small family gathering?</strong>
+                            <p>A: Absolutely! Our mini caterers in {city.toUpperCase()} are perfect for small family gatherings, providing a customized and delightful culinary experience.</p>
+                        </div>
+                        <div>
+                            <strong>24: How do I hire a private cook for home in {city.toUpperCase()} for regular meals?</strong>
+                            <p>A: Hiring a private cook for home in {city.toUpperCase()} for regular meals is easy. Choose a cook that fits your preferences and schedule for consistent cooking services.</p>
+                        </div>
+                        <div>
+                            <strong>25: Are your private chef services near me in {city.toUpperCase()} available for special dietary requirements?</strong>
+                            <p>A: Yes, our private chef services near you in {city.toUpperCase()} are customizable to accommodate special dietary requirements. Discuss your needs with the selected chef to ensure a tailored culinary experience.</p>
                         </div>
                     </div>
-                    {/* <p id="city-area-title" style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 2px", textAlign: "center" }}>Serving all Areas in {city}</p>
+                    <p id="city-area-title" style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 2px", textAlign: "center" }}>Serving all Areas in {city}</p>
                     <p style={{ fontSize: "10px", fontWeight: "bold", color: "#E6756B", margin: "2px 0 2px", textAlign: "center" }}>All localities are here</p>
                     <div id="city-area-list">
                         <ul style={{ listStyle: "none", padding: "20px 0" }}>
@@ -1002,212 +1059,81 @@ const DecorationCity = () => {
                                 )
                             })}
                         </ul>
-                    </div> */}
+                    </div>
                 </div>
             </section>
             <section id="section7" class="sectionidsec">
                 <div style={styles.pageWidth}>
                     <p style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 2px", textAlign: "center" }} className="other-cities">Other Cities</p>
                     <div class="tab-inner">
-                        <ul style={{ listStyle: "none", padding: "20px 0" }}>
+                        <ul style={{ listStyle: "none", padding: "20px 20px" }}>
                             <li className="city-link" data-city="Delhi" style={{ padding: "0 10px", display: "inline-block" }} >
-                                <Link href="/balloon-decoration/delhi">Delhi</Link>
+                                <Link href="#">Delhi</Link>
                             </li>
                             <li className="city-link" data-city="Gurugram" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Gurugram</Link>
+                                <Link href="#">Gurugram</Link>
                             </li>
                             <li className="city-link" data-city="Ghaziabad" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Ghaziabad</Link>
+                                <Link href="#">Ghaziabad</Link>
                             </li>
                             <li className="city-link" data-city="Faridabad" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Faridabad</Link>
+                                <Link href="#">Faridabad</Link>
                             </li>
                             <li className="city-link" data-city="Noida" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Noida</Link>
+                                <Link href="#">Noida</Link>
                             </li>
                             <li className="city-link" data-city="Bengaluru" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Bengaluru</Link>
+                                <Link href="#">Bengaluru</Link>
                             </li>
                             <li className="city-link" data-city="Hyderabad" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Hyderabad</Link>
+                                <Link href="#">Hyderabad</Link>
                             </li>
                             <li className="city-link" data-city="Mumbai" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/delhi">Mumbai</Link>
+                                <Link href="#">Mumbai</Link>
                             </li>
                             <li className="city-link" data-city="Indore" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="balloon-decoration/indore">Indore</Link>
+                                <Link href="#" >Indore</Link>
                             </li>
                             <li className="city-link" data-city="Chennai" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/chennai">Chennai</Link>
+                                <Link href="#">Chennai</Link>
                             </li>
                             <li className="city-link" data-city="Pune" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/pune">Pune</Link>
+                                <Link href="#" >Pune</Link>
                             </li>
                             <li className="city-link" data-city="Surat" style={{ padding: "0 10px", display: "inline-block" }}>
                                 <Link href="#" >Surat</Link>
-
                             </li>
                             <li className="city-link" data-city="Bhopal" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration/bhopal">Bhopal</Link>
+                                <Link href="#" >Bhopal</Link>
                             </li>
                             <li className="city-link" data-city="kanpur" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration/kanpur">Kanpur</Link>
+                                <Link href="#" >Kanpur</Link>
                             </li>
                             <li className="city-link" data-city="Lucknow" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration/Lucknow">Lucknow</Link>
+                                <Link href="#" >Lucknow</Link>
                             </li>
                             <li className="city-link" data-city="kolkata" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration/kolkata">kolkata</Link>
+                                <Link href="#" >Kolkata</Link>
                             </li>
                             <li className="city-link" data-city="Goa" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration/Goa">Goa</Link>
+                                <Link href="#" >Goa</Link>
                             </li>
                         </ul>
-
-
 
                         <div id="city-content">
                             <div class="des-city-area">
                                 <h1 style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 0px", textAlign: "center" }}>Description</h1>
-                                <div id="city-description" style={{ fontSize: "10px", padding: "0 10px" }}>
-                                    <p>Home Balloon Decoration in {city} for Birthday Party celebrations</p>
-                                    <p>Decorations and Gifts can make anybody happy. Who doesn’t love getting pampered? Everybody does, though all may not ask for it. A birthday is an occasion to rejoice with our friends and loved ones. These days’ birthday themes and decorations seem to play a major role in any birthday party. Balloons are a necessary thing when it comes to decorating for birthday parties not because Online balloon decoration is cheap and colorful but because balloon decoration adds warm fuzzies to the party which creates a blissful moment in the hearts of people. Balloons are party highlighters! They not only brighten up birthday parties but also bring the group together in balloon bursting activities. Balloon birthday themes have always been fun and easy. The bright and colorful balloons are an ideal choice for any birthday party. When people hear the name of balloons decoration, they anticipate a happy moment to come which makes them feel extremely happy from within. It enlightens the festive mood with its elegant design, color and pattern. There are so many things you can do to create the best balloon decoration with the help of the best party planner in Bangalore or balloon decorators in {city}. These are the things you can do to make your birthday parties memorable.</p>
-                                    <p>Birthday Balloon Decoration in {city}</p>
-                                    <p>Birthdays are memorable occasions for all of us. Who does not love celebrating their birthday, kids love gifts, youngsters love to get their dream stuff and grown-up loves to get all the attention and special treatment by their near and dear ones, birthday is the happiest day of one’s life. This day not only makes the birthday boy or girl happy but also injects the family members with cheerful vibes. That’s the reason everyone is so excited to celebrate birthdays. And this is the sole reason that in India and across the globe, birthdays are no less than festivals, So celebrate your birthday with beautiful balloon decoration at home in {city}. Are you looking for the Best Balloon decorator in {city}? You want to opt for the Professional balloon decoration services but at the same time wanted it to be budget friendly? Our on-site balloon decorating service in Bangalore by HORA had created a wow and stunning backdrop for your corporate as well as personal events. The variety of balloon designs includes Backdrop, Ring Decoration, Sequence photo booth and so on. If you want to introduce fun to your events and looking for some unique assortment of party decoration then book Best Balloon Decoration in {city} from us.</p>
-                                    <p>Online Balloon Decoration Shop in {city}</p>
-                                    <p>Organizing and managing an event yourself can be tedious and, not to mention, time consuming. With everyday activities becoming simpler, the fun-filled episodes in your life have become even more precious. Celebrating them in a fashionable and classy manner is what makes the best memories. Whenever people gather, regardless of their number or purpose, someone needs to handle the intricacies to ensure the celebration is a success. stands the vitality of time, cooperation, and every other aspect that surrounds the planning of an event. With a fresh team of skilled, creative and motivated professionals, HORA offers the coolest event planning services in more than 100+ Cities in India Being young in this business; we bring to you a blend of innovation and style that’s simply new. Our focus is to provide you with the latest in trend and to create new trends. Taking your personal preferences into consideration and mixing it with new-age design layouts and themes, our primary goal is to help you create amazing memories to cherish for a lifetime. So what are you waiting for? book your favourite occasion from the best balloon decoration shop near me in {city}.</p>
-                                    <p>Choose HORA for all your celebrations and parties at cheapest rates</p>
-                                    <p>Get all your decoration requirements under one roof on HORA, from Baby Shower decoration to Welcome Baby decorations at home in {city}. We specialize in creating dreamy and delightful setups for various events, ensuring every moment is special and memorable.</p>
-                                    <p>
-                                        Decorator near me in {city?.toUpperCase()},
-                                        Balloon Decorator near me in {city?.toUpperCase()},
-                                        Flower Decorator near me in {city?.toUpperCase()},
-                                        Decoration service near me in {city?.toUpperCase()},
-                                        Balloon Decoration service near me in {city?.toUpperCase()},
-                                        Flower Decoration service near me in {city?.toUpperCase()},
-                                        Birthday Decoration service near me in {city?.toUpperCase()},
-                                        Anniversary decoration service near me in {city?.toUpperCase()},
-                                        baby shower Decoration service near me in {city?.toUpperCase()},
-                                        Baby welome Decoration service near me in {city?.toUpperCase()},
-                                        Online balloon decoration in {city?.toUpperCase()};
-                                        Best balloon decorations{city?.toUpperCase()};
-                                        Kids birthday decoration service near me in {city?.toUpperCase()}
-                                    </p>
-                                    <p>
-                                        event planning certification,event organizing courses,event planner classes,event planner training,event planning course,event mangement certification,how to become a certified event planner,event certification,how to plan an event,event planning,event planners,helena paschal,how to plan an event houston,corporate event planner,business event planner,how to become an event planner,how to start an event planner business,event planning for beginners
-
-                                    </p>
-                                </div>
+                                <p id="city-description">
+                                    Book professional Cooks and Chefs in {city} for House Parties, Birthday Parties, Special Breakfast, Lunch and Dinner at Home. Hire trained and verified personal Chefs and Cooks near you for a private dining experience at home with the best cooks and chef services at home.
+                                </p>
                             </div>
                         </div>
-
-
-                    </div>
-                    <p id="city-seo-content" style={{ fontSize: "10px", padding: "0 10px" }}>
-
-                        Online balloon decoration in {city}, Online decoration in {city}, Online balloon decorators in {city}, Online decorator in {city}; top balloon decorator in {city}; top balloon decorator in {city}; Excellent birthday party balloon decoration in {city}; event organising companies in {city}; beautiful theme balloon balloon decoration in {city}; beautiful theme flower balloon decoration in {city}; Hire balloon decoration at home in {city}; Best balloon decoration in {city}, Best decoration in {city}, Best balloon decorator in {city}; Best decorator in {city}; Balloon decoration at home in {city}; Balloon decorator at home in {city}; Best Balloon decorator at home in {city}; Best Balloon decoration at home in {city}; Professional balloon decoration services in {city}; Room Balloon Decoration; Hall Decoration; Large Decorations, Premium Decorations; Room decoration designs; Home Decoration; Stage decoration; Venue decoration; Best Room Balloon Decoration; Best Hall Decoration; Best Large Decorations, Best Premium Decorations; Best Room decoration designs; Best Home Decoration; Best Stage decoration; Best Venue decoration;
-                        Same-day bookings for Birthday Decoration at Home in {city}; Same-day bookings for Anniversary Decoration at Home in {city}; Same-day bookings for Birthday Decoration at in {city}. Same-day bookings for Baby shower Decoration at Home in {city}; Same-day bookings for Car Decoration at Home in {city}; Same-day bookings for first night Decoration at Home in {city}; Same-day bookings for welcome baby Decoration at Home in {city}
-                        Jungle Theme Decoration design, Jungle Theme Decorator near me; Jungle theme decoration under 1500; Jungle theme decoration under 5000; Jungle theme decoration under 10000; Jungle Theme balloon Decoration design; Jungle Theme balloon Decorator near me; Princess or Barbie Theme Decoration design, Princess or Barbie Theme Decorator near me; Princess or Barbie theme decoration under 1500; Princess or Barbie theme decoration under 5000; Jungle theme decoration under 10000; Princess or Barbie Theme balloon Decoration design; Princess or Barbie Theme balloon Decorator near me; Unicorn Theme Decoration design, Unicorn Theme Decorator near me; Unicorn theme decoration under 1500; Unicorn theme decoration under 5000; Unicorn theme decoration under 10000; Unicorn Theme balloon Decoration design; Unicorn Theme balloon Decorator near me; Space Theme Decoration design, Space Theme Decorator near me; Space theme decoration under 1500; Space theme decoration under 5000; Space theme decoration under 10000; Space Theme balloon Decoration design; Space Theme balloon Decorator near me;
-
-                        First birthday decoration; Second year birthday decoration, 5th year birthday decoration, 10th Birthday decoration; Anniversary Balloon Decoration in Bangalore; Kids birthday decoration; Birthday decoration; Decoration starting 1200 Rs; Budget-friendly suggestions for 1st Birthday Party Decorations; Budget-friendly suggestions for 2nd Birthday Party Decorations; Budget-friendly suggestions for 5th Birthday Party Decorations; Budget-friendly suggestions for 10th Birthday Party Decorations; Best balloon decorator for small parties in {city}, Best balloon decoration for small parties in {city}; Mini Decoration in {city},
-                        Book a decorator in {city}, Book a decoration in {city}, Book a balloon decorator in {city}, Book a flower decoration in {city}, Book a balloon decoration in {city}, Book a flower decorator in {city}; Book a trained verified decorator near you in {city}, Bookadecortor in {city},
-                        Decoration for small parties in {city}, Top Decorator in {city}, Decoration services in {city}, Decorator at home service in {city}, Decorator for a night in {city}, Decoration for a night in {city}, Decorator for hire in {city}, Decoration at my home in {city}, Decorator near me in {city}, Balloon Decorator near me in {city}, Flower Decorator near me in {city}, Decoration service near me in {city}, Balloon Decoration service near me in {city}, Flower Decoration service near me in {city}, Birthday Decoration service near me in {city}, Anniversary decoration service near me in {city}, baby shower Decoration service near me in {city}, Baby welome Decoration service near me in {city}; Simple birthday decoration at home; Simple birthday decoration in {city};
-
-                        Balloon Decoration for small parties in {city}, Top balloon Decorator in {city}, balloon Decoration services in {city}, balloon Decorator at home service in {city}, balloon Decorator for a night in {city}, Decorator for hire in {city}, balloon Decoration at my home in {city}, balloon Decorator near me in {city}, Balloon Decoration near me in {city}, Flower Decorator near me in {city}, Decoration service near me in {city}, Balloon Decoration service near me in {city}, Flower Decoration service near me in {city}, Birthday Decoration service near me in {city}, Anniversary decoration service near me in {city}, baby shower Decoration service near me in {city}, Baby welome Decoration service near me in {city}; balloon decoration for birthday at home in {city};
-                        balloon decoration ideas; Astronaut Space Theme balloon decoration; Avenger Space Theme balloon decoration; Boss Baby Theme balloon decoration; Baby Shark Theme balloon decoration; Barbie Theme balloon decoration; Cocomelon Theme balloon decoration; Car Theme balloon decoration; Circus Theme balloon decoration; Dinosaur Theme balloon decoration; Jungle Theme balloon decoration; Kitty Theme balloon decoration; Lion Theme balloon decoration; Mickey Mouse Theme balloon decoration; Minecraft Theme balloon decoration; Mermail Theme balloon decoration; Pokemon Theme balloon decoration; Princess Theme balloon decoration; Panda Theme balloon decoration; Traffic Theme balloon decoration; Super Dog Theme balloon decoration; Unicorn Theme balloon decoration                    </p>
-                </div>
-
-
-
-            </section>
-            <section id="section7" class="sectionidsec">
-                <div style={styles.pageWidth}>
-                    <p style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 2px", textAlign: "center" }} className="other-cities">Other Services</p>
-                    <div class="tab-inner">
-                        <ul style={{ listStyle: "none", padding: "20px 0" }}>
-                            <li className="city-link" data-city={city} style={{ padding: "0 10px", display: "inline-block" }} >
-                                <Link href="/balloon-decoration">Birthday Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Gurugram" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Baby Shower Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Ghaziabad" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Baby Welcome Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Faridabad" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">First Night Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Noida" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="balloon-decoration">Kids Birthday Decoration in  {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Bengaluru" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Anniversary Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Hyderabad" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Candle Light Dinner in  {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Mumbai" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Car Decoration in  {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Indore" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Naming Ceremony Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Chennai" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Terrace Decoration in{city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Pune" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Proposal Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Surat" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Bride-to-be Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Bhopal" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Cabana Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="kanpur" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Haldi Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Lucknow" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration">Balloon Decoration in {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="kolkata" style={{ padding: "0 10px", display: "inline-block" }}>
-                                <Link href="/balloon-decoration" >Office Decoration in  {city}</Link>
-                            </li>
-                            <li className="city-link" data-city="Goa" style={{ padding: "0 10px", display: "inline-block" }}>
-
-                                <Link href="/balloon-decoration">Engagement Ring Platter in {city}</Link>
-                            </li>
-                        </ul>
-
                     </div>
                     <p id="city-seo-content" style={{ fontSize: "5px", margin: "20px 0 20px " }}>
-
-                        Online balloon decoration in {city}, Online decoration in {city}, Online balloon decorators in {city}, Online decorator in {city}; top balloon decorator in {city}; top balloon decorator in {city}; Excellent birthday party balloon decoration in {city}; event organising companies in {city}; beautiful theme balloon balloon decoration in {city}; beautiful theme flower balloon decoration in {city}; Hire balloon decoration at home in {city}; Best balloon decoration in {city}, Best decoration in {city}, Best balloon decorator in {city}; Best decorator in {city}; Balloon decoration at home in {city}; Balloon decorator at home in {city}; Best Balloon decorator at home in {city}; Best Balloon decoration at home in {city}; Professional balloon decoration services in {city}; Room Balloon Decoration; Hall Decoration; Large Decorations, Premium Decorations; Room decoration designs; Home Decoration; Stage decoration; Venue decoration; Best Room Balloon Decoration; Best Hall Decoration; Best Large Decorations, Best Premium Decorations; Best Room decoration designs; Best Home Decoration; Best Stage decoration; Best Venue decoration;
-                        Same-day bookings for Birthday Decoration at Home in {city}; Same-day bookings for Anniversary Decoration at Home in {city}; Same-day bookings for Birthday Decoration at in {city}. Same-day bookings for Baby shower Decoration at Home in {city}; Same-day bookings for Car Decoration at Home in {city}; Same-day bookings for first night Decoration at Home in {city}; Same-day bookings for welcome baby Decoration at Home in {city}
-                        Jungle Theme Decoration design, Jungle Theme Decorator near me; Jungle theme decoration under 1500; Jungle theme decoration under 5000; Jungle theme decoration under 10000; Jungle Theme balloon Decoration design; Jungle Theme balloon Decorator near me; Princess or Barbie Theme Decoration design, Princess or Barbie Theme Decorator near me; Princess or Barbie theme decoration under 1500; Princess or Barbie theme decoration under 5000; Jungle theme decoration under 10000; Princess or Barbie Theme balloon Decoration design; Princess or Barbie Theme balloon Decorator near me; Unicorn Theme Decoration design, Unicorn Theme Decorator near me; Unicorn theme decoration under 1500; Unicorn theme decoration under 5000; Unicorn theme decoration under 10000; Unicorn Theme balloon Decoration design; Unicorn Theme balloon Decorator near me; Space Theme Decoration design, Space Theme Decorator near me; Space theme decoration under 1500; Space theme decoration under 5000; Space theme decoration under 10000; Space Theme balloon Decoration design; Space Theme balloon Decorator near me;
-
-                        First birthday decoration; Second year birthday decoration, 5th year birthday decoration, 10th Birthday decoration; Anniversary Balloon Decoration in Bangalore; Kids birthday decoration; Birthday decoration; Decoration starting 1200 Rs; Budget-friendly suggestions for 1st Birthday Party Decorations; Budget-friendly suggestions for 2nd Birthday Party Decorations; Budget-friendly suggestions for 5th Birthday Party Decorations; Budget-friendly suggestions for 10th Birthday Party Decorations; Best balloon decorator for small parties in {city}, Best balloon decoration for small parties in {city}; Mini Decoration in {city},
-                        Book a decorator in {city}, Book a decoration in {city}, Book a balloon decorator in {city}, Book a flower decoration in {city}, Book a balloon decoration in {city}, Book a flower decorator in {city}; Book a trained verified decorator near you in {city}, Bookadecortor in {city},
-                        Decoration for small parties in {city}, Top Decorator in {city}, Decoration services in {city}, Decorator at home service in {city}, Decorator for a night in {city}, Decoration for a night in {city}, Decorator for hire in {city}, Decoration at my home in {city}, Decorator near me in {city}, Balloon Decorator near me in {city}, Flower Decorator near me in {city}, Decoration service near me in {city}, Balloon Decoration service near me in {city}, Flower Decoration service near me in {city}, Birthday Decoration service near me in {city}, Anniversary decoration service near me in {city}, baby shower Decoration service near me in {city}, Baby welome Decoration service near me in {city}; Simple birthday decoration at home; Simple birthday decoration in {city};
-
-                        Balloon Decoration for small parties in {city}, Top balloon Decorator in {city}, balloon Decoration services in {city}, balloon Decorator at home service in {city}, balloon Decorator for a night in {city}, Decorator for hire in {city}, balloon Decoration at my home in {city}, balloon Decorator near me in {city}, Balloon Decoration near me in {city}, Flower Decorator near me in {city}, Decoration service near me in {city}, Balloon Decoration service near me in {city}, Flower Decoration service near me in {city}, Birthday Decoration service near me in {city}, Anniversary decoration service near me in {city}, baby shower Decoration service near me in {city}, Baby welome Decoration service near me in {city}; balloon decoration for birthday at home in {city};
-                        balloon decoration ideas; Astronaut Space Theme balloon decoration; Avenger Space Theme balloon decoration; Boss Baby Theme balloon decoration; Baby Shark Theme balloon decoration; Barbie Theme balloon decoration; Cocomelon Theme balloon decoration; Car Theme balloon decoration; Circus Theme balloon decoration; Dinosaur Theme balloon decoration; Jungle Theme balloon decoration; Kitty Theme balloon decoration; Lion Theme balloon decoration; Mickey Mouse Theme balloon decoration; Minecraft Theme balloon decoration; Mermail Theme balloon decoration; Pokemon Theme balloon decoration; Princess Theme balloon decoration; Panda Theme balloon decoration; Traffic Theme balloon decoration; Super Dog Theme balloon decoration; Unicorn Theme balloon decoration                    </p>
+                        Online chef for hire in {city}, Chef in {city}, Best caterers for small parties in  {city}, Best home-made cooking service in  {city}, Mini party caterers in  {city}, Book a chef in  {city}, Book a cook in  {city}, Book a private chef in  {city}, Book a private cook in  {city}, Book a trained verified cook near you in  {city}, Bookacook in  {city}, Caterers for small parties in  {city}, Top caterers in  {city}, Chef for a party in  {city}, Catering services in  {city}, Chef at home service in  {city}, Chef for a day in  {city}, Chef for a night in  {city}, Chef for hire in  {city}, Chef cooking at my home in  {city}, Chef near me in  {city}, Chef on demand in  {city}, Chef required at home in  {city}, Chefs for hire in  {city}, Chefs for home in  {city}, Hire a private chef in  {city}, Chefs on hire in  {city}, Cook chef near me in  {city}, Cook at home services in  {city}, Cook for a day in  {city}, Cook for a night in  {city}, Cook for one day in  {city}, Cook for a party in  {city}, Cook service near me in  {city}, Cook home services in  {city}, Cook near me in  {city}, Cook on demand in  {city}, Cook on hire near me in  {city}, Cook required at home in  {city}, Cooking as a service in {city}, Cooking maids near me in  {city}, Cooking services near me in  {city}, Cooks for hire in  {city}, Cooks for home in  {city}, Cooks near me in  {city}, Cooks on hire in  {city}, Domestic cook near me in  {city}, Find a chef in  {city}, Find a cook in  {city}, Hire a chef in  {city}, Hire a chef for a day in  {city}, Hire personal chef in  {city}, Hire a chef for home in  {city}, Hire a chef near me in  {city}, Take a Chef in  {city}, Hire a cook in  {city}, Hire a cook at home in  {city}, Hire a cook for home in  {city}, Hire a cook near me in  {city}, Hire a personal chef for a night in  {city}, Hire a personal cook in  {city}, Hire a professional chef in  {city}, Hire chef at home in  {city}, Hire cook near me in  {city}, Hire cook online in  {city}, Hire private chef in  {city}, Hire someone to cook for you in  {city}, Hiring a personal chef in  {city}, Home caterers in  {city}, Home chef near me in  {city}, Home cook near me in  {city}, Home cooking service in  {city}, Home cooking service near me in  {city}, Home party catering in  {city}, House chef near me in  {city}, House cook near me in  {city}, In-home cooking service in  {city}, In-house cooking service in  {city}, Local chefs for hire in  {city}, Looking for chef in  {city}, Looking for cook in  {city}, Mini caterers in  {city}, Need a chef in  {city}, Need a cook in  {city}, Online cook service in  {city}, Party caterers in  {city}, Personal chef in  {city}, Personal chefs for hire near me in  {city}, Personal Cook in  {city}, Personal cook near me in  {city}, Private chef in  {city}, Private chef hire in  {city}, Private chef near me in  {city}, Private chef services near me in  {city}, Private cook in  {city}, Private cook for hire in  {city}, Private personal chef in  {city}, Professional chef for hire in  {city}, Top rated chefs in  {city}, Top rated cooks in  {city}, Want to hire a cook in  {city}
+                    </p>
                 </div>
-
-
-
             </section>
-
         </div>
     );
 }
@@ -1222,7 +1148,6 @@ const styles = {
         margin: "0 auto",
     },
     bgImg: {
-        background: `url(${bannerSvgImage.src})`,
         backgroundSize: "cover",
         paddingTop: "110px",
         paddingBottom: "30px",
@@ -1281,4 +1206,4 @@ const styles = {
 
 };
 
-export default DecorationCity;
+export default ChefCitypage;

@@ -12,7 +12,7 @@ const PageLayout = ({ children }) => {
       <main className="page-main row m-0">
         <section
           // style={{ backgroundColor: getBackgroundColor() }}
-          className=""
+          className="p-0"
         >
           {children}
         </section>

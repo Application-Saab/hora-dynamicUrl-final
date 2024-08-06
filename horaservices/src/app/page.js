@@ -201,7 +201,7 @@ export default function Home() {
                     <Image
                       src={bannerDecorationImage}
                       alt="Decoration Near me"
-                      style={{ height: '200px' }}
+                      style={{ height: 'auto' }}
 
                     />
                     <h2
@@ -219,7 +219,7 @@ export default function Home() {
                 </div>
                 <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/book-chef-cook-for-party">
-                    <Image src={bannerChefImage} alt="Chef Near me" style={{ height: '200px' }} />
+                    <Image src={bannerChefImage} alt="Chef Near me" style={{ height: 'auto' }} />
                     <h2
                       style={{
                         fontSize: "16px",
@@ -238,7 +238,7 @@ export default function Home() {
                     <Image
                       src={bannerFoodDeliveryImage}
                       alt="Food Delivery Near me"
-                      style={{ height: '200px' }}
+                      style={{ height: 'auto' }}
                     />
                     <h2
                       style={{
@@ -255,7 +255,7 @@ export default function Home() {
                 </div>
                 <div className={`${styles.bannerDecorationImage} bannerDecorationImage`}>
                   <Link href="/party-food-delivery-live-catering-buffet/party-live-buffet-catering">
-                    <Image src={service4Image} alt="Return Gift Near me" style={{ height: '200px' }} />
+                    <Image src={service4Image} alt="Return Gift Near me" style={{ height: 'auto' }} />
                     <h2
                       style={{
                         fontSize: "16px",
@@ -274,7 +274,7 @@ export default function Home() {
                     <Image
                       src={bannerEntertainmentImage}
                       alt="Entertainment Near me"
-                      style={{ height: '200px' }}
+                      style={{ height: 'auto' }}
                     />
                     <h2
                       style={{

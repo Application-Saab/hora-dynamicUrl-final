@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BASE_URL, OTP_GENERATE_END_POINT, API_SUCCESS_CODE, OTP_VERIFY_ENDPOINT } from "../../utils/apiconstants";
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
 import { Col, Form, Row } from "react-bootstrap";
 import { useTimer } from "../../utils/useTimer";
 import Popup from "../../utils/popup";
-import logoutImage from '../../assets/logout.png'
+import logoutImage from '../../assets/logout.png';
 import orderWarning from "../../assets/OrderWarning.png";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
@@ -24,28 +22,27 @@ const Login = () => {
     const [loginError, setLoginError] = useState(false);
     const [loginMsg, setLoginMsg] = useState('');
     const router = useRouter();
-    // const location = useLocation();
-    const previousPage = router.state && router.state.from;
-    const subCategory = router.state && router.state.subCategory;
-    const orderType = router.state && router.state.orderType;
-    const product = router.state && router.state.product;
-    const selectedDishDictionary = router.state && router.state.selectedDishDictionary;
-    const selectedDishPrice = router.state && router.state.selectedDishPrice;
-    const selectedDishes = router.state && router.state.selectedDishes;
-    const isDishSelected = router.state && router.state.isDishSelected;
-    const selectedCount = router.state && router.state.selectedCount;
-    const peopleCount = router.state && router.state.peopleCount;
-    const selectedDeliveryOption = router.state && router.state.selectedOption;
-    const totalOrderAmount = router.state && router.state.totalOrderAmount;
-    const selectedDishQuantities = router.state && router.state.selectedDishQuantities;
-    const selectedOption = router.state && router.state.selectedOption;
-    const selectedDishesFoodDelivery = router.state && router.state.selectedDishesFoodDelivery;
+    const previousPage = router.query.from || null;
+    const subCategory = router.query.subCategory || null;
+    const orderType = router.query.orderType || null;
+    const product = router.query.product || null;
+    const selectedDishDictionary = router.query.selectedDishDictionary || null;
+    const selectedDishPrice = router.query.selectedDishPrice || null;
+    const selectedDishes = router.query.selectedDishes || null;
+    const isDishSelected = router.query.isDishSelected || null;
+    const selectedCount = router.query.selectedCount || null;
+    const peopleCount = router.query.peopleCount || null;
+    const selectedDeliveryOption = router.query.selectedOption || null;
+    const totalOrderAmount = router.query.totalOrderAmount || null;
+    const selectedDishQuantities = router.query.selectedDishQuantities || null;
+    const selectedOption = router.query.selectedOption || null;
+    const selectedDishesFoodDelivery = router.query.selectedDishesFoodDelivery || null;
     const [validMobileNumber, setValidMobileNumber] = useState(false); // Add state for valid mobile number
     const otpRefs = useRef([React.createRef(), React.createRef(), React.createRef(), React.createRef()]);
     const { time, isTimeUp, resetTimer } = useTimer(25);
     const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
     const [popupMessage, setPopupMessage] = useState({}); // State for popup message
-
+    console.log(router)
     const handleLogout = () => {
         localStorage.setItem("isLoggedIn", "false");
         localStorage.clear();
@@ -75,7 +72,7 @@ const Login = () => {
             button: "OK"
         });
         setShowPopup(true); // Show the popup
-    }
+    };
 
     const handleOrderWarning = () => {
         setPopupMessage({
@@ -85,7 +82,7 @@ const Login = () => {
             button: "Add More",
         });
         setWarningVisibleForTotalAmount(true); // Ensure this is set to true to display the popup
-    }
+    };
 
     const handleMobileNumberChange = (e) => {
         const value = e.target.value.trim();
@@ -101,7 +98,7 @@ const Login = () => {
             setLoginError(false);
             setValidMobileNumber(true); // Update validMobileNumber state
         }
-    }
+    };
 
     //when time is up set otpFail to true
     useEffect(() => {
@@ -119,7 +116,7 @@ const Login = () => {
 
     const handleSendOtp = () => {
         fetchOtp();
-    }
+    };
 
     useEffect(() => {
         console.log('Popup message changed:', popupMessage);
@@ -150,9 +147,9 @@ const Login = () => {
                     localStorage.setItem('userID', response.data.data._id);
                     if (previousPage) {
                         if (previousPage.includes("/book-chef-cook-for-party")) {
-                            // alert("Navigating to /book-chef-checkout");
-                            router.push('/book-chef-checkout', {
-                                state: {
+                            router.push({
+                                pathname: '/book-chef-checkout',
+                                query: {
                                     peopleCount,
                                     selectedDishDictionary,
                                     selectedDishPrice,
@@ -163,14 +160,14 @@ const Login = () => {
                                 }
                             });
                         } else if (previousPage.startsWith('/balloon-decoration/anniversary-decoration/product')) {
-                            // alert("Navigating to /checkout for anniversary decoration");
-                            router.push('/checkout', {
-                                state: { subCategory, product, orderType }
+                            router.push({
+                                pathname: '/checkout',
+                                query: { subCategory, product, orderType }
                             });
                         } else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {
-                            // alert("Navigating to /party-food-delivery-live-catering-buffet-checkout");
-                            router.push("/party-food-delivery-live-catering-buffet-checkout", {
-                                state: {
+                            router.push({
+                                pathname: "/party-food-delivery-live-catering-buffet-checkout",
+                                query: {
                                     peopleCount,
                                     selectedDeliveryOption: selectedOption,
                                     selectedDishesFoodDelivery: selectedDishesFoodDelivery,
@@ -180,9 +177,9 @@ const Login = () => {
                                 }
                             });
                         } else if (previousPage.startsWith('/balloon-decoration/birthday-decoration/product/')) {
-                            // alert("Navigating to /checkout for birthday decoration");
-                            router.push('/checkout', {
-                                state: { subCategory, product, orderType }
+                            router.push({
+                                pathname: '/checkout',
+                                query: { subCategory, product, orderType }
                             });
                         } else {
                             console.log("previous page not including")
@@ -207,7 +204,7 @@ const Login = () => {
             console.log('Error verifying OTP:', error.message);
             setOtpError('Failed to verify OTP. Please try again.');
         }
-    }
+    };
 
     const handleOtpChange = (e, index) => {
         const { value } = e.target;
@@ -235,13 +232,13 @@ const Login = () => {
         if (otpError) {
             setOtpError('');
         }
-    }
+    };
 
     const handleKeyDown = (e, index) => {
         if (e.key === 'Backspace' && !otp[index] && index > 0) {
             otpRefs.current[index - 1].current.focus();
         }
-    }
+    };
 
     const fetchOtp = async () => {
         try {
@@ -354,14 +351,6 @@ const Login = () => {
             )}
         </div>
     );
-}
-
-const styles = {
-    pageWidth: {
-        margin: "0 auto",
-        maxWidth: "1200px",
-        textAlign: "center"
-    },
-}
+};
 
 export default Login;
