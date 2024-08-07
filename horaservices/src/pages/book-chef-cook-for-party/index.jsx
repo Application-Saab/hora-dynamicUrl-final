@@ -194,7 +194,7 @@ const CreateOrder = ({ history, currentStep }) => {
         if (selectedDishes.length > 11 && !isSelected) {
             setWarningVisibleForDishCount(true);
             setPopupMessage({
-                image: warningImage,
+                img: warningImage,
                 title: "Total Dishes Selected can not be more than 12 Dish.",
                 body: "Total dish selected can not be more than 12 dish, for more help contact us.",
                 button: "Contact Us",
@@ -226,6 +226,7 @@ const CreateOrder = ({ history, currentStep }) => {
             setIsDishSelected(updatedSelectedDishes.length > 0);
         }
     };
+    console.log(selectedDishes.length)
 
     const handleCuisinePress = (cuisineId) => {
         if (selectedCuisines.length < 3 || selectedCuisines.includes(cuisineId)) {
@@ -239,7 +240,7 @@ const CreateOrder = ({ history, currentStep }) => {
         } else {
             setWarningVisibleForCuisineCount(true);
             setPopupMessage({
-                image: warningImage,
+                img: warningImage,
                 title: "One chef is only expert in 3 cuisine only.",
                 body: "Our chef is expert in cuisines only please select appropriate number of cuisines to continue",
                 button: "Continue",
