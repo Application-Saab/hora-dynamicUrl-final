@@ -26,6 +26,7 @@ import styled from 'styled-components';
 import InfoIcon from '../../assets/info.png';
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Popup from '../../utils/popup';
 const orangeColor = '#FF6F61';
 const defaultColor = '#B0BEC5';
 
@@ -52,12 +53,9 @@ const CreateOrder = ({ history, currentStep }) => {
     const [isVegSelected, setIsVegSelected] = useState(true);
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
-        useState(false);
-    const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] =
-        useState(false);
-    const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] =
-        useState(false);
+    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
+    const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] = useState(false);
+    const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] = useState(false);
     const [isViewAllExpanded, setIsViewAllExpanded] = useState(false);
     const [popupMessage, setPopupMessage] = useState({
         image: "",
@@ -398,6 +396,7 @@ const CreateOrder = ({ history, currentStep }) => {
                                                             ? MinusIcon
                                                             : PlusIcon
                                                     }
+                                                    alt="icon"
                                                     style={{ width: 21, height: 21 }}
                                                 />
                                             </Button>
@@ -483,6 +482,7 @@ const CreateOrder = ({ history, currentStep }) => {
                                                             ? MinusIcon
                                                             : PlusIcon
                                                     }
+                                                    alt="icon"
                                                     style={{ width: 21, height: 21 }}
                                                 />
                                             </Button>
@@ -603,23 +603,23 @@ const CreateOrder = ({ history, currentStep }) => {
         <div className="chef-create-order">
             <div className="order-container chef">
                 <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-                    <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} />
+                    <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
                     <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
                 </div>
                 <div className="range-bar">
-                    <Step active={true.toString()} className="step1">
+                    <Step active className="step1">
                         <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
-                        <Label active={true.toString()}>Select Dishes</Label>
+                        <Label active>Select Dishes</Label>
                     </Step>
                     <div className="sep-image">
-                        <Image src={separator} />
+                        <Image src={separator} alt="separator" />
                     </div>
                     <Step className="step2">
                         <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
                         <Label>Select Date & Time</Label>
                     </Step>
                     <div className="sep-image">
-                        <Image src={separator} />
+                        <Image src={separator} alt="separator" />
                     </div>
                     <Step className="step3">
                         <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
@@ -734,6 +734,8 @@ const CreateOrder = ({ history, currentStep }) => {
                     </Col>
                 </Row>
             </div>
+            {isWarningVisibleForCuisineCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}
+            {isWarningVisibleForDishCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}
         </div>
     )
 }

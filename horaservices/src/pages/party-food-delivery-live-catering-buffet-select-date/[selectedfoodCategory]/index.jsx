@@ -57,7 +57,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   if (selectedDishDictionary) {
     try {
       selectedDishDictionary = JSON.parse(selectedDishDictionary);
-      selectedDishQuantities = JSON.parse(selectedDishQuantities)
+      selectedDishQuantities = JSON.parse(selectedDishQuantities);
     } catch (error) {
       console.error('Error parsing selectedDishDictionary:', error);
     }
@@ -319,7 +319,6 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       });
     }
   };
-  console.log("dsata", data)
 
   useEffect(() => {
     const handleResize = () => {
@@ -743,9 +742,9 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     );
   };
 
-  const RightTabContent = ({ selectedDishQuantities }) => {
-    if (!selectedDishQuantities || typeof selectedDishQuantities !== 'object') {
-      console.error('selectedDishQuantities is not an object:', selectedDishQuantities);
+  const RightTabContent = ({ selected_dish_quantities }) => {
+    if (!selected_dish_quantities) {
+      // console.log('selectedDishQuantities is not an object:', selected_dish_quantities);
       return null;
     }
     return (
@@ -777,11 +776,11 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
               alignItems: "center",
             }}
           >
-            {Object.keys(selectedDishQuantities).length > 0 ? (
-              Object.keys(selectedDishQuantities).map((key, index) => (
+            {Object.keys(selected_dish_quantities).length > 0 ? (
+              Object.keys(selected_dish_quantities).map((key, index) => (
                 <RenderDishQuantity
                   key={index}
-                  item={selectedDishQuantities[key]}
+                  item={selected_dish_quantities[key]}
                 />
               ))
             ) : null}
@@ -823,7 +822,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       return <LeftTabContent selectedOption={selectedOption} />;
     } else if (activeTab === "right") {
       return (
-        <RightTabContent selectedDishQuantities={selectedDishQuantities} />
+        <RightTabContent selected_dish_quantities={selectedDishQuantities} />
       );
     }
   };

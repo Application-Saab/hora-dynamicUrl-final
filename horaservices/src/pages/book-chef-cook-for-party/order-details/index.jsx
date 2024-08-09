@@ -74,7 +74,7 @@ const SelectDate = ({ history, currentStep }) => {
   @media (max-width: 768px) {
     padding: 0;
   }
-`;
+  `;
 
     // Layout for heading and control section
     const HeaderSection = styled.div`
@@ -89,7 +89,7 @@ const SelectDate = ({ history, currentStep }) => {
     align-items: flex-start;
     margin-bottom: 20px;
   }
-`;
+  `;
 
     // Heading
     const Heading = styled.p`
@@ -102,7 +102,7 @@ const SelectDate = ({ history, currentStep }) => {
     font-size: 16px;
     margin-bottom: 10px;
   }
-`;
+  `;
 
     // Buttons container
     const ControlButtons = styled.div`
@@ -114,7 +114,7 @@ const SelectDate = ({ history, currentStep }) => {
     justify-content: space-between;
     margin: 0;
   }
-`;
+  `;
 
     // Container for Range Input and Count Display
     const RangeContainer = styled.div`
@@ -128,7 +128,7 @@ const SelectDate = ({ history, currentStep }) => {
     flex-direction: column;
     width: 100%;
   }
-`;
+  `;
 
     // Range Input container
     const RangeWrapper = styled.div`
@@ -140,7 +140,7 @@ const SelectDate = ({ history, currentStep }) => {
     width: 100%;
     margin: 0;
   }
-`;
+  `;
 
     // Text
     const CountText = styled.p`
@@ -153,7 +153,7 @@ const SelectDate = ({ history, currentStep }) => {
   @media (max-width: 768px) {
     font-size: 16px;
   }
-`;
+  `;
 
     // Display Count
     const CountDisplay = styled.p`
@@ -334,28 +334,36 @@ const SelectDate = ({ history, currentStep }) => {
     const defaultImage = 'https://play-lh.googleusercontent.com/a-/ALV-UjXtTD4G9gbxQz1RSCSnAEkBxESsZuZI2pSfXLzd6WjXDJ3muobz6w=s32-rw'; // Replace with the path to your default image
 
     const getTotalIngredients = () => {
-        const totalIngredients = {};
+        let totalIngredients = {};
         for (const dishId in data) {
             console.log('dishId2' + dishId);
             const dish = data[dishId];
             if (dish.ingredientUsed) {
                 dish.ingredientUsed.forEach((ingredient) => {
-                    if (!totalIngredients[ingredient._id]) {
-                        totalIngredients[ingredient._id] = {
-                            _id: ingredient._id,
-                            name: ingredient.name,
-                            image: ingredient.image && ingredient.image.trim() !== '' ? ingredient.image : defaultImage,
-                            unit: ingredient.unit,
+                    const { _id, name, image, unit, qty } = ingredient;
+
+                    if (!totalIngredients[_id]) {
+                        totalIngredients[_id] = {
+                            _id,
+                            name,
+                            image: image && image.trim() !== '' ? image : defaultImage,
+                            unit: '',
                             qty: 0,
-                            count: 0
+                            count: 0,
                         };
                     }
-                    totalIngredients[ingredient._id].qty += parseInt(ingredient.qty);
-                    totalIngredients[ingredient._id].count += 1;
-                    if (ingredient.unit === 'gram' || ingredient.unit === 'Gram')
-                        totalIngredients[ingredient._id].unit = 'g';
-                    if (ingredient.unit === 'ml' || ingredient.unit === 'ML')
-                        totalIngredients[ingredient._id].unit = 'ml';
+
+                    totalIngredients[_id].qty += parseInt(qty, 10);
+                    totalIngredients[_id].count += 1;
+
+                    // Normalize units
+                    if (unit.toLowerCase() === 'gram') {
+                        totalIngredients[_id].unit = 'g';
+                    } else if (unit.toLowerCase() === 'ml') {
+                        totalIngredients[_id].unit = 'ml';
+                    } else {
+                        totalIngredients[_id].unit = unit; // Keep the original unit if it's not 'gram' or 'ml'
+                    }
                 });
             }
         }
@@ -541,7 +549,7 @@ const SelectDate = ({ history, currentStep }) => {
                 />
             );
         } else if (activeTab === 'right') {
-            const totalIngredientsList = getTotalIngredients();
+            let totalIngredientsList = getTotalIngredients();
             console.log('totalIngredientsList', totalIngredientsList)
             return <RightTabContent ingredientList={totalIngredientsList} />;
         }

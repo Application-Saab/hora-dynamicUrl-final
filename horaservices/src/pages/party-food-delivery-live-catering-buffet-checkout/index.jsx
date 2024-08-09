@@ -72,7 +72,7 @@ const FoodDeliveryCheckout = () => {
         setComment(e.target.value);
     };
 
-    console.log("selectedDishesFoodDelivery", selectedDishesFoodDelivery)
+    // console.log("selectedDishesFoodDelivery", selectedDishesFoodDelivery)
 
     const selectedMealList = selectedDishesFoodDelivery
         ? Object.values(selectedDishesFoodDelivery).map(dish => {
@@ -88,7 +88,6 @@ const FoodDeliveryCheckout = () => {
 
     const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
     function calculateDiscountPercentage(peopleCount, dishCount) {
-        console.log(peopleCount + "===3333====" + dishCount)
         if (dishCount <= 5) {
             if (peopleCount >= 0 && peopleCount <= 10) {
                 return 0;
@@ -322,10 +321,10 @@ const FoodDeliveryCheckout = () => {
 
     // Assuming selectedMealList, peopleCount, and dishCount are defined earlier
     const dishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
-    console.log("dishPrice" + dishPrice)
+    // console.log("dishPrice" + dishPrice)
     var totalPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((dishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : dishPrice * peopleCount;
     const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
-    console.log("discountPercentage" + discountPercentage)
+    // console.log("discountPercentage" + discountPercentage)
     var discountedPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
     const calculateFinalTotal = () => {
@@ -710,7 +709,7 @@ const FoodDeliveryCheckout = () => {
 
     return (
         <div className="App">
-            {window.innerWidth > 800 ?
+            {isClient && window.innerWidth > 800 ?
                 <div style={{ padding: "1% 2%", backgroundColor: "rgba(237, 237, 237, 0.79)" }}>
                     <div style={{ display: "flex" }} className='checoutSec my-3 gap-3'>
                         <div style={{ width: "40%", boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px", backgroundColor: "rgb(255, 255, 255)", borderRadius: "20px" }} className='leftSeccheckout'>
@@ -1115,7 +1114,7 @@ const FoodDeliveryCheckout = () => {
             }
         </div>
     );
-}
+};
 
 export default FoodDeliveryCheckout;
 

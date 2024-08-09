@@ -364,6 +364,10 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   );
 
   const addDish = selectedDishPrice => {
+    if (!selectedDishDictionary || Object.keys(selectedDishDictionary).length === 0) {
+      console.error("selectedDishDictionary is undefined or empty");
+      return; // Exit the function early if the dictionary is undefined or empty
+  }
     const selectedDishQuantities = Object.values(selectedDishDictionary).map(item => {
       return {
         name: item.name,

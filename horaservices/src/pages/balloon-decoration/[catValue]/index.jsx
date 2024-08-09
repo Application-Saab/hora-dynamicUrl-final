@@ -324,7 +324,7 @@ const DecorationCatPage = () => {
               )
             )
           }
-          |<div>
+          <div>
             {/* <div>
                       {
                          filteredData.map((item, index) => (
