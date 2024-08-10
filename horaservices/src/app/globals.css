@@ -330,12 +330,11 @@ select {
 }
 
 .dropdpwnarrow {
-  width: 10px !important;
-  height: 16px !important;
-  padding-left: 8px;
+  padding-left: 6px;
   transform: scale(1); /* Forces repaint */
   flex-shrink: 0;
   display: inline-block;
+  font-size: 20px;
 }
 
 .dropdpwnarrow path {

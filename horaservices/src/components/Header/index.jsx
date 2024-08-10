@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBars, faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 // import avtar from '../assets/avtar.jpg';
+import { FaCaretDown } from "react-icons/fa";
 import backIcon from '../../assets/back_arrow1.png';
-// import { useNavigate } from 'react-router-dom';
-// import { useLocation } from "react-router-dom";
 import logoutImage from '../../assets/logout.png';
 import logoWhite from '../../../public/assets/logo_white.svg'
 import Link from "next/link";
@@ -154,11 +153,13 @@ useEffect(() => {
                 }}
               >
                 <span style={styles.link}>Services</span>
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                   icon={isHovered ? faCaretUp : faCaretDown}
                   className={`dropdpwnarrow ${isHovered ? "rotate-icon" : ""}`}
                   
-                />
+                /> */} 
+                <FaCaretDown  className={`dropdpwnarrow ${isHovered ? "rotate-icon" : ""}`} />
+                {/* <Image src={dropdown} alt='logo'/> */}
                 {showDecorationSubMenu && (
                   <ul style={styles.subMenu}>
                     <li>
