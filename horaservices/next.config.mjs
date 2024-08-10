@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['horaservices.com'],
-    },
+    images:{
+        unoptimized:true
+      },
+    output: "export",
     webpack(config) {
         config.module.rules.push({
             test: /\.(mp4|webm|ogg|swf|ogv)$/,

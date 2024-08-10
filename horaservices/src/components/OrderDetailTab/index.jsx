@@ -101,7 +101,7 @@ const OrderDetailTab = ({
         </div>
       </div> */}
 
-      {orderType === 2 ? (
+      {parseInt(orderType) === 2 ? (
         <div>
           <div className="tabs">
             <button
@@ -204,6 +204,9 @@ const OrderDetailTab = ({
                     src={`https://horaservices.com/api/uploads/${product?.featured_image}`}
                     alt={product?.name}
                     className="product-image"
+                    height={300}
+                    width={300}
+                    style={{height:"auto", width:"auto"}}
                   />
                 </div>
                 <div className="product-info">

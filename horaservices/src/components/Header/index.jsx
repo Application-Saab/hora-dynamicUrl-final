@@ -157,7 +157,7 @@ useEffect(() => {
                 <FontAwesomeIcon
                   icon={isHovered ? faCaretUp : faCaretDown}
                   className={`dropdpwnarrow ${isHovered ? "rotate-icon" : ""}`}
-                  style={{ paddingLeft: "8px" }}
+                  
                 />
                 {showDecorationSubMenu && (
                   <ul style={styles.subMenu}>

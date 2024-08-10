@@ -329,6 +329,15 @@ select {
   padding: 0 0 20px 0;
 }
 
+.dropdpwnarrow {
+  width: 10px !important;
+  height: 16px !important;
+  padding-left: 8px;
+  transform: scale(1); /* Forces repaint */
+  flex-shrink: 0;
+  display: inline-block;
+}
+
 .dropdpwnarrow path {
   fill: white;
 }

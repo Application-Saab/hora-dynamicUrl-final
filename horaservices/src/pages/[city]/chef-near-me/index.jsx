@@ -864,7 +864,6 @@ const ChefCitypage = () => {
         return <div>Loading...</div>;
     }
 
-    console.log(router)
     return (
         <div>
             <div style={styles.homebanner} className="homebanner citypage">

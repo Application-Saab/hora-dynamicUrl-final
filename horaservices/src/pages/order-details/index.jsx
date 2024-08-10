@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 const OrderDetail = () => {
 
   const router = useRouter();
-  const { apiOrderId, orderType, orderId } = router.query;
+  let { apiOrderId, orderType, orderId } = router.query;
   const [loading, setLoading] = useState(false);
   const [orderDetail, setOrderDetail] = useState([]);
   const [decorationItems, setDecorationItems] = useState([]);
@@ -27,6 +27,8 @@ const OrderDetail = () => {
   const [hospitalityServiceCount, setHospitalityServiceCount] = useState();
   const [hospitalityServiceTotalAmount, setHospitalityServiceTotalAmount] =
     useState();
+
+  orderType = parseInt(orderType);
 
   useEffect(() => {
     if (
@@ -55,6 +57,7 @@ const OrderDetail = () => {
       );
       const responseData = await response.json();
       setOrderDetail(responseData.data);
+      console.log(responseData)
       setLoading(false);
     } catch (error) {
       console.log("error", error);
@@ -113,6 +116,7 @@ const OrderDetail = () => {
       </center>
     );
   }
+
 
   return (
     <>

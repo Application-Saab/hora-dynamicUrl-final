@@ -54,6 +54,7 @@ const OrderDetailsIngre = ({ orderDetail, orderType }) => {
               <Image
                 src={`https://horaservices.com/api/uploads/${orderIngredients[item].image}`}
                 alt={item}
+                width={80} height={80}
               />
             </div>
             <div className="ingredient-details">

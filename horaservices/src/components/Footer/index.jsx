@@ -88,10 +88,10 @@ function Footer() {
   return (
     <footer style={style.footer}>
       <div style={style.frameBlack}></div>
-      <Container>
-        <Row className="py-4">
+      <Container className="p-0">
+        <Row className="py-4 justify-content-center">
           {footerColumns.map((column, index) => (
-            <Col key={index} md={3} sm={6} xs={12} className="mb-3">
+            <Col key={index}  className="mb-3">
               <h2 className="footerheading">{column.title}</h2>
               <ul className={`list-unstyled-${index}`}>
                 {column.links.map((link, idx) => (

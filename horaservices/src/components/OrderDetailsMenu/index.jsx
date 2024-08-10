@@ -15,6 +15,8 @@ const OrderDetailsMenu = ({ orderDetail, orderType }) => {
             <Image
               src={`https://horaservices.com/api/uploads/${item?.image}`}
               alt={item.name}
+              height={56}
+              width={80}
             />
           </div>
           <div className="menu-item-details">
