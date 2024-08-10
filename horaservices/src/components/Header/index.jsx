@@ -195,7 +195,7 @@ useEffect(() => {
                 </Link>
               </li>
               <li style={styles.desktopMenuli}>
-                <Link href="https://horaservices.com/AboutUs.html" style={styles.link}>
+                <Link href="/aboutus" style={styles.link}>
                   About Us
                 </Link>
               </li>

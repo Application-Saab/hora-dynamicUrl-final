@@ -28,6 +28,7 @@ const router = useRouter();
           src={confirmOrder}
           alt="Order Confirmed"
           className="success-image"
+          height={230}
         />
       </div>
       <div className="confirm-order-details">

@@ -102,9 +102,9 @@ export default function Home() {
               },
             });
 
-            router.push("success");
+            router.push("/Success");
           } else {
-            router.push("failure");
+            router.push("/Failure");
           }
         } else {
           console.log("API response does not contain a message field");
