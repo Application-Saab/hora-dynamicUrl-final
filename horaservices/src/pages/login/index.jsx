@@ -24,6 +24,7 @@ const Login = () => {
     const router = useRouter();
     const previousPage = router.query.from || null;
     const subCategory = router.query.subCategory || null;
+    const catValue = router.query.catValue || null;
     const orderType = router.query.orderType || null;
     const product = router.query.product || null;
     const selectedDishDictionary = router.query.selectedDishDictionary || null;
@@ -159,7 +160,7 @@ const Login = () => {
                                     selectedCount
                                 }
                             });
-                        } else if (previousPage.startsWith('/balloon-decoration/anniversary-decoration/product')) {
+                        } else if (previousPage.startsWith(`/balloon-decoration/${catValue}/product`)) {
                             router.push({
                                 pathname: '/checkout',
                                 query: { subCategory, product, orderType }
