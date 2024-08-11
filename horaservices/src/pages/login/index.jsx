@@ -139,7 +139,7 @@ const Login = () => {
                 });
 
                 if (response.data.status === API_SUCCESS_CODE) {
-                    handleLogout();
+                    // handleLogout();
                     setLoginMsg("Successfully logged in");
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem("mobileNumber", mobileNumber);

@@ -913,7 +913,7 @@ const FoodDeliveryCheckout = () => {
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
                                         <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
                                             <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Total Dishes</label>
-                                            <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {Object.keys(selectedDishesFoodDelivery).length}</p>
+                                            <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {selectedDishesFoodDelivery && Object.keys(selectedDishesFoodDelivery).length}</p>
                                         </div>
                                         {peopleCount > 0 ?
                                             <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
@@ -1065,7 +1065,7 @@ const FoodDeliveryCheckout = () => {
                                         </div>
                                         <div>
                                             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }}>
-                                                {selectedDishQuantities.map((item, index) => (
+                                                {selectedDishQuantities && selectedDishQuantities.map((item, index) => (
                                                     <div style={{ width: "48%", border: "1px solid rgb(149 142 142 / 73%)", flexDirection: "row", display: "flex", borderRadius: "10px", padding: "6px 10px", boxSizing: "border-box" }} className='dishes-checkout-page'>
                                                         <div style={{ marginRight: 2, width: "90%" }}>
                                                             <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} width={300} height={300} />

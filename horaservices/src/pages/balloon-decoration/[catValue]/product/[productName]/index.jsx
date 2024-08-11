@@ -41,7 +41,11 @@ function DecorationCatDetails() {
       router.push({
         pathname: '/login',
         query: {
-          stateData
+          from: window.location.pathname,
+          subCategory,
+          product: JSON.stringify(product),
+          orderType,
+          catValue 
         }
       });
     } else {
