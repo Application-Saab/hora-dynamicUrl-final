@@ -140,8 +140,8 @@ const Login = () => {
                 });
 
                 if (response.data.status === API_SUCCESS_CODE) {
-                    handleLogout();
-                    setLoginMsg("Successfully logged in");
+                    // handleLogout();
+                   // setLoginMsg("Successfully logged in");
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem("mobileNumber", mobileNumber);
                     localStorage.setItem('token', response.data.token);
@@ -183,7 +183,7 @@ const Login = () => {
                                 query: { subCategory, product, orderType }
                             });
                         } else {
-                            console.log("previous page not including")
+                            router.push('/');
                         }
                     } else {
                         // Handle the case where previousPage is null or undefined
@@ -191,8 +191,7 @@ const Login = () => {
                         router.push('/');
                     }
                 } else {
-                    setLoginMsg(" ");
-                    setOtpError('Failed to verify OTP. Please try again.');
+                    router.push('/');
                 }
             } else {
                 setLoginMsg("");

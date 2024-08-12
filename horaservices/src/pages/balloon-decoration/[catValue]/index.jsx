@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../utils/apiconstants';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { CardSkeleton } from "../../../components/CardSkeleton";
@@ -203,7 +203,7 @@ const DecorationCatPage = () => {
 
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
-      <Helmet>
+      <Head>
         <title>Balloon and Flower Decoration @999</title>
         <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
@@ -215,7 +215,7 @@ const DecorationCatPage = () => {
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}`} />
         <meta property="og:type" content="website" />
-      </Helmet>
+      </Head>
       <>
         <div style={{ textAlign: "center", justifyContent: "center", alignItems: "center" }}>
           <div style={{ marginTop: "0px" }}>

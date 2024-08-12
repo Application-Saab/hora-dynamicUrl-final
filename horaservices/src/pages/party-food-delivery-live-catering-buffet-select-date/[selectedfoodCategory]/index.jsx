@@ -302,7 +302,15 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       router.push({
         pathname: "/login",
-        query: { navigateState }
+        query: {
+          from: window.location.pathname,
+          peopleCount: peopleCount,
+          selectedDeliveryOption: selectedOption,
+          selectedDishesFoodDelivery: JSON.stringify(data),
+          totalOrderAmount: totalOrderAmount,
+          selectedDishQuantities: JSON.stringify(selectedDishQuantities),
+          selectedOption: selectedOption,
+        }
         });
     } else {
       router.push({

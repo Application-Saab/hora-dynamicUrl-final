@@ -13,7 +13,7 @@ const Popup = ({ onClose, popupMessage }) => {
 
   const handleContactUs = () => {
     window.open(
-      "whatsapp://send?phone=+917338584828&text=Hello%20I%20have%20some%20queries%20for%20food%20delivey%20and%20live%20Catering%20service"
+      "https://wa.me/+917338584828/?text=Hello%20I%20have%20some%20queries%20for%20food%20delivey%20and%20live%20Catering%20service"
     );
     onClose();
   };

@@ -58,7 +58,7 @@ const CreateOrder = ({ history, currentStep }) => {
     const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] = useState(false);
     const [isViewAllExpanded, setIsViewAllExpanded] = useState(false);
     const [popupMessage, setPopupMessage] = useState({
-        image: "",
+        img: "",
         title: "",
         body: "",
         button: "",

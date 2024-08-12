@@ -8,7 +8,7 @@ import checkImage from '../../../../../../assets/tick.jpeg';
 import { getDecorationProductOrganizationSchema } from "../../../../../../utils/schema";
 import '../../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
-import { Helmet } from "react-helmet";
+import Head from 'next/head';
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -104,7 +104,7 @@ function DecorationCatDetails() {
 
   return (
     <div className="App" style={{ backgroundColor: "#EDEDED" }}>
-      <Helmet>
+      <Head>
         <title>Balloon and Flower Decoration @999</title>
         <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
@@ -116,7 +116,7 @@ function DecorationCatDetails() {
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}/product/${product.name}`} />
         <meta property="og:type" content="website" />
-      </Helmet>
+      </Head>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "10px", position: "relative" }} className="decDetails">
           <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">

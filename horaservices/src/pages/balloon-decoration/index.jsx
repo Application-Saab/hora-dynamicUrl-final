@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 // import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 import { useParams } from "react-router-dom";
@@ -53,7 +53,7 @@ const Decoration = () => {
 
     return (
         <div>
-            <Helmet>
+            <Head>
                 <title>Balloon and Flower Decoration @999</title>
                 <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
                 <meta name="keywords" content="Balloon and Flower Decoration @999" />
@@ -65,7 +65,7 @@ const Decoration = () => {
                 <meta name="author" content="Hora Services" />
                 <meta property="og:url" content="https://horaservices.com/balloon-decoration" />
                 <meta property="og:type" content="website" />
-            </Helmet>
+            </Head>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", margin: "20px auto 0", width: "70%", justifyContent: "space-between" }} className="decContainerSec decPage">
                 {decCat.map((item, index) => (
                     <div key={index} className="imageContainer">
