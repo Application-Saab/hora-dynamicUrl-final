@@ -28,8 +28,8 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const router = useRouter();
   console.log(router)
   let { selectedfoodCategory } = router.query;
-  // const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
-  const selectedOption = router.asPath.split('/').pop();
+  const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
+  // const selectedOption = router.asPath.split('/').pop();
   const [orderType, setOrderType] = useState(2);
   const [isDishSelected, setIsDishSelected] = useState(false);
   const [selected, setSelected] = useState('veg');
@@ -362,7 +362,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
       }
     </div>
   );
-
+console.log('selectedOption',selectedOption)
   const addDish = selectedDishPrice => {
     if (!selectedDishDictionary || Object.keys(selectedDishDictionary).length === 0) {
       console.error("selectedDishDictionary is undefined or empty");
