@@ -854,9 +854,22 @@ const DecorationCity = () => {
     useEffect(() => {
         if (router.isReady) {
             const { city } = router.query;
-            setCity(city);
+            if (city) {
+                setCity(city);
+
+                // Check if the city includes ".html" and perform redirection
+                if (city.includes('.html')) {
+                    // Redirect to home page
+                    router.push('/');
+                } else {
+                    // Handle cases where the city does not include ".html"
+                    console.log(`City: ${city}`); // For debugging
+                }
+            }
         }
     }, [router.isReady, router.query]);
+
+   
 
     if (!router.isReady) {
         return <div>Loading...</div>;
