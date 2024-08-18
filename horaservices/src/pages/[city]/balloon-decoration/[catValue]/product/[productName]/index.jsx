@@ -39,7 +39,7 @@ function DecorationCatDetails() {
           subCategory,
           product: JSON.stringify(product),
           orderType,
-          catValue 
+          catValue,
         }
       });
 

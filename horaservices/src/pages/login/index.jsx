@@ -161,17 +161,12 @@ const Login = () => {
                                     selectedCount
                                 }
                             });
-                        } else if (previousPage.startsWith(`/balloon-decoration/${catValue}/product`)) {
+                        } else if (previousPage.includes(`/balloon-decoration/${catValue}/product`)) {
                             router.push({
                                 pathname: '/checkout',
                                 query: { subCategory, product, orderType }
                             });
-                        }else if (previousPage.startsWith(`${city}/balloon-decoration/${catValue}/product`)) {
-                            router.push({
-                                pathname: '/checkout',
-                                query: { subCategory, product, orderType,city,catValue }
-                            });
-                        } 
+                        }
                         else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {
                             router.push({
                                 pathname: "/party-food-delivery-live-catering-buffet-checkout",
