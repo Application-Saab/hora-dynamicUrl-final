@@ -32,7 +32,17 @@ function DecorationCatDetails() {
     const stateData = { from: window.location.pathname, subCategory, product, orderType, catValue };
 
     if (localStorage.getItem("isLoggedIn") !== "true") {
-      router.push('/login', { state: stateData });
+      router.push({
+        pathname: '/login',
+        query: {
+          from: window.location.pathname,
+          subCategory,
+          product: JSON.stringify(product),
+          orderType,
+          catValue 
+        }
+      });
+
     } else {
       router.push({
         pathname: '/checkout',

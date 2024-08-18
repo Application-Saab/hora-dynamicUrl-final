@@ -25,6 +25,7 @@ const Login = () => {
     const previousPage = router.query.from || null;
     const subCategory = router.query.subCategory || null;
     const catValue = router.query.catValue || null;
+    const city = router.query.city || null;
     const orderType = router.query.orderType || null;
     const product = router.query.product || null;
     const selectedDishDictionary = router.query.selectedDishDictionary || null;
@@ -165,7 +166,13 @@ const Login = () => {
                                 pathname: '/checkout',
                                 query: { subCategory, product, orderType }
                             });
-                        } else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {
+                        }else if (previousPage.startsWith(`${city}/balloon-decoration/${catValue}/product`)) {
+                            router.push({
+                                pathname: '/checkout',
+                                query: { subCategory, product, orderType,city,catValue }
+                            });
+                        } 
+                        else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {
                             router.push({
                                 pathname: "/party-food-delivery-live-catering-buffet-checkout",
                                 query: {
