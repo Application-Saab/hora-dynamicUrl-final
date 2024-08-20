@@ -68,13 +68,13 @@ useEffect(() => {
 
     switch (true) {
       case pathname === "/balloon-decoration":
-        return "Decoration";
+        return "Select Category";
       case pathname === "/book-chef-cook-for-party":
         return "Create Order";
       case pathname === "/book-chef-cook-for-party/order-details":
-        return "Order Details";
+        return "Create Order";
       case pathname === "/book-chef-checkout":
-        return "Checkout";
+        return "Order Summary For Checkout";
       case pathname ===
         "/party-food-delivery-live-catering-buffet/party-food-delivery":
         return "Food Delivery";
@@ -94,9 +94,9 @@ useEffect(() => {
       case pathname === "/aboutus":
         return "About Us";
       case pathname.match(/^\/balloon-decoration\/.+\/product\/.+$/) !== null:
-        return "Product";
+        return "Product Details";
       case pathname.match(/^\/balloon-decoration\/.+$/) !== null:
-        return "Decoration category";
+        return "Select Product";
       default:
         return "";
     }

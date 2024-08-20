@@ -45,18 +45,18 @@ const Login = () => {
     const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
     const [popupMessage, setPopupMessage] = useState({}); // State for popup message
     console.log(router)
-    const handleLogout = () => {
-        localStorage.setItem("isLoggedIn", "false");
-        localStorage.clear();
-        setPopupMessage({
-            img: logoutImage,
-            title: "Logout Successful",
-            body: "You have been logged out successfully.",
-            button: "OK"
-        });
-        setShowPopup(true); // Show the popup
-        router.push("/");
-    };
+    // const handleLogin = () => {
+    //     localStorage.setItem("isLoggedIn", "false");
+    //     localStorage.clear();
+    //     setPopupMessage({
+    //         img: logoutImage,
+    //         title: "Login Successful",
+    //         body: "You have been logged in successfully.",
+    //         button: "OK"
+    //     });
+    //     setShowPopup(true); // Show the popup
+    //     router.push("/");
+    // };
 
     const handleWarningClose = () => {
         setWarningVisibleForTotalAmount(false);
@@ -141,8 +141,15 @@ const Login = () => {
                 });
 
                 if (response.data.status === API_SUCCESS_CODE) {
-                    // handleLogout();
-                   // setLoginMsg("Successfully logged in");
+                    setPopupMessage({
+                        image: require('../assets/logout.png').default,
+                        title: "Login Successful",
+                        body: "You have been login successfully.",
+                        button: "OK"
+                      });
+                      setShowPopup(true); // Show the popup
+            
+                      setLoginMsg("Successfully logged in");
                     localStorage.setItem('isLoggedIn', 'true');
                     localStorage.setItem("mobileNumber", mobileNumber);
                     localStorage.setItem('token', response.data.token);

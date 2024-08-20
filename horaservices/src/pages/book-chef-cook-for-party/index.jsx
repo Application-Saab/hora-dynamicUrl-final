@@ -709,6 +709,7 @@ const CreateOrder = ({ history, currentStep }) => {
                                         ? "#9252AA"
                                         : "#F9E9FF",
                                     borderColor: isDishSelected ? "#9252AA" : "#F9E9FF",
+                                    marginBottom: "20px",
                                 }}
                                 disabled={!isDishSelected}
                                 className="continuebtnchef"
