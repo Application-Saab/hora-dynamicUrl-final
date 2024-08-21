@@ -550,7 +550,7 @@
 //               Chef for a day in Bangalore, Chef for a night in Bangalore, Chef
 //               for hire in Bangalore, Chef cooking at my home in Bangalore, Chef
 //               near me in Bangalore, Chef on demand in Bangalore, Chef required
-//               at home in Bangalore, Chefs for hire in Bangalore, Chefs for home
+//               at home in Bangalore, Chefs for che in Bangalore, Chefs for home
 //               in Bangalore, Hire a private chef in Bangalore, Chefs on hire in
 //               Bangalore, Cook chef near me in Bangalore, Cook at home services
 //               in Bangalore, Cook for a day in Bangalore, Cook for a night in
