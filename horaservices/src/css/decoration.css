@@ -127,3 +127,350 @@ img {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+
+
+  /* FAQ */
+  .faqSection {
+    width: 81%;
+    margin: 20px auto;
+    text-align: left;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .faqItem {
+    margin-bottom: 10px;
+  }
+  
+  .faqItem > div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .faqItem > div:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .faqItem h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .faqItem span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .faqItem p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .faqItem > div + div {
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    transition: max-height 0.3s ease;
+  }
+  
+  @media (max-width: 600px) {
+    .faqSection {
+      width: 95%;
+      max-height: calc(4 * 60px + 30px); /* Adjust based on your item height and spacing */
+      overflow-y: auto; /* Enable vertical scrolling */
+    }
+  
+    .faqItem > div {
+      font-size: 14px; /* Adjust font size for smaller screens */
+    }
+  
+    .faqItem span {
+      font-size: 18px; /* Adjust icon size */
+    }
+  }
+  
+
+
+  /* decoration home page slider */
+  
+.container {
+  padding: 20px;
+}
+
+.slider-container {
+  width: 100%;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.price {
+  font-size: 18px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.rating {
+  font-size: 18px;
+  gap: 5px;
+}
+
+.view-more-container {
+  margin-left: 20px;
+}
+
+.view-more-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-more-button:hover {
+  background-color: #0056b3;
+}
+
+.decorations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.decoration-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: calc(25% - 20px);
+  text-align: center;
+  position: relative;
+}
+
+.decoration-card Image {
+  width: 100%;
+  height: auto;
+}
+
+.decoration-card h2 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 10px;
+}
+
+.price {
+  font-size: 18px;
+  color: #333;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 10px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+.view-more-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.view-more-button {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 26px;
+}
+
+.view-more-button:hover {
+  background-color: rgb(157, 74, 147);
+}
+
+.decContainerSec {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  width: 100%;
+}
+
+.imageContainer {
+  cursor: pointer;
+  flex: 1 1 calc(18% - 10px);
+  text-align: center;
+}
+
+.decCatimage {
+  width: 90%;
+  height: 250px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.2s;
+  align-items: center;
+}
+
+
+.decCatimage2 {
+  width: 90%;
+  height: 250px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.2s;
+  align-items: center;
+}
+
+.imageContainer:hover .decCatimage {
+  transform: scale(1.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header-container {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space between header and button */
+    align-items: center; /* Align items vertically */
+    flex-wrap: wrap; /* Ensure wrapping on smaller screens */
+    margin-top: 30px;
+  }
+
+  .header-container h1 {
+    font-size: 20px;
+    margin: 0;
+    flex: 1; /* Allow the header to take up available space */
+  }
+
+  .view-more-container {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    align-items: center; /* Center align items vertically */
+    margin: 0; /* Remove margin for tighter alignment */
+  }
+
+  .view-more-button {
+    padding: 6px 12px; /* Smaller padding for a smaller button */
+    font-size: 8px; /* Smaller font size */
+    background-color: rgb(157, 74, 147); /* Set background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 36px;
+  }
+
+  .view-more-button:hover {
+    background-color: #0056b3; /* Adjust hover color if needed */
+  }
+
+  .slider-container Image {
+    width: 100%;
+    height: auto;
+  }
+
+  .decoration-card {
+    width: calc(50% - 10px); /* Two cards per row */
+  }
+
+  .price-rating {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .rating {
+    font-size: 12px;
+  }
+
+  .decCatimage2 {
+    width: 95%; /* Slightly wider for tablet */
+    height: 220px; /* Adjust height for tablet */
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container h1 {
+    font-size: 18px;
+  }
+
+  .view-more-button {
+    padding: 4px 8px; /* Even smaller padding */
+    font-size: 8px; /* Even smaller font size */
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+
+  .decoration-card {
+    width: 100%; /* Full width for mobile */
+  }
+
+  .price-rating {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .rating {
+    font-size: 10px;
+  }
+
+  .decCatimage2 {
+    width: 100%;
+    height: 200px; /* Adjust height for mobile */
+    border-radius: 8px; /* Slightly smaller border radius */
+  }
+}

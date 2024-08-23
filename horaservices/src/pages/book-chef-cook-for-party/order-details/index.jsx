@@ -236,21 +236,26 @@ const SelectDate = ({ history, currentStep }) => {
         button: "",
     });
 
-    const minPeopleCount = 1
-    const maxPeopleCount = 100
-    const step = 10;
-
+    const minPeopleCount = 1;
+    const maxPeopleCount = 35;
+    const step = 1;
+    
     const increasePeopleCount = () => {
-        setPeopleCount(peopleCount + 1)
-        setDishPrice(parseInt(dishPrice) + 49)
-    }
-
-    const decreasePeopleCount = () => {
-        if (peopleCount != 1) {
-            setPeopleCount(peopleCount - 1)
-            setDishPrice(dishPrice - 49)
+        if (peopleCount >= maxPeopleCount) {
+            alert(`The maximum allowed people count is ${maxPeopleCount}.`);
+            return;
         }
-    }
+        setPeopleCount(peopleCount + step);
+        setDishPrice(parseInt(dishPrice) + 49);
+    };
+    
+    const decreasePeopleCount = () => {
+        if (peopleCount > minPeopleCount) {
+            setPeopleCount(peopleCount - step);
+            setDishPrice(dishPrice - 49);
+        }
+    };
+    
     const handleRangeChange = (e) => {
         console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
@@ -563,6 +568,8 @@ const SelectDate = ({ history, currentStep }) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    
 
     return (
         <div style={{ width: "90%", margin: "0 auto", backgroundColor: "#EDEDED", marginBottom: "10px" }} className='selectdatesecouter'>
