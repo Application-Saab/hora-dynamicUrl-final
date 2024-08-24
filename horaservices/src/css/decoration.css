@@ -474,3 +474,22 @@ img {
     border-radius: 8px; /* Slightly smaller border radius */
   }
 }
+
+/* decoration bro */
+
+.slider-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 43px;
+  color: #333
+}
+
+@media (max-width: 468px) {
+  .slider-container h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px; 
+    margin-top: 20px;
+    color: #333;
+  }
+}

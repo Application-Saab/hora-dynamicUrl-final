@@ -307,7 +307,9 @@ const DecorationCatPage = () => {
                           > ₹ {item.price}</p>
                         </div>
                         <div className="d-flex align-items-center rating-sec">
-                          <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
+                          <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>
+                            {item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}>
+                              <FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
                         </div>
                       </div>

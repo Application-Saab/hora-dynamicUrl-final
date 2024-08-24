@@ -137,7 +137,7 @@ import PremiumImage from '../../assets/preminumdecor.jpeg';
 import BallonBImage from '../../assets/Balloon-B-new.jpeg';
 import HaldiImage from '../../assets/HaldiImage.png';
 import MehendiImage from '../../assets/MehendiImage.png';
-import BacheloretteImage from '../../assets/Bachelorette.jpg';
+import BacheloretteImage from '../../assets/Bachelorette_1.png';
 import { getDecorationOrganizationSchema } from '../../utils/schema';
 import { setState } from '../../actions/action';
 
@@ -145,6 +145,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 import Image from 'next/image';
+
+import ReusableSlider from '../../pages/balloon-decoration/ReusableSlider';
 
 
 import '../../css/decoration.css';
@@ -177,30 +179,6 @@ const birthdayData = [
     price: '₹3999',
     rating: 4.7,
   },
-  {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-    title: 'Underwater Wonderland: Mermaid',
-    price: '₹3999',
-    rating: 4.7,
-  },
-  {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-    title: 'Underwater Wonderland: Mermaid',
-    price: '₹3999',
-    rating: 4.7,
-  },
-  {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-    title: 'Underwater Wonderland: Mermaid',
-    price: '₹3999',
-    rating: 4.7,
-  },
-  {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-    title: 'Underwater234dsasdasd Wonderland: Mermaid',
-    price: '₹3999',
-    rating: 4.7,
-  },
 ];
 
 
@@ -213,7 +191,7 @@ const firstNightData = [
     },
     {
       Image: 'https://horaservices.com/api/uploads/attachment-1706470026330.png',
-      title: 'Wedding Night Room Decoration',
+      title: 'Wedding Night Room',
       price: '₹1900',
       rating: 4.5,
     },
@@ -259,6 +237,170 @@ const firstNightData = [
     },
   ];
 
+
+  const AnniversaryData = [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705947179768.png',
+      title: 'Roseate Radiance Anniversary Decor',
+      price: '₹1999',
+      rating: 4.6,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706442984306.png',
+      title: 'Love You Room Decor',
+      price: '₹1250',
+      rating: 4.2,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706443182006.png',
+      title: 'Rose Gold Anniversary Decor',
+      price: '₹1599',
+      rating: 4.5,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706459807177.png',
+      title: 'Canopy Red Heart Decor',
+      price: '₹4286',
+      rating: 4.5,
+    },
+  ];
+
+  const KidsBirthdayData = [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
+      title: 'Minnie Mouse Theme Decor',
+      price: '₹1549',
+      rating: 4.6,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705948813744.png',
+      title: 'Unicorn Backdrop Decor',
+      price: '₹4399',
+      rating: 4.4,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706520101383.png',
+      title: 'Multi color Birthday Balloon',
+      price: '₹1299',
+      rating: 4.3,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
+      title: 'Cute and Simple Birthday Decor',
+      price: '₹2299',
+      rating: 4.7,
+    },
+  ];
+
+
+  const BabyShowerData= [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705598818463.png',
+      title: 'Cloudy Theme Baby Shower',
+      price: '₹1899',
+      rating: 4.2,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705598937315.png',
+      title: 'Golden, Pink and Blue Baby Shower',
+      price: '₹2299',
+      rating: 4.5,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705599152481.png',
+      title: 'Baby Pink Baby Shower',
+      price: '₹2700',
+      rating: 4.2,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711520474508.png',
+      title: 'OH BABY Light Decoration',
+      price: '₹3399',
+      rating: 4.8,
+    },
+  ];
+
+  const WelcomebabyData= [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706471308375.png',
+      title: 'Pink Theme Welcome Baby',
+      price: '₹2070',
+      rating: 4.8,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706471595779.png',
+      title: 'Blue Theme Welcome Baby Boy',
+      price: '₹1899',
+      rating: 4.5,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711458529679.png',
+      title: 'Oh Baby Classy Decoration',
+      price: '₹2999',
+      rating: 4.7,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711555526222.png',
+      title: 'Welcome Baby Decoration',
+      price: '₹1899',
+      rating: 4.2,
+    },
+  ];
+
+  const PremiumData= [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705586477880.png',
+      title: 'Open Area Birthday Decoration',
+      price: '₹6999',
+      rating: 4.4,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706528142518.png',
+      title: 'Canopy Birthday Decoration',
+      price: '₹4999',
+      rating: 4.6,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1706534258221.png',
+      title: 'Multi-Colored Baby Shower',
+      price: '₹6120',
+      rating: 4.7,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711540983547.png',
+      title: 'Car Theme With Mickey Mouse',
+      price: '₹6235',
+      rating: 4.6,
+    },
+  ];
+  
+  const BallonBData= [
+    {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705949316251.png',
+      title: 'I Love You Balloon Bouquet',
+      price: '₹1800',
+      rating: 4.3,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1705949583322.png',
+      title: 'LOVE Balloon Bouquet',
+      price: '₹1350',
+      rating: 4.6,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711542379923.png',
+      title: 'Barbie Balloon Bouquet',
+      price: '₹1450',
+      rating: 4.1,
+    },
+   {
+      Image: 'https://horaservices.com/api/uploads/attachment-1712305355842.png',
+      title: 'Baby Shark Bouquet',
+      price: '₹1420',
+      rating: 4.5,
+    },
+  ];
+
 function Decoration() {
     
     const dispatch = useDispatch();
@@ -285,7 +427,7 @@ function Decoration() {
         
         {id: '11', Image: MehendiImage, name: "Mehendi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Mehendi Event"},
         
-        {id: '12', Image: BacheloretteImage, name: "Bachelorette Event", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "bachelorette Event"},
+        // {id: '12', Image: BacheloretteImage, name: "Bachelorette Event", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "bachelorette Event"},
    
         // { id: '10', image: BallonBImage, name: 'Car Boot', subCategory: "CarBoot" , catValue:"carboot-decoration"},
         // { id: '11', image: BachelorPartyImage, name: 'Bachelor Party', subCategory: "BachelorParty" , catValue:"bachelorparty-decoration"},
@@ -294,11 +436,6 @@ function Decoration() {
         // { id: '14', image: EntertainerImage, name: 'Entertainer', subCategory: "Entertainer" , catValue:"entainer-decoration"},
     
     ]);
-
-    const [visibleItems, setVisibleItems] = useState(birthdayData.slice(0, 4));
-    const [visibleItems2, setVisibleItems2] = useState(firstNightData.slice(0, 4)); 
-    const [visibleItems3, setVisibleItems3] = useState(haldiAndMehndiData.slice(0,4));
-
 
     const getCatData = async (subCategory) => {
         try {
@@ -321,44 +458,22 @@ function Decoration() {
     };
 
     const handleViewMore = (category) => {
-        const categoryItem = decCat.find(cat => cat.name === category);
-        if (categoryItem) {
-            openCatItems(categoryItem);
-        }
-    };
+      console.log('Category:', category); 
+      const categoryItem = decCat.find(cat => cat.subCategory === category);
+      console.log('Category Item:', categoryItem); 
+      if (categoryItem) {
+          openCatItems(categoryItem);
+      } else {
+          console.log('No matching category item found.');
+      }
+  };
+    
 
     useEffect(() => {
         decCat.forEach((item) => {
             getCatData(item.subCategory);
         });
     }, [decCat]);
-
-    // Slider settings
-    const sliderSettings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
 
     return ( 
         <div>
@@ -384,113 +499,54 @@ function Decoration() {
         ))}
       </div>
 
-            <div className="container">
-            <div className="header-container">
-        <h1>Birthday Party Decorations</h1>
-        <div className="view-more-container">
-            <button style={{backgroundColor: "rgb(157, 74, 147)"}} className="view-more-button" onClick={() => handleViewMore('Birthday')}>View More</button>
-        </div>
-    
-        </div>
-                <div className="slider-container">
-                    <Slider {...sliderSettings}>
-                        {visibleItems.map((item, index) => (
-                            <div className="decoration-card" key={index}>
-                                {/* <Image style={{ width: "350px", height: "310px" }} src={item.Image} alt={item.title} /> */}
 
 
-                                <Image 
-      src={item.Image} 
-      alt={item.title} 
-      width={350}  // Set width as a numeric value
-      height={310} // Set height as a numeric value
-      className="decCatimage2"
-    />
-                                <h2>{item.title}</h2>
-                                <div className="price-rating">
-                                    <div className="price">
-                                        {item.oldPrice && <span className="old-price">{item.oldPrice}</span>}
-                                        <span>{item.price}</span>
-                                    </div>
-                                    <div className="rating">
-                                        <FontAwesomeIcon icon={faThumbsUp} /> <span>{item.rating}</span> 
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
+      <div className="slider-container">
+  <h2>Birthday Party Decorations</h2>
+  <ReusableSlider data={birthdayData} category="Birthday" handleViewMore={handleViewMore} />
+</div>
 
-                {/* Second Slider */}
-                <div className="header-container">
-                    <h1>First Night Balloon Decoration</h1>
-                    <div className="view-more-container">
-            <button style={{backgroundColor: "rgb(157, 74, 147)"}} className="view-more-button" onClick={() => handleViewMore('First Night')}>View More</button>
-        </div>
-                </div>
-                <div className="slider-container">
-                    <Slider {...sliderSettings}>
-                        {visibleItems2.map((item, index) => (
-                            <div className="decoration-card" key={index}>
-                                {/* <Image style={{ width: "350px", height: "310px" }} src={item.Image} alt={item.title} /> */}
+<div className="slider-container">
+  <h2>First Night Balloon Decoration</h2>
+  <ReusableSlider data={firstNightData} category="FirstNight" handleViewMore={handleViewMore} />
+</div>
 
-                                <Image 
-      src={item.Image} 
-      alt={item.title} 
-      width={350}  // Set width as a numeric value
-      height={310} // Set height as a numeric value
-      className="decCatimage2"
-    />
+<div className="slider-container">
+  <h2>Haldi & Mehndi Decoration</h2>
+  <ReusableSlider data={haldiAndMehndiData} category="HaldiAndMehndi" handleViewMore={handleViewMore} />
+</div>
 
-                                <h2>{item.title}</h2>
-                                <div className="price-rating">
-                                    <div className="price">
-                                        {item.oldPrice && <span className="old-price">{item.oldPrice}</span>}
-                                        <span>{item.price}</span>
-                                    </div>
-                                    <div className="rating">
-                                        <FontAwesomeIcon icon={faThumbsUp} /> <span>{item.rating}</span> 
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
+<div className="slider-container">
+  <h2>Anniversary Decoration</h2>
+  <ReusableSlider data={AnniversaryData} category="Anniversary" handleViewMore={handleViewMore} />
+</div>
 
-                 {/* Third Slider */}
-                 <div className="header-container">
-                    <h1>Haldi & Mehndi Decoration</h1>
-                    <div className="view-more-container">
-            <button style={{backgroundColor: "rgb(157, 74, 147)"}} className="view-more-button" onClick={() => handleViewMore('Haldi Event')}>View More</button>
-        </div>
-                </div>
-                <div className="slider-container">
-                    <Slider {...sliderSettings}>
-                        {visibleItems3.map((item, index) => (
-                            <div className="decoration-card" key={index}>
-                                {/* <Image style={{ width: "350px", height: "310px" }} src={item.Image} alt={item.title} /> */}
-                                <Image 
-      src={item.Image} 
-      alt={item.title} 
-      width={350}  // Set width as a numeric value
-      height={310} // Set height as a numeric value
-      className="decCatimage2"
-    />
-                                <h2>{item.title}</h2>
-                                <div className="price-rating">
-                                    <div className="price">
-                                        {item.oldPrice && <span className="old-price">{item.oldPrice}</span>}
-                                        <span>{item.price}</span>
-                                    </div>
-                                    <div className="rating">
-                                        <FontAwesomeIcon icon={faThumbsUp} /> <span>{item.rating}</span> 
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-            </div>
+<div className="slider-container">
+  <h2>Kids Birthday Balloon Decoration</h2>
+  <ReusableSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
+</div>
+
+<div className="slider-container">
+  <h2>Baby Shower</h2>
+  <ReusableSlider data={BabyShowerData} category="BabyShower" handleViewMore={handleViewMore} />
+</div>
+
+<div className="slider-container">
+  <h2>Welcome baby</h2>
+  <ReusableSlider data={WelcomebabyData} category="WelcomeBaby" handleViewMore={handleViewMore} />
+</div>
+
+<div className="slider-container">
+  <h2>Premium Decors</h2>
+  <ReusableSlider data={PremiumData} category="PremiumDecoration" handleViewMore={handleViewMore} />
+</div>
+
+
+<div className="slider-container">
+  <h2>Ballon Bouquets</h2>
+  <ReusableSlider data={BallonBData} category="BalloonBouquets" handleViewMore={handleViewMore} />
+</div>
+
         </div>
     );
 }
