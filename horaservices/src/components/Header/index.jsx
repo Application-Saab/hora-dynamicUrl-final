@@ -13,6 +13,7 @@ import ChefCitypage from "../../pages/[city]/chef-near-me";
  import Popup from "../../utils/popup";
 import { usePathname, useRouter } from "next/navigation";
 import logo from '../../assets/new_logo_light.png.png';
+import logolight from '../../assets/hora-light-innerpage.png'
 import loginIcon from '../../assets/profile_picture.png';
   
 function Header() {
@@ -227,10 +228,13 @@ useEffect(() => {
         {/* <li><i className="language-icon"></i></li> */}
               <li style={styles.desktopMenuli1}>
               {isMounted && (!isLoggedIn ? (
+                <>
                   <Link href="/login" style={styles.linkicon}>
-                   <image src={loginIcon} alt={'qq'}/>
-                    <span style={{ marginLeft: "3px" }}>Login</span>
+                  <Image src={loginIcon} alt={'login icon'} width={20} height={20}/>
+                    <span style={{ marginLeft: "7px" }}>Login</span>
                   </Link>
+                </>
+               
                 ) : (
                   <a style={styles.linkicon} onClick={handleLogout}>
                     <image src={loginIcon} />
@@ -284,7 +288,7 @@ useEffect(() => {
       <div style={styles.headerContainerinner} className="headerContainerinner">
         <div className="z-1">
           <Link href="/">
-            <Image src={logoWhite} alt="Logo" style={styles.innerpagelogo} />
+            <Image src={logolight} alt="Logo" style={styles.logo} />
           </Link>
         </div>
         <nav>

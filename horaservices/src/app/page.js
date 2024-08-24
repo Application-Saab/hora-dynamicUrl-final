@@ -169,6 +169,32 @@ const settings = {
     ],
   };
 
+  const celebrateslidersettings = {
+    infinite: true,
+    speed: 300,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
 
 
 const slides = [
@@ -304,7 +330,7 @@ const whereAreYouData = [
     imageUrl: require('../assets/homepage_whatareu4.png'),
     imgAlt: 'Live Catering services',
     points: [
-      '✨🎉 Enjoy Live Food with',
+      '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
       '✨ Best prices , Timely service',
       '✨ Delicious taste',
       '✨ Good packing' ,
@@ -466,7 +492,7 @@ return (
     <div className="food-cards mobile">
   {foodData.slice(0, 1).map(item => (
     <div key={item.id} className="food-card left-side">
-      <a href="#" className="food-card-link">
+      <a href={item.link} className="food-card-link">
         <Image src={item.image} alt={item.title} className="food-image" />
         <p className="food-card-title">{item.title}</p>
       </a>
@@ -476,7 +502,7 @@ return (
   <div className="food-card  right-side">
     {foodData.slice(1, 3).map(item => (
       <div key={item.id} className="food-card right-card">
-        <a href="#" className="food-card-link">
+        <a href={item.link} className="food-card-link">
           <Image src={item.image} alt={item.title} className="food-image" />
           <p className="food-card-title">{item.title}</p>
         </a>
@@ -508,7 +534,7 @@ return (
     </div>
     <div className="service-image-container">
       <Image src={PhotographyImage} alt="Photography" className="service-image" />
-      <button className="book-now2" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
+      <button className="book-now2" onClick={() => window.location.href = '/'} >Book Now</button>
     </div>
   </div>
    </div>
@@ -565,19 +591,22 @@ return (
     <div className="celebrate-container sec-container">
     <h1 className="celebrate-title">Celebrate With Us
     <Image src={DecorationIcon} alt="Entertainment Icon" className="service-icon" />
-
     </h1>
     <p className="celebrate-subtitle">You can easily search for what category of item you want to order.</p>
-    <div className="categories-cards">
-    {celebrateData.map(category => (
-    <div key={category.id} className="categories-card">
+      <div className="categories-cards">
+      <Slider {...celebrateslidersettings}>
+      {celebrateData.map(category => (
+      <div key={category.id} className="categories-card">
       <a href={category.link} rel="noopener noreferrer">
         <Image src={category.imageUrl} alt={category.title} className="categories-image" />
       </a>
       <p className="categories-title">{category.title}</p>
-    </div>
-    ))}
-    </div>
+      </div>
+      ))}
+      </Slider>
+      </div>
+
+    
     </div>
 
     <div className="customer-review-container sec-container">
