@@ -995,7 +995,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
               </div>
             </div>
 
-            <div
+            {/* <div
               style={{
                 alignItems: "center",
                 flexDirection: "row",
@@ -1024,7 +1024,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                 ₹ 49/person would be added to bill value in addition to dish
                 price
               </p>
-            </div>
+            </div> */}
 
             <div>
               <div

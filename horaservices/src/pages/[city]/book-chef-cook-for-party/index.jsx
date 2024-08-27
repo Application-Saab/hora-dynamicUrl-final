@@ -507,7 +507,7 @@ const CreateOrder = ({ history, currentStep }) => {
                 orderType,
                 selectedDishDictionary: JSON.stringify(selectedDishDictionary),
                 selectedDishPrice,
-                selectedDishes,
+                selectedDishes: JSON.stringify(selectedDishes),
                 isDishSelected,
                 selectedCount,
             }
