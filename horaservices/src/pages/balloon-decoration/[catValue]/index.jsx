@@ -152,6 +152,11 @@ const DecorationCatPage = () => {
     try {
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ID + subCategory);
       const categoryId = response.data.data?._id;
+      console.log(categoryId, "categoryId")
+
+      localStorage.setItem('categoryId', categoryId);
+
+
       setCatId(categoryId);
     } catch (error) {
       console.log("Error:", error.message);
@@ -162,6 +167,8 @@ const DecorationCatPage = () => {
     try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+      console.log(response)
+      console.log(catId, "catid")
       if (response.status === API_SUCCESS_CODE) {
         const decoratedData = response.data.data.map(item => ({
           ...item,
@@ -184,6 +191,7 @@ const DecorationCatPage = () => {
       router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
     }
     else {
+      console.log(catValue, "catValue");
       router.push(`/balloon-decoration/${catValue}/product/${productName}`);
     }
   };
@@ -269,7 +277,8 @@ const DecorationCatPage = () => {
                     className="decimagecontainer"
                   >
                     <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={imgAlt} style={styles.decCatimage} width={300} height={300} />
+                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} 
+                      alt={imgAlt} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
                       <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>

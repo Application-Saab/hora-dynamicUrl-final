@@ -296,7 +296,7 @@ const CreateOrder = ({ history, currentStep }) => {
                         }}
                     >
                         <h1
-                            style={{ color: "#000", fontSize: "16px", marginBottom: "0px" }}
+                            style={{ color: "#000", fontSize: "16px", marginBottom: "0px", fontWeight: "bold" }}
                         >
                             {item.mealObject.name}
                             {"  "}
@@ -603,9 +603,11 @@ const CreateOrder = ({ history, currentStep }) => {
         <div className="chef-create-order">
             <div className="order-container chef">
                 <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-                    <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
-                    <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
+                    <Image style={{ width: "17px", height: "17px", marginRight: "10px" }} src={InfoIcon} alt="info" />
+                    <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }}
+                     className='billheading'>Bill value depends upon Dish selected + Number of people</p>
                 </div>
+                
                 <div className="range-bar">
                     <Step active className="step1">
                         <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
@@ -626,10 +628,11 @@ const CreateOrder = ({ history, currentStep }) => {
                         <Label>Select Confirm Order</Label>
                     </Step>
                 </div>
+                
             </div>
             <div className="order-container chef-bottum">
                 <Row className="d-flex justify-content-start">
-                    <div style={{ display: "flex", margin: "5px 0 0" }}>
+                    <div style={{ display: "flex", margin: "15px 0 0" }}>
                         <div style={{ marginRight: "10px" }}>
                             <Button
                                 variant={selected === "veg" ? "success" : "outline-success"}
@@ -659,6 +662,7 @@ const CreateOrder = ({ history, currentStep }) => {
                                 color: "#000",
                                 marginTop: "0px",
                                 marginBottom: "0",
+                                fontWeight: "bold",
                             }}
                         >
                             Select Cusinies

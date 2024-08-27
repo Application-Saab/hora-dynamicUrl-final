@@ -15,7 +15,7 @@
 }
 
 .sep-image {
-    margin-top: -55px;
+    margin-top: -30px;
     height: 0px;
     margin-left: 11px;
 }
@@ -197,6 +197,7 @@
 
     .order-container.chef-bottum {
         padding: 2px 9px 0;
+        
     }
 
     .dtezCg {
@@ -212,6 +213,7 @@
     }
 }
 
+
 /* Responsive styles */
 @media (max-width: 480px) {
     select.rounded.border.border-1.p-1.select-city {
@@ -225,7 +227,7 @@
     }
 
     .sep-image img {
-        width: 80px;
+        width: 90px;
         padding: 0 10px;
         height: auto;
     }

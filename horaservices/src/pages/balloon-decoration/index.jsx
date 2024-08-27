@@ -156,28 +156,28 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const birthdayData = [
   {
-    Image: 'https://horaservices.com/api/uploads/attachment-1705585951138.png',
-    title: 'Birthday Special Balloon Decoration',
-    price: '₹1499',
-    rating: 4.8,
+    Image: 'https://horaservices.com/api/uploads/attachment-1705579946309.png',
+    title: 'Simple Room Decoration',
+    price: '₹1199',
+    rating: 4.7,
   },
   {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706464222384.png',
-    title: 'Pastel And Rosegold Birthday Decor',
-    price: '₹2499',
-    rating: 4.8,
-  },
-  {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706520680774.png',
-    title: 'Glitzy Silver and Black Birthday Decor',
-    price: '₹1999',
+    Image: 'https://horaservices.com/api/uploads/attachment-1711601912449.png',
+    title: 'Elegant Vibes Happy Birthday',
+    price: '₹3500',
     rating: 4.6,
   },
   {
-    Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-    title: 'Underwater Wonderland: Mermaid',
-    price: '₹3999',
-    rating: 4.7,
+    Image: 'https://horaservices.com/api/uploads/attachment-1706464222384.png',
+    title: 'Golden & Silver Ring Decoration',
+    price: '₹3000',
+    rating: 4.1,
+  },
+  {
+    Image: 'https://horaservices.com/api/uploads/attachment-1706463835447.png',
+    title: 'Multi Balloon Round Ring',
+    price: '₹4670',
+    rating: 4.4,
   },
 ];
 
@@ -441,7 +441,10 @@ function Decoration() {
         try {
             const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ID + subCategory);
             const categoryId = response.data.data._id;
+            console.log(categoryId, "categ")
+            
             const result = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + categoryId);
+            console.log(result, "result")
             setCatalogueData(result.data.data);
         } catch (error) {
             console.log("Error:", error.message);

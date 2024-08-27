@@ -12,6 +12,10 @@ import Head from 'next/head';
 import { useRouter } from "next/router";
 import Image from "next/image";
 
+
+import Testing from '../../../../../store/testing';
+
+
 const getFaqData = (product) => [
   {
     "question": "What does time slot mean?",
@@ -105,6 +109,9 @@ function DecorationCatDetails() {
               )}
             </div>
           ))}
+
+
+          
         </div>
       );
     };
@@ -310,6 +317,10 @@ function DecorationCatDetails() {
         :
         null
       } */}
+
+
+<Testing />
+
     </div>
   );
 };

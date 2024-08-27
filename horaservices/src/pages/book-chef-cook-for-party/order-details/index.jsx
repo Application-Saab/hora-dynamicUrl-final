@@ -17,6 +17,13 @@ import minusIcon from '../../../assets/ic_minus.png';
 import plusIcon from '../../../assets/plus.png';
 import burner from '../../../assets/burner.png';
 
+import { Step, Label, Divider } from 'semantic-ui-react'; // Replace with actual library
+
+
+import separator from "../../../assets/separator.png";
+
+import InfoIcon from '../../../assets/info.png';
+
 const orangeColor = '#FF6F61';
 const defaultColor = '#B0BEC5';
 
@@ -62,6 +69,10 @@ const SelectDate = ({ history, currentStep }) => {
 
     const data = selectedDishDictionary;
     const [dishPrice, setDishPrice] = useState(selectedDishPrice);
+
+
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(null);
 
     // Container for the whole component
     const MainContainer = styled.div`
@@ -171,83 +182,45 @@ const SelectDate = ({ history, currentStep }) => {
     //different
 
 
-    const Container = styled.div`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row; // Align items horizontally
-      overflow-x: auto;    // Enable horizontal scrolling if needed
-      padding: 10px;      // Adjust padding for mobile view
-      width: 100%;        // Ensure it takes up the full width of the parent
-      white-space: nowrap; // Prevent labels from wrapping to the next line
 
-      @media (max-width: 600px) {
-        padding: 5px;    // Reduce padding on smaller screens
-      }
-    `;
-
-    const Step = styled.div`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 10px;    // Adjust margin for spacing
-    `;
-
-    const Line = styled.div`
-      height: 2px;
-      width: 50px;       // Default width for mobile view
-      background-color: #ccc;
-      margin: 0 4px;     // Adjust margin for spacing
-      color: ${(props) => (props.active ? '#F46C5B' : 'black')};
-
-      @media (max-width: 600px) {
-        width: 30px;     // Smaller width for mobile view
-      }
-    `;
-
-    // const Image = styled.img`
-    //   width: 48px;       // Default size for mobile view
-    //   height: 48px;
-
-    //   ${(props) => props.active && `border: 2px solid #000;`};
-
-    //   @media (max-width: 600px) {
-    //   width: 32px;     // Smaller width for mobile view
-    //   height: 32px;    // Maintain aspect ratio
-    // }
-    // `;
-
-    const Label = styled.div`
-      margin-top: 5px;
-      text-align: center;
-      font-size: 14px;   // Default font size
-      color: ${(props) => (props.active ? '#F46C5B' : 'black')}; // Color based on active prop
-      white-space: nowrap; // Prevent text from wrapping
-
-      @media (max-width: 600px) {
-        font-size: 10px; // Smaller font size for mobile view
-      }
-    `;
-
-    const [popupMessage, setPopupMessage] = useState({
-        img: "",
-        title: "",
-        body: "",
-        button: "",
-    });
+    // const [popupMessage, setPopupMessage] = useState({
+    //     img: "",
+    //     title: "",
+    //     body: "",
+    //     button: "",
+    // });
 
     const minPeopleCount = 1;
     const maxPeopleCount = 35;
     const step = 1;
     
+    // const increasePeopleCount = () => {
+    //     if (peopleCount >= maxPeopleCount) {
+    //         alert(`The maximum allowed people count is ${maxPeopleCount}.`);
+    //         return;
+    //     }
+    //     setPeopleCount(peopleCount + step);
+    //     setDishPrice(parseInt(dishPrice) + 49);
+    // };
+
     const increasePeopleCount = () => {
         if (peopleCount >= maxPeopleCount) {
-            alert(`The maximum allowed people count is ${maxPeopleCount}.`);
-            return;
+          setPopupMessage({
+            img: orderWarning, // Image to show in the popup
+            title: "Warning",
+            body: `The maximum allowed people count is ${maxPeopleCount}.`,
+            button: "OK"
+          });
+          setIsPopupVisible(true);
+          return;
         }
         setPeopleCount(peopleCount + step);
         setDishPrice(parseInt(dishPrice) + 49);
-    };
+      };
+
+      const handleClosePopup = () => {
+        setIsPopupVisible(false);
+      };
     
     const decreasePeopleCount = () => {
         if (peopleCount > minPeopleCount) {
@@ -573,27 +546,39 @@ const SelectDate = ({ history, currentStep }) => {
 
     return (
         <div style={{ width: "90%", margin: "0 auto", backgroundColor: "#EDEDED", marginBottom: "10px" }} className='selectdatesecouter'>
-            <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
+            {/* <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
                 <Image style={{ width: "20px", marginRight: "10px", height: "20px" }} src={info} />
                 <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
-            </div>
+            </div> */}
+            <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
+                    <Image style={{ width: "17px", height: "17px", marginRight: "10px" }} src={InfoIcon} alt="info" />
+                    <p style={{ color: '#676767', fontSize: "90%", fontWeight: '400', margin: "0" }}
+                     className='billheading'>Bill value depends upon Dish selected + Number of people</p>
+                </div>
 
-            <Container>
-                <Step active={true.toString()}>
-                    {isMobile ? <Image src={SelectDishes} alt="Select Dishes" width={32} height={32} /> : <Image src={SelectDishes} alt="Select Dishes" width={48} height={48} />}
-                    <Label active={true.toString()}>Select Dishes</Label>
-                </Step>
-                <Line active={true.toString()} />
-                <Step>
-                    {isMobile ? <Image src={SelectDateTime} alt="Select Date & Time" width={32} height={32} /> : <Image src={SelectDateTime} alt="Select Date & Time" width={48} height={48} />}
-                    <Label active={true.toString()}>Select Date & Time</Label>
-                </Step>
-                <Line />
-                <Step>
-                    {isMobile ? <Image src={SelectConfirmOrder} alt="Confirm Order" width={32} height={32} /> : <Image src={SelectConfirmOrder} alt="Confirm Order" width={48} height={48} />}
-                    <Label>Select Confirm Order</Label>
-                </Step>
-            </Container>
+<div>
+            <div className="range-bar">
+                    <Step active className="step1">
+                        <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
+                        <Label active>Select Dishes</Label>
+                    </Step>
+                    <div className="sep-image">
+                        <Image src={separator} alt="separator" />
+                    </div>
+                    <Step className="step2">
+                        <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
+                        <Label>Select Date & Time</Label>
+                    </Step>
+                    <div className="sep-image">
+                        <Image src={separator} alt="separator" />
+                    </div>
+                    <Step className="step3">
+                        <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
+                        <Label>Select Confirm Order</Label>
+                    </Step>
+                </div>
+
+                </div>
 
             <div style={{
                 width: "90%", margin: "0 auto", backgroudColor: "rgb(237, 237, 237)",
@@ -601,20 +586,35 @@ const SelectDate = ({ history, currentStep }) => {
             }} className='selectdateContainersec'>
                 <div style={{ width: "98%", margin: "10px", padding: "10px 30px" }} className='selectdateContainer'>
                     <div style={{ backgroundColor: "#fff", borderRadius: "10px", padding: "10px 10px 20px 15px" }} className='peoplecontsec'>
-                        <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
+                        {/* <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
                             <div style={{ color: "#9252AA", fontWeight: '500', fontSize: 11 }}>Note: Additional charge of 700 applies for more than 7 dishes.</div>
-                        </div>
+                        </div> */}
                         <div className="header-section">
                             <div className="heading">How many people you are hosting?</div>
-                            <div className="control-buttons">
+                            {/* <div className="control-buttons">
                                 <button onClick={decreasePeopleCount} className="control-button">
-                                    <Image src={minusIcon} alt="minus icon" />
+                                    <Image src={minusIcon} alt="minus icon" />  
                                 </button>
                                 <div className="count-text mx-2">{peopleCount}</div>
                                 <button onClick={increasePeopleCount} className="control-button">
                                     <Image src={plusIcon} alt="plus icon" />
                                 </button>
-                            </div>
+                            </div> */}
+                            <div>
+      <div className="control-buttons">
+        <button onClick={decreasePeopleCount} className="control-button">
+          <Image src={minusIcon} alt="minus icon" />
+        </button>
+        <div className="count-text mx-2">{peopleCount}</div>
+        <button onClick={increasePeopleCount} className="control-button">
+          <Image src={plusIcon} alt="plus icon" />
+        </button>
+      </div>
+
+      {isPopupVisible && (
+        <Popup onClose={handleClosePopup} popupMessage={popupMessage} />
+      )}
+    </div>
                         </div>
                         <div className="range-container">
                             <div className="range-wrapper">
@@ -763,7 +763,24 @@ const styles = {
         width: "56px",
         height: "56px",
         margin: "10px 0 0"
-    }
+    },
+
+    imageContainer: {
+        position: "relative",
+        width: "270px",
+        backgroundColor: "#fff",
+        marginBottom: 40,
+        boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
+        borderRadius: "5px",
+        overflow: "hidden",
+        transition: "transform 0.3s ease-in-out",
+        margin: "10px 12px 20px",
+        padding: "6px 5px 10px",
+    },
+    dish: {
+        width: "32px",
+        height: "32px",
+    },
 }
 
 export default SelectDate;
