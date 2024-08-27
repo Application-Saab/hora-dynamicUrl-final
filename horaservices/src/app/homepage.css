@@ -237,7 +237,10 @@ transform: translateY(-31%);
       border-radius: 10px;
     }
 
-    
+    .service-image-container img {
+      width: 100%;
+      height: 100%;
+  }
     .food-card:hover {
       transform: scale(1.05);
     }
@@ -462,8 +465,8 @@ transform: translateY(-31%);
     padding: 6px 12px; 
     font-size: 14px; 
     border-radius: 6px;
-    width: 42%; 
-    margin-left: 75px;
+    width: 30%; 
+    margin-left: 10px;
   }
 }
 
@@ -614,6 +617,9 @@ transform: translateY(-31%);
   .category-title {
     font-size: 0.8rem; 
     padding: 6px; 
+  }
+  .categories-image {
+    height: 140px;
   }
 }
 

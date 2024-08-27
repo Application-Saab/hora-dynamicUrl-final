@@ -23,8 +23,6 @@ import './globals.css';
 import Slider from 'react-slick'; 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
- import DecorationImage from '../assets/homepage_decoration.png';
-import PhotographyImage from '../assets/homepage_photography.png';
 import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
@@ -145,12 +143,12 @@ const settings = {
 
   const homeslidersettings = {
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     fade: true, // Enables the fade effect
-    autoplaySpeed: 800,
+    autoplaySpeed: 2500,
     responsive: [
       {
         breakpoint: 1024,
@@ -199,49 +197,46 @@ const settings = {
 
 const slides = [
 {
- // image: "https://horaservices.com/api/uploads/homepage_slider1.png",
-  image: require('../assets/homepage_slider1.png'),
+ image: "https://horaservices.com/api/uploads/homepage_slider1.png",
   title: 'Decoration at your step',
   description: 'Transform your space with our expert decorators',
   imgAlt: 'Decoration services at your step',
   link:"/balloon-decoration"
 },
 {
-  //image: "https://horaservices.com/api/uploads/homepage_slider1.png",
-  image: require('../assets/homepage_slider2.png'),
+  image: "https://horaservices.com/api/uploads/homepage_slider2.png",
   title: 'Party Food Delivery',
   description: 'Delicious food for all your party needs',
   imgAlt: 'Party food delivery service',
-  link:"book-chef-cook-for-party"
+  link:"/book-chef-cook-for-party"
 },
 {
-  //image: "https://horaservices.com/api/uploads/homepage_slider1.png",
-  image: require('../assets/homepage_slider3.png'),
+  image: "https://horaservices.com/api/uploads/homepage_slider3.png",
   title: 'Live Cooking at Spot',
   description: 'Book top-notch performers for your event',
   imgAlt: 'Live cooking at event location',
-  link:"party-food-delivery-live-catering-buffet/party-food-delivery"
+  link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
 }
 ];
 
 const foodData = [
   {
     id: 1,
-    image: require('../assets/homepage_food1.png'),
+    image: "https://horaservices.com/api/uploads/homepage_food1.png",
     title: "Bulk Food Delivery",
     imgAlt: "Bulk food delivery service",
     link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
   },
   {
     id: 2,
-    image: require('../assets/homepage_food2.png'),
+    image: "https://horaservices.com/api/uploads/homepage_food2.png",
     title: "Chef For Party",
     imgAlt: "Chef cooking for a party",
     link:"/book-chef-cook-for-party"
   },
   {
     id: 3,
-    image: require('../assets/homepage_food3.png'),
+    image: "https://horaservices.com/api/uploads/homepage_food3.png",
     title: "Live Catering",
     imgAlt: "Live catering service at an event",
     link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
@@ -284,7 +279,7 @@ const whereAreYouData = [
     id: 1,
     title: 'Decoration',
     link: '/balloon-decoration',
-    imageUrl: require('../assets/homepage_whatareu1.png'),
+    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.png",
     imgAlt: 'Event decoration service',
     points: [
       '✨Choose from 1000+ unique designs for any Event - Birthdays, Anniversaries, Baby showers, Weddings, and more!',
@@ -297,7 +292,7 @@ const whereAreYouData = [
     id: 2,
     title: 'Chef For Party',
     link: '/book-chef-cook-for-party',
-    imageUrl: require('../assets/homepage_whatareu2.png'),
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.png",
     imgAlt: 'Chef services for party events',
     points: [
         " ✨ HORA brings professional chefs to your kitchen",
@@ -312,7 +307,7 @@ const whereAreYouData = [
     id: 3,
     title: 'Food Delivery',
     link: '/party-food-delivery-live-catering-buffet/party-food-delivery',
-    imageUrl: require('../assets/homepage_whatareu3.png'),
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.png",
     imgAlt: 'Food delivery services for events',
     points: [
       '✨🎉 Enjoy food delivery with',
@@ -327,7 +322,7 @@ const whereAreYouData = [
     id: 4,
     title: 'Live Catering',
     link: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering',
-    imageUrl: require('../assets/homepage_whatareu4.png'),
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.png",
     imgAlt: 'Live Catering services',
     points: [
       '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
@@ -342,7 +337,7 @@ const whereAreYouData = [
     id: 5,
     title: 'Entertainment',
     link: '/',
-    imageUrl: require('../assets/homepage_whatareu5.png'),
+    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.png",
     imgAlt: 'Event food delivery services',
     points: [
       '✨ Make your event unforgettable by engaging your guests! ✨ Choose from over 10 amazing services:',
@@ -431,11 +426,11 @@ const CustomerReview = [
   },
   {
     id: 5,
-    name: "Emily",
+    name: "Sneha",
     image: "https://play-lh.googleusercontent.com/a-/ALV-UjWYlq3OV6In6sCw_X91EexqX7q9FdazSyOJ-ROxRw63-BEbUnuB_A=s32-rw",
     imgAlt: 'Jerome Bell review repeated',
     rating: 4,
-    review: "Festive Flair Solutions did an outstanding job with our holiday party. The decorations were festive and vibrant, creating the perfect atmosphere for our celebration. Their professionalism and creativity were top-notch.."
+    review: "The decorations were festive and vibrant, creating the perfect atmosphere for our celebration. Their professionalism and creativity were top-notch.. Very Good and amazing suppport"
   },
 ];
 
@@ -482,7 +477,7 @@ return (
     {foodData.map(item => (
       <div key={item.id} className="food-card">
         <a href={item.link} className="food-card-link">
-          <Image src={item.image} alt={item.title} className="food-image" />
+          <Image src={item.image} alt={item.title} className="food-image"  width={200} height={100}/>
           <p className="food-card-title">{item.title}</p>
         </a>
       </div>
@@ -493,7 +488,7 @@ return (
   {foodData.slice(0, 1).map(item => (
     <div key={item.id} className="food-card left-side">
       <a href={item.link} className="food-card-link">
-        <Image src={item.image} alt={item.title} className="food-image" />
+        <Image src={item.image} alt={item.title} className="food-image" width={200} height={100}/>
         <p className="food-card-title">{item.title}</p>
       </a>
     </div>
@@ -503,7 +498,7 @@ return (
     {foodData.slice(1, 3).map(item => (
       <div key={item.id} className="food-card right-card">
         <a href={item.link} className="food-card-link">
-          <Image src={item.image} alt={item.title} className="food-image" />
+          <Image src={item.image} alt={item.title} className="food-image" width={200} height={100}/>
           <p className="food-card-title">{item.title}</p>
         </a>
       </div>
@@ -521,7 +516,7 @@ return (
       </h2>
     </div>
     <div className="service-image-container">
-      <Image src={DecorationImage} alt="Decoration" className="service-image" />
+      <Image src="https://horaservices.com/api/uploads/homepage_decoration.png" alt="Decoration" className="service-image" width={200} height={100}/>
       <button className="book-now2" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
     </div>
   </div>
@@ -533,7 +528,7 @@ return (
       </h2>
     </div>
     <div className="service-image-container">
-      <Image src={PhotographyImage} alt="Photography" className="service-image" />
+      <Image src="https://horaservices.com/api/uploads/homepage_photography.png" alt="Photography" className="service-image" width={200} height={100}/>
       <button className="book-now2" onClick={() => window.location.href = '/'} >Book Now</button>
     </div>
   </div>
@@ -568,7 +563,7 @@ return (
       <div key={category.id} className="categoriesCard-card">
         <a href={category.link} rel="noopener noreferrer">
           <div className="categoriesCard-image-wrapper">
-            <Image src={category.imageUrl} alt={category.title} className="categoriesCard-image" />
+            <Image src={category.imageUrl} alt={category.title} className="categoriesCard-image"  width={200} height={100}/>
           </div>
         </a>
         <div className="what-are-sec">

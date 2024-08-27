@@ -40,7 +40,7 @@ return (
 <div className="slider-container slider-decoration-inner">
 <Slider {...sliderSettings}>
     {data.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
+        <a key={index} className="slider-item">
         <Image 
         src={item.Image} 
         alt={item.title} 
