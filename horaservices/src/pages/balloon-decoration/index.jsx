@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Head from 'next/head';
 // import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons"
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM } from '../../utils/apiconstants';
@@ -18,6 +20,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import '../../css/decoration.css';
+import '../../components/DecorationLandingSlider/decorationladingslider.css';
 import DecorationLandingSlider from  '../../components/DecorationLandingSlider';
 import HaldiImage from '../../assets/HaldiImage.png';
 import MehendiImage from '../../assets/MehendiImage.png';
@@ -383,7 +386,68 @@ const Decoration = () => {
         ))}
                 </div>
 <div className="page-width decorationlanding-slider">
-    <div className="slider-container ">
+<div className="slider-container">
+  <div className="slider-header">
+    <h2>Kids Birthday Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("KidsBirthday")}
+    >
+    View More
+    </button>
+    </div>
+  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
+</div>
+    
+<div className="slider-container">
+  <div className="slider-header">
+    <h2>First Night Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("FirstNight")}
+    >
+    View More
+    </button>
+    </div>
+  <div>
+  <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {firstNightData.map((item, index) => (
+        <a key={index} className="slider-item">
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+
+        </div>
+
+
+        </a>
+    ))}
+</div>
+  </div>
+</div>
+<div className="slider-container ">
     <div className="slider-header">
     <h2>Birthday Decoration</h2>
     <button 
@@ -397,18 +461,6 @@ const Decoration = () => {
     </div>
 <div className="slider-container">
   <div className="slider-header">
-    <h2>First Night Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("FirstNight")}
-    >
-    View More
-    </button>
-    </div>
-  <DecorationLandingSlider data={firstNightData} category="FirstNight" handleViewMore={handleViewMore} />
-</div>
-<div className="slider-container">
-  <div className="slider-header">
     <h2>Haldi & Mehndi Decoration</h2>
     <button 
     className="viewbtn  btn btn-primary" 
@@ -417,8 +469,43 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={haldiAndMehndiData} category="Haldi-Mehandi" handleViewMore={handleViewMore} />
+    <div>
+    <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {haldiAndMehndiData.map((item, index) => (
+        <a key={index} className="slider-item">
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+        </div>
+        </a>
+    ))}
 </div>
+    </div>
+ 
+</div>
+
 <div className="slider-container">
   <div className="slider-header">
     <h2>Anniversary Decoration</h2>
@@ -434,18 +521,6 @@ const Decoration = () => {
 </div>
 <div className="slider-container">
   <div className="slider-header">
-    <h2>Kids Birthday Balloon Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("KidsBirthday")}
-    >
-    View More
-    </button>
-    </div>
-  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
-</div>
-<div className="slider-container">
-  <div className="slider-header">
     <h2>Baby Shower</h2>
     <button 
     className="viewbtn  btn btn-primary" 
@@ -454,7 +529,38 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={BabyShowerData} category="BabyShower" handleViewMore={handleViewMore} />
+  <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {BabyShowerData.map((item, index) => (
+        <a key={index} className="slider-item">
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+        </div>
+        </a>
+    ))}
+</div>
 </div>
 <div className="slider-container">
   <div className="slider-header">
@@ -478,7 +584,38 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={PremiumData} category="PremiumDecoration" handleViewMore={handleViewMore} />
+  <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {PremiumData.map((item, index) => (
+        <a key={index} className="slider-item">
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+        </div>
+        </a>
+    ))}
+</div>
 </div>
 <div className="slider-container">
   <div className="slider-header">
