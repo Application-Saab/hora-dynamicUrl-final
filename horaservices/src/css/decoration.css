@@ -493,3 +493,223 @@ img {
     color: #333;
   }
 }
+
+
+/* similar product */
+/* styles.css */
+
+
+.title {
+  text-align: center;
+  color: #9252AA;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  width: 200px;
+  height: 320px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-image-container {
+  position: relative;
+  width: 250px;
+  height: 200px;
+}
+
+.product-image {
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.product-details {
+  padding: 10px;
+}
+
+.product-title {
+  font-size: 16px;
+  color: #9252AA;
+}
+
+.product-price {
+  color: #9252AA;
+  font-weight: 700;
+}
+
+.price-rating-container {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+  gap: 50px; /* Adds space between price and rating */
+  margin-top: 10px; /* Adds some margin at the top */
+}
+
+.product-price {
+  font-size: 16px; /* Adjust the font size */
+  color: #9252AA; /* Set the color */
+  font-weight: 700; /* Set the font weight */
+}
+
+.rating-container {
+  display: flex;
+  align-items: center; /* Aligns rating text and icon vertically in the center */
+  margin-bottom: 10px;
+}
+
+.rating-text {
+  font-weight: 500;
+  margin: 0;
+  font-size: 14px; /* Adjust the font size */
+}
+
+.rating-icon {
+  color: #ffc107;
+  margin-left: 3px; /* Space between rating text and star icon */
+}
+
+.rating-count {
+  color: #9252AA;
+  font-weight: 600;
+  margin: 0;
+  padding-left: 5px; /* Space between star icon and user count */
+  font-size: 14px; /* Adjust the font size */
+}
+
+
+.no-products {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+
+/* Mobile View for Screen Width 468px */
+@media (max-width: 468px) {
+  .title {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between cards */
+    justify-content: space-between; /* Space cards evenly */
+  }
+
+  .product-card {
+    width: calc(50% - 10px); /* Two cards per row with gap */
+    height: 300px; /* Fixed height for uniformity */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column; /* Ensure content stacks vertically */
+  }
+
+  .product-image-container {
+    position: relative;
+    width: 100%; /* Full width of card */
+    height: 200px; /* Fixed height for image */
+  }
+
+  .product-image {
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    object-fit: cover; /* Cover the container */
+  }
+
+  .image-overlay {
+    position: absolute;
+    bottom: 5px; /* Adjust spacing */
+    right: 5px; /* Adjust spacing */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 3px; /* Adjust padding */
+    border-radius: 4px; /* Adjust border radius */
+    font-size: 12px; /* Adjust font size */
+  }
+
+  .product-details {
+    padding: 8px; /* Reduce padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space content evenly */
+  }
+
+  .product-title {
+    font-size: 13px; /* Adjust font size */
+    margin: 0; /* Remove margin */
+  }
+
+  .price-rating-container {
+    display: flex; /* Align price and rating horizontally */
+    align-items: center; /* Vertically center align */
+    gap: 10px; /* Space between price and rating */
+    margin-top: 5px;
+  }
+
+  .product-price {
+    font-size: 14px; /* Adjust font size */
+    color: #9252AA;
+    font-weight: 700;
+    margin-top: 15px;
+  }
+
+  .rating-container {
+    display: flex; /* Align rating text and icon horizontally */
+    align-items: center; /* Vertically center align */
+    margin-top: 14px;
+  }
+
+  .rating-text {
+    font-weight: 500;
+    margin: 0;
+    font-size: 14px; /* Adjust font size */
+  }
+
+  .rating-icon {
+    color: #ffc107;
+    margin-left: 3px; /* Adjust spacing */
+    margin-bottom: 10px;
+  }
+
+  .rating-count {
+    color: #9252AA;
+    font-weight: 600;
+    margin: 0;
+    padding-left: 3px; /* Adjust spacing */
+    font-size: 14px; /* Adjust font size */
+  }
+
+  .no-products {
+    text-align: center;
+    font-size: 14px; /* Adjust font size */
+  }
+
+  /* Hide all product cards except the first two */
+  .product-card:nth-child(n+3) {
+    display: none; /* Hide all cards starting from the 3rd */
+  }
+}

@@ -12,8 +12,10 @@ import Head from 'next/head';
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-
-import Testing from '../../../../../store/testing';
+import axios from 'axios';
+import { BASE_URL, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../../../utils/apiconstants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 const getFaqData = (product) => [
@@ -78,6 +80,16 @@ function DecorationCatDetails() {
   const scriptTag = JSON.stringify(schemaOrg);
   const [isClient, setIsClient] = useState(false);
 
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
+  const categoryId = localStorage.getItem('categoryId');
+  const catValueId = localStorage.getItem('catValue');
+  console.log(catValueId, "catValueId");
+  // const catValue = 'birthday-decoration'; // static one
+
+
   const faqData = getFaqData(product);
 
       const [openIndex, setOpenIndex] = useState(null);
@@ -92,6 +104,194 @@ function DecorationCatDetails() {
       const handleToggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
       };
+
+
+      // similar product
+      const getRandomRating = () => {
+        return (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
+      };
+      
+      const getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+
+
+      const themeFilters = [
+        { label: 'Select Design', value: 'all' },
+        { label: 'Astronaut space theme', value: 'Astronaut-space' },
+        { label: 'Avengers theme', value: 'Avengers' },
+        { label: 'Boss baby theme', value: 'Boss' },
+        { label: 'Baby shark theme', value: 'shark' },
+        { label: 'Barbie theme', value: 'Barbie' },
+        { label: 'Cocomelon Theme', value: 'Cocomelon' },
+        { label: 'Car Theme', value: 'car' },
+        { label: 'Circus Theme', value: 'Circus' },
+        { label: 'Dinosaur Theme', value: 'Dinosaur' },
+        { label: 'Elsa Theme', value: ' Elsa' },
+        { label: 'Flamingo Theme', value: 'Flamingo' },
+        { label: 'Jungle Theme', value: 'Jungle' },
+        { label: 'Kitty Theme', value: 'Kitty' },
+        { label: 'Lion King', value: 'Lion' },
+        { label: 'Mickey Mouse Theme', value: 'Mickey-Mouse' },
+        { label: 'Mickey and Minnie Theme', value: 'Mickey-Minnie' },
+        { label: 'Minecraft Theme', value: 'Minecraft' },
+        { label: 'Mermaid Theme', value: 'Mermaid' },
+        { label: 'Pokemon and Pikachu theme', value: 'Pikachu-Pokemon' },
+        { label: 'Princess Theme', value: 'Princess' },
+        { label: 'Panda Theme', value: 'Panda' },
+        { label: 'Traffic Theme', value: 'Traffic' },
+        { label: 'Super dogs theme', value: 'dogs' },
+        { label: 'Super Hero theme', value: 'Hero' },
+        { label: 'Sport Football theme', value: 'Football' },
+        { label: 'Unicorn Theme', value: 'Unicorn' },
+      ];
+
+    //   const fetchProducts = async () => {
+    //     try {
+    //         const response = await axios.get(`${BASE_URL}${GET_DECORATION_CAT_ITEM}${categoryId}`);
+    //         console.log('Full API Response:', response); // Log full response to inspect
+
+    //         if (response.status === API_SUCCESS_CODE) {
+    //             const products = response.data.data;
+    //             console.log('Products Array:', products); // Log products array
+
+    //             if (Array.isArray(products) && products.length > 0) {
+    //                 // Extracting name, featured_image, and price
+    //                 const productDetails = products.map(product => ({
+    //                     name: product.name,
+    //                     featured_image: product.featured_image,
+    //                     price: product.price
+    //                 })).slice(0, 5); // Limit to 5 items
+
+    //                 setProducts(productDetails); // Set products in state
+    //             } else {
+    //                 console.warn('Products array is empty or not an array');
+    //             }
+    //         } else {
+    //             console.error('Failed to fetch products, status code:', response.status);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error fetching products:', error);
+    //     } finally {
+    //         setLoading(false); // Set loading to false when done
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     fetchProducts();
+    // }, [categoryId]);
+
+
+    
+   
+    const fetchProducts = async () => {
+      try {
+          const response = await axios.get(`${BASE_URL}${GET_DECORATION_CAT_ITEM}${categoryId}`);
+          console.log('Full API Response:', response); // Log full response to inspect
+  
+          if (response.status === API_SUCCESS_CODE) {
+              const products = response.data.data; // Array of products
+              console.log('Products Array:', products); // Log products array
+  
+  
+              // Only proceed if catValueId matches
+              if (catValueId === 'kids-birthday-decoration') {
+                  // Filter products based on whether their name includes any value from themeFilters
+                  const filteredProducts = products.filter(product => {
+                      // Case-insensitive check
+                      const match = themeFilters.some(filter => product.name.toLowerCase().includes(filter.value.toLowerCase()));
+                      console.log(`Product Name: ${product.name}, Matches Filter: ${match}`);
+                      return match;
+                  });
+  
+                  // Limit to a maximum of 5 items
+                  const limitedProducts = filteredProducts.slice(0, 5);
+  
+                  console.log('Filtered Products:', filteredProducts); // Log the filtered product list
+                  console.log('Limited Products:', limitedProducts); // Log the limited product list
+  
+                  // Your logic to display or use limitedProducts here
+              } else {
+                  console.warn('Category value ID does not match.');
+              }
+          } else {
+              console.error('Failed to fetch products, status code:', response.status);
+          }
+      } catch (error) {
+          console.error('Error fetching products:', error);
+      }
+  };
+  
+
+
+
+    useEffect(() => {
+        fetchProducts();
+    }, [categoryId]);
+
+
+      // const fetchProducts = async () => {
+      //   try {
+      //     const response = await axios.get(`${BASE_URL}${GET_DECORATION_CAT_ITEM}${categoryId}`);
+      //     if (response.status === API_SUCCESS_CODE) {
+      //       console.log('API Response Data:', response.data.data);
+
+      //       const productNames = products.map(product => product.name); // Extracting names
+
+      //       console.log(productNames, 'Product Names123456789:'); // Logging the names
+      
+      //       const themeFilter = themeFilters.find(filter => filter.value === 'Avengers');
+      //       console.log('Theme Filter:', themeFilter);
+      
+      //       if (themeFilter && catValueId === 'kids-birthday-decoration') {
+      //         const filteredProducts = response.data.data
+      //           .filter(item => item.name.includes(themeFilter.value))
+      //           .slice(0, 5)
+      //           .map(item => {
+      //             const generateUniqueRating = () => (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
+      //             const generateUniqueUserCount = () => Math.floor(Math.random() * (500 - 20 + 1)) + 20;
+      
+      //             const storedRating = localStorage.getItem(`rating_${item.id}`);
+      //             const storedUserCount = localStorage.getItem(`userCount_${item.id}`);
+      
+      //             const rating = storedRating || generateUniqueRating();
+      //             const userCount = storedUserCount || generateUniqueUserCount();
+      
+      //             localStorage.setItem(`rating_${item.id}`, rating);
+      //             localStorage.setItem(`userCount_${item.id}`, userCount);
+      
+      //             return {
+      //               ...item,
+      //               rating: parseFloat(rating),
+      //               userCount: parseInt(userCount, 10)
+      //             };
+      //           });
+      
+      //         console.log('Filtered Products After Mapping:', filteredProducts);
+      
+      //         setProducts(filteredProducts);
+      //       } else {
+      //         setProducts([]);
+      //       }
+      //     }
+      //   } catch (error) {
+      //     console.log('Error fetching products:', error.message);
+      //   } finally {
+      //     setLoading(false);
+      //   }
+      // };
+      
+      
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleProductClick = (productName) => {
+    const formattedProductName = encodeURIComponent(productName).replace(/%20/g, '-');
+    router.push(`/balloon-decoration/${catValueId}/product/${formattedProductName}`);
+  };
+
     
       return (
         <div className="faqSection">
@@ -198,15 +398,15 @@ function DecorationCatDetails() {
     );
   };
 
-  // Function to generate a random number between min and max (inclusive)
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+  // // Function to generate a random number between min and max (inclusive)
+  // const getRandomNumber = (min, max) => {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // };
 
-  // Function to generate a random rating between 4.1 to 4.8
-  const getRandomRating = () => {
-    return (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
-  };
+  // // Function to generate a random rating between 4.1 to 4.8
+  // const getRandomRating = () => {
+  //   return (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
+  // };
 
 
   const [isMobile, setIsMobile] = useState(false);
@@ -301,6 +501,48 @@ function DecorationCatDetails() {
             {isMobile && <FAQSection faqData={faqData} />}
           </div>
         </div>
+
+      
+        <div>
+            <div style={{ backgroundColor: "#EDEDED", padding: "20px" }}>
+                <h1 style={{ textAlign: "center", color: '#9252AA' }}>Similar Products</h1>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
+                    {loading ? (
+                        <p>Loading...</p>
+                    ) : (
+                        products.length > 0 ? (
+                            products.map((item) => (
+                                <div
+                                    key={item.name} // Assuming name is unique; otherwise, use a unique ID
+                                    style={{ width: '200px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', overflow: 'hidden', cursor: 'pointer' }}
+                                    onClick={() => handleProductClick(item.name)}
+                                >
+                                    <div style={{ position: 'relative' }}>
+                                        <Image src={`https://horaservices.com/api/uploads/${item.featured_image}`} alt={item.name} width={200} height={200} style={{ objectFit: 'cover' }} />
+                                        <div style={{ position: 'absolute', bottom: '10px', right: '10px', backgroundColor: 'rgba(0,0,0,0.5)', color: '#fff', padding: '5px', borderRadius: '5px' }}>
+                                            Hora
+                                        </div>
+                                    </div>
+                                    <div style={{ padding: '10px' }}>
+                                        <h2 style={{ fontSize: '16px', color: '#9252AA' }}>{item.name}</h2>
+                                        <p style={{ color: '#9252AA', fontWeight: '700' }}>₹ {item.price}</p>
+                                        <div style={{ display: 'flex', alignItems: 'center', marginTop: '5px' }}>
+                                            <p style={{ fontWeight: '500', margin: '0' }}>{item.rating || 'N/A'}</p>
+                                            <FontAwesomeIcon icon={faStar} style={{ color: '#ffc107', marginLeft: '5px' }} />
+                                            <p style={{ color: '#9252AA', fontWeight: '600', margin: '0', paddingLeft: '5px' }}>({item.userCount || '0'})</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No similar products with a lower price are available.</p>
+                        )
+                    )}
+                </div>
+            </div>
+        </div>
+
+
       </div>
 
       {/* {isClient && window.innerWidth < 800 ?
@@ -317,9 +559,6 @@ function DecorationCatDetails() {
         :
         null
       } */}
-
-
-<Testing />
 
     </div>
   );

@@ -33,6 +33,7 @@ const DecorationCatPage = () => {
   const [themeFilter, setThemeFilter] = useState("all"); // Default: Show all
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
   const scriptTag = JSON.stringify(schemaOrg);
+  
   const themeFilters = [
     { label: 'Select Design', value: 'all' },
     { label: 'Astronaut space theme', value: 'Astronaut-space' },
@@ -62,6 +63,7 @@ const DecorationCatPage = () => {
     { label: 'Sport Football theme', value: 'Football' },
     { label: 'Unicorn Theme', value: 'Unicorn' },
   ];
+
   function getSubCategory(catValue) {
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
 
@@ -129,13 +131,18 @@ const DecorationCatPage = () => {
     // Filter by theme
     if (themeFilter !== "all") {
       const formattedThemeFilter = themeFilter.toLowerCase().split('-')[0];
+      console.log(formattedThemeFilter, 'formattedThemeFilter');
       const formattedItemName = item.name.toLowerCase().split('-')[0];
+      console.log(formattedItemName, 'formateditemname');
       themeCondition = formattedItemName.includes(formattedThemeFilter);
+      console.log(themeCondition, "themecondition");
     }
 
     // Return true if either price or theme condition is met
     return priceCondition && themeCondition;
   });
+
+  console.log('Filtered Data:', filteredData);
 
   function addSpaces(subCategory) {
     let result = "";
@@ -175,6 +182,7 @@ const DecorationCatPage = () => {
           rating: getRandomRating(),
           userCount: getRandomNumber(20, 500)
         }));
+        console.log(decoratedData, "decorated Data");
         setCatalogueData(decoratedData);
       }
     } catch (error) {
@@ -192,6 +200,7 @@ const DecorationCatPage = () => {
     }
     else {
       console.log(catValue, "catValue");
+      localStorage.setItem('catValue', catValue);
       router.push(`/balloon-decoration/${catValue}/product/${productName}`);
     }
   };
@@ -246,12 +255,33 @@ const DecorationCatPage = () => {
               </div>
 
               {/* Theme filter */}
-              {selCat === "Kids Birthday" ? <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
-                style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
-                {themeFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>{filter.label}</option>
-                ))}
-              </select> : null}
+              {/* Theme filter */}
+{selCat === "Kids Birthday" ? (
+  <select
+    value={themeFilter}
+    onChange={(e) => {
+      const selectedTheme = e.target.value;
+      setThemeFilter(selectedTheme);
+      console.log("Selected theme filter:", selectedTheme); // Print the selected theme to the console
+    }}
+    style={{
+      fontSize: "16px",
+      color: 'rgb(157, 74, 147)',
+      padding: "7px 10px",
+      borderWidth: 1,
+      borderColor: "rgb(157, 74, 147)",
+      borderRadius: "5px",
+      marginLeft: "5px"
+    }}
+  >
+    {themeFilters.map((filter) => (
+      <option key={filter.value} value={filter.value}>
+        {filter.label}
+      </option>
+    ))}
+  </select>
+) : null}
+
             </div>
           </div>
         </div>
