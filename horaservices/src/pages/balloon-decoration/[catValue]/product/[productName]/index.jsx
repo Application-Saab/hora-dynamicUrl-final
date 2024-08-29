@@ -11,6 +11,8 @@ import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { BASE_URL, GET_DECORATION_BY_NAME } from "@/utils/apiconstants";
+import axios from 'axios';
 
 const getFaqData = (product) => [
   {
@@ -61,15 +63,42 @@ function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
   const router = useRouter();
-  const { subCategory: urlSubCategory, catValue: urlCatValue, productName } = router.query;
-  // You might also need to handle product name formatting (e.g., converting hyphens to spaces or similar)
-  const formattedProductName = productName ? productName.replace(/-/g, ' ') : '';
-  // Get state from Redux store
-  const { subCategory: stateSubCategory, catValue: stateCatValue, product: stateProduct } = useSelector((state) => state.state || {});
-  // Determine which values to use
-  const subCategory = stateSubCategory || urlSubCategory;
-  const catValue = stateCatValue || urlCatValue;
-  const product = stateProduct || formattedProductName;
+  const [product, setProduct] = useState('');
+  const [subCategory, setSubCategory] = useState('');
+  const [catValue, setCatValue] = useState('');
+  // Use useEffect to handle router query
+  useEffect(() => {
+    if (router.isReady) {
+      const { subCategory: urlSubCategory, catValue: urlCatValue, productName } = router.query;
+      const formattedProduct = productName ? productName.replace(/-/g, ' ') : '';
+      setProduct(formattedProduct);
+      setSubCategory(urlSubCategory || '');
+      setCatValue(urlCatValue || '');
+    }
+  }, [router.isReady, router.query]);
+  
+  useEffect(() => {
+    alert("111" , JSON.stringify(product));
+    if (product) {
+      const fetchDecorationDetails = async () => {
+        try {
+          const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${product}`;
+          alert("Fetching URL:", url);  // Log the URL
+          alert("2222" , JSON.stringify(product));
+          const response = await axios.get(url);
+          console.log("API Response:", response.data);  // Log the response
+          setProduct(response.data.data[0]);
+          setSubCategory(getSubCategory(catValue || ''));
+        } catch (error) {
+          console.error("Error:", error.message);  // Log the error
+        }
+      };
+  
+      fetchDecorationDetails();
+    }
+  }, [product, catValue]);
+  
+  
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
   const [isClient, setIsClient] = useState(false);
@@ -156,6 +185,20 @@ function DecorationCatDetails() {
     }
     setSelCat(result);
   }
+
+  function getSubCategory(catValue) {
+    if (catValue === 'birthday-decoration') {
+      return 'Birthday';
+    } else if (catValue === 'anniversary-decoration') {
+      return 'Anniversary';
+    } else {
+      const parts = catValue.split('-'); // Split by hyphens
+      return parts.slice(0, 2) // Take only the first two parts
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()) // Capitalize each part
+        .join(''); // Join parts together without spaces
+    }
+  }
+
 
   useEffect(() => {
     addSpaces(subCategory);

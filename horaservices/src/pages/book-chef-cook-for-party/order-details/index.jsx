@@ -55,6 +55,7 @@ const SelectDate = ({ history, currentStep }) => {
     if (selectedDishDictionary) {
         try {
             selectedDishDictionary = JSON.parse(selectedDishDictionary);
+            selectedDishes = JSON.parse(selectedDishes);
         } catch (error) {
             console.error('Error parsing selectedDishDictionary:', error);
         }
@@ -236,25 +237,29 @@ const SelectDate = ({ history, currentStep }) => {
         button: "",
     });
 
-    const minPeopleCount = 1;
-    const maxPeopleCount = 35;
+    const minPeopleCount = 1
+    const maxPeopleCount = 35
     const step = 1;
-    
+
     const increasePeopleCount = () => {
-        if (peopleCount >= maxPeopleCount) {
-            alert(`The maximum allowed people count is ${maxPeopleCount}.`);
-            return;
+        if (peopleCount >= 35) {
+            alert("You cannot select more than 35 people.");
+        } else {
+            setPeopleCount(peopleCount + 1);
+            setDishPrice(parseInt(dishPrice) + 49);
+        }
+    }
+
+    const decreasePeopleCount = () => {
+        if (peopleCount != 1) {
+            setPeopleCount(peopleCount - 1)
+            setDishPrice(dishPrice - 49)
         }
         setPeopleCount(peopleCount + step);
         setDishPrice(parseInt(dishPrice) + 49);
     };
     
-    const decreasePeopleCount = () => {
-        if (peopleCount > minPeopleCount) {
-            setPeopleCount(peopleCount - step);
-            setDishPrice(dishPrice - 49);
-        }
-    };
+
     
     const handleRangeChange = (e) => {
         console.log(e.target.value)
@@ -601,9 +606,9 @@ const SelectDate = ({ history, currentStep }) => {
             }} className='selectdateContainersec'>
                 <div style={{ width: "98%", margin: "10px", padding: "10px 30px" }} className='selectdateContainer'>
                     <div style={{ backgroundColor: "#fff", borderRadius: "10px", padding: "10px 10px 20px 15px" }} className='peoplecontsec'>
-                        <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
+                        {/* <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
                             <div style={{ color: "#9252AA", fontWeight: '500', fontSize: 11 }}>Note: Additional charge of 700 applies for more than 7 dishes.</div>
-                        </div>
+                        </div> */}
                         <div className="header-section">
                             <div className="heading">How many people you are hosting?</div>
                             <div className="control-buttons">

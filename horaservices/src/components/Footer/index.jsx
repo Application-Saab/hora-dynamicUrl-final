@@ -12,7 +12,7 @@ const footerColumns = [
     title: 'About Hora',
     links: [
       { text: 'My Order', to: '/orderlist' },
-      { text: 'About Us', href: 'https://horaservices.com/AboutUs.html' },
+      { text: 'About Us', href: '/aboutus' },
       { text: 'Private Policy', href: 'https://horaservices.com/privacy-policy.html' },
       { text: 'Terms & Condition', href: 'https://horaservices.com/termCondition.html' },
       { text: 'Sitemap', href: 'https://horaservices.com/sitemap.xml' },
@@ -25,11 +25,11 @@ const footerColumns = [
       { text: 'Decorations for Party and Occasions', href: '/balloon-decoration' },
       { text: 'Food Delivery for Party and Occasions', href: 'party-food-delivery-live-catering-buffet/party-food-delivery' },
       { text: 'Catering Service for Party and Occasions', href: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering' },
-      { text: 'Waiter for Party and Occasions', href: 'https://horaservices.com/ContactUs.html' },
-      { text: 'Bar Tender for Party and Occasions', href: 'https://horaservices.com/ContactUs.html' },
-      { text: 'Cleaner for Party and Occasions', href: 'https://horaservices.com/ContactUs.html' },
-      { text: 'Occasions', href: 'https://horaservices.com/Occasion.html' },
-      { text: 'Cuisine', href: 'https://horaservices.com/Cuisine.html' },
+      { text: 'Waiter for Party and Occasions', href: '/contactus' },
+      { text: 'Bar Tender for Party and Occasions', href: '/contactus' },
+      { text: 'Cleaner for Party and Occasions', href: '/contactus' },
+      { text: 'Occasions', href: '/' },
+      { text: 'Cuisine', href: '/' },
     ],
   },
   {
@@ -87,11 +87,9 @@ const footerColumns = [
 function Footer() {
   return (
     <footer style={style.footer}>
-      <div style={style.frameBlack}></div>
-      <Container className="p-0">
-        <Row className="py-4 justify-content-center">
+      <div className="page-width footerlist">
           {footerColumns.map((column, index) => (
-            <Col key={index}  className="mb-3">
+            <div key={index} className="footerlist-sec">
               <h2 className="footerheading">{column.title}</h2>
               <ul className={`list-unstyled-${index}`}>
                 {column.links.map((link, idx) => (
@@ -104,8 +102,15 @@ function Footer() {
                   </li>
                 ))}
               </ul>
-            </Col>
+            </div>
           ))}
+       
+      </div>
+      <div className="page-width copy-right">
+        <Row>
+        <Col>
+            <p className="copy p-0 m-0">© HORA - All rights reserved</p>
+          </Col>
         </Row>
         <Row className="text-center align-items-center justify-content-center">
           <Col>
@@ -121,18 +126,16 @@ function Footer() {
               </Link>
             </div>
           </Col>
-          <Col>
-            <p className="copy p-0 m-0">© HORA - All rights reserved</p>
-          </Col>
+        
         </Row>
-      </Container>
+      </div>
     </footer>
   )
 }
 
 const style = {
   footer: {
-    background: `url(${horaFooterImage.src})`,
+    backgroundColor: "#96528D",
     padding: '10px 0',
     color: '#fff',
   },
