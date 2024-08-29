@@ -19,6 +19,8 @@ function DecorationCatDetails() {
   const [orderType, setOrderType] = useState(1);
   const router = useRouter();
   const [product, setProduct] = useState('');
+  const [apiProduct , setApiProduct] = useState('');
+  const [isFetched , setIsFetched ] = useState(false)
   const [subCategory, setSubCategory] = useState('');
   const [catValue, setCatValue] = useState('');
   // Use useEffect to handle router query
@@ -26,20 +28,17 @@ function DecorationCatDetails() {
     if (router.isReady) {
       const { subCategory: urlSubCategory, catValue: urlCatValue, productName } = router.query;
       const formattedProduct = productName ? productName.replace(/-/g, ' ') : '';
-      setProduct(formattedProduct);
+      setApiProduct(formattedProduct);
       setSubCategory(urlSubCategory || '');
       setCatValue(urlCatValue || '');
     }
   }, [router.isReady, router.query]);
   
   useEffect(() => {
-    alert("111" , JSON.stringify(product));
-    if (product) {
+    if (apiProduct && !isFetched) {
       const fetchDecorationDetails = async () => {
         try {
-          const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${product}`;
-          alert("Fetching URL:", url);  // Log the URL
-          alert("2222" , JSON.stringify(product));
+          const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
           const response = await axios.get(url);
           console.log("API Response:", response.data);  // Log the response
           setProduct(response.data.data[0]);
@@ -51,7 +50,7 @@ function DecorationCatDetails() {
   
       fetchDecorationDetails();
     }
-  }, [product, catValue]);
+  }, [apiProduct, catValue]);
   
   
   const schemaOrg = getDecorationProductOrganizationSchema(product);
