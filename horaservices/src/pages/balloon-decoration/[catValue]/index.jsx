@@ -324,22 +324,18 @@ const DecorationCatPage = () => {
               )
             )
           }
-          <div>
-            {/* <div>
-                      {
-                         filteredData.map((item, index) => (
-                         
-                          <url>
-                            <loc>
-                            {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name}`}
-                            </loc>
-                            <priority>1.00</priority>
-                        </url>
-                         )
-                      )}
-                   
-                    </div> */}
-          </div>
+          {/* <div>
+          {
+          filteredData.map((item, index) => (
+          <url key={index}>
+          <loc>
+          {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name.replace(/ /g, "-")}`}
+          </loc>
+          <priority>1.00</priority>
+          </url>
+          ))
+          }
+          </div> */}
         </div>
       </>
     </div>

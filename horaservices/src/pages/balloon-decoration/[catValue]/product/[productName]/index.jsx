@@ -14,6 +14,31 @@ import Image from "next/image";
 import { BASE_URL, GET_DECORATION_BY_NAME } from "@/utils/apiconstants";
 import axios from 'axios';
 
+// Skeleton Loader Component
+const SkeletonLoader = () => {
+  return (
+    <div className="skeleton-loader" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "20px", paddingBottom:"20px" ,  position: "relative" }} className="decDetails">
+        <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">
+          <div style={{ width: "80%", height: "300px", backgroundColor: "#f0f0f0", margin: "0 auto", position: "relative" }} />
+        </div>
+        <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "40%" }} />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "80%" }} />
+          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" }} />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%" }} />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%" }} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
@@ -23,6 +48,7 @@ function DecorationCatDetails() {
   const [isFetched , setIsFetched ] = useState(false)
   const [subCategory, setSubCategory] = useState('');
   const [catValue, setCatValue] = useState('');
+  const [loading, setLoading] = useState(true); // Add a loading state
   // Use useEffect to handle router query
   useEffect(() => {
     if (router.isReady) {
@@ -40,14 +66,15 @@ function DecorationCatDetails() {
         try {
           const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
           const response = await axios.get(url);
-          console.log("API Response:", response.data);  // Log the response
+          console.log("API Response:", response.data);
           setProduct(response.data.data[0]);
           setSubCategory(getSubCategory(catValue || ''));
+          setLoading(false); // Stop loading when data is fetched
         } catch (error) {
-          console.error("Error:", error.message);  // Log the error
+          console.error("Error:", error.message);
+          setLoading(false); // Stop loading even if there is an error
         }
       };
-  
       fetchDecorationDetails();
     }
   }, [apiProduct, catValue]);
@@ -158,6 +185,10 @@ function DecorationCatDetails() {
   const getRandomRating = () => {
     return (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
   };
+
+  if (loading) {
+    return <SkeletonLoader />; // Show skeleton loader while loading
+  }
 
   return (
     <div className="App" style={{ backgroundColor: "#EDEDED" }}>

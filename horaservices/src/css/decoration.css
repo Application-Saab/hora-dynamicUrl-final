@@ -94,7 +94,7 @@ width: 100%;
 font-size: 18px !important;
 }
 .decorationlanding-slider h2 {
-    font-size: 16px;
+    font-size: 18px;
     color: #222;
     font-weight: 700;
 }
@@ -119,5 +119,8 @@ font-size: 14px !important;
 img {
     height: 130px !important;
 }
+}
+.decorationlanding-slider h2 {
+    font-size: 16px;
 }
 }
