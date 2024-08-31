@@ -597,9 +597,22 @@ button.dec-continueButton {
 }
 
 .no-orders {
-  padding: 100px 30px;
+  font-size: 20px !important;
+  padding: 0;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 350px;
 }
-
+.no-orders h4 {
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
 .left-details {
   text-align: left;
 }
@@ -620,6 +633,12 @@ main.order-list .order-container {
     padding: 0 20px;
   }
  
+  .no-orders {
+    width: 90%;
+  }
+  .no-orders h4 {
+    font-size: 11px;
+}
 
   .order-detail-page-decoration {
     width: 100% !important;
@@ -1429,6 +1448,12 @@ main.order-list .order-container {
       width: 22% !important;
     }
   }
+  .decDetailsRightInner {
+    width: 90% !important;
+}
+.decDetails .decDetailsLeft div {
+  width: 94% !important;
+}
 }
 
 @media (max-width: 400px) {

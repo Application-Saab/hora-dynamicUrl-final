@@ -462,6 +462,9 @@ const Drawer = ({ closeDrawer, drawerRef, handleLogout }) => {
       </Link>
       </div>
       <div style={{ padding:"0px 10px 20px 20px"}}>
+      <Link href="/orderlist" style={style.drawerLink} onClick={closeDrawer}>
+        My Order
+      </Link>
       <Link href="/balloon-decoration" style={style.drawerLink} onClick={closeDrawer}>
         Decoration
       </Link>
