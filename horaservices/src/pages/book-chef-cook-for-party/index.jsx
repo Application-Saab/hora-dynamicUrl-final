@@ -353,8 +353,8 @@ const CreateOrder = ({ history, currentStep }) => {
                                                 alt={dish.name}
                                                 className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""
                                                     }`}
-                                                width={300}
-                                                height={300}
+                                                width={350}
+                                                height={350}
                                             />
                                         ) : (
                                             <div

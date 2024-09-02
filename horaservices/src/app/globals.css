@@ -465,12 +465,26 @@ img.dish-image.selected {
   border: none !important;
 }
 
+/* .dish-image {
+  width: 86px;
+  height: 81px;
+  border-radius: 50%;
+  margin: -30px auto 0;
+} */
+
+
 .dish-image {
   width: 86px;
   height: 81px;
   border-radius: 50%;
   margin: -30px auto 0;
+  transition: transform 0.3s ease; /* Smooth transition effect */
 }
+
+.dish-image:hover {
+  transform: scale(1.2); /* Zooms the image to 120% of its original size */
+}
+
 
 .order-container .dish-name {
   color: rgb(157, 74, 147) !important;

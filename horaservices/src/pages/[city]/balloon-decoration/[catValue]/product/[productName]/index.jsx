@@ -5,7 +5,7 @@ import buynowImage from '../../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../../assets/service.png';
 import checkImage from '../../../../../../assets/tick.jpeg';
-import { getDecorationProductOrganizationSchema } from "../../../../../../utils/schema";
+import { getDecorationProductOrganizationSchema, getProductFAQSchemaProductDetails } from "../../../../../../utils/schema";
 import '../../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
@@ -13,10 +13,20 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 function DecorationCatDetails() {
+
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
   const router = useRouter();
   const { subCategory: urlSubCategory, catValue: urlCatValue, productName } = router.query;
+  
+  const { city } = router.query;
+
+   // Generate the FAQ schema with the dynamic city
+   const faqSchema = getProductFAQSchemaProductDetails(city);
+
+   // Convert schema object to JSON-LD
+   const faqSchemaJSON = JSON.stringify(faqSchema);
+
   // You might also need to handle product name formatting (e.g., converting hyphens to spaces or similar)
   const formattedProductName = productName ? productName.replace(/-/g, ' ') : '';
   // Get state from Redux store
@@ -112,6 +122,107 @@ function DecorationCatDetails() {
     return (Math.random() * (4.8 - 4.1) + 4.1).toFixed(1);
   };
 
+
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const getFaqData = (product) => [
+    {
+      question: "What does time slot mean?",
+      answer: "Time slots are set times when you can book our services. If you choose the time slot of 1-4pm, then our decorators will be coming to your location between 1pm to 2pm and the decoration will be ready by 4pm.",
+    },
+    {
+      question: "Can I customise the decoration according to my preference?",
+      answer: "Yes, we provide customizations based on your preferences. You can change balloon colors, add name and age foils, and more. You can directly mention the details on the last page before payment or simply reach out to us to discuss your specific requirements.",
+    },
+    {
+      question: "Do you offer same-day decoration service?",
+      answer: "Yes, we offer same-day decoration service. It depends upon the slot availability and design selected by the customer. Please contact us to check slot availability.",
+    },
+    {
+      question: "Do you only provide materials, or do you also decorate?",
+      answer: "We provide materials and also handle the decoration. Our team will come to your given location with all the materials and complete the decoration on time.",
+    },
+    {
+      question: "How much time do you take to set up the decoration?",
+      answer: "The time needed depends on factors like the decor's complexity and the venue size. Simple setups take 40-45 minutes, while larger installations may need 1-2 hours. We ensure timely and efficient setup for every event.",
+    },
+    {
+      question: "Tell us more about the design?",
+      answer: `For an unforgettable kids birthday celebration, our expert decoration services are tailored to match your vision and budget. ${product.name} decoration under ₹${product.price} is designed to create a stunning atmosphere. Our designs are crafted to enhance your event, ensuring a memorable experience for you and your guests. This is one of the 1000+ designs under kids' birthday decoration for kids under 15 years.`,
+    },
+    {
+      question: "How Early Should I Book Your Decoration Services?",
+      answer: "To ensure a smooth experience, we recommend booking our decoration services at least 2 days in advance. This helps avoid any last-minute issues and ensures we can fully meet your needs. However, we also provide same-day delivery, depending on availability. For more information or to check availability, feel free to contact us.",
+    },
+    {
+      question: "Tell us more about your designs and pricing?",
+      answer: "We provide 1000+ decoration designs across all events like Birthdays, Baby Showers, Anniversaries, Baby Welcome, First Night, Mehandi, Haldi, Weddings, etc. Customers can choose the designs based on the event and spot of decoration, like room decoration, stage decoration, hall decoration, etc. The price of the decoration depends on the design selected, inclusions, and add-ons. The prices and inclusions are mentioned with each design.",
+    },
+    {
+      question: "How does decoration service work?",
+      answer: "Customers can directly select the design, fill in details like city, event date, time slot, and pincode on the next page, and place the order. The executor will be assigned after order finalization. The executor would come to the defined location at the given time slot and date with materials, execute the design, and leave the location after taking the balance payment.",
+    },
+    {
+      question: "What all cities do we serve?",
+      answer: "We serve decoration services in 7+ cities including Bangalore, Delhi NCR, Mumbai, Hyderabad, Indore, and more.",
+    }
+  ];
+  
+
+  const faqData = getFaqData(product);
+
+      const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (index) => {
+      setOpenIndex(openIndex === index ? null : index);
+    };
+
+    const FAQSection = ({ faqData }) => {
+      const [openIndex, setOpenIndex] = useState(null);
+    
+      const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+      };
+    
+      return (
+        <div className="faqSection">
+          <h2>Frequently Asked Questions</h2>
+          {faqData.map((item, index) => (
+            <div key={index} className="faqItem">
+              <div onClick={() => handleToggle(index)}>
+                <h3>{item.question}</h3>
+                <span>{openIndex === index ? "-" : "+"}</span>
+              </div>
+              {openIndex === index && (
+                <div>
+                  <p>{item.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    };
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 800);
+      };
+  
+      handleResize(); // Set initial value
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
   return (
     <div className="App" style={{ backgroundColor: "#EDEDED" }}>
       <Head>
@@ -136,11 +247,43 @@ function DecorationCatDetails() {
                 <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
               </div>
             </div>
+            
+            {/* faq */}
+
+            {/* <div>
+<div className="faq-container">
+      <h2 className="faq-title">Frequently Asked Questions</h2>
+      {questions.map((item, index) => (
+        <div key={index} className="faq-item">
+          <h3 className="faq-question" onClick={() => toggleFAQ(index)}>
+            {item.question}
+            <span className="faq-icon">{activeIndex === index ? '-' : '+'}</span>
+          </h3>
+          {activeIndex === index && <p className="faq-answer">{item.answer}</p>}
+        </div>
+      ))}
+    </div>
+    </div> */}
+
+
+{/* FAQ */}
+{!isMobile && <FAQSection faqData={faqData} />}
+
+
+{/* FAQ */}
+
+
+
+
+            {/* faq */}
+
+
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
               <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{subCategory}{' > '}{product.name}</h2>
               <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
+              {/* <h1>sohan {city}</h1> */}
               <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
@@ -178,6 +321,7 @@ function DecorationCatDetails() {
               <p className="cancelltionPolicySecSubHeading">- Till the order is not assigned to service provider, 100% of the amount will be refunded, otherwise 50% of advance will be deducted as cancellation charges to compensate the service provider.</p>
               <p className="cancelltionPolicySecSubHeading">- The order cannot be edited after paying advance. Customer can cancel the order and replace the new order with required changes.</p>
             </div>
+            {isMobile && <FAQSection faqData={faqData} />}
           </div>
         </div>
       </div>

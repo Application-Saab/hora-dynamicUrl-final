@@ -5,7 +5,7 @@ import buynowImage from '../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../assets/service.png';
 import checkImage from '../../../../../assets/tick.jpeg';
-import { getDecorationProductOrganizationSchema } from "../../../../../utils/schema";
+import { getDecorationProductOrganizationSchema, getProductFAQSchema } from "../../../../../utils/schema";
 import '../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { BASE_URL, GET_DECORATION_BY_NAME } from "@/utils/apiconstants";
 import axios from 'axios';
+
 
 function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
