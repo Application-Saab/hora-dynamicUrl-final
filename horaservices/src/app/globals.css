@@ -626,6 +626,15 @@ main.order-list .order-container {
 .price-para {
   text-align: end !important;
 }
+h4.contact-us-heading a {
+  color: #9252aa;
+  margin: 14px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
 
 /* select date chef flow */
 @media (max-width: 800px) {
