@@ -145,6 +145,18 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import Link from "next/link";
 
+import cityData from '../../../utils/cityData';
+
+// Function to get the locality names for a given city
+const getLocalitiesForCity = (city) => {
+  const cityInfo = cityData[city];
+  if (cityInfo && cityInfo.cityLocalitiesList) {
+      return cityInfo.cityLocalitiesList.map(locality => locality.name).join(", ");
+  }
+  return "the listed areas";
+};
+
+
 const decCat = [
     { id: '2', image: BirthdayImage, name: 'Birthday', subCategory: "Birthday", catValue: "birthday-decoration", imgAlt: "A Gorgeous Candy Birthday Decoration Surprise!" },
     { id: '3', image: FirstnightImage, name: 'First Night', subCategory: "FirstNight", catValue: "first-night-decoration", imgAlt: "Add extra happiness quotient to your wedding night with our exclusive décor package" },
@@ -159,38 +171,6 @@ const decCat = [
      
 ];
 
-// const Decoration = () => {
-//     const dispatch = useDispatch();
-//     const router = useRouter();
-//     // const navigate = useNavigate();
-//     const schemaOrg = getDecorationOrganizationSchema();
-//     const scriptTag = JSON.stringify(schemaOrg);
-    
-//     // let { city } = useParams();
-//     // const hasCityPageParam = city ? true : false;
-
-//      // Retrieve city parameter from Next.js router
-//      const { city } = router.query;
-//      const hasCityPageParam = city ? true : false; 
-
-//      const openCatItems = (item) => {
-//         dispatch(setState(item.subCategory, item.imgAlt));
-//         if (hasCityPageParam) {
-//             router.push(`/${city}/balloon-decoration/${item.catValue}`);
-//         } else {
-//             router.push(`/balloon-decoration/${item.catValue}`);
-//         }
-//     };
-
-//     const handleViewMore = (category) => {
-//         const categoryItem = decCat.find(cat => cat.subCategory === category);
-//         if (categoryItem) {
-//             openCatItems(categoryItem);
-//         } else {
-//             console.log('No matching category item found.');
-//         }
-//     };
-
 
 const Decoration = () => {
     const dispatch = useDispatch();
@@ -204,29 +184,28 @@ const Decoration = () => {
     const faqSchemaJSON = JSON.stringify(faqSchema);
 
     const [activeIndex, setActiveIndex] = useState(null);
+    
+    const [showMore, setShowMore] = useState(false);
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // const questions = [
-  //   {
-  //     question: `Do you provide Balloon Room Decoration Services in ${city}?`,
-  //     answer: `Yes, we have a huge range to offer Room Balloon Decoration services in the vibrant city of ${city}
-  //     Our skilled and well-experienced team can beautifully transform any room with balloons as per your occasion and your mood of celebration.`,
-  //   },
-  //   {
-  //     question: `Do you offer same-day bookings for Birthday Decoration at Home in  ${ city }?`,
-  //     answer: `Yes, we understand that plans can change, and sometimes you need decorations on short notice. 
-  //     At HORA, we strive to accommodate same-day birthday decoration bookings possible. Contact our customer support team, 
-  //     and we'll do our best to make your event special, even on short notice.`,
-  //   },
-  //   {
-  //     question: `Can you provide me some budget-friendly suggestions for 1st Birthday Party Decorations?`,
-  //     answer: `Of course! Consider themes for a first birthday such as Jungle Theme, Princess or Barbie Theme, Unicorn Theme, Space Theme and many more. 
-  //     For wonderful photo options, add bright colors, balloons, customized banners, and a cake smash setup. Visit our website and explore a wide range of decoration options for first birthday.`,
-  //   },
-  // ];
+
+  const paragraphs = [
+    "Home Balloon Decoration in " + city?.toUpperCase() + " for Birthday Party celebrations",
+    "Decorations and Gifts can make anybody happy. Who doesn’t love getting pampered? Everybody does, though all may not ask for it. A birthday is an occasion to rejoice with our friends and loved ones. These days’ birthday themes and decorations seem to play a major role in any birthday party. Balloons are a necessary thing when it comes to decorating for birthday parties not because Online balloon decoration is cheap and colorful but because balloon decoration adds warm fuzzies to the party which creates a blissful moment in the hearts of people. Balloons are party highlighters! They not only brighten up birthday parties but also bring the group together in balloon bursting activities. Balloon birthday themes have always been fun and easy. The bright and colorful balloons are an ideal choice for any birthday party. When people hear the name of balloons decoration, they anticipate a happy moment to come which makes them feel extremely happy from within. It enlightens the festive mood with its elegant design, color and pattern. There are so many things you can do to create the best balloon decoration with the help of the best party planner in Bangalore or balloon decorators in " + city?.toUpperCase() + ". These are the things you can do to make your birthday parties memorable.",
+    "Birthday Balloon Decoration in " + city?.toUpperCase(),
+    "Birthdays are memorable occasions for all of us. Who does not love celebrating their birthday, kids love gifts, youngsters love to get their dream stuff and grown-up loves to get all the attention and special treatment by their near and dear ones, birthday is the happiest day of one’s life. This day not only makes the birthday boy or girl happy but also injects the family members with cheerful vibes. That’s the reason everyone is so excited to celebrate birthdays. And this is the sole reason that in India and across the globe, birthdays are no less than festivals, So celebrate your birthday with beautiful balloon decoration at home in " + city?.toUpperCase() + ". Are you looking for the Best Balloon decorator in " + city?.toUpperCase() + "? You want to opt for the Professional balloon decoration services but at the same time wanted it to be budget friendly? Our on-site balloon decorating service in Bangalore by HORA had created a wow and stunning backdrop for your corporate as well as personal events. The variety of balloon designs includes Backdrop, Ring Decoration, Sequence photo booth and so on. If you want to introduce fun to your events and looking for some unique assortment of party decoration then book Best Balloon Decoration in " + city?.toUpperCase() + " from us.",
+    "Online Balloon Decoration Shop in " + city?.toUpperCase(),
+    "Organizing and managing an event yourself can be tedious and, not to mention, time consuming. With everyday activities becoming simpler, the fun-filled episodes in your life have become even more precious. Celebrating them in a fashionable and classy manner is what makes the best memories. Whenever people gather, regardless of their number or purpose, someone needs to handle the intricacies to ensure the celebration is a success. stands the vitality of time, cooperation, and every other aspect that surrounds the planning of an event. With a fresh team of skilled, creative and motivated professionals, HORA offers the coolest event planning services in more than 100+ Cities in India Being young in this business; we bring to you a blend of innovation and style that’s simply new. Our focus is to provide you with the latest in trend and to create new trends. Taking your personal preferences into consideration and mixing it with new-age design layouts and themes, our primary goal is to help you create amazing memories to cherish for a lifetime. So what are you waiting for? book your favourite occasion from the best balloon decoration shop near me in " + city?.toUpperCase() + ".",
+    "Choose HORA for all your celebrations and parties at cheapest rates",
+    "Get all your decoration requirements under one roof on HORA, from Baby Shower decoration to Welcome Baby decorations at home in " + city?.toUpperCase() + ". We specialize in creating dreamy and delightful setups for various events, ensuring every moment is special and memorable.",
+    "Decorator near me in " + city?.toUpperCase() + ", Balloon Decorator near me in " + city?.toUpperCase() + ", Flower Decorator near me in " + city?.toUpperCase() + ", Decoration service near me in " + city?.toUpperCase() + ", Balloon Decoration service near me in " + city?.toUpperCase() + ", Flower Decoration service near me in " + city?.toUpperCase() + ", Birthday Decoration service near me in " + city?.toUpperCase() + ", Anniversary decoration service near me in " + city?.toUpperCase() + ", baby shower Decoration service near me in " + city?.toUpperCase() + ", Baby welcome Decoration service near me in " + city?.toUpperCase() + ", Online balloon decoration in " + city?.toUpperCase() + "; Best balloon decorations " + city?.toUpperCase() + "; Kids birthday decoration service near me in " + city?.toUpperCase(),
+    "event planning certification,event organizing courses,event planner classes,event planner training,event planning course,event management certification,how to become a certified event planner,event certification,how to plan an event,event planning,event planners,helena paschal,how to plan an event houston,corporate event planner,business event planner,how to become an event planner,how to start an event planner business,event planning for beginners"
+  ];
+
+  console.log(city,"city");
 
   const questions = [
     {
@@ -238,19 +217,20 @@ const Decoration = () => {
       answer: `7eventzz makes it simple to bring the joy of Balloon Decoration to your doorstep for any celebration in ${city?.toUpperCase()}. Our website serves as your guide to planning memorable parties from the comfort of your own home. Choose the "Balloon Decoration at Home" option, enter the event details, modify your requirements, and complete the simple booking process. Our skilled team will handle all of the details, ensuring that your celebration is both seamless and extraordinary.`,
     },
     {
+    
       question: `Areas we provide our services across ${city?.toUpperCase()}`,
-      answer: `We provide decorations in all areas of ${city?.toUpperCase()} - Sarjapur, Bellandur, Marathahalli, HSR Layout, Madiwala, MG Road, Kundalahalli, Brookefield, Defence Colony, Bagalagunte, Bannerghatta, Azad Nagar, Banashankari, Banaswadi, Bapuji Nagar, Basavanagar, Bhuvaneshwari Nagar, Bidadi, Bommasandra, BTM Layout, Chandapura, Chandra Layout, Electronic City, Frazer Town, Ganga Nagar, HBR Layout, Hebbal, Hegde Nagar, Hennur, HRBR Layout, Indira Nagar, Jagajeevanram Nagar, Jayanagar, Jayamahal, Kalyan Nagar, Kammanahalli, Kanakapura, Hebbal Kempapura, Koramangala, Kothanur, LB Shastri Nagar, Mahadevpura, Malleshpalya, Malleshwaram, Sahakara Nagar, Sarjapur, Shanthi Nagar, Shivaji Nagar, Ulsoor, Uttarahalli, Whitefield, Williams Town, K R Puram, Vijayanagar, JP Nagar, Vittal Nagar, and more.`,
+            answer: `We provide decorations in all areas of ${city?.toUpperCase()} - ${getLocalitiesForCity(city)}.`,
     },
     {
       question: `Our Services in ${city?.toUpperCase()}`,
       answer: `We provide various decoration services in all areas of ${city?.toUpperCase()}. Our offerings include balloon decorations, flower decorations, and more for different events such as birthdays, anniversaries, baby showers, and more.`,
     },
     {
-      question: `Do you provide Balloon Room Decoration Services in ${city}?`,
-      answer: `Yes, we have a huge range of Room Balloon Decoration services in the vibrant city of ${city}. Our skilled and well-experienced team can beautifully transform any room with balloons as per your occasion and your mood of celebration.`,
+      question: `Do you provide Balloon Room Decoration Services in ${city?.toUpperCase()}`,
+      answer: `Yes, we have a huge range of Room Balloon Decoration services in the vibrant city of ${city?.toUpperCase()}. Our skilled and well-experienced team can beautifully transform any room with balloons as per your occasion and your mood of celebration.`,
     },
     {
-      question: `Do you offer same-day bookings for Birthday Decoration at Home in ${city}?`,
+      question: `Do you offer same-day bookings for Birthday Decoration at Home in ${city?.toUpperCase()}`,
       answer: `Yes, we understand that plans can change, and sometimes you need decorations on short notice. At HORA, we strive to accommodate same-day birthday decoration bookings possible. Contact our customer support team, and we'll do our best to make your event special, even on short notice.`,
     },
     {
@@ -842,24 +822,6 @@ const Decoration = () => {
 </div>
 
 {/* faq */}
-{/* <div className="faq-container">
-      <h2 className="faq-title">Frequently Asked Questions</h2>
-      <ul className="faq-list">
-        <li className="faq-item">
-          <strong className="faq-question">Do you provide Balloon Room Decoration Services in {city}?</strong>
-          <p className="faq-answer">Yes, we have a huge range to offer Room Balloon Decoration services in the vibrant city of {city}. Our skilled and well-experienced team can beautifully transform any room with balloons as per your occasion and your mood of celebration.</p>
-        </li>
-        <li className="faq-item">
-          <strong className="faq-question">Do you offer same-day bookings for Birthday Decoration at Home in {city}?</strong>
-          <p className="faq-answer">Yes, we understand that plans can change, and sometimes you need decorations on short notice. At HORA, we strive to accommodate same-day birthday decoration bookings possible. Contact our customer support team, and we'll do our best to make your event special, even on short notice.</p>
-        </li>
-        <li className="faq-item">
-          <strong className="faq-question">Can you provide me some budget-friendly suggestions for 1st Birthday Party Decorations?</strong>
-          <p className="faq-answer">Of course! Consider themes for a first birthday such as Jungle Theme, Princess or Barbie Theme, Unicorn Theme, Space Theme and many more. For wonderful photo options, add bright colors, balloons, customized banners, and a cake smash setup. Visit our website and explore a wide range of decoration options for first birthday.</p>
-        </li>
-      </ul>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqSchemaJSON }} />
-    </div> */}
 <div>
 <div className="faq-container">
       <h2 className="faq-title">Frequently Asked Questions</h2>
@@ -875,39 +837,36 @@ const Decoration = () => {
     </div>
     </div>
 
-                            <div>
-                                <h1 style={{ fontSize: "50px", textTransform: "uppercase", fontWeight: "bold", 
-                                  color: "#E6756B", margin: "35px 0 0px", textAlign: "center" }}>Description</h1>
-                                <div id="city-description" style={{ fontSize: "10px", padding: "0 60px" }}>
-                                    <p>Home Balloon Decoration in {city} for Birthday Party celebrations</p>
-                                    <p>Decorations and Gifts can make anybody happy. Who doesn’t love getting pampered? Everybody does, though all may not ask for it. A birthday is an occasion to rejoice with our friends and loved ones. These days’ birthday themes and decorations seem to play a major role in any birthday party. Balloons are a necessary thing when it comes to decorating for birthday parties not because Online balloon decoration is cheap and colorful but because balloon decoration adds warm fuzzies to the party which creates a blissful moment in the hearts of people. Balloons are party highlighters! They not only brighten up birthday parties but also bring the group together in balloon bursting activities. Balloon birthday themes have always been fun and easy. The bright and colorful balloons are an ideal choice for any birthday party. When people hear the name of balloons decoration, they anticipate a happy moment to come which makes them feel extremely happy from within. It enlightens the festive mood with its elegant design, color and pattern. There are so many things you can do to create the best balloon decoration with the help of the best party planner in Bangalore or balloon decorators in {city}. These are the things you can do to make your birthday parties memorable.</p>
-                                    <p>Birthday Balloon Decoration in {city}</p>
-                                    <p>Birthdays are memorable occasions for all of us. Who does not love celebrating their birthday, kids love gifts, youngsters love to get their dream stuff and grown-up loves to get all the attention and special treatment by their near and dear ones, birthday is the happiest day of one’s life. This day not only makes the birthday boy or girl happy but also injects the family members with cheerful vibes. That’s the reason everyone is so excited to celebrate birthdays. And this is the sole reason that in India and across the globe, birthdays are no less than festivals, So celebrate your birthday with beautiful balloon decoration at home in {city}. Are you looking for the Best Balloon decorator in {city}? You want to opt for the Professional balloon decoration services but at the same time wanted it to be budget friendly? Our on-site balloon decorating service in Bangalore by HORA had created a wow and stunning backdrop for your corporate as well as personal events. The variety of balloon designs includes Backdrop, Ring Decoration, Sequence photo booth and so on. If you want to introduce fun to your events and looking for some unique assortment of party decoration then book Best Balloon Decoration in {city} from us.</p>
-                                    <p>Online Balloon Decoration Shop in {city}</p>
-                                    <p>Organizing and managing an event yourself can be tedious and, not to mention, time consuming. With everyday activities becoming simpler, the fun-filled episodes in your life have become even more precious. Celebrating them in a fashionable and classy manner is what makes the best memories. Whenever people gather, regardless of their number or purpose, someone needs to handle the intricacies to ensure the celebration is a success. stands the vitality of time, cooperation, and every other aspect that surrounds the planning of an event. With a fresh team of skilled, creative and motivated professionals, HORA offers the coolest event planning services in more than 100+ Cities in India Being young in this business; we bring to you a blend of innovation and style that’s simply new. Our focus is to provide you with the latest in trend and to create new trends. Taking your personal preferences into consideration and mixing it with new-age design layouts and themes, our primary goal is to help you create amazing memories to cherish for a lifetime. So what are you waiting for? book your favourite occasion from the best balloon decoration shop near me in {city}.</p>
-                                    <p>Choose HORA for all your celebrations and parties at cheapest rates</p>
-                                    <p>Get all your decoration requirements under one roof on HORA, from Baby Shower decoration to Welcome Baby decorations at home in {city}. We specialize in creating dreamy and delightful setups for various events, ensuring every moment is special and memorable.</p>
-                                    <p>
-                                        Decorator near me in {city?.toUpperCase()},
-                                        Balloon Decorator near me in {city?.toUpperCase()},
-                                        Flower Decorator near me in {city?.toUpperCase()},
-                                        Decoration service near me in {city?.toUpperCase()},
-                                        Balloon Decoration service near me in {city?.toUpperCase()},
-                                        Flower Decoration service near me in {city?.toUpperCase()},
-                                        Birthday Decoration service near me in {city?.toUpperCase()},
-                                        Anniversary decoration service near me in {city?.toUpperCase()},
-                                        baby shower Decoration service near me in {city?.toUpperCase()},
-                                        Baby welome Decoration service near me in {city?.toUpperCase()},
-                                        Online balloon decoration in {city?.toUpperCase()};
-                                        Best balloon decorations{city?.toUpperCase()};
-                                        Kids birthday decoration service near me in {city?.toUpperCase()}
-                                    </p>
-                                    <p>
-                                        event planning certification,event organizing courses,event planner classes,event planner training,event planning course,event mangement certification,how to become a certified event planner,event certification,how to plan an event,event planning,event planners,helena paschal,how to plan an event houston,corporate event planner,business event planner,how to become an event planner,how to start an event planner business,event planning for beginners
 
-                                    </p>
-                                </div>
-                        </div>
+<div>
+
+<h1 style={{
+      fontSize: "50px",
+      textTransform: "uppercase",
+      fontWeight: "bold",
+      color: "rgb(157, 74, 147)",
+      margin: "35px 0 0px",
+      textAlign: "center",
+      letterSpacing: "1.5px",
+      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)"
+    }}>
+      Description
+    </h1>
+
+      <div id="city-description" style={{ fontSize: "14px", padding: "0 60px" }}>
+        {paragraphs.slice(0, showMore ? paragraphs.length : 2).map((para, index) => (
+          <p key={index}>{para}</p>
+        ))}
+      </div>
+      <button
+        style={{ display: 'block', margin: '20px auto', backgroundColor: 'rgb(157, 74, 147)', 
+          color: '#fff', border: 'none', padding: '10px 20px', cursor: 'pointer', borderRadius: "20px" }}
+        onClick={() => setShowMore(!showMore)}
+      >
+        {showMore ? 'Show Less' : 'Show More'}
+      </button>
+    </div>
+                            
 
                         <p id="city-seo-content" style={{ fontSize: "10px", padding: "0 80px" }}>
 
@@ -923,9 +882,22 @@ Balloon Decoration for small parties in {city}, Top balloon Decorator in {city},
 balloon decoration ideas; Astronaut Space Theme balloon decoration; Avenger Space Theme balloon decoration; Boss Baby Theme balloon decoration; Baby Shark Theme balloon decoration; Barbie Theme balloon decoration; Cocomelon Theme balloon decoration; Car Theme balloon decoration; Circus Theme balloon decoration; Dinosaur Theme balloon decoration; Jungle Theme balloon decoration; Kitty Theme balloon decoration; Lion Theme balloon decoration; Mickey Mouse Theme balloon decoration; Minecraft Theme balloon decoration; Mermail Theme balloon decoration; Pokemon Theme balloon decoration; Princess Theme balloon decoration; Panda Theme balloon decoration; Traffic Theme balloon decoration; Super Dog Theme balloon decoration; Unicorn Theme balloon decoration                    
 </p>
 
-<section id="section7" class="sectionidsec">
+      <section id="section7" class="sectionidsec">
                 <div style={styles.pageWidth}>
-                    <p style={{ fontSize: "70px", textTransform: "uppercase", fontWeight: "bold", color: "#E6756B", margin: "35px 0 2px", textAlign: "center" }} className="other-cities">Other Services</p>
+                    <p 
+                    style={{
+                      fontSize: "43px",
+                      textTransform: "uppercase",
+                      fontWeight: "bold",
+                      color: "rgb(157, 74, 147)",
+                      margin: "35px 0 0px",
+                      textAlign: "center",
+                      letterSpacing: "1.5px",
+                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)"
+                    }}
+                    className="other-cities">
+                        Explore Other Decoration Category In {city}
+                        </p>
                     <div class="tab-inner">
                         <ul style={{ listStyle: "none", padding: "20px 0" }}>
                             <li className="city-link" data-city={city} style={{ padding: "0 10px", display: "inline-block" }} >

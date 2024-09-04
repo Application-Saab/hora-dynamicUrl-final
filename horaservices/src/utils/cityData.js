@@ -1,5 +1,5 @@
 const cityData = {
-    Delhi: {
+    delhi: {
         bannerImage: "test",
         cityLocalitiesList:
             [
@@ -86,7 +86,7 @@ const cityData = {
 
             ]
     },
-    Gurugram: {
+    gurugram: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { name: "Ardee city" },
@@ -211,7 +211,7 @@ const cityData = {
             { name: "Sector 59" }
         ]
     },
-    Ghaziabad: {
+    ghaziabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Abhay Khand" },
@@ -296,7 +296,7 @@ const cityData = {
             { "name": "Patel Nagar I" }
         ]
     },
-    Faridabad: {
+    faridabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Adarsh Colony" },
@@ -383,7 +383,7 @@ const cityData = {
         ]
 
     },
-    Noida: {
+    noida: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Ambedkar city" },
@@ -470,7 +470,7 @@ const cityData = {
         ]
 
     },
-    Bengaluru: {
+    bengaluru: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
             [
@@ -557,7 +557,7 @@ const cityData = {
                 // Add more localities here
             ]
     },
-    Hyderabad: {
+    hyderabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
         [
@@ -645,7 +645,7 @@ const cityData = {
           ]
           
     },
-    Mumbai: {
+    mumbai: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
             [
@@ -809,3 +809,27 @@ const cityData = {
         bannerImage: "content/img/OIP1.jpg",
     }
 };
+
+
+
+
+// // cityData.js
+// const cityData = {
+//     delhi: {
+//         cityLocalitiesList: [
+//             { name: "Adarsh Nagar" },
+//             { name: "Adchini" },
+//             // ... more localities
+//         ]
+//     },
+//     gurugram: {
+//         cityLocalitiesList: [
+//             { name: "Ardee city" },
+//             { name: "Arjun Nagar" },
+//             // ... more localities
+//         ]
+//     }
+//     // Add more cities as needed
+// };
+
+export default cityData;
