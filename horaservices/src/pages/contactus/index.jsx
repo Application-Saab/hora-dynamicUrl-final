@@ -29,7 +29,7 @@ const ContactUs = () => {
   const router = useRouter();
 
   const handleRedirect = (city) => {
-    router.push(`/${city}/balloon-decoration`);
+    router.push(`/${city}`);
   };
   
   return (
