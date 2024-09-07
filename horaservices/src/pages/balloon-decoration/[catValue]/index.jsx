@@ -20,6 +20,7 @@ const DecorationCatPage = () => {
   const router = useRouter();
   //   let { city } = useParams();
   const { city, catValue } = router.query;
+
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();
@@ -201,6 +202,27 @@ const DecorationCatPage = () => {
     return text;
   }
 
+  
+  // Replace hyphens with spaces
+const altTagCatValue = catValue.replace(/-/g, ' ');
+
+function getAltImgPrice(price) {
+  if (price < 1000) {
+    return "Price under 1000";
+  } else if (price < 2000) {
+    return "Price under 2000";
+  } else if (price < 3000) {
+    return "Price under 3000";
+  }else if (price < 4000) {
+    return "Price under 4000";
+  } else if (price < 5000) {
+    return "Price under 5000";
+  } else {
+    return "Price above 5000";
+  }
+}
+
+
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
@@ -269,7 +291,8 @@ const DecorationCatPage = () => {
                     className="decimagecontainer"
                   >
                     <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={imgAlt} style={styles.decCatimage} width={300} height={300} />
+                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} 
+                      alt={`balloon decoration ${altTagCatValue} ${item.name} ${getAltImgPrice(item.price)}`} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
                       <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>

@@ -1,0 +1,21 @@
+.product-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping if screen is too small */
+    justify-content: flex-start; /* Align items horizontally at the start */
+    gap: 16px; /* Adds space between cards */
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 8px;
+    max-width: 300px;
+    flex: 0 0 300px; /* Each card takes up 300px of width */
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+  

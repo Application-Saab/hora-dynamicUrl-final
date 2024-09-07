@@ -441,6 +441,10 @@ const openSliderLink = (link) => {
 };
 
 
+const handleNavigation = () => {
+  router.push('/photographies'); // Navigates to /photographies
+};
+
 
 return (
 <>
@@ -529,7 +533,7 @@ return (
     </div>
     <div className="service-image-container">
       <Image src="https://horaservices.com/api/uploads/homepage_photography.png" alt="Photography" className="service-image" width={200} height={100}/>
-      <button className="book-now2" onClick={() => window.location.href = '/'} >Book Now</button>
+      <button className="book-now2" onClick={handleNavigation} >Book Now</button>
     </div>
   </div>
    </div>

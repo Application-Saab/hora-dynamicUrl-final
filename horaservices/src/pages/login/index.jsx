@@ -147,6 +147,8 @@ const Login = () => {
                     localStorage.setItem("mobileNumber", mobileNumber);
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('userID', response.data.data._id);
+                    console.log("token", response.data.token);
+                    console.log("userid",response.data.data._id );
                     if (previousPage) {
                         if (previousPage.includes("/book-chef-cook-for-party")) {
                             router.push({
