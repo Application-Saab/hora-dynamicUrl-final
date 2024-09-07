@@ -1,6 +1,5 @@
 .slider-container {
     position: relative;
-    margin-top: 20px;
     padding: 0;
 }
 .slider-item {
@@ -15,9 +14,12 @@
     background-color: #fff; /* Add a background color to make the gap visible */
 }
 .slick-slide{
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 8px;
+    margin-right: 8px;
     max-height: 230px;
+}
+.slider-container.slider-decoration-inner.decoration-item-grid{
+    margin-bottom: 40px !important;
 }
 
 .slider-image {
@@ -29,10 +31,9 @@
 }
 
 .slider-item h3 {
-    font-size: 16px;
+    font-size: 14px;
     color: rgb(146, 82, 170);
     font-weight: bold;
-    min-height: 50px;
 }
 .slider-header {
     display: flex;
@@ -51,7 +52,7 @@
     font-size: 14px;
     margin-top: auto;
     flex-direction: column;
-    padding: 0 8px 20px 8px;
+    padding: 1px 8px 0px 8px;
 }
 
 .slider-item-details p {
@@ -84,7 +85,31 @@
 .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
     width: 24%;
 }
+
+.slick-prev:before, .slick-next:before{
+    color: #9252AA !important;
+    font-size: 40px !important;
+}
+.slick-prev, .slick-next{
+    width: 30px !important;
+    height: 30px !important;
+}
+.slick-next {
+    right: 21px !important;
+    z-index: 1111 !important;
+   
+}
+.slick-prev{
+    left: 10px !important;
+    z-index: 1111 !important;
+}
 @media (max-width: 468px) {
+    .slick-next{
+        right: 10px !important;
+    }
+    .slick-prev, .slick-next{
+        top:38% !important;
+    }
     .slider-header {
         padding: 0;
         margin: 0 0 13px 0}
@@ -110,7 +135,7 @@
         margin: 0 5px;
     }
     .slider-item-details {
-        padding: 0 4px 21px 4px;
+        padding: 0 4px 0px 4px;
     }
     .slider-image {
         height: 160px;
@@ -120,10 +145,10 @@
     }
 
     .slider-item h3 {
-        font-size: 11px;
+        font-size: 14px;
         margin: 0;
-        padding: 5px 0 9px;
-        min-height: 40px;
+        padding: 5px 2px 9px;
+        min-height: 30px;
     }
     .slider-header button.viewbtn.btn {
         padding: 9px 9px !important;

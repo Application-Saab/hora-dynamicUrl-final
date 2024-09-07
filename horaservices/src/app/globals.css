@@ -1444,7 +1444,7 @@ h4.contact-us-heading a {
     }
 
     .checkoutRightImg {
-      height: auto;
+      height: auto !important;
       border-radius: 10px;
     }
 

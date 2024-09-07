@@ -140,8 +140,8 @@ const ContactUs = () => {
                 }}
               >
                  <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={banglore} alt="image" />
-                  <h4 className="contact-us-heading"><a href="/banglore">Banglore</a></h4>
+                  <Image className="contact-us-img" src={bangalore} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/bangalore">Bangalore</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={noida} alt="image" />

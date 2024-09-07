@@ -19,8 +19,10 @@ import InfoIcon from '../../assets/info.png'
 
 const Checkout = () => {
   const router = useRouter();
-  const { orderType, selectedDishDictionary, selectedDishPrice, selectedCount, peopleCount } = router.query // Accessing subCategory and itemName safely
+  const { orderType, selectedDishDictionary, selectedDishPrice, selectedCount, peopleCount, totalAmount } = router.query // Accessing subCategory and itemName safely
   let { subCategory, product } = router.query; // Accessing subCategory and itemName safely
+  const selectedAddOnProduct = router.query.selectedAddOnProduct ? JSON.parse(router.query.selectedAddOnProduct) : [];
+  const itemQuantities = router.query.itemQuantities ? JSON.parse(router.query.itemQuantities) : {};
   const [comment, setComment] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedDateError, setSelectedDateError] = useState(false);
@@ -42,6 +44,7 @@ const Checkout = () => {
     product = JSON.parse(product)
   }
 
+
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -55,8 +58,22 @@ const Checkout = () => {
   /// order type 7 Live Buffer
   /// order type 8 Bulk Catering.
   const handleComment = (e) => {
-    setComment(e.target.value);
+    const commentText = e.target.value;
+    setComment(commentText);
   };
+
+  // Function to get the final comment including add-on products
+  const getFinalComment = () => {
+    let addOnProductsText = "";
+
+    if (selectedAddOnProduct.length > 0) {
+      addOnProductsText = " and I have added these add-on products: " +
+        selectedAddOnProduct.map(item => `${item.title}: ₹${item.price}`).join(" ");
+    }
+
+    return comment + addOnProductsText;
+  };
+
 
   const handleDateChange = (date) => {
     console.log(`Date selected: ${date}`);
@@ -152,14 +169,14 @@ const Checkout = () => {
     "122018", "201009", "201001", "201002", "201003", "201004", "201005", "201006", "201007", "201008",
     "201010", "201011", "201012", "201013", "201014", "201015", "201016", "201017", "201018", "121002",
     "121001", "121003", "121004", "121005", "121006", "121007", "121008", "121009", "121010", "122022",
-    "560035", "500030" ,"500004", "500045", "500007", "500012", "500015", "500044", "500013", "501201", 
-    "501301", "500040", "500020", "500048", "500058", "500064", "500005", "500034", "500027", "500016", 
-    "500003", "500018", "500080", "500039", "500022", "500024", "500081", "500008", "500028", "500006", 
-    "500060", "500062", "500053", "500065", "500029", "500043", "500001", "500068", "500052", "500066", 
-    "500025", "500051", "500035", "500002", "500076", "500082", "500031", "500079", "500085", "500033", 
+    "560035", "500030", "500004", "500045", "500007", "500012", "500015", "500044", "500013", "501201",
+    "501301", "500040", "500020", "500048", "500058", "500064", "500005", "500034", "500027", "500016",
+    "500003", "500018", "500080", "500039", "500022", "500024", "500081", "500008", "500028", "500006",
+    "500060", "500062", "500053", "500065", "500029", "500043", "500001", "500068", "500052", "500066",
+    "500025", "500051", "500035", "500002", "500076", "500082", "500031", "500079", "500085", "500033",
     "500077", "500067", "500074", "500063", "500017", "500089", "500036", "500026", "500095", "500069",
     "500071", "500041", "500023", "500055", "500059", "500038", "500046", "500061", "500073", "502032",
-    "500070", "500057", "501101", "502300", "500049", "500060", "501218", "501505", "500070", "500019", 
+    "500070", "500057", "501101", "502300", "500049", "500060", "501218", "501505", "500070", "500019",
     "500101", "501504", "501815",
   ]
 
@@ -264,15 +281,16 @@ const Checkout = () => {
         "order_date": selectedDate.toDateString(),
         "no_of_burner": 0,
         "order_locality": city,
-        "total_amount": product.price,
+        "total_amount": totalAmount,
         "orderApplianceIds": [],
-        "payable_amount": product.price,
+        "payable_amount": totalAmount,
         "is_gst": "0",
         "order_type": true,
         "items": [product._id],
-        "decoration_comments": comment,
+        "decoration_comments": getFinalComment(),
         "status": 0
       }
+      console.log("req data", requestData)
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
         headers: {
@@ -429,28 +447,56 @@ const Checkout = () => {
                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Product Name:</label>
                         <p style={{ margin: 0, windth: "100%" }}>{product?.name}</p>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", margin: "0 0 20px 0" }}>
-                        <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Total Amount:</label>
+                      <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", margin: "0" }}>
+                        <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Product Price:</label>
                         <p style={{ margin: 0, windth: "100%" }}>{product?.price}</p>
                       </div>
-                      <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", margin: "0 0 20px 0" }}>
-                        <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Advance Amount:</label>
-                        <p style={{ margin: 0, windth: "100%" }}>₹ {Math.round(product?.price * 0.3)}</p>
+                      <div className='add-on-prices'>
+
+                        <div>
+                          {selectedAddOnProduct.length > 0 && (
+                            <>
+                              <label>Customisations</label>
+                              {selectedAddOnProduct.map((item, index) => (
+                                <li key={index}>
+                                  <div>
+                                    {item.title}
+                                  </div>
+                                  <div>
+                                    ₹ {item.price} x {itemQuantities[item.title]} = ₹ {item.price * itemQuantities[item.title]}
+
+                                  </div>
+                                </li>
+                              ))}
+
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className='detail-item'>
+                        <label>Total Amount:</label>
+                        <p>₹{totalAmount}</p>
+                      </div>
+
+                      <div className='detail-item'>
+                        <label>Advance Amount:</label>
+                        <p>₹ {Math.round(totalAmount * 0.3)}</p>
                       </div>
                     </div>
                   </div>
-                  <div >
-                    <div className='d-flex flex-wrap justify-content-center align-items-center need-more-info-sec'>
-                      <h5 className='mt-2'>Need more info?</h5>
-                      <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className='rounded-5 ms-1 bg-transparent contactus-redirection'>Contact Us</button>
-                    </div>
-                    <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
-                      background: "rgb(157, 74,147, 28%)"
-                    }}>
-                      <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation and order change policy</p>
-                      <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
-                      <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
-                    </div>
+                </div>
+                <div >
+                  <div className='d-flex flex-wrap justify-content-center align-items-center need-more-info-sec'>
+                    <h5 className='mt-2'>Need more info?</h5>
+                    <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className='rounded-5 ms-1 bg-transparent contactus-redirection'>Contact Us</button>
+                  </div>
+                  <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
+                    background: "rgb(157, 74,147, 28%)"
+                  }}>
+                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation and order change policy</p>
+                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
+                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
                   </div>
                 </div>
               </div>
@@ -474,14 +520,44 @@ const Checkout = () => {
 
                 <div className="rightSeccheckout" style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18) ", padding: "20px", backgroundColor: "#fff", borderRadius: "20px" }} >
                   <div className='rightcheckoutsec'>
-                    <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", margin: "0 0 5px 0" }}>
-                      <label style={{ color: "rgb(146, 82, 170)", fontSize: "16px", marigin: "16px 0 6px", fontWeight: 700 }}>Total Amount:</label>
-                      <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "16px", fontWeight: 700 }}>₹  {product?.price}</p>
+                    <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", margin: "5px 0 5px 0" }}>
+                      <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Product Amount:</label>
+                      <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: 700 }}>₹  {product?.price}</p>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", margin: "0 0 5px 0" }}>
-                      <label style={{ color: "rgb(146, 82, 170)", fontSize: "16px", marigin: "16px 0 6px", fontWeight: 700 }}>Advance Amount:</label>
-                      <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "16px", fontWeight: 700 }}>₹ {Math.round(product?.price * 0.3)}</p>
+                    <div className='add-on-prices mobile'>
+
+                      <div>
+                        {selectedAddOnProduct.length > 0 && (
+                          <>
+                            <label>Customisations</label>
+                            {selectedAddOnProduct.map((item, index) => (
+                              <li key={index}>
+                                <div>{item.title}</div>
+                                <div>
+                                  ₹ {item.price} x {itemQuantities[item.title]} = ₹ {item.price * itemQuantities[item.title]}
+                                </div>
+                              </li>
+                            ))}
+                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", margin: "0" }}>
+                              <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Total Amount:</label>
+                              <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: 700 }}>₹  {totalAmount}</p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+
+
                     </div>
+                    <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", margin: "0 0 10px 0" }}>
+                      <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 700 }}>Advance Amount:</label>
+                      <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "16px", fontWeight: 700 }}>₹ {Math.round(totalAmount * 0.3)}</p>
+                    </div>
+
+
+
+
+
+
                     <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
                       <div>
                         <Image style={{ width: "20px", marginRight: "10px", height: "20px" }} src={InfoIcon} alt='info' />
@@ -518,8 +594,9 @@ const Checkout = () => {
                       <select value={city} className=' rounded border border-1 p-1 bg-white text-black' onChange={handleCityChange}>
                         <option value="">Select City</option>
                         <option value="Bangalore">Bangalore</option>
-                        <option value="Delhi">Delhi</option>
+                        <option value="Delhi">Delhi NCR</option>
                         <option value="Mumbai">Mumbai</option>
+                        <option value="Hyderabad">Hyderabad</option>
                         {/* Add more cities as needed */}
                       </select>
                       {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}

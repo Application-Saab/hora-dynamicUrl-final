@@ -1,0 +1,101 @@
+{
+    "addOnProducts": [
+      {
+        "title": "BOARD WITH STAND (SIZE- 2*3)",
+        "description": "Elegant and customizable Welcome Sign with a sturdy stand for a professional and inviting presentation.",
+        "price": 985,
+        "image": "https://horaservices.com/api/uploads/borad-stand.jpg"
+      },
+      {
+        "title": "CAKE TABLE WITH STAND 1 PCS",
+        "description": "Cake Table with Stand for displaying and serving cakes with style and stability.",
+        "price": 571,
+        "image": "https://horaservices.com/api/uploads/cake_table.jpg"
+      },
+      {
+        "title": "SMALL HALL DECOR (100 Balloons)",
+        "description": "Small Hall Decor to add charm and elegance to compact spaces.",
+        "price": 385,
+        "image": "https://horaservices.com/api/uploads/small-hall-decor-200-ballon.jpg"
+      },
+      {
+        "title": "SMALL HALL DECOR (200 Balloons)",
+        "description": "Charming Small Hall Decor to enhance and personalize compact spaces with style.",
+        "price": 700,
+        "image": "https://horaservices.com/api/uploads/small-hall-decor-200-ballon.jpg"
+      },
+      {
+        "title": "LARGE ENTRY DECOR (Arch of 300 Balloons)",
+        "description": "Grand Large Entry Decor to make a striking first impression and set the tone for your space.",
+        "price": 1700,
+        "image": "https://horaservices.com/api/uploads/entery=deocration-300-ballons.jpg"
+      },
+      {
+        "title": "CEILING DECOR Embellishments (100 Balloons)",
+        "description": "Ceiling Decor to add a touch of elegance and creativity to overhead spaces.",
+        "price": 385,
+        "image": "https://horaservices.com/api/uploads/celing-ballons.jfif"
+      },
+      {
+        "title": "SMALL PILLAR (20 Balloons without numbers foil)",
+        "description": "Small Pillar for adding a touch of sophistication and structure to any space.",
+        "price": 57,
+        "image": "https://horaservices.com/api/uploads/ballon-pillar-without-number.jfif"
+      },
+      {
+        "title": "NAME AND PICTURE BANNER (Size- 6*6)",
+        "description": "Personalized Name and Picture Banner to showcase custom designs and memorable moments.",
+        "price": 1211,
+        "image": "https://horaservices.com/api/uploads/name&picture-banner.jfif"
+      },
+      {
+        "title": "NEON LIGHT (Small Size)",
+        "description": "Neon Light for an electrifying and contemporary glow that transforms any space with dazzling brilliance.",
+        "price": 428,
+        "image": "https://horaservices.com/api/uploads/neon-light-small.jfif"
+      },
+      {
+        "title": "NEON LIGHT (Large Size)",
+        "description": "Neon Light for an electrifying and contemporary glow that transforms any space with dazzling brilliance.",
+        "price": 500,
+        "image": "https://horaservices.com/api/uploads/neon-light-big-size.jfif"
+      },
+      {
+        "title": "NAME MARQUEE (Small Size 8 Inch) (Up to 7 Letters)",
+        "description": "Name Marquee for a bold and personalized display of names or messages.",
+        "price": 500,
+        "image": "https://horaservices.com/api/uploads/marquee-light-9inch.jfif"
+      },
+      {
+        "title": "NAME MARQUEE (Large Size 32 Inch) (Up to 7 Letters)",
+        "description": "Name Marquee for a bold and personalized display of names or messages.",
+        "price": 4000,
+        "image": "https://horaservices.com/api/uploads/marquee-light-32inch.jfif"
+      },
+      {
+        "title": "NAME MARQUEE (Small Size 8 Inch)",
+        "description": "Name Marquee for a bold and eye-catching display that highlights names or messages with style.",
+        "price": 142,
+        "image": "https://horaservices.com/api/uploads/marquee-light-8inch.jfif"
+      },
+      {
+        "title": "NAME MARQUEE (Large Size 32 Inch)",
+        "description": "Name Marquee for a bold and eye-catching display that highlights names or messages with style.",
+        "price": 571,
+        "image": "https://horaservices.com/api/uploads/marquee-light-32-seoncd-inch.jfif"
+      },
+      {
+        "title": "NAME FOIL BALLOON (Small Size) (Up to 10 Characters)",
+        "description": "Name Foil Balloon for a festive and personalized touch to any celebration.",
+        "price": 282,
+        "image": "https://horaservices.com/api/uploads/name-foil-ballon.jpg"
+      },
+      {
+        "title": "BACKDROP STAND WITH WHITE NET CLOTH AND FAIRY LIGHTS",
+        "description": "Backdrop Stand with White Net Cloth and Fairy Lights for a magical and elegant event setting.",
+        "price": 2570,
+        "image": "https://horaservices.com/api/uploads/backdrop-stand.jfif"
+      }
+    ]
+  }
+  
