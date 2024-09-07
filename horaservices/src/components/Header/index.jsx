@@ -236,7 +236,7 @@ useEffect(() => {
                 </>
                
                 ) : (
-                  <a style={styles.linkicon} onClick={handleLogout}>
+                  <a style={styles.linkiconLogout} onClick={handleLogout}>
                     <image src={loginIcon} />
                     <span style={{ marginLeft: "3px" }}>Logout</span>
                   </a>
@@ -368,7 +368,7 @@ useEffect(() => {
                   <span style={{ marginLeft: "3px" }}>Login</span>
                 </Link>
               ) : (
-                <a style={styles.linkicon} onClick={handleLogout}>
+                <a style={styles.linkiconLogout} onClick={handleLogout}>
                   <FontAwesomeIcon icon={faUser} style={styles.icon} />
                   <span style={{ marginLeft: "3px" }}>Logout</span>
                 </a>
@@ -572,6 +572,12 @@ const styles = {
     padding: "0px",
   },
   linkicon: {
+    color: "#333",
+    textDecoration: "none",
+    fontSize: "16px",
+    fontWeight: "500",
+  },
+  linkiconLogout: {
     color: "#333",
     textDecoration: "none",
     fontSize: "16px",
