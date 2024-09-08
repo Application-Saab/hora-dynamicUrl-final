@@ -39,12 +39,14 @@ const router = useRouter();
 const [showButton, setShowButton] = useState(false);
 const [currentSlide, setCurrentSlide] = useState(0);
 
-const openLink = () => {
-window.open(
-  "https://play.google.com/store/apps/details?id=com.hora",
-  "_blank"
-);
-};
+
+
+const photographyUrl = () =>{
+  window.open(
+    'https://api.whatsapp.com/send?phone=918982321487&text=I%20wanted%20to%20know%20about%2C%20photography',
+    '_blank'
+  );
+}
 const schemaOrg = getHomeOrganizationSchema();
 const scriptTag = JSON.stringify(schemaOrg);
 
@@ -529,7 +531,7 @@ return (
     </div>
     <div className="service-image-container">
       <Image src="https://horaservices.com/api/uploads/homepage_photography.png" alt="Photography" className="service-image" width={200} height={100}/>
-      <button className="book-now2" onClick={() => window.location.href = '/'} >Book Now</button>
+      <button className="book-now2" onClick={photographyUrl} >Book Now</button>
     </div>
   </div>
    </div>

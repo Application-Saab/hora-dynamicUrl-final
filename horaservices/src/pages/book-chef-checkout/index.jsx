@@ -20,6 +20,7 @@ import SelectConfirmOrder from "../../assets/ConfirmOrderSelected.png";
 import styled from "styled-components";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Skeleton from 'react-loading-skeleton';
 
 const ChefCheckout = () => {
     //   let { peopleCount, orderType, selectedDishDictionary, selectedDishPrice, selectedCount , selectedDishes } = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -41,7 +42,7 @@ const ChefCheckout = () => {
     const [isClient, setIsClient] = useState(false);
     const [combinedDateTime, setCombinedDateTime] = useState(null);
     const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     let {
         peopleCount,
         orderType,
@@ -319,6 +320,7 @@ const ChefCheckout = () => {
     };
 
     const onContinueClick = async () => {
+        setLoading(true);
         const apiUrl = BASE_URL + PAYMENT;
         const storedUserID = await localStorage.getItem('userID');
         const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -398,6 +400,9 @@ const ChefCheckout = () => {
         } catch (error) {
             // Handle errors
             console.error('API error:', error);
+        }
+        finally {
+            setLoading(false); // Hide the loader after the operation
         }
     }
 

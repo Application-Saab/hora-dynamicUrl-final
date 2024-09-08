@@ -290,7 +290,7 @@ const Checkout = () => {
         "decoration_comments": getFinalComment(),
         "status": 0
       }
-      alert(JSON.stringify(requestData))
+
       console.log("req data", requestData)
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
