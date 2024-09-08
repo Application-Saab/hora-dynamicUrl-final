@@ -360,7 +360,7 @@ const ChefCheckout = () => {
 
         const requestData2 = {
             user_id: storedUserID,
-            price: Math.round(selectedDishPrice * 0.2),
+            price: Math.round(totalPrice * 0.2),
             phone: phoneNumber,
             name: '',
             merchantTransactionId: merchantTransactionId
@@ -652,9 +652,10 @@ const ChefCheckout = () => {
                                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
                                         <select value={city} className='rounded border border-1 p-1 select-city bg-white text-black' onChange={handleCityChange}>
                                             <option value="">Select City</option>
-                                            <option value="Bangalore">Bangalore</option>
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Mumbai">Mumbai</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Delhi">Delhi NCR</option>
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Hyderabad">Hyderabad</option>
                                             {/* Add more cities as needed */}
                                         </select>
                                         {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}

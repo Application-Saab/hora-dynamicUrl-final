@@ -281,15 +281,16 @@ const Checkout = () => {
         "order_date": selectedDate.toDateString(),
         "no_of_burner": 0,
         "order_locality": city,
-        "total_amount": totalAmount,
+        "total_amount": Math.round(totalAmount*0.3),
         "orderApplianceIds": [],
-        "payable_amount": totalAmount,
+        "payable_amount": Math.round(totalAmount*0.3),
         "is_gst": "0",
         "order_type": true,
         "items": [product._id],
         "decoration_comments": getFinalComment(),
         "status": 0
       }
+      alert(JSON.stringify(requestData))
       console.log("req data", requestData)
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
@@ -306,7 +307,7 @@ const Checkout = () => {
 
     const requestData2 = {
       user_id: storedUserID,
-      price: Math.round(product.price * 0.3),
+      price: Math.round(totalAmount * 0.3),
       phone: phoneNumber,
       name: '',
       merchantTransactionId: merchantTransactionId
