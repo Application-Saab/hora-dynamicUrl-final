@@ -20,6 +20,7 @@ import SelectConfirmOrder from "../../assets/ConfirmOrderSelected.png";
 import styled from "styled-components";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Skeleton from 'react-loading-skeleton';
 
 const ChefCheckout = () => {
     //   let { peopleCount, orderType, selectedDishDictionary, selectedDishPrice, selectedCount , selectedDishes } = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -41,7 +42,7 @@ const ChefCheckout = () => {
     const [isClient, setIsClient] = useState(false);
     const [combinedDateTime, setCombinedDateTime] = useState(null);
     const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
-
+    const [loading, setLoading] = useState(false);
     let {
         peopleCount,
         orderType,
@@ -319,6 +320,7 @@ const ChefCheckout = () => {
     };
 
     const onContinueClick = async () => {
+        setLoading(true);
         const apiUrl = BASE_URL + PAYMENT;
         const storedUserID = await localStorage.getItem('userID');
         const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -360,7 +362,7 @@ const ChefCheckout = () => {
 
         const requestData2 = {
             user_id: storedUserID,
-            price: Math.round(selectedDishPrice * 0.2),
+            price: Math.round(totalPrice * 0.2),
             phone: phoneNumber,
             name: '',
             merchantTransactionId: merchantTransactionId
@@ -398,6 +400,9 @@ const ChefCheckout = () => {
         } catch (error) {
             // Handle errors
             console.error('API error:', error);
+        }
+        finally {
+            setLoading(false); // Hide the loader after the operation
         }
     }
 
@@ -652,9 +657,10 @@ const ChefCheckout = () => {
                                         <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
                                         <select value={city} className='rounded border border-1 p-1 select-city bg-white text-black' onChange={handleCityChange}>
                                             <option value="">Select City</option>
-                                            <option value="Bangalore">Bangalore</option>
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Mumbai">Mumbai</option>
+                                        <option value="Bangalore">Bangalore</option>
+                                        <option value="Delhi">Delhi NCR</option>
+                                        <option value="Mumbai">Mumbai</option>
+                                        <option value="Hyderabad">Hyderabad</option>
                                             {/* Add more cities as needed */}
                                         </select>
                                         {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}

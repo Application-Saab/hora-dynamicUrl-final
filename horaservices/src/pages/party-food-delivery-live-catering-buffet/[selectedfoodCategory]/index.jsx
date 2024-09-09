@@ -27,8 +27,8 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const bottomSheetRef = useRef(null);
   const router = useRouter();
   console.log(router)
-  let { selectedfoodCategory } = router.query;
-  const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
+  const { selectedfoodCategory } = router.query;
+  const [selectedOption, setSelectedOption] = useState('');
   // const selectedOption = router.asPath.split('/').pop();
   const [orderType, setOrderType] = useState(2);
   const [isDishSelected, setIsDishSelected] = useState(false);
@@ -60,6 +60,12 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     button: "",
   });
 
+  useEffect(() => {
+    if (selectedfoodCategory) {
+      setSelectedOption(selectedfoodCategory);
+    }
+  }, [selectedfoodCategory]);
+
   // const navigate = useNavigate();
 
   const handleWarningClose = () => {
@@ -67,7 +73,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     setWarningVisibleForCuisineCount(false);
     setWarningVisibleForTotalAmount(false);
   };
-  console.log(selectedOption)
 
   // get category of cuisines
 

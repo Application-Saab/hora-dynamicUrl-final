@@ -66,6 +66,12 @@ const FoodDeliveryCheckout = () => {
             console.error('Error parsing selectedDishDictionary:', error);
         }
     }
+
+    useEffect(() => {
+        setIsClient(true);
+      }, []);
+
+      
     const selectedDeliveryOption = selectedOption;
 
     const handleComment = (e) => {
@@ -328,25 +334,37 @@ const FoodDeliveryCheckout = () => {
     var discountedPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
     const calculateFinalTotal = () => {
-        let finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
-        console.log(totalPrice, discountedPrice);
-        console.log("finalTotal: " + finalTotal);
+        let finalTotal = 0; // Initialize finalTotal with 0
+    
+        // Check for the selected delivery option
         if (selectedDeliveryOption === 'party-food-delivery') {
+            finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+            console.log("Initial total after applying discount and delivery charges: " + finalTotal);
+            
             finalTotal += parseFloat(packingCost);
-            console.log("finalTotal after packing cost: " + finalTotal);
+            console.log("Total after adding packing cost: " + finalTotal);
+    
             if (includeDisposable) {
-                finalTotal += parseFloat((20 * peopleCount).toFixed(0));
-                console.log("finalTotal after disposable cost: " + finalTotal);
+                finalTotal += parseFloat((20 * peopleCount).toFixed(0)); // Convert to float to add
+                console.log("Total after adding disposable cost: " + finalTotal);
             }
         } else if (selectedDeliveryOption === 'party-live-buffet-catering') {
+            finalTotal = totalPrice - parseFloat(discountedPrice);
+            console.log("Initial total after applying discount: " + finalTotal);
+    
             if (includeTables) {
                 finalTotal += 1200;
-                console.log("finalTotal after table cost: " + finalTotal);
+                console.log("Total after adding table cost: " + finalTotal);
             }
         }
-        console.log("finalTotal after adjustments: " + finalTotal.toFixed(0));
-        return finalTotal.toFixed(0);
+    
+        // Ensure finalTotal is a number and rounded to the nearest whole number
+        finalTotal = parseFloat(finalTotal.toFixed(0));
+        console.log("Final total after adjustments: " + finalTotal);
+    
+        return finalTotal;
     };
+    
 
     // Function to calculate the advance payment
     const calculateAdvancePayment = () => {
