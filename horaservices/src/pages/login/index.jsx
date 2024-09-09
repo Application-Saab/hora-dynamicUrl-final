@@ -28,6 +28,9 @@ const Login = () => {
     const city = router.query.city || null;
     const orderType = router.query.orderType || null;
     const product = router.query.product || null;
+    const selectedAddOnProduct = router.query.selectedAddOnProduct || null;
+    const itemQuantities = router.query.itemQuantities || null;
+    const totalAmount = router.query.totalAmount || null;
     const selectedDishDictionary = router.query.selectedDishDictionary || null;
     const selectedDishPrice = router.query.selectedDishPrice || null;
     const selectedDishes = router.query.selectedDishes || null;
@@ -44,7 +47,6 @@ const Login = () => {
     const { time, isTimeUp, resetTimer } = useTimer(25);
     const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
     const [popupMessage, setPopupMessage] = useState({}); // State for popup message
-    console.log(router)
     const handleLogout = () => {
         localStorage.setItem("isLoggedIn", "false");
         localStorage.clear();
@@ -164,7 +166,7 @@ const Login = () => {
                         } else if (previousPage.includes(`/balloon-decoration/${catValue}/product`)) {
                             router.push({
                                 pathname: '/checkout',
-                                query: { subCategory, product, orderType }
+                                query: { subCategory, product, totalAmount , orderType, catValue , selectedAddOnProduct, itemQuantities  }
                             });
                         }
                         else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {

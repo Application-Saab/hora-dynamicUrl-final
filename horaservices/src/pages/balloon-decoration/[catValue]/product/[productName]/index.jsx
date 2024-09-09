@@ -19,21 +19,21 @@ import addOnProductsData from '../../../../../utils/addOnProduct.json';
 const SkeletonLoader = () => {
   return (
     <div className="skeleton-loader" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "20px", paddingBottom:"20px" ,  position: "relative" }} className="decDetails">
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "20px", paddingBottom: "20px", position: "relative" }} className="decDetails">
         <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">
           <div style={{ width: "80%", height: "300px", backgroundColor: "#f0f0f0", margin: "0 auto", position: "relative" }} />
         </div>
         <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
-          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%"  , borderRadius:"4px" }} className="decDetailsRightInner"/>
-          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "40%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "80%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
-          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%" , borderRadius:"4px"}} className="decDetailsRightInner"/>
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "40%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "80%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "30px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "20px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "60%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%", borderRadius: "4px" }} className="decDetailsRightInner" />
+          <div style={{ height: "50px", backgroundColor: "#f0f0f0", marginBottom: "12px", width: "100%", borderRadius: "4px" }} className="decDetailsRightInner" />
         </div>
       </div>
     </div>
@@ -50,8 +50,8 @@ function DecorationCatDetails() {
   const [buttonClickCount, setButtonClickCount] = useState(0);
   const router = useRouter();
   const [product, setProduct] = useState('');
-  const [apiProduct , setApiProduct] = useState('');
-  const [isFetched , setIsFetched ] = useState(false)
+  const [apiProduct, setApiProduct] = useState('');
+  const [isFetched, setIsFetched] = useState(false)
   const [subCategory, setSubCategory] = useState('');
   const [catValue, setCatValue] = useState('');
   const altTagCatValue = catValue.replace(/-/g, ' ');
@@ -68,7 +68,7 @@ function DecorationCatDetails() {
   }, [router.isReady, router.query]);
 
 
-  
+
   useEffect(() => {
     if (apiProduct && !isFetched) {
       const fetchDecorationDetails = async () => {
@@ -87,11 +87,11 @@ function DecorationCatDetails() {
       fetchDecorationDetails();
     }
   }, [apiProduct, catValue]);
-  
-  
+
+
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
-  const faqSchema = getProductFAQSchemaProductDetails(product); 
+  const faqSchema = getProductFAQSchemaProductDetails(product);
   const faqScriptTag = JSON.stringify(faqSchema);
   const [isClient, setIsClient] = useState(false);
 
@@ -114,13 +114,13 @@ function DecorationCatDetails() {
   const handleAddToCart = (item) => {
     const updatedSelectedAddOnProduct = [...selectedAddOnProduct];
     const existingItemIndex = updatedSelectedAddOnProduct.findIndex(addonproductItem => addonproductItem.title === item.title);
-  
+
     if (existingItemIndex !== -1) {
       updatedSelectedAddOnProduct[existingItemIndex].quantity += 1;
     } else {
       updatedSelectedAddOnProduct.push({ ...item, quantity: 1 });
     }
-  
+
     setSelectedAddOnProduct(updatedSelectedAddOnProduct);
     setItemQuantities({
       ...itemQuantities,
@@ -128,11 +128,11 @@ function DecorationCatDetails() {
     });
     updateTotalAmount();
   };
-  
+
   const handleRemoveFromCart = (item) => {
     const updatedSelectedAddOnProduct = [...selectedAddOnProduct];
     const existingItemIndex = updatedSelectedAddOnProduct.findIndex(addonproductItem => addonproductItem.title === item.title);
-  
+
     if (existingItemIndex !== -1) {
       if (updatedSelectedAddOnProduct[existingItemIndex].quantity > 1) {
         updatedSelectedAddOnProduct[existingItemIndex].quantity -= 1;
@@ -140,7 +140,7 @@ function DecorationCatDetails() {
         updatedSelectedAddOnProduct.splice(existingItemIndex, 1);
       }
     }
-  
+
     const updatedQuantities = { ...itemQuantities };
 
     if (updatedQuantities[item.title] > 1) {
@@ -148,7 +148,7 @@ function DecorationCatDetails() {
     } else {
       delete updatedQuantities[item.title];
     }
-  
+
     setSelectedAddOnProduct(updatedSelectedAddOnProduct);
     setItemQuantities(updatedQuantities);
     updateTotalAmount();
@@ -166,11 +166,11 @@ function DecorationCatDetails() {
     setIsModalOpen(false);
   }
 
-  const handleButtonClick = (subCategory , product) => {
+  const handleButtonClick = (subCategory, product) => {
     if (buttonClickCount === 0) {
-      showAddOnmodal(subCategory , product);
+      showAddOnmodal(subCategory, product);
     } else {
-      handleCheckout(subCategory , product);
+      handleCheckout(subCategory, product);
     }
     setButtonClickCount(buttonClickCount + 1);
   };
@@ -182,11 +182,11 @@ function DecorationCatDetails() {
 
   const FAQSection = ({ faqData }) => {
     const [openIndex, setOpenIndex] = useState(null);
-  
+
     const handleToggle = (index) => {
       setOpenIndex(openIndex === index ? null : index);
     };
-  
+
     return (
       <div className="faqSection">
         {faqData.map((item, index) => (
@@ -246,18 +246,18 @@ function DecorationCatDetails() {
       ),
     },
   ];
-  
 
-  const handleCheckout = (subCategory, product , selectedAddOnProduct) => {
-    const stateData = { 
+
+  const handleCheckout = (subCategory, product, selectedAddOnProduct) => {
+    const stateData = {
       from: window.location.pathname,
       subCategory,
       product: JSON.stringify(product),
       orderType,
-      catValue ,
-      selectedAddOnProduct:JSON.stringify(selectedAddOnProduct),
-      itemQuantities:JSON.stringify(itemQuantities),
-      totalAmount:totalAmount,
+      catValue,
+      selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+      itemQuantities: JSON.stringify(itemQuantities),
+      totalAmount: totalAmount,
     };
 
     if (localStorage.getItem("isLoggedIn") !== "true") {
@@ -269,9 +269,9 @@ function DecorationCatDetails() {
           product: JSON.stringify(product),
           orderType,
           catValue,
-          selectedAddOnProduct:JSON.stringify(selectedAddOnProduct),
-          itemQuantities:JSON.stringify(itemQuantities),
-          totalAmount:totalAmount,
+          selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+          itemQuantities: JSON.stringify(itemQuantities),
+          totalAmount: totalAmount,
         }
       });
     } else {
@@ -283,9 +283,9 @@ function DecorationCatDetails() {
           product: JSON.stringify(product),
           orderType,
           catValue,
-          selectedAddOnProduct:JSON.stringify(selectedAddOnProduct),
-          itemQuantities:JSON.stringify(itemQuantities),
-          totalAmount:totalAmount,
+          selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+          itemQuantities: JSON.stringify(itemQuantities),
+          totalAmount: totalAmount,
         }
       });
     }
@@ -313,6 +313,10 @@ function DecorationCatDetails() {
         .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()) // Capitalize each part
         .join(''); // Join parts together without spaces
     }
+  }
+
+  function getSimilarProducts(product){
+    console.log("product" , product);
   }
 
 
@@ -401,121 +405,112 @@ function DecorationCatDetails() {
             </div> */}
             </div>
 
-          
-                {selectedAddOnProduct.length > 0 && (
-   <ul className="decoration-addons">
-    <>
-    <div className="addon-sec">
-      <h1  style={{color: "#222", fontSize: "16px", fontWeight: "#222"}}>{product.name} : </h1>
-      <div style={{fontSize: "16px", color: "#222", fontWeight: "600"}}> ₹ {product.price}</div>
-    </div>
-      <h6>Customisations 
-      <span onClick={showAddOnmodal} style={{ marginLeft:"6px" , cursor:"pointer"}}>
-      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path></svg>
-      </span>
-      </h6>
-      {selectedAddOnProduct.map((item, index) => (
-        <li key={index} className="addon-sec">
-          <div>
-          {item.title} :     
-          </div>
-          <div>
-          ₹ {item.price} x {itemQuantities[item.title]} = ₹ {item.price * itemQuantities[item.title]}
-          </div>
-        </li>
-      ))}
-      <p style={{fontSize: "18px", color: "#9252AA", fontWeight: "600"}} className="addon-sec">
-        <div>
-        Total:
-        </div>
-        <div>
-        ₹ {totalAmount}
-        </div>
-        
-      </p>
-  {/* {isClient && window.innerWidth > 800 ? */}
-  <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleCheckout(subCategory, product, selectedAddOnProduct)}>Continue</button>
-                {/* : null} */}    </>
-</ul>
-  )}      
-            
+
+            {selectedAddOnProduct.length > 0 && (
+              <ul className="decoration-addons">
+                <>
+                  <div className="addon-sec">
+                    <h1 style={{ color: "#222", fontSize: "16px", fontWeight: "#222" }}>{product.name} : </h1>
+                    <div style={{ fontSize: "16px", color: "#222", fontWeight: "600" }}> ₹ {product.price}</div>
+                  </div>
+                  <h6>Customisations
+                    <span onClick={showAddOnmodal} style={{ marginLeft: "6px", cursor: "pointer" }}>
+                      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path></svg>
+                    </span>
+                  </h6>
+                  {selectedAddOnProduct.map((item, index) => (
+                    <li key={index} className="addon-sec">
+                      <div>
+                        {item.title} :
+                      </div>
+                      <div>
+                        ₹ {item.price} x {itemQuantities[item.title]} = ₹ {item.price * itemQuantities[item.title]}
+                      </div>
+                    </li>
+                  ))}
+                  <p style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }} className="addon-sec">
+                    <div>
+                      Total:
+                    </div>
+                    <div>
+                      ₹ {totalAmount}
+                    </div>
+
+                  </p>
+                  {/* {isClient && window.innerWidth > 800 ? */}
+                  <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleCheckout(subCategory, product, selectedAddOnProduct)}>Continue</button>
+                  {/* : null} */}    </>
+              </ul>
+            )}
 
 
-            <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px" , backgroundColor:"#fff"}}>
-                {getItemInclusion(product.inclusion)}
-                {selectedAddOnProduct.length == 0 && (
+
+            <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
+              {getItemInclusion(product.inclusion)}
+              {selectedAddOnProduct.length == 0 && (
                 <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
-              )}  
-              </div>
-          
+              )}
+            </div>
+
 
             <div className="tab-section-details-productpage">
-            <Tabs 
-            tabs={tabs} 
-            defaultTab="faq" 
-            className="faqtabs"
-            />
+              <Tabs
+                tabs={tabs}
+                defaultTab="faq"
+                className="faqtabs"
+              />
             </div>
-          
+
+            <div className="similar-products">
+              <h2>Similar Products</h2>
+              {getSimilarProducts(product)}
+            </div>
+
           </div>
         </div>
       </div>
 
-      {/* {isClient && window.innerWidth < 800 ?
-        <div style={{
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          borderTop: "1px solid #efefef",
-          backgroundColor: "#EDEDED"
-        }}
-        >
-          <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleCheckout(subCategory, product)}>Continue</button>
-        </div>
-        :
-        null
-      } */}
+    
 
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
+            <div className="modal-top-box">
+              <h2>Select Customizations</h2>
+            </div>
+            <div className="modal-middle-box">
+              <div className="modal-card-container">
+                {addOnProductsData.addOnProducts.map((item, index) => (
+                  <div key={index} className="modal-card">
+                    <img style={{ width: "150px", height: "150px" }} src={item.image} alt={item.title} className="model-image" />
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
 
-{isModalOpen && (
-  <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
-      <div className="modal-top-box">
-        <h2>Select Customizations</h2>
-      </div>
-      <div className="modal-middle-box">
-        <div className="modal-card-container">
-          {addOnProductsData.addOnProducts.map((item, index) => (
-            <div key={index} className="modal-card">
-              <img style={{width: "150px", height: "150px"}} src={item.image} alt={item.title}className="model-image"/>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              
-              <div className="price-container">
-                <span className="price">₹ {item.price}</span>
-                {itemQuantities[item.title] ? (
-  <div>
-    <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
-    <span>{itemQuantities[item.title]}</span>
-    <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
-  </div>
-) : (
-  <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
-)}
+                    <div className="price-container">
+                      <span className="price">₹ {item.price}</span>
+                      {itemQuantities[item.title] ? (
+                        <div>
+                          <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
+                          <span>{itemQuantities[item.title]}</span>
+                          <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
+                        </div>
+                      ) : (
+                        <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+            <div className="modal-bottom-box">
+
+              <p>Total: ₹ {calculateTotalPrice(Number(product.price))}</p>
+              <button className="book-now-button" onClick={handleContinue}>Continue</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="modal-bottom-box">
-        
-      <p>Total: ₹ {calculateTotalPrice(Number(product.price))}</p>
-        <button className="book-now-button" onClick={handleContinue}>Continue</button>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

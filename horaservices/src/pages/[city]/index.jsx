@@ -14,7 +14,7 @@ import Failure from '../../pages/Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
 import whatsppicon from "../../assets/whatsapp-icon.png";
 import { getHomeOrganizationSchema } from "../../utils/schema";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../../app/page.module.css";
@@ -41,7 +41,7 @@ export default function Home() {
   const [city, setCity] = useState(null);
   const photographyUrl = () =>{
     window.open(
-      'https://api.whatsapp.com/send?phone=918982321487&text=I%20wanted%20to%20know%20about%2C%20photography',
+      'https://api.whatsapp.com/send?phone=+917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
       '_blank'
     );
   }
@@ -49,6 +49,7 @@ export default function Home() {
   const scriptTag = JSON.stringify(schemaOrg);
 
   useEffect(() => {
+    console.log(router.query)
     console.log('Router is ready');
     if (router.isReady) {
       console.log('Router is ready');
@@ -452,8 +453,8 @@ export default function Home() {
 
   const openSliderLink = (link, city) => {
     if (link) {
-      // window.location.href = `/${city}/${link}`; // Redirects to the provided link
-      window.location.href = link; // Redirects to the provided link
+      window.location.href = `/${city}/${link}`; // Redirects to the provided link
+      //window.location.href = link; // Redirects to the provided link
     }
   };
 
@@ -477,7 +478,7 @@ export default function Home() {
                   />
                   <div className="carousel-content slide-content">
                     <h2 className="party-title1 slide-title">{slide.title}</h2>
-                    <button className="slide-button book-now" onClick={() => openSliderLink(slide.link)}>book Now</button>
+                    <button className="slide-button book-now" onClick={() => openSliderLink(slide.link , city)}>book Now</button>
                   </div>
                 </div>
               ))}
@@ -493,7 +494,7 @@ export default function Home() {
           <div className="food-cards desktop">
             {foodData.map(item => (
               <div key={item.id} className="food-card">
-                <a href={item.link} className="food-card-link">
+                <a href={`${city}/${item.link}`} className="food-card-link">
                   <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                   <p className="food-card-title">{item.title}</p>
                 </a>
@@ -514,7 +515,7 @@ export default function Home() {
             <div className="food-card  right-side">
               {foodData.slice(1, 3).map(item => (
                 <div key={item.id} className="food-card right-card">
-                  <a href={item.link} className="food-card-link">
+                  <a href={`${city}/${item.link}`} className="food-card-link">
                     <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                     <p className="food-card-title">{item.title}</p>
                   </a>
@@ -534,7 +535,7 @@ export default function Home() {
             </div>
             <div className="service-image-container">
               <Image src="https://horaservices.com/api/uploads/homepage_decoration.png" alt="Decoration" className="service-image" width={200} height={100} />
-              <button className="book-now2" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
+              <button className="book-now2" onClick={() => window.location.href = `${city}/balloon-decoration`} >Book Now</button>
             </div>
           </div>
           <div className="service">
@@ -579,7 +580,7 @@ export default function Home() {
           <div className="categoriesCard-container">
             {whereAreYouData.map(category => (
               <div key={category.id} className="categoriesCard-card">
-                <a href={category.link} rel="noopener noreferrer">
+                <a href={`${city}/${category.link}`} rel="noopener noreferrer">
                   <div className="categoriesCard-image-wrapper">
                     <Image src={category.imageUrl} alt={category.title} className="categoriesCard-image" width={200} height={100} />
                   </div>
@@ -591,7 +592,7 @@ export default function Home() {
                       <li key={index}>{point}</li>
                     ))}
                   </ul>
-                  <a href={category.link} className="categoriesCard-explore-more" >
+                  <a href={`${city}/${category.link}`} className="categoriesCard-explore-more" >
                     Explore More
                   </a>
                 </div>

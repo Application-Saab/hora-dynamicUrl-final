@@ -8,6 +8,12 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+.sticky-image {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 10px; /* Adjust this value as needed */
+  width: 50%; /* Ensure it occupies the correct width */
+}
 .decContainerSec.decPage img{
   cursor: pointer;
 }

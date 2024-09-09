@@ -224,7 +224,6 @@ const CreateOrder = ({ history, currentStep }) => {
             setIsDishSelected(updatedSelectedDishes.length > 0);
         }
     };
-    console.log(selectedDishes.length)
 
     const handleCuisinePress = (cuisineId) => {
         if (selectedCuisines.length < 3 || selectedCuisines.includes(cuisineId)) {

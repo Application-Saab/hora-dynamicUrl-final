@@ -20,7 +20,6 @@ const DecorationCatPage = () => {
   const router = useRouter();
     // let { city } = useParams();
   const { city, catValue } = router.query;
-  console.log(router)
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();
@@ -319,7 +318,7 @@ const DecorationCatPage = () => {
                 <div style={{ textAlign: "center", width: "100%", padding: "20px 0" }}>
                   <span>Reach out to our support team for this</span>
                   <span style={{ marginLeft: "10px" }}>
-                    <Link className="conactus" href="https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
+                    <Link className="conactus" href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
                   </span>
                 </div>
               )

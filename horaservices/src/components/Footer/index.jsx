@@ -42,6 +42,7 @@ const footerColumns = [
       { text: 'Faridabad', to: '/faridabad' },
       { text: 'Noida', to: '/noida' },
       { text: 'Bengaluru', to: '/bengaluru' },
+      { text: 'Bangalore', to: '/bangalore' },
       { text: 'Hyderabad', to: '/hyderabad' },
       { text: 'Mumbai', to: '/mumbai' },
       { text: 'Indore', to: '/indore' },
@@ -63,6 +64,7 @@ const footerColumns = [
       { text: 'Faridabad', to: '/faridabad/chef-near-me' },
       { text: 'Noida', to: '/noida/chef-near-me' },
       { text: 'Bengaluru', to: '/bengaluru/chef-near-me' },
+      { text: 'Bangalore', to: '/bangalore/chef-near-me' },
       { text: 'Hyderabad', to: '/hyderabad/chef-near-me' },
       { text: 'Mumbai', to: '/mumbai/chef-near-me' },
       { text: 'Indore', to: '/indore/chef-near-me' },
@@ -84,6 +86,7 @@ const footerColumns = [
       { text: 'Faridabad', to: '/faridabad/balloon-decoration' },
       { text: 'Noida', to: '/noida/balloon-decoration' },
       { text: 'Bengaluru', to: '/bengaluru/balloon-decoration' },
+      { text: 'Bangalore', to: '/bangalore/balloon-decoration' },
       { text: 'Hyderabad', to: '/hyderabad/balloon-decoration' },
       { text: 'Mumbai', to: '/mumbai/balloon-decoration' },
       { text: 'Indore', to: '/indore/balloon-decoration' },
@@ -99,7 +102,7 @@ const footerColumns = [
   {
     title: 'Contact',
     links: [
-      { text: '+917338584828', href: 'tel:+918982321487' },
+      { text: '+917338584828', href: 'tel:+917338584828' },
       { text: 'dev@horaservices.com', href: 'mailto:dev@horaservices.com', style: { textTransform: 'lowercase' } },
       { text: 'Contact Us', href: '/contactus' },
     ],
