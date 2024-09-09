@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,10 @@ export default function RootLayout({ children }) {
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content="https://horaservices.com" />
         <meta property="og:type" content="website" />
+
+        <GoogleTagManager gtmId="GTM-K3SCKLTZ" />
+        
+
       </head>
       <body className={inter.className}>
         <Header />

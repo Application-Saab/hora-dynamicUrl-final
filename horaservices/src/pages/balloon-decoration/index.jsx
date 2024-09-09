@@ -29,6 +29,9 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { GoogleTagManager } from '@next/third-parties/google'
+
+
 const decCat = [
     { id: '2', image: BirthdayImage, name: 'Birthday', subCategory: "Birthday", catValue: "birthday-decoration", imgAlt: "A Gorgeous Candy Birthday Decoration Surprise!" },
     { id: '3', image: FirstnightImage, name: 'First Night', subCategory: "FirstNight", catValue: "first-night-decoration", imgAlt: "Add extra happiness quotient to your wedding night with our exclusive décor package" },
@@ -358,6 +361,7 @@ const Decoration = () => {
 
     return (
         <div>
+          <GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
             <Head>
                 <title>Balloon and Flower Decoration @999</title>
                 <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
@@ -370,6 +374,9 @@ const Decoration = () => {
                 <meta name="author" content="Hora Services" />
                 <meta property="og:url" content="https://horaservices.com/balloon-decoration" />
                 <meta property="og:type" content="website" />
+
+                <GoogleTagManager gtmId="GTM-K3SCKLTZ" />
+            
             </Head>
                 <div  className="decContainerSec decPage">
                 {decCat

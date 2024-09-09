@@ -34,6 +34,8 @@ import homepage_entertainment2 from '../assets/homepage_entertainment2.png';
 import homepage_entertainment3 from '../assets/homepage_entertainment3.png';
 import homepage_entertainment4 from '../assets/homepage_entertainment4.png';
 
+import { sendGTMEvent } from '@next/third-parties/google'
+
 export default function Home() {
 const router = useRouter();
 const [showButton, setShowButton] = useState(false);
