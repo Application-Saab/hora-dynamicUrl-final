@@ -34,7 +34,7 @@ import homepage_entertainment2 from '../assets/homepage_entertainment2.png';
 import homepage_entertainment3 from '../assets/homepage_entertainment3.png';
 import homepage_entertainment4 from '../assets/homepage_entertainment4.png';
 
-import { sendGTMEvent } from '@next/third-parties/google'
+import { sendGTMEvent, GoogleTagManager } from '@next/third-parties/google';
 
 export default function Home() {
 const router = useRouter();
@@ -445,9 +445,15 @@ const openSliderLink = (link) => {
 };
 
 
+const handleTitleClick = (title) => {
+  // Trigger GTM event when the user clicks on the title
+  sendGTMEvent('event', 'titleClicked', { value: title });
+};
+
 
 return (
 <>
+<GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
   <div className="page-width">
     <div className="party-services homeslider">
      <h1 className="party-title">All party services on one platform</h1>
@@ -482,7 +488,16 @@ return (
       <div key={item.id} className="food-card">
         <a href={item.link} className="food-card-link">
           <Image src={item.image} alt={item.title} className="food-image"  width={200} height={100}/>
-          <p className="food-card-title">{item.title}</p>
+          {/* <p className="food-card-title">{item.title}</p> */}
+
+            {/* Sending GTM event on title click */}
+            <p
+            className="food-card-title"
+            onClick={() => handleTitleClick(item.title)}
+             >
+            {item.title}
+          </p>
+
         </a>
       </div>
     ))}

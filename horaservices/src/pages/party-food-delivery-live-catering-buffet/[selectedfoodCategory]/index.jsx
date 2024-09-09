@@ -22,6 +22,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import '../../../css/chefOrder.css';
 
+import { sendGTMEvent, GoogleTagManager } from '@next/third-parties/google';
+
 const FoodDeliveryCreateOrder = (currentStep) => {
   const viewBottomSheetRef = useRef(null);
   const bottomSheetRef = useRef(null);
@@ -480,6 +482,7 @@ console.log('selectedOption',selectedOption)
 
   return (
     <div className="chef-create-order">
+      <GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
       <div className="order-container chef">
         <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
           <Image style={{ width: "20px", height: '20px', marginRight: "10px" }} src={InfoIcon} />

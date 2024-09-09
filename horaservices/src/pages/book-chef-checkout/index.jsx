@@ -22,6 +22,8 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Skeleton from 'react-loading-skeleton';
 
+import { sendGTMEvent, GoogleTagManager } from '@next/third-parties/google';
+
 const ChefCheckout = () => {
     //   let { peopleCount, orderType, selectedDishDictionary, selectedDishPrice, selectedCount , selectedDishes } = useLocation().state || {}; // Accessing subCategory and itemName safely
     // const { subCategory, product } = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -419,6 +421,7 @@ const ChefCheckout = () => {
 
     return (
         <div className="App">
+                      <GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
             {isClient && window.innerWidth > 800 ?
                 <div style={{ padding: "1% 2%", backgroundColor: "#edededc9" }}>
                     <div style={{ display: "flex", alignItems: "start", margin: "0 !important", padding: "10px 0" }}

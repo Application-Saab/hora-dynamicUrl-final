@@ -444,7 +444,7 @@ function DecorationCatDetails() {
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px" , backgroundColor:"#fff"}}>
                 {getItemInclusion(product.inclusion)}
                 {selectedAddOnProduct.length == 0 && (
-                <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
+                <button id="continueButton"  style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
               )}  
               </div>
           
