@@ -20,7 +20,7 @@ import SelectConfirmOrder from "../../assets/ConfirmOrderSelected.png";
 import styled from "styled-components";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Loader from '../../components/Loader'    
+import Loader from '../../components/Loader'
 
 
 const ChefCheckout = () => {
@@ -61,8 +61,7 @@ const ChefCheckout = () => {
             console.error('Error parsing selectedDishDictionary:', error);
         }
     }
-    const orangeColor = '#FF6F61';
-    const defaultColor = '#B0BEC5';
+    
 
     const Container = styled.div`
       display: flex;

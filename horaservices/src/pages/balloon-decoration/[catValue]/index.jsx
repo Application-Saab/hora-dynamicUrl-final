@@ -19,7 +19,23 @@ const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   //   let { city } = useParams();
-  const { city, catValue } = router.query;
+  const [city, setCity] = useState('');
+  const [catValue, setCatValue] = useState('');
+  useEffect(() => {
+    if (router.isReady) {
+      const { catValue: queryCatValue, city: queryCity } = router.query;
+
+      if (queryCatValue) {
+        setCatValue(queryCatValue);
+        ///alert(`catValue: ${queryCatValue}`);
+      }
+
+      if (queryCity) {
+        setCity(queryCity);
+        ///alert(`city: ${queryCity}`);
+      }
+    }
+  }, [router.isReady, router.query]);
   const altTagCatValue = catValue.replace(/-/g, ' ');
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
