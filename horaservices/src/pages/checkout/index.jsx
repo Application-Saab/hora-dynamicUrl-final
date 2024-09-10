@@ -651,7 +651,7 @@ const Checkout = () => {
                 backgroundColor: "#EDEDED"
               }}
               >
-                <button className="blue-btn chkeoutBottun" onClick={onContinueClick}>Confirm Order</button>
+                <button id="confirm_order_checkout" className="blue-btn chkeoutBottun" onClick={onContinueClick}>Confirm Order</button>
               </div>
               :
               null

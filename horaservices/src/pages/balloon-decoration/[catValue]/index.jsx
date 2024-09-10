@@ -178,16 +178,52 @@ const DecorationCatPage = () => {
     }
   };
 
+  // const handleViewDetails = (subCategory, catValue, product) => {
+  //   const productName = product.name.replace(/ /g, "-");
+  //   dispatch(setState(subCategory, orderType, catValue, product));
+  //   if (hasCityPageParam) {
+  //     router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
+  //   }
+  //   else {
+  //     router.push(`/balloon-decoration/${catValue}/product/${productName}`);
+  //   }
+  // };
+
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
+  
+    // Construct the product data for GTM
+    const productData = {
+      event: 'view_item',  // Custom event name for GTM
+      ecommerce: {
+        items: [{
+          item_name: product.name,    // Product name
+          item_id: product.id,        // Product ID
+          category: subCategory,      // Sub-category or main category
+          category_value: catValue,   // Additional category data
+          price: product.price        // Product price (if applicable)
+        }]
+      }
+    };
+  
+    // Log the product data to the console for tracking/debugging
+    console.log('GTM Product View Event Data:', productData);
+  
+    // Push the event data to the GTM dataLayer
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(productData);
+  
+    // Dispatch the state or perform your routing
     dispatch(setState(subCategory, orderType, catValue, product));
+  
     if (hasCityPageParam) {
       router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
-    }
-    else {
+    } else {
       router.push(`/balloon-decoration/${catValue}/product/${productName}`);
     }
   };
+  
+  
 
   useEffect(() => {
     if (catId) {
