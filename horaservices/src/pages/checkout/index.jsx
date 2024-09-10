@@ -16,6 +16,7 @@ import '../../css/decoration.css';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import InfoIcon from '../../assets/info.png'
+import Loader from '../../components/Loader'
 
 const Checkout = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const Checkout = () => {
   const [combinedDateTime, setCombinedDateTime] = useState(null);
   const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (product) {
     product = JSON.parse(product)
@@ -262,6 +264,7 @@ const Checkout = () => {
   };
 
   const onContinueClick = async () => {
+    setLoading(true);
     const apiUrl = BASE_URL + PAYMENT;
     const storedUserID = await localStorage.getItem('userID');
     const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -281,9 +284,9 @@ const Checkout = () => {
         "order_date": selectedDate.toDateString(),
         "no_of_burner": 0,
         "order_locality": city,
-        "total_amount": Math.round(totalAmount*0.3),
+        "total_amount": totalAmount,
         "orderApplianceIds": [],
-        "payable_amount": Math.round(totalAmount*0.3),
+        "payable_amount": totalAmount,
         "is_gst": "0",
         "order_type": true,
         "items": [product._id],
@@ -303,6 +306,7 @@ const Checkout = () => {
     } catch (error) {
       console.log('Error Confirming Order:', error.message);
     }
+  
 
     const requestData2 = {
       user_id: storedUserID,
@@ -346,6 +350,9 @@ const Checkout = () => {
       // Handle errors
       console.error('API error:', error);
     }
+    finally {
+      setLoading(false); // Hide loader
+  }
   }
 
   const contactUsRedirection = () => {
@@ -370,6 +377,7 @@ const Checkout = () => {
 
   return (
     <div className="App">
+       {loading && <Loader />}
       {
         isClient && window.innerWidth > 800 ?
           <div style={{ padding: "1% 2%", backgroundColor: "#edededc9" }}>

@@ -438,7 +438,7 @@ function DecorationCatDetails() {
 
                   </p>
                   {/* {isClient && window.innerWidth > 800 ? */}
-                  <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleCheckout(subCategory, product, selectedAddOnProduct)}>Continue</button>
+                  <button style={styles.Buttonstyle}  id="continueButton"  className="dec-continueButton" onClick={() => handleCheckout(subCategory, product, selectedAddOnProduct)}>Continue</button>
                   {/* : null} */}    </>
               </ul>
             )}

@@ -27,6 +27,7 @@ import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
 import EntertainmentIcon from '../assets/enter_icon.png';
+
 import './homepage.css'
 // remove later
 import homepage_entertainment1 from '../assets/homepage_entertainment1.png';

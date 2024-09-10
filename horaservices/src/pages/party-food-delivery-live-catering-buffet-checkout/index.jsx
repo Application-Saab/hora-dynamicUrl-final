@@ -14,6 +14,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import checkImage from '../../assets/check.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import loader from '../../components/Loader'
 
 const FoodDeliveryCheckout = () => {
     //   const { selectedDishesFoodDelivery , selectedOption ,orderType, selectedDishDictionary, selectedDishPrice, totalOrderAmount , selectedDishQuantities , peopleCount} = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -38,6 +39,7 @@ const FoodDeliveryCheckout = () => {
     const [combinedDateTime, setCombinedDateTime] = useState(null);
     const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
     const [isClient, setIsClient] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     /// order.type is 2 for chef
     /// order.type is 1 for decoration
@@ -632,6 +634,7 @@ const FoodDeliveryCheckout = () => {
 
 
     const onContinueClick = async () => {
+        setLoading(true)
         const apiUrl = BASE_URL + PAYMENT;
         const storedUserID = await localStorage.getItem('userID');
         const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -723,11 +726,15 @@ const FoodDeliveryCheckout = () => {
             // Handle errors
             console.error('API error:', error);
         }
+        finally {
+            setLoading(false); // Hide loader
+        }
 
     }
 
     return (
         <div className="App">
+             {loading && <Loader />}
             {isClient && window.innerWidth > 800 ?
                 <div style={{ padding: "1% 2%", backgroundColor: "rgba(237, 237, 237, 0.79)" }}>
                     <div style={{ display: "flex" }} className='checoutSec my-3 gap-3'>
