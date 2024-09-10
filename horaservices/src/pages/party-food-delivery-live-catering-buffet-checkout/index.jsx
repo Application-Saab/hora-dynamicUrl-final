@@ -14,7 +14,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import checkImage from '../../assets/check.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import loader from '../../components/Loader'
+import Loader from '../../components/Loader'
 
 const FoodDeliveryCheckout = () => {
     //   const { selectedDishesFoodDelivery , selectedOption ,orderType, selectedDishDictionary, selectedDishPrice, totalOrderAmount , selectedDishQuantities , peopleCount} = useLocation().state || {}; // Accessing subCategory and itemName safely
