@@ -1798,6 +1798,55 @@ h4.contact-us-heading a {
   margin-top: 5px;
 }
 
+
+/* Mobile view adjustments */
+@media (max-width: 468px) {
+  .order-card {
+    width: 90%;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .order-div {
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: flex-start; */
+    padding: 10px;
+    width: 108%;
+    margin-bottom: 15px;
+    margin-left: -15px;
+    margin-top: -15px;
+  }
+
+  .order-id {
+    font-size: 1em;
+  }
+
+  .order-status {
+    align-items: flex-end;
+    margin-left: auto;
+  }
+
+  .order-details {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .right-details {
+    align-items: flex-end;
+    margin-left: auto;
+  }
+
+  .view-details,
+  .send-invite {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
 /* .view-details:hover {
   background-color: #5753d6;
 } */
@@ -2350,8 +2399,8 @@ h4.contact-us-heading a {
 }
 
 .product-name {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 900;
   margin-bottom: 5px;
   text-align: start;
 }
@@ -2359,7 +2408,7 @@ h4.contact-us-heading a {
 .product-price {
   font-size: 14px;
   color: grey;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   text-align: start;
 }
 
@@ -2367,6 +2416,7 @@ h4.contact-us-heading a {
   color: black;
   white-space: pre-wrap;
   word-wrap: break-word;
+  font-size: 14px;
 }
 
 .comment-container {

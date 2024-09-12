@@ -110,7 +110,7 @@ const Orderlist = () => {
   };
 
   const formatDate = (dateString) => {
-    const options = { day: "numeric", month: "short", year: "numeric" };
+    const options = { day: "numeric", month: "long", year: "numeric" };
     return new Date(dateString).toLocaleDateString("en-GB", options);
   };
 
@@ -196,18 +196,18 @@ const Orderlist = () => {
               <div key={order.order_id} className="order-card">
                 <div className="order-div">
                   <div className="order-id">
-                    <div style={{ color: "#9252AA" }}>
+                    <div style={{ color: "#9252AA", fontWeight: "bold" }}>
                       Order Id: {getOrderId(order?.order_id)}
                     </div>
-                    <h6 className="order-otp mt-2" style={{ color: "#9252AA" }}>
+                    <h6 className="order-otp mt-2" style={{ color: "#9252AA", fontWeight: "bold" }}>
                       OTP: {order?.otp}
                     </h6>
                   </div>
                   <div className="order-status">
-                    <span className={orderStatus.className}>
+                    <span style={{fontWeight: "bold"}} className={orderStatus.className}>
                       {orderStatus.status}
                     </span>
-                    <h6 className="mt-2" style={{ color: "#9252AA" }}>
+                    <h6 className="mt-2" style={{ color: "#9252AA", fontWeight: "bold" }}>
                       {getOrderType(order?.type)}
                     </h6>
                   </div>
@@ -222,7 +222,7 @@ const Orderlist = () => {
                         height={20}
                         width={20}
                       />{" "}
-                      <span>{formatDate(order.order_date)}</span>
+                      <span style={{fontWeight: "bold"}}>{formatDate(order.order_date)}</span>
                     </div>
                     <div>
                       {/* <FiClock color="#9252AA" size={20}/>{" "} */}
@@ -232,10 +232,10 @@ const Orderlist = () => {
                         height={20}
                         width={20}
                       />{" "}
-                      <span>{order.order_time}</span>
+                      <span style={{fontWeight: "bold"}}>{order.order_time}</span>
                     </div>
-                    <div>
-                      {/* <FaUsers color="#9252AA" size={20}/>{" "} */}
+                    {/* <div>
+                      <FaUsers color="#9252AA" size={20}/>{" "} 
                       <Image
                         className="contact-us-img"
                         src={people}
@@ -243,7 +243,7 @@ const Orderlist = () => {
                         width={20}
                       />{" "}
                       <span>{order?.no_of_people} People</span>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="right-details">
                     <div>
