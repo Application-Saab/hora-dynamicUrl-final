@@ -5,35 +5,36 @@ import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "react-router-dom";
-import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM } from '../../../utils/apiconstants';
-import DecorationLandingSlider from  '../../../components/DecorationLandingSlider';
-import BirthdayImage from '../../../assets/Birthday_dec_cat.jpeg';
-import FirstnightImage from '../../../assets/first_night_cat_dec.jpeg'
-import AnniversaryImage from '../../../assets/aniversary_Cat_Dec.jpeg'
-import KidsbirthdayImage from '../../../assets/kids_birthday_decoration.jpeg'
-import BabyShowerImage from '../../../assets/baby-shower-dec-cat.jpeg'
-import WelcomebabyImage from '../../../assets/welcome_baby_dec.jpeg'
-import PremiumImage from '../../../assets/preminumdecor.jpeg'
-import CarbootImage from '../../../assets/car_boot.jpg'
+import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM } from '../../../../utils/apiconstants';
+import DecorationLandingSlider from  '../../../../components/DecorationLandingSlider';
+import BirthdayImage from '../../../../assets/Birthday_dec_cat.jpeg';
+import FirstnightImage from '../../../../assets/first_night_cat_dec.jpeg'
+import AnniversaryImage from '../../../../assets/aniversary_Cat_Dec.jpeg'
+import KidsbirthdayImage from '../../../../assets/kids_birthday_decoration.jpeg'
+import BabyShowerImage from '../../../../assets/baby-shower-dec-cat.jpeg'
+import WelcomebabyImage from '../../../../assets/welcome_baby_dec.jpeg'
+import PremiumImage from '../../../../assets/preminumdecor.jpeg'
+import CarbootImage from '../../../../assets/car_boot.jpg'
 import getFAQs from "@/components/JsonData/faqData";
 import getCityParagraphs from "@/components/JsonData/cityParagraphs";
-import BallonBImage from '../../../assets/Balloon-B-new.jpeg'
-import { getDecorationOrganizationSchema, getProductFAQSchema } from '../../../utils/schema';
-import { setState } from '../../../actions/action';
+import BallonBImage from '../../../../assets/Balloon-B-new.jpeg'
+import { getDecorationOrganizationSchema, getProductFAQSchema } from '../../../../utils/schema';
+import { setState } from '../../../../actions/action';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
-import '../../../css/decoration.css'
+import '../../../../css/decoration.css'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Link from "next/link";
-import cityData from '../../../utils/cityData';
+
 
 const Decoration = () => {
 const dispatch = useDispatch();
 const router = useRouter();
-let { city } = router.query;
+let { city, locality } = router.query;
+console.log(locality, "locality");
 const schemaOrg = getDecorationOrganizationSchema();
 const scriptTag = JSON.stringify(schemaOrg);
 const faqSchema = getProductFAQSchema(city);
@@ -62,7 +63,7 @@ const [decCat, setDecCat] = useState([
          const openCatItems = (item) => {
             dispatch(setState(item.subCategory, item.imgAlt));
             if (hasCityPageParam) {
-                router.push(`/${city}/balloon-decoration/${item.catValue}`);
+                router.push(`/${city}/${locality}/balloon-decoration/${item.catValue}`);
             }
             else {
                 router.push(`/balloon-decoration/${item.catValue}`);
@@ -378,46 +379,6 @@ const [decCat, setDecCat] = useState([
         });
     }, []);
 
-
-    
-  const formatLocalityName = (name) => {
-    return name.replace(/\s+/g, '-').toLowerCase();
-  };
-  
-   // Normalize city parameter
-   const normalizedCity = city ? city.toLowerCase() : '';
-   console.log("Normalized City:", normalizedCity); // Log normalized city
-   
-   // Determine if the city parameter exists
-  //  const hasCityPageParam = city ? true : false;
-   console.log("Has City Page Param:", hasCityPageParam); // Log if city parameter exists
- 
-   // State to hold the city localities list
-   const [cityLocalitiesList, setCityLocalitiesList] = useState([]);
- 
-   // Fetch city localities when city changes
-   useEffect(() => {
-     console.log("UseEffect Triggered"); // Log when useEffect is triggered
-     if (normalizedCity) {
-       const localities = cityData[normalizedCity]?.cityLocalitiesList || [];
-       console.log("Fetched Localities:", localities); // Log fetched localities
-       setCityLocalitiesList(localities);
-     }
-   }, [normalizedCity]);
- 
-   const handleClick = (localityName) => {
-    const formattedLocalityName = formatLocalityName(localityName);
-    router.push(`/${normalizedCity}/${formattedLocalityName}/balloon-decoration`);
-  };
- 
-   // If city parameter is missing
-   if (!hasCityPageParam) {
-     return <div>Please select a city first.</div>;
-   }
- 
-   console.log("City Localities List:", cityLocalitiesList); // Log final localities list
- 
-
     return (
         <div className="decoration-city-page-sec">
         <Head>
@@ -711,27 +672,6 @@ const [decCat, setDecCat] = useState([
       ))}
 </div>
 </div>
-
-{/* Locality */}
-<div className="localities-box">
-  <h1 className="city-heading">
-    {city ? city.charAt(0).toUpperCase() + city.slice(1) : "City"} Localities
-  </h1>
-  <ul className="localities-list">
-    {cityLocalitiesList.length > 0 ? (
-      cityLocalitiesList.map((locality, index) => (
-        <li key={index} className="locality-item">
-          <button onClick={() => handleClick(locality.name)} className="locality-button">
-            {locality.name}
-          </button>
-        </li>
-      ))
-    ) : (
-      <div className="no-localities">No localities found for this city.</div>
-    )}
-  </ul>
-</div>
-
 
 <div className="description-city">
     <div className="page-width">

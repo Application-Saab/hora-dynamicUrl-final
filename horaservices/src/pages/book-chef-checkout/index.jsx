@@ -20,7 +20,8 @@ import SelectConfirmOrder from "../../assets/ConfirmOrderSelected.png";
 import styled from "styled-components";
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Skeleton from 'react-loading-skeleton';
+import Loader from '../../components/Loader'
+
 
 import { sendGTMEvent, GoogleTagManager } from '@next/third-parties/google';
 
@@ -62,8 +63,7 @@ const ChefCheckout = () => {
             console.error('Error parsing selectedDishDictionary:', error);
         }
     }
-    const orangeColor = '#FF6F61';
-    const defaultColor = '#B0BEC5';
+    
 
     const Container = styled.div`
       display: flex;
@@ -179,9 +179,9 @@ const ChefCheckout = () => {
 
     const validateDateTime = (combinedDate) => {
         const now = new Date();
-        console.log(`Combined Date for Validation: ${combinedDate}`);
+        // console.log(`Combined Date for Validation: ${combinedDate}`);
         const timeDifference = combinedDate - now;
-        console.log(`Time Difference: ${timeDifference} ms`);
+        // console.log(`Time Difference: ${timeDifference} ms`);
         // Check if the combined date and time are at least 24 hours in the future
         if (timeDifference < 24 * 60 * 60 * 1000) { // 24 hours in milliseconds
             console.log("The selected date and time are less than 24 hours from now.");
@@ -284,7 +284,7 @@ const ChefCheckout = () => {
     }
 
     const openWhatsppLink = () => {
-        window.open("https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20payment%20in%20Decoration%20services", "_blank");
+        window.open("https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20payment%20in%20Decoration%20services", "_blank");
     }
 
     const saveAddress = async () => {

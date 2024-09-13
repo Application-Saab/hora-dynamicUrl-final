@@ -5,7 +5,7 @@ const getFAQs = (city) => [
     },
     {
       question: `How can I arrange for Balloon Decoration at Home in ${city} for any celebration?`,
-      answer: `7eventzz makes it simple to bring the joy of Balloon Decoration to your doorstep for any celebration in ${city}. Our website serves as your guide to planning memorable parties from the comfort of your own home. Choose the "Balloon Decoration at Home" option, enter the event details, modify your requirements, and complete the simple booking process. Our skilled team will handle all of the details, ensuring that your celebration is both seamless and extraordinary.`,
+      answer: `Hora Services makes it simple to bring the joy of Balloon Decoration to your doorstep for any celebration in ${city}. Our website serves as your guide to planning memorable parties from the comfort of your own home. Choose the "Balloon Decoration at Home" option, enter the event details, modify your requirements, and complete the simple booking process. Our skilled team will handle all of the details, ensuring that your celebration is both seamless and extraordinary.`,
     },
     {
       question: `Areas we provide our services across ${city}`,
@@ -34,4 +34,3 @@ const getFAQs = (city) => [
   ];
 
    export default getFAQs;
-  

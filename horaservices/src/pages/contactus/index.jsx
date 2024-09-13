@@ -54,7 +54,7 @@ const ContactUs = () => {
             >
               Call & Whatsapp
             </h2>
-            <a href="tel:+918982321487" style={{ color: "#444" }}>
+            <a href="tel:+917338584828" style={{ color: "#444" }}>
               +917338584828
             </a>
           </div>
@@ -140,12 +140,12 @@ const ContactUs = () => {
                 }}
               >
                  <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={bangalore} alt="image" />
+                  <Image className="contact-us-img" src={banglore} alt="image" />
                   <h4 className="contact-us-heading"><a href="/bangalore">Bangalore</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={noida} alt="image" />
-                  <h4 className="contact-us-heading"><a href="noida">Noida</a></h4>
+                  <h4 className="contact-us-heading"><a href="/noida">Noida</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={ghaziabad} alt="image" />

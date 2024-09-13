@@ -16,6 +16,7 @@ import '../../css/decoration.css';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import InfoIcon from '../../assets/info.png'
+import Loader from '../../components/Loader'
 
 const Checkout = () => {
   const router = useRouter();
@@ -39,6 +40,7 @@ const Checkout = () => {
   const [combinedDateTime, setCombinedDateTime] = useState(null);
   const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (product) {
     product = JSON.parse(product)
@@ -76,7 +78,7 @@ const Checkout = () => {
 
 
   const handleDateChange = (date) => {
-    console.log(`Date selected: ${date}`);
+    // console.log(`Date selected: ${date}`);
     setSelectedDate(date);
     setSelectedDateError(false);
     combineDateTime(date, selectedTimeSlot); // Pass the current selected time slot
@@ -84,14 +86,14 @@ const Checkout = () => {
 
   const handleTimeSlotChange = (event) => {
     const timeSlot = event.target.value;
-    console.log(`Time slot selected: ${timeSlot}`);
+    // console.log(`Time slot selected: ${timeSlot}`);
     setSelectedTimeSlot(timeSlot);
     setSelectedDateError(false);
     combineDateTime(selectedDate, timeSlot); // Pass the current selected date
   };
 
   const combineDateTime = (date, timeSlot) => {
-    console.log(`Combining Date: ${date} with Time Slot: ${timeSlot}`);
+    // console.log(`Combining Date: ${date} with Time Slot: ${timeSlot}`);
     if (date && timeSlot) {
       const [startHour, period] = timeSlot.split('-')[0].trim().split(' ');
       let hour = parseInt(startHour.split(':')[0], 10);
@@ -102,12 +104,12 @@ const Checkout = () => {
       }
 
       const combinedDate = new Date(date);
-      console.log(`Initial Combined Date: ${combinedDate}`);
+      // console.log(`Initial Combined Date: ${combinedDate}`);
       combinedDate.setHours(hour);
       combinedDate.setMinutes(0);
       combinedDate.setSeconds(0);
       combinedDate.setMilliseconds(0);
-      console.log(`Final Combined Date: ${combinedDate}`);
+      // console.log(`Final Combined Date: ${combinedDate}`);
       setCombinedDateTime(combinedDate);
       validateDateTime(combinedDate);
     }
@@ -115,9 +117,9 @@ const Checkout = () => {
 
   const validateDateTime = (combinedDate) => {
     const now = new Date();
-    console.log(`Combined Date for Validation: ${combinedDate}`);
+    // console.log(`Combined Date for Validation: ${combinedDate}`);
     const timeDifference = combinedDate - now;
-    console.log(`Time Difference: ${timeDifference} ms`);
+    // console.log(`Time Difference: ${timeDifference} ms`);
     // Check if the combined date and time are at least 24 hours in the future
     if (timeDifference < 24 * 60 * 60 * 1000) { // 24 hours in milliseconds
       console.log("The selected date and time are less than 24 hours from now.");
@@ -222,7 +224,7 @@ const Checkout = () => {
   }
 
   const openWhatsppLink = () => {
-    window.open("https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20payment%20in%20Decoration%20services", "_blank");
+    window.open("https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20payment%20in%20Decoration%20services", "_blank");
   }
 
   const saveAddress = async () => {
@@ -262,6 +264,7 @@ const Checkout = () => {
   };
 
   const onContinueClick = async () => {
+    setLoading(true);
     const apiUrl = BASE_URL + PAYMENT;
     const storedUserID = await localStorage.getItem('userID');
     const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -281,9 +284,9 @@ const Checkout = () => {
         "order_date": selectedDate.toDateString(),
         "no_of_burner": 0,
         "order_locality": city,
-        "total_amount": Math.round(totalAmount*0.3),
+        "total_amount": totalAmount,
         "orderApplianceIds": [],
-        "payable_amount": Math.round(totalAmount*0.3),
+        "payable_amount": totalAmount,
         "is_gst": "0",
         "order_type": true,
         "items": [product._id],
@@ -291,7 +294,6 @@ const Checkout = () => {
         "status": 0
       }
 
-      console.log("req data", requestData)
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
         headers: {
@@ -304,6 +306,7 @@ const Checkout = () => {
     } catch (error) {
       console.log('Error Confirming Order:', error.message);
     }
+  
 
     const requestData2 = {
       user_id: storedUserID,
@@ -347,6 +350,9 @@ const Checkout = () => {
       // Handle errors
       console.error('API error:', error);
     }
+    finally {
+      setLoading(false); // Hide loader
+  }
   }
 
   const contactUsRedirection = () => {
@@ -371,6 +377,7 @@ const Checkout = () => {
 
   return (
     <div className="App">
+       {loading && <Loader />}
       {
         isClient && window.innerWidth > 800 ?
           <div style={{ padding: "1% 2%", backgroundColor: "#edededc9" }}>

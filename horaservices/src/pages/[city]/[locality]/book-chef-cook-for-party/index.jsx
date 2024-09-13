@@ -8,25 +8,24 @@ import {
     GET_CUISINE_ENDPOINT,
     API_SUCCESS_CODE,
     GET_MEAL_DISH_ENDPOINT,
-} from "../../utils/apiconstants";
+} from "../../../../utils/apiconstants";
 // import { useNavigate } from "react-router-dom";
-import RectanglePurple from "../../assets/Rectanglepurple.png";
-import RectangleWhite from "../../assets/rectanglewhite.png";
-import MinusIcon from "../../assets/minus.png";
-import PlusIcon from "../../assets/plus.png";
-import warningImage from "../../assets/Group.png";
-import SkeletonLoader from "../../utils/chefSkeleton";
-import '../../css/Toggle.css';
-import '../../css/chefOrder.css';
-import SelectDishes from "../../assets/selectDish.png";
-import SelectDateTime from "../../assets/event.png";
-import SelectConfirmOrder from "../../assets/confirm_order.png";
-import separator from "../../assets/separator.png";
+import RectanglePurple from "../../../../assets/Rectanglepurple.png";
+import RectangleWhite from "../../../../assets/rectanglewhite.png";
+import MinusIcon from "../../../../assets/minus.png";
+import PlusIcon from "../../../../assets/plus.png";
+import warningImage from "../../../../assets/Group.png";
+import SkeletonLoader from "../../../../utils/chefSkeleton";
+import '../../../../css/Toggle.css';
+import '../../../../css/chefOrder.css';
+import SelectDishes from "../../../../assets/selectDish.png";
+import SelectDateTime from "../../../../assets/event.png";
+import SelectConfirmOrder from "../../../../assets/confirm_order.png";
+import separator from "../../../../assets/separator.png";
 import styled from 'styled-components';
-import InfoIcon from '../../assets/info.png';
+import InfoIcon from '../../../../assets/info.png';
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Popup from '../../utils/popup';
 const orangeColor = '#FF6F61';
 const defaultColor = '#B0BEC5';
 
@@ -53,12 +52,15 @@ const CreateOrder = ({ history, currentStep }) => {
     const [isVegSelected, setIsVegSelected] = useState(true);
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
-    const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] = useState(false);
-    const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] = useState(false);
+    const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
+        useState(false);
+    const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] =
+        useState(false);
+    const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] =
+        useState(false);
     const [isViewAllExpanded, setIsViewAllExpanded] = useState(false);
     const [popupMessage, setPopupMessage] = useState({
-        img: "",
+        image: "",
         title: "",
         body: "",
         button: "",
@@ -192,7 +194,7 @@ const CreateOrder = ({ history, currentStep }) => {
         if (selectedDishes.length > 11 && !isSelected) {
             setWarningVisibleForDishCount(true);
             setPopupMessage({
-                img: warningImage,
+                image: warningImage,
                 title: "Total Dishes Selected can not be more than 12 Dish.",
                 body: "Total dish selected can not be more than 12 dish, for more help contact us.",
                 button: "Contact Us",
@@ -237,7 +239,7 @@ const CreateOrder = ({ history, currentStep }) => {
         } else {
             setWarningVisibleForCuisineCount(true);
             setPopupMessage({
-                img: warningImage,
+                image: warningImage,
                 title: "One chef is only expert in 3 cuisine only.",
                 body: "Our chef is expert in cuisines only please select appropriate number of cuisines to continue",
                 button: "Continue",
@@ -395,7 +397,6 @@ const CreateOrder = ({ history, currentStep }) => {
                                                             ? MinusIcon
                                                             : PlusIcon
                                                     }
-                                                    alt="icon"
                                                     style={{ width: 21, height: 21 }}
                                                 />
                                             </Button>
@@ -481,7 +482,6 @@ const CreateOrder = ({ history, currentStep }) => {
                                                             ? MinusIcon
                                                             : PlusIcon
                                                     }
-                                                    alt="icon"
                                                     style={{ width: 21, height: 21 }}
                                                 />
                                             </Button>
@@ -507,7 +507,7 @@ const CreateOrder = ({ history, currentStep }) => {
                 orderType,
                 selectedDishDictionary: JSON.stringify(selectedDishDictionary),
                 selectedDishPrice,
-                selectedDishes:JSON.stringify(selectedDishes),
+                selectedDishes: JSON.stringify(selectedDishes),
                 isDishSelected,
                 selectedCount,
             }
@@ -602,23 +602,23 @@ const CreateOrder = ({ history, currentStep }) => {
         <div className="chef-create-order">
             <div className="order-container chef">
                 <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.23)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-                    <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
+                    <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} />
                     <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
                 </div>
                 <div className="range-bar">
-                    <Step active className="step1">
+                    <Step active={true.toString()} className="step1">
                         <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
-                        <Label active>Select Dishes</Label>
+                        <Label active={true.toString()}>Select Dishes</Label>
                     </Step>
                     <div className="sep-image">
-                        <Image src={separator} alt="separator" />
+                        <Image src={separator} />
                     </div>
                     <Step className="step2">
                         <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
                         <Label>Select Date & Time</Label>
                     </Step>
                     <div className="sep-image">
-                        <Image src={separator} alt="separator" />
+                        <Image src={separator} />
                     </div>
                     <Step className="step3">
                         <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
@@ -733,8 +733,6 @@ const CreateOrder = ({ history, currentStep }) => {
                     </Col>
                 </Row>
             </div>
-            {isWarningVisibleForCuisineCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}
-            {isWarningVisibleForDishCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}
         </div>
     )
 }

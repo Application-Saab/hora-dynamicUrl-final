@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
-import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../utils/apiconstants';
+import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../../../utils/apiconstants';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
-import { CardSkeleton } from "../../../components/CardSkeleton";
-import { getDecorationCatOrganizationSchema } from "../../../utils/schema";
-import '../../../css/decoration.css';
-import { setState } from '../../../actions/action';
+import { CardSkeleton } from "../../../../../components/CardSkeleton";
+import { getDecorationCatOrganizationSchema } from "../../../../../utils/schema";
+import '../../../../../css/decoration.css';
+import { setState } from '../../../../../actions/action';
 import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -18,25 +18,8 @@ import Link from "next/link";
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  //   let { city } = useParams();
-  const [city, setCity] = useState('');
-  const [catValue, setCatValue] = useState('');
-  useEffect(() => {
-    if (router.isReady) {
-      const { catValue: queryCatValue, city: queryCity } = router.query;
-
-      if (queryCatValue) {
-        setCatValue(queryCatValue);
-        ///alert(`catValue: ${queryCatValue}`);
-      }
-
-      if (queryCity) {
-        setCity(queryCity);
-        ///alert(`city: ${queryCity}`);
-      }
-    }
-  }, [router.isReady, router.query]);
-  const altTagCatValue = catValue.replace(/-/g, ' ');
+    // let { city } = useParams();
+  const { city, catValue, locality } = router.query;
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();
@@ -194,52 +177,16 @@ const DecorationCatPage = () => {
     }
   };
 
-  // const handleViewDetails = (subCategory, catValue, product) => {
-  //   const productName = product.name.replace(/ /g, "-");
-  //   dispatch(setState(subCategory, orderType, catValue, product));
-  //   if (hasCityPageParam) {
-  //     router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
-  //   }
-  //   else {
-  //     router.push(`/balloon-decoration/${catValue}/product/${productName}`);
-  //   }
-  // };
-
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
-  
-    // Construct the product data for GTM
-    const productData = {
-      event: 'view_item',  // Custom event name for GTM
-      ecommerce: {
-        items: [{
-          item_name: product.name,    // Product name
-          item_id: product.id,        // Product ID
-          category: subCategory,      // Sub-category or main category
-          category_value: catValue,   // Additional category data
-          price: product.price        // Product price (if applicable)
-        }]
-      }
-    };
-  
-    // Log the product data to the console for tracking/debugging
-    console.log('GTM Product View Event Data:', productData);
-  
-    // Push the event data to the GTM dataLayer
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push(productData);
-  
-    // Dispatch the state or perform your routing
     dispatch(setState(subCategory, orderType, catValue, product));
-  
     if (hasCityPageParam) {
-      router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
-    } else {
+      router.push(`/${city}/${locality}/balloon-decoration/${catValue}/product/${productName}`);
+    }
+    else {
       router.push(`/balloon-decoration/${catValue}/product/${productName}`);
     }
   };
-  
-  
 
   useEffect(() => {
     if (catId) {
@@ -322,7 +269,7 @@ const DecorationCatPage = () => {
                     className="decimagecontainer"
                   >
                     <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
+                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={imgAlt} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
                       <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
@@ -377,18 +324,22 @@ const DecorationCatPage = () => {
               )
             )
           }
-          {/* <div>
-          {
-          filteredData.map((item, index) => (
-          <url key={index}>
-          <loc>
-          {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name.replace(/ /g, "-")}`}
-          </loc>
-          <priority>1.00</priority>
-          </url>
-          ))
-          }
-          </div> */}
+          |<div>
+            {/* <div>
+                      {
+                         filteredData.map((item, index) => (
+                         
+                          <url>
+                            <loc>
+                            {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name}`}
+                            </loc>
+                            <priority>1.00</priority>
+                        </url>
+                         )
+                      )}
+                   
+                    </div> */}
+          </div>
         </div>
       </>
     </div>

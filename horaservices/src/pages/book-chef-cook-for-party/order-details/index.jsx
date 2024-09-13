@@ -257,7 +257,7 @@ const SelectDate = ({ history, currentStep }) => {
         }
     }
     const handleRangeChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         setPeopleCount(value);
         setDishPrice(value * 49); // Assuming 49 is the unit price
@@ -341,7 +341,7 @@ const SelectDate = ({ history, currentStep }) => {
     const getTotalIngredients = () => {
         let totalIngredients = {};
         for (const dishId in data) {
-            console.log('dishId2' + dishId);
+            // console.log('dishId2' + dishId);
             const dish = data[dishId];
             if (dish.ingredientUsed) {
                 dish.ingredientUsed.forEach((ingredient) => {
@@ -372,7 +372,7 @@ const SelectDate = ({ history, currentStep }) => {
                 });
             }
         }
-        console.log('totalIngredients', totalIngredients)
+        // console.log('totalIngredients', totalIngredients)
         return Object.values(totalIngredients);
     };
 
@@ -440,7 +440,7 @@ const SelectDate = ({ history, currentStep }) => {
                 </div>
                 <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
                     <div style={{ fontSize: "70%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
-                    <div style={{ fontSize: "140%", fontWeight: '700', color: '#9252AA', textTransform: "lowerCase" }}
+                    <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA', textTransform: "lowerCase" }}
                         className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
                 </div>
             </div>
@@ -555,7 +555,7 @@ const SelectDate = ({ history, currentStep }) => {
             );
         } else if (activeTab === 'right') {
             let totalIngredientsList = getTotalIngredients();
-            console.log('totalIngredientsList', totalIngredientsList)
+            // console.log('totalIngredientsList', totalIngredientsList)
             return <RightTabContent ingredientList={totalIngredientsList} />;
         }
     };

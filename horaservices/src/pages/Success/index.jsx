@@ -10,7 +10,7 @@ const router = useRouter();
   const contactUsRedirection = async () => {
     try {
       window.open(
-        `whatsapp://send?phone=+918982321487&text=I've canceled my order, kindly assist with the refund process. Thanks!`
+        `whatsapp://send?phone=+917338584828&text=I've canceled my order, kindly assist with the refund process. Thanks!`
       );
     } catch (error) {
       console.log("contactUsRedirection error", error);
@@ -18,7 +18,7 @@ const router = useRouter();
   };
 
   const handleContinue = () => {
-    router.push("/orderList");
+    router.push("/orderlist");
   };
 
   return (

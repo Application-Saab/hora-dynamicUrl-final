@@ -27,6 +27,7 @@ import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
 import EntertainmentIcon from '../assets/enter_icon.png';
+
 import './homepage.css'
 // remove later
 import homepage_entertainment1 from '../assets/homepage_entertainment1.png';
@@ -45,7 +46,7 @@ const [currentSlide, setCurrentSlide] = useState(0);
 
 const photographyUrl = () =>{
   window.open(
-    'https://api.whatsapp.com/send?phone=918982321487&text=I%20wanted%20to%20know%20about%2C%20photography',
+    'https://api.whatsapp.com/send?phone=917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
     '_blank'
   );
 }
