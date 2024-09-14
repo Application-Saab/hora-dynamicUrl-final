@@ -234,7 +234,7 @@ const Orderlist = () => {
                       />{" "}
                       <span style={{fontWeight: "bold"}}>{order.order_time}</span>
                     </div>
-                    {/* <div>
+                    <div>
                       <FaUsers color="#9252AA" size={20}/>{" "} 
                       <Image
                         className="contact-us-img"
@@ -243,7 +243,7 @@ const Orderlist = () => {
                         width={20}
                       />{" "}
                       <span>{order?.no_of_people} People</span>
-                    </div> */}
+                    </div>
                   </div>
                   <div className="right-details">
                     <div>

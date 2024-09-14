@@ -11,7 +11,7 @@ dots: false,
 infinite: true,
 speed: 500,
 slidesToShow: 4,
-slidesToScroll: 1,
+slidesToScroll: 2,
 autoplay: true,  // Enable autoplay
 autoplaySpeed: 3000,  // Adjust the speed for auto-slide (in milliseconds)
 responsive: [

@@ -77,31 +77,52 @@ const Decoration = () => {
 
     const birthdayData = [
       {
-        Image: 'https://horaservices.com/api/uploads/attachment-1705579946309.png',
-        title: 'Simple Room Decoration',
-        price: '₹1199',
+        Image: 'https://horaservices.com/api/uploads/attachment-1705585784757.png',
+        title: 'Blushing Celebration Birthday Decor',
+        price: '₹1650',
         rating: 4.7,
-        link:"/balloon-decoration/birthday-decoration",
+        link:"/balloon-decoration/birthday-decoration/product/Blushing-Celebration-Birthday-Decor",
       },
       {
-      Image: 'https://horaservices.com/api/uploads/attachment-1711601912449.png',
-      title: 'Elegant Vibes Happy Birthday',
-      price: '₹3500',
+      Image: 'https://horaservices.com/api/uploads/attachment-1711727911194.png',
+      title: 'Delightful White & Golden Decoration',
+      price: '₹4650',
       rating: 4.6,
-      link:"balloon-decoration/birthday-decoration",
+      link:"/balloon-decoration/birthday-decoration/product/Delightful-White-&-Golden-Decoration",
       },
       {
-        Image: 'https://horaservices.com/api/uploads/attachment-1706464222384.png',
-        title: 'Golden & Silver Ring Decoration',
-        price: '₹3000',
+        Image: 'https://horaservices.com/api/uploads/attachment-1725181762865.png',
+        title: 'Maroon White Birthday Decor',
+        price: '₹3250',
         rating: 4.1,
-        link:"/balloon-decoration/birthday-decoration",
+        link:"/balloon-decoration/birthday-decoration/product/Maroon-White-Birthday-Decor",
       },
       {
-        Image: 'https://horaservices.com/api/uploads/attachment-1706463835447.png',
-        title: 'Multi Balloon Round Ring',
-        price: '₹4670',
+        Image: 'https://horaservices.com/api/uploads/attachment-1711568028341.png',
+        title: 'Birthday Party at Home Black & White',
+        price: '₹1999',
         rating: 4.4,
+        link:"/balloon-decoration/birthday-decoration/product/Birthday-Party-at-Home-Black-&-White",
+      },
+      {
+        Image: 'https://horaservices.com/api/uploads/attachment-1706520980436.png',
+        title: 'Classic Attractive Decoration',
+        price: '₹6499',
+        rating: 4.7,
+        link:"/balloon-decoration/birthday-decoration/product/Classic-Attractive-Decoration",
+      },
+      {
+        Image: 'https://horaservices.com/api/uploads/attachment-1725541669342.png',
+        title: 'Purple Pink n Gold Shimmer Decor',
+        price: '₹7420',
+        rating: 4.8,
+        link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
+      },
+      {
+        Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+        title: 'VIEW ALL',
+        price: '',
+        rating: 100,
         link:"/balloon-decoration/birthday-decoration",
       },
     ];
@@ -109,63 +130,98 @@ const Decoration = () => {
     
     const firstNightData = [
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1705582807178.png',
-          title: 'Romantic Heart Balloon',
-          price: '₹1429',
+          Image: 'https://horaservices.com/api/uploads/attachment-1712942470417.png',
+          title: 'Bed Decor With Love Moment',
+          price: '₹2400',
           rating: 4.5,
-          link:"/balloon-decoration/first-night-decoration/product/Romantic-Heart-Balloon-Decoration",
+          link:"/balloon-decoration/first-night-decoration/product/Bed-Decor-With-Love-Moment-",
         },
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1706470026330.png',
-          title: 'Wedding Night Room Decoration',
-          price: '₹1900',
+          Image: 'https://horaservices.com/api/uploads/attachment-1713196298004.png',
+          title: 'Heart Room With Decor Rose Petal',
+          price: '₹5700',
           rating: 4.5,
-          link:"/balloon-decoration/first-night-decoration/product/Wedding-Night-Room-Decoration",
+          link:"/balloon-decoration/first-night-decoration/product/Heart-Room-With-Decor-Rose-Petal--",
         },
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1706470815566.png',
-          title: 'Wedding Night Decoration',
-          price: '₹2250',
+          Image: 'https://horaservices.com/api/uploads/attachment-1713195839177.png',
+          title: 'First Night With Rose Decoration',
+          price: '₹1570',
           rating: 4.5,
-          link:"/balloon-decoration/first-night-decoration/product/Wedding-Night-Decoration",
+          link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Rose-Decoration",
         },
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1711614540709.png',
-          title: 'Lightning With Heart Room Decor',
-          price: '₹1450',
+          Image: 'https://horaservices.com/api/uploads/attachment-1706470671060.png',
+          title: 'Romantic Wedding Room Decor',
+          price: '₹1600',
           rating: 4.3,
-          link:"/balloon-decoration/first-night-decoration/product/Lightning-With-Heart-Room-Decor",
+          link:"/balloon-decoration/first-night-decoration/product/Romantic-Wedding-Room-Decor",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1713178826666.png',
+          title: 'First Night With Dim Light Decor',
+          price: '₹1550',
+          rating: 4.3,
+          link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Dim-Light-Decor",
+        },
+        {
+          Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+          title: 'VIEW ALL',
+          price: '',
+          rating: 100,
+          link:"/balloon-decoration/first-night-decoration",
         },
       ];
     
     
       const haldiAndMehndiData = [
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1722688345222.png',
-          title: 'Mehendi Decoration Green Look',
-          price: '₹16200',
+          Image: 'https://horaservices.com/api/uploads/attachment-1723290555708.png',
+          title: 'Haldi Decoration Ring Look',
+          price: '₹14080',
           rating: 4.6,
-          link:"/balloon-decoration/haldi-mehendi-decoration",
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Ring-Look",
         },
         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1722692831708.png',
-          title: 'Haldi With Green Backdrop',
-          price: '₹9680',
+            Image: 'https://horaservices.com/api/uploads/attachment-1723290234806.png',
+          title: 'Haldi Decoration Yellow Looks',
+          price: '₹8700',
           rating: 4.5,
-          link:"/balloon-decoration/haldi-mehendi-decoration",
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Yellow-Looks",
         },
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1722935098782.png',
-          title: 'Mehendi Decoration Look',
-          price: '₹17200',
+          Image: 'https://horaservices.com/api/uploads/attachment-1722693437219.png',
+          title: 'Mehendi Decoration Green Style',
+          price: '₹13500',
           rating: 4.6,
-          link:"/balloon-decoration/haldi-mehendi-decoration",
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Green-Style",
         },
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1722969484208.png',
-          title: 'Mehendi With Orange Theme',
-          price: '₹7000',
+          Image: 'https://horaservices.com/api/uploads/attachment-1723209813542.png',
+          title: 'Mehendi Decoration Look Yellow',
+          price: '₹6600',
           rating: 4.6,
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Look-Yellow",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1723290772620.png',
+          title: 'Haldi Decoration Stage',
+          price: '₹13920',
+          rating: 4.3,
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Stage",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1722969101388.png',
+          title: 'Mehendi Decoration Attractive Look',
+          price: '₹17800',
+          rating: 4.1,
+          link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Attractive-Look",
+        },
+        {
+          Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+          title: 'VIEW ALL',
+          price: '',
+          rating: 100,
           link:"/balloon-decoration/haldi-mehendi-decoration",
         },
       ];
@@ -173,156 +229,298 @@ const Decoration = () => {
     
       const AnniversaryData = [
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1705947179768.png',
-          title: 'Roseate Radiance Anniversary Decor',
-          price: '₹1999',
+          Image: 'https://horaservices.com/api/uploads/attachment-1706461267921.png',
+          title: 'Lavender Rose Extravaganza Anniversary Decor',
+          price: '₹2999',
           rating: 4.6,
-          link:"/balloon-decoration/anniversary-decoration",
+          link:"/balloon-decoration/anniversary-decoration/product/Lavender-Rose-Extravaganza-Anniversary-Decor",
         },
        {
-          Image: 'https://horaservices.com/api/uploads/attachment-1706442984306.png',
-          title: 'Love You Room Decor',
-          price: '₹1250',
+          Image: 'https://horaservices.com/api/uploads/attachment-1706460114319.png',
+          title: 'White & Gold Enchantment Anniversary Decoration',
+          price: '₹2499',
           rating: 4.2,
-          link:"/balloon-decoration/anniversary-decoration",
+          link:"/balloon-decoration/anniversary-decoration/product/White-&-Gold-Enchantment-Anniversary-Decoration",
         },
        {
-          Image: 'https://horaservices.com/api/uploads/attachment-1706443182006.png',
-          title: 'Rose Gold Anniversary Decor',
-          price: '₹1599',
+          Image: 'https://horaservices.com/api/uploads/attachment-1713965416898.png',
+          title: 'Anniversary Decoration With Ring Shape',
+          price: '₹4250',
           rating: 4.5,
-          link:"/balloon-decoration/anniversary-decoration",
+          link:"/balloon-decoration/anniversary-decoration/product/Anniversary-Decoration-With-Ring-Shape",
         },
        {
-          Image: 'https://horaservices.com/api/uploads/attachment-1706459807177.png',
-          title: 'Canopy Red Heart Decor',
-          price: '₹4286',
+          Image: 'https://horaservices.com/api/uploads/attachment-1725953653670.png',
+          title: 'Rose and Gold Heaven Balloon Decor',
+          price: '₹8350',
           rating: 4.5,
+          link:"/balloon-decoration/anniversary-decoration/product/Rose-and-Gold-Heaven-Balloon-Decor",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1713189291302.png',
+          title: 'Bed Decoration For First Night',
+          price: '₹2840',
+          rating: 4.0,
+          link:"/balloon-decoration/anniversary-decoration/product/Bed-Decoration-For-First-Night",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
+          title: 'Floral Anniversary Decor',
+          price: '₹4400',
+          rating: 4.5,
+          link:"/balloon-decoration/anniversary-decoration/product/Floral-Anniversary-Decor",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1725951536862.png',
+          title: 'Golden n White Petals Balloon decor',
+          price: '₹2870',
+          rating: 4.8,
+          link:"/balloon-decoration/anniversary-decoration/product/Golden-n-White-Petals-Balloon-decor",
+        },
+        {
+          Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+          title: 'VIEW ALL',
+          price: '',
+          rating: 100,
           link:"/balloon-decoration/anniversary-decoration",
         },
       ];
 
       const KidsBirthdayData = [
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1726056840221.png',
+          title: 'Metallic Blue n White Glow Balloon Decor',
+          price: '₹2560',
+          rating: 4.5,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Metallic-Blue-n-White-Glow-Balloon-Decor",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
+          title: 'Minnie Mouse Theme Decoration',
+          price: '₹1549',
+          rating: 4.5,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1713198322285.png',
+          title: 'Cocomelon Theme For Birthday Kids',
+          price: '₹2299',
+          rating: 4.5,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-Theme-For-Birthday-Kids",
+        },
           {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
-            title: 'Minnie Mouse Theme Decor',
-            price: '₹1549',
+            Image: 'https://horaservices.com/api/uploads/attachment-1706464928126.png',
+            title: 'Mickey Ring Birthday Decoration',
+            price: '₹2699',
             rating: 4.6,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
+            link:"/balloon-decoration/kids-birthday-decoration/product/Mickey-Ring-Birthday-Decoration",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705948813744.png',
-            title: 'Unicorn Backdrop Decor',
-            price: '₹4399',
+            Image: 'https://horaservices.com/api/uploads/attachment-1711527333610.png',
+            title: 'Cocomelon theme With Shining Balloons',
+            price: '₹6570',
             rating: 4.4,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Unicorn-Backdrop-Decoration",
+            link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-theme-With-Shining-Balloons",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706520101383.png',
-            title: 'Multi color Birthday Balloon',
-            price: '₹1299',
+            Image: 'https://horaservices.com/api/uploads/attachment-1711535459259.png',
+            title: 'Mermaid Theme Birthday Ring Decor',
+            price: '₹5999',
             rating: 4.3,
+            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-Birthday-Ring-Decor",
+          },
+         {
+            Image: 'https://horaservices.com/api/uploads/attachment-1711525915897.png',
+            title: '4th Birthday Cocomelon Theme Ring Decor',
+            price: '₹7560',
+            rating: 4.7,
+            link:"/balloon-decoration/kids-birthday-decoration/product/4th-Birthday-Cocomelon-Theme-Ring-Decor",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1726057785648.png',
+            title: 'Sea Shell by Sea Shore Decor',
+            price: '₹2740',
+            rating: 4.4,
+            link:"/balloon-decoration/kids-birthday-decoration/product/Sea-Shell-by-Sea-Shore-Decor",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1706520101383.png',
+            title: 'Multi color Birthday Balloon Decoration',
+            price: '₹1299',
+            rating: 4.7,
             link:"/balloon-decoration/kids-birthday-decoration/product/Multi-color-Birthday-Balloon-Decoration",
           },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-            title: 'Cute and Simple Birthday Decor',
-            price: '₹2299',
-            rating: 4.7,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Cute-and-Simple-Birthday-Decoration",
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1713185070655.png',
+            title: 'Mermaid Theme With Birthday Decor',
+            price: '₹3550',
+            rating: 4.8,
+            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-With-Birthday-Decor",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1706521327374.png',
+            title: 'Charming Birthday Decoration',
+            price: '₹1250',
+            rating: 4.2,
+            link:"/balloon-decoration/kids-birthday-decoration/product/Charming-Birthday-Decoration",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
+            title: 'Minnie Mouse Theme Decoration',
+            price: '₹1549',
+            rating: 4.5,
+            link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
+          },
+          {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
+            link:"/balloon-decoration/kids-birthday-decoration",
           },
         ];
       
+
+        // https://drive.google.com/file/d/1zSUd5itXLDv1E4NplF5Eo6U7OYnVCArd/view?usp=sharing
       
         const BabyShowerData= [
           {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705598818463.png',
-            title: 'Cloudy Theme Baby Shower',
-            price: '₹1899',
+            Image: 'https://horaservices.com/api/uploads/attachment-1713010630004.png',
+            title: 'Oh Baby Decor With Baby Feet',
+            price: '₹3000',
             rating: 4.2,
-            link:"/balloon-decoration/baby-shower-decoration",
+            link:"/balloon-decoration/baby-shower-decoration/product/Oh-Baby-Decor-With-Baby-Feet",
           },
          {
             Image: 'https://horaservices.com/api/uploads/attachment-1705598937315.png',
             title: 'Golden, Pink and Blue Baby Shower',
             price: '₹2299',
             rating: 4.5,
-            link:"/balloon-decoration/baby-shower-decoration",
+            link:"/balloon-decoration/baby-shower-decoration/product/Golden,-Pink-and-Blue-Baby-Shower",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705599152481.png',
-            title: 'Baby Pink Baby Shower',
-            price: '₹2700',
+            Image: 'https://horaservices.com/api/uploads/attachment-1711536118870.png',
+            title: 'Rosy Whispers Baby Shower',
+            price: '₹6120',
             rating: 4.2,
-            link:"/balloon-decoration/baby-shower-decoration",
+            link:"/balloon-decoration/baby-shower-decoration/product/Rosy-Whispers-Baby-Shower",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711520474508.png',
-            title: 'OH BABY Light Decoration',
-            price: '₹3399',
+            Image: 'https://horaservices.com/api/uploads/attachment-1713379165376.png',
+            title: 'Oh Baby With Green Decoration',
+            price: '₹6270',
             rating: 4.8,
+            link:"/balloon-decoration/baby-shower-decoration/product/Oh-Baby-With-Green-Decoration",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1726062561916.png',
+            title: 'Oh Baby With Green Decoration',
+            price: '₹5860',
+            rating: 4.5,
+            link:"/balloon-decoration/baby-shower-decoration/product/Teddy%27s-Wonderland-Pink-Decor",
+          },
+          {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
             link:"/balloon-decoration/baby-shower-decoration",
           },
         ];
       
         const WelcomebabyData= [
           {
+            Image: 'https://horaservices.com/api/uploads/attachment-1713382130916.png',
+            title: 'Welcome Baby By Teddy Theme',
+            price: '₹4150',
+            rating: 4.8,
+            link:"/balloon-decoration/welcome-baby-decoration/product/Welcome-Baby-By-Teddy-Theme",
+          },
+         {
+            Image: 'https://horaservices.com/api/uploads/attachment-1713010968590.png',
+            title: 'Light Baby Decoration',
+            price: '₹3750',
+            rating: 4.5,
+            link:"/balloon-decoration/welcome-baby-decoration/product/Light-Baby-Decoration-",
+          },
+         {
+            Image: 'https://horaservices.com/api/uploads/attachment-1706471168212.png',
+            title: 'Pastel Theme Baby Welcome',
+            price: '₹1999',
+            rating: 4.7,
+            link:"/balloon-decoration/welcome-baby-decoration/product/Pastel-Theme-Baby-Welcome",
+          },
+         {
             Image: 'https://horaservices.com/api/uploads/attachment-1706471308375.png',
             title: 'Pink Theme Welcome Baby',
             price: '₹2070',
-            rating: 4.8,
-            link:"/balloon-decoration/welcome-baby-decoration",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706471595779.png',
-            title: 'Blue Theme Welcome Baby Boy',
-            price: '₹1899',
-            rating: 4.5,
-            link:"/balloon-decoration/welcome-baby-decoration",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711458529679.png',
-            title: 'Oh Baby Classy Decoration',
-            price: '₹2999',
-            rating: 4.7,
-            link:"/balloon-decoration/welcome-baby-decoration",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711555526222.png',
-            title: 'Welcome Baby Decoration',
-            price: '₹1899',
             rating: 4.2,
+            link:"/balloon-decoration/welcome-baby-decoration/product/Pink-Theme-Welcome-Baby",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1711599827419.png',
+            title: 'Golden & Pink Theme Baby Welcome',
+            price: '₹2599',
+            rating: 4.8,
+            link:"/balloon-decoration/welcome-baby-decoration/product/Golden-&-Pink-Theme-Baby-Welcome",
+          },
+           {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
             link:"/balloon-decoration/welcome-baby-decoration",
           },
         ];
       
         const PremiumData= [
           {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705586477880.png',
-            title: 'Open Area Birthday Decoration',
-            price: '₹6999',
+            Image: 'https://horaservices.com/api/uploads/attachment-1713005111181.png',
+            title: 'Birthday Decor With Cocomelon Setup',
+            price: '₹8770',
             rating: 4.4,
-            link:"/balloon-decoration/premium-decoration",
+            link:"/balloon-decoration/premium-decoration/product/Birthday-Decor-With-Cocomelon-Setup",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706528142518.png',
-            title: 'Canopy Birthday Decoration',
-            price: '₹4999',
+            Image: 'https://horaservices.com/api/uploads/attachment-1712938054361.png',
+            title: 'Boy & Girl Baby Shower Theme',
+            price: '₹7650',
             rating: 4.6,
-            link:"/balloon-decoration/premium-decoration",
+            link:"/balloon-decoration/premium-decoration/product/Boy-&-Girl-Baby-Shower-Theme",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706534258221.png',
-            title: 'Multi-Colored Baby Shower',
-            price: '₹6120',
+            Image: 'https://horaservices.com/api/uploads/attachment-1706463835447.png',
+            title: 'Multi Balloon Round Ring',
+            price: '₹4670',
             rating: 4.7,
-            link:"/balloon-decoration/premium-decoration",
+            link:"/balloon-decoration/premium-decoration/product/Multi-Balloon-Round-Ring",
           },
          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711540983547.png',
-            title: 'Car Theme With Mickey Mouse',
-            price: '₹6235',
+            Image: 'https://horaservices.com/api/uploads/attachment-1711711395150.png',
+            title: 'Silver & White Theme Birthday Decor',
+            price: '₹6349',
             rating: 4.6,
+            link:"/balloon-decoration/premium-decoration/product/Silver-&-White-Theme-Birthday-Decor",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1712919978677.png',
+            title: 'Birthday Celebrate 1st Trip Around World',
+            price: '₹6600',
+            rating: 4.3,
+            link:"/balloon-decoration/premium-decoration/product/Birthday-Celebrate-1st-Trip-Around-World",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1711528712533.png',
+            title: 'Unicorn Theme Birthday Surprise',
+            price: '₹7399',
+            rating: 4.6,
+            link:"/balloon-decoration/premium-decoration/product/Unicorn-Theme-Birthday-Surprise",
+          },
+           {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
             link:"/balloon-decoration/premium-decoration",
           },
         ];
@@ -354,6 +552,13 @@ const Decoration = () => {
             title: 'Baby Shark Bouquet',
             price: '₹1420',
             rating: 4.5,
+            link:"/balloon-decoration/balloon-bouquets-decoration",
+          },
+           {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
             link:"/balloon-decoration/balloon-bouquets-decoration",
           },
         ];
@@ -395,10 +600,14 @@ const Decoration = () => {
     </div>
     ))}
 </div>
+
 <div className="page-width decorationlanding-slider">
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("KidsBirthday")}>
     <h2>Kids Birthday Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("KidsBirthday")}
@@ -408,58 +617,13 @@ const Decoration = () => {
     </div>
   <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
 </div>
-    
-<div className="slider-container">
-  <div className="slider-header">
-    <h2>First Night Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("FirstNight")}
-    >
-    View More
-    </button>
-    </div>
-  <div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {firstNightData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}> 
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
-
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-
-        </div>
 
 
-        </a>
-    ))}
-</div>
-  </div>
-</div>
 <div className="slider-container ">
     <div className="slider-header">
+    <a  onClick={() => handleViewMore("Birthday")}>
     <h2>Birthday Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("Birthday")}
@@ -469,9 +633,31 @@ const Decoration = () => {
     </div>
     <DecorationLandingSlider data={birthdayData} category="Birthday" handleViewMore={handleViewMore} />
     </div>
+
+
+    
 <div className="slider-container">
   <div className="slider-header">
-    <h2>Haldi & Mehndi Decoration</h2>
+  <a  onClick={() => handleViewMore("FirstNight")}>
+    <h2>First Night Decoration</h2>
+    </a>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("FirstNight")}
+    >
+    View More
+    </button>
+    </div>
+  <DecorationLandingSlider data={firstNightData} category="FirstNight" handleViewMore={handleViewMore} />
+</div>
+
+
+
+    <div className="slider-container">
+  <div className="slider-header">
+  <a  onClick={() => handleViewMore("Haldi-Mehandi")}>
+    <h2>Haldi & Mehandi Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("Haldi-Mehandi")}
@@ -479,45 +665,17 @@ const Decoration = () => {
     View More
     </button>
     </div>
-    <div>
-    <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {haldiAndMehndiData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
 
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontSize: '17px' , fontWeight:"bold", margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-        </div>
-        </a>
-    ))}
+  <DecorationLandingSlider data={haldiAndMehndiData} category="Haldi-Mehandi" handleViewMore={handleViewMore} />
 </div>
-    </div>
+
+
  
-</div>
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("Anniversary")}>
     <h2>Anniversary Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("Anniversary")}
@@ -528,9 +686,12 @@ const Decoration = () => {
 
   <DecorationLandingSlider data={AnniversaryData} category="Anniversary" handleViewMore={handleViewMore} />
 </div>
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("BabyShower")}>
     <h2>Baby Shower</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("BabyShower")}
@@ -538,42 +699,16 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {BabyShowerData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
 
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-        </div>
-        </a>
-    ))}
+  <DecorationLandingSlider data={BabyShowerData} category="BabyShower" handleViewMore={handleViewMore} />
 </div>
-</div>
+
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("WelcomeBaby")}>
     <h2>Welcome baby</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("WelcomeBaby")}
@@ -583,9 +718,14 @@ const Decoration = () => {
     </div>
   <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby" handleViewMore={handleViewMore} />
 </div>
+
+
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("PremiumDecoration")}>
     <h2>Premium Decors</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("PremiumDecoration")}
@@ -593,42 +733,16 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {PremiumData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
+  <DecorationLandingSlider data={PremiumData} category="PremiumDecoration" handleViewMore={handleViewMore} />
+</div>
 
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-        </div>
-        </a>
-    ))}
-</div>
-</div>
+
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("BallonBouquets")}>
     <h2>Ballon Bouquets</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("BallonBouquets")}

@@ -649,3 +649,16 @@ img {
 }
 }
 
+
+
+a {
+  color: #000; /* Initial color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+a:hover {
+  color: #ff6600; /* Change color on hover */
+  text-decoration: underline; /* Add underline on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
