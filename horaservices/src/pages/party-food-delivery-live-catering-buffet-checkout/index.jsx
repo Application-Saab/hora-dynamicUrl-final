@@ -340,7 +340,14 @@ const FoodDeliveryCheckout = () => {
     
         // Check for the selected delivery option
         if (selectedDeliveryOption === 'party-food-delivery') {
-            finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+            {
+            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
+            ? totalPrice - parseFloat(discountedPrice)
+            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+
+            }
+
+            //finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
             console.log("Initial total after applying discount and delivery charges: " + finalTotal);
             
             finalTotal += parseFloat(packingCost);
@@ -351,7 +358,10 @@ const FoodDeliveryCheckout = () => {
                 console.log("Total after adding disposable cost: " + finalTotal);
             }
         } else if (selectedDeliveryOption === 'party-live-buffet-catering') {
-            finalTotal = totalPrice - parseFloat(discountedPrice);
+            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
+            ? totalPrice - parseFloat(discountedPrice)
+            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+        
             console.log("Initial total after applying discount: " + finalTotal);
     
             if (includeTables) {
@@ -446,7 +456,12 @@ const FoodDeliveryCheckout = () => {
                 </div>
                 <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}>
                     <p className='ordersummeryname'>{item.name}</p>
-
+                    {
+            selectedDeliveryOption === 'party-food-delivery' ? 
+            <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
+            :
+            null
+          }
                 </div>
             </div>
         );
@@ -860,7 +875,8 @@ const FoodDeliveryCheckout = () => {
                                                                 <p style={{ color: "#008631", fontWeight: '600', marginRight: 5 }}>FREE</p>
                                                                 <p style={{ textDecoration: "line-through", color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
                                                             </>
-                                                        ) : (
+                                                        ) :
+                                                         (
                                                             <p style={{ color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
                                                         )}
                                                     </div>
@@ -1090,19 +1106,15 @@ const FoodDeliveryCheckout = () => {
                                             {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}
                                         </div>
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }}>
-                                                {selectedDishQuantities && selectedDishQuantities.map((item, index) => (
-                                                    <div style={{ width: "48%", border: "1px solid rgb(149 142 142 / 73%)", flexDirection: "row", display: "flex", borderRadius: "10px", padding: "6px 10px", boxSizing: "border-box" }} className='dishes-checkout-page'>
-                                                        <div style={{ marginRight: 2, width: "90%" }}>
-                                                            <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} width={300} height={300} />
-                                                        </div>
-                                                        <div style={{ color: "rgb(146, 82, 170)", fontWeight: "500", fontSize: "12px" }}>
-                                                            <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.name}</p>
-                                                            {/* <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.price}</p> */}
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
+                
+
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }} className='foode-deliry-mobile'>
+                                        {selectedDishQuantities.map((item, index) => (
+                                        <RenderDishQuantity key={index} item={item} />
+                                        ))}
+                                        </div>
+
+
                                         </div>
                                     </div>
                                 </div>

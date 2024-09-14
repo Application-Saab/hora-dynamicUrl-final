@@ -28,6 +28,7 @@ import BacheloretteImage from '../../assets/Bachelorette.jpg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { sendGTMEvent  } from '@next/third-parties/google';
 
 const decCat = [
     { id: '2', image: BirthdayImage, name: 'Birthday', subCategory: "Birthday", catValue: "birthday-decoration", imgAlt: "A Gorgeous Candy Birthday Decoration Surprise!" },
@@ -53,6 +54,7 @@ const Decoration = () => {
     const hasCityPageParam = city ? true : false;
 
     const openCatItems = (item) => {
+     // sendGTMEvent('event', 'titleClicked', { value: `/balloon-decoration/${item.catValue}` });
         dispatch(setState(item.subCategory, item.imgAlt));
         if (hasCityPageParam) {
             router.push(`/${city}/balloon-decoration/${item.catValue}`);

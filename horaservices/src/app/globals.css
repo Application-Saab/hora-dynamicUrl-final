@@ -641,6 +641,9 @@ h4.contact-us-heading a {
   div#faqQ {
     padding: 0 20px;
   }
+  .foode-deliry-mobile .ordersummaryproduct p.ordersummeryname {
+    min-height: auto;
+  }
  
   .no-orders {
     width: 90%;

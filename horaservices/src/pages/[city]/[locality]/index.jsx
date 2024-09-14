@@ -6,41 +6,35 @@ import {
   PAYMENT_STATUS,
   API_SUCCESS_CODE,
   UPDATE_ORDER_STATUS,
-} from "../../utils/apiconstants";
+} from "../../../utils/apiconstants";
 import axios from "axios";
-import Head from "next/head";
-import Success from '../../pages/Success';
-import Failure from '../../pages/Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
-import whatsppicon from "../../assets/whatsapp-icon.png";
-import { getHomeOrganizationSchema } from "../../utils/schema";
+import whatsppicon from "../../../assets/whatsapp-icon.png";
+import { getHomeOrganizationSchema } from "../../../utils/schema";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../app/page.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../app/globals.css';
+import '../../../app/globals.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import DecorationIcon from '../../assets/decoration_icon.png';
-import PhotographyIcon from '../../assets/photography_icon.png';
-import FoodIcon from '../../assets/food_icon.png';
-import EntertainmentIcon from '../../assets/enter_icon.png';
-import '../../app/homepage.css'
-import cityData from '../../utils/cityData';
+import DecorationIcon from '../../../assets/decoration_icon.png';
+import PhotographyIcon from '../../../assets/photography_icon.png';
+import FoodIcon from '../../../assets/food_icon.png';
+import EntertainmentIcon from '../../../assets/enter_icon.png';
+// import '../../app/homepage.css'
 // remove later
-import homepage_entertainment1 from '../../assets/homepage_entertainment1.png';
-import homepage_entertainment2 from '../../assets/homepage_entertainment2.png';
-import homepage_entertainment3 from '../../assets/homepage_entertainment3.png';
-import homepage_entertainment4 from '../../assets/homepage_entertainment4.png';
+import homepage_entertainment1 from '../../../assets/homepage_entertainment1.png';
+import homepage_entertainment2 from '../../../assets/homepage_entertainment2.png';
+import homepage_entertainment3 from '../../../assets/homepage_entertainment3.png';
+import homepage_entertainment4 from '../../../assets/homepage_entertainment4.png';
 
 export default function Home() {
   const router = useRouter();
   const [showButton, setShowButton] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [city, setCity] = useState(null);
-
   const photographyUrl = () =>{
     window.open(
       'https://api.whatsapp.com/send?phone=+917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
@@ -372,38 +366,38 @@ export default function Home() {
     {
       id: 1,
       title: 'Birthday and Anniversary',
-      imageUrl: require('../../assets/homepage_Celebrate1.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate1.png'),
       imgAlt: 'Birthday and Anniversary celebration',
       link: "https://horaservices.com/balloon-decoration/birthday-decoration",
     },
     {
       id: 2,
       title: 'House Parties',
-      imageUrl: require('../../assets/homepage_Celebrate2.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate2.png'),
       imgAlt: 'House parties celebration',
     },
     {
       id: 3,
       title: 'Corporate Events',
-      imageUrl: require('../../assets/homepage_Celebrate3.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate3.png'),
       imgAlt: 'Corporate events celebration',
     },
     {
       id: 4,
       title: 'Wedding Events',
-      imageUrl: require('../../assets/homepage_Celebrate4.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate4.png'),
       imgAlt: 'Wedding events celebration',
     },
     {
       id: 5,
       title: 'Gatherings',
-      imageUrl: require('../../assets/homepage_Celebrate5.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate5.png'),
       imgAlt: 'Gatherings celebration',
     },
     {
       id: 6,
       title: 'Kids Events',
-      imageUrl: require('../../assets/homepage_Celebrate6.png'),
+      imageUrl: require('../../../assets/homepage_Celebrate6.png'),
       imgAlt: 'Kids events celebration',
     },
   ];
@@ -451,52 +445,16 @@ export default function Home() {
     },
   ];
 
+  const { locality } = router.query;
 
+  console.log(locality,"locality");
 
-  const openSliderLink = (link, city) => {
+  const openSliderLink = (link, city,locality) => {
     if (link) {
-      window.location.href = `/${city}/${link}`; // Redirects to the provided link
+      window.location.href = `/${city}/${locality}/${link}`; // Redirects to the provided link
       //window.location.href = link; // Redirects to the provided link
     }
   };
-
-  const formatLocalityName = (name) => {
-    return name.replace(/\s+/g, '-').toLowerCase();
-  };
-
-   const normalizedCity = city ? city.toLowerCase() : '';
-   console.log("Normalized City:", normalizedCity); 
-
-   const hasCityPageParam = city ? true : false;
-   console.log("Has City Page Param:", hasCityPageParam); 
-
-   const [cityLocalitiesList, setCityLocalitiesList] = useState([]);
-
-   useEffect(() => {
-     console.log("UseEffect Triggered"); 
-     if (normalizedCity) {
-       const localities = cityData[normalizedCity]?.cityLocalitiesList || [];
-       console.log("Fetched Localities:", localities); // Log fetched localities
-       setCityLocalitiesList(localities);
-     }
-   }, [normalizedCity]);
-
-   const handleClick = (localityName) => {
-    const formattedLocalityName = formatLocalityName(localityName);
-
-    router.push({
-      pathname: `/${normalizedCity}/${formattedLocalityName}`, 
-    });
-  };
-
-
-
-   // If city parameter is missing
-   if (!hasCityPageParam) {
-     return <div>Please select a city first.</div>;
-   }
-
-   console.log("City Localities List:", cityLocalitiesList);
 
 
 
@@ -518,7 +476,7 @@ export default function Home() {
                   />
                   <div className="carousel-content slide-content">
                     <h2 className="party-title1 slide-title">{slide.title}</h2>
-                    <button className="slide-button book-now" onClick={() => openSliderLink(slide.link , city)}>book Now</button>
+                    <button className="slide-button book-now" onClick={() => openSliderLink(slide.link , city, locality)}>book Now</button>
                   </div>
                 </div>
               ))}
@@ -534,7 +492,7 @@ export default function Home() {
           <div className="food-cards desktop">
             {foodData.map(item => (
               <div key={item.id} className="food-card">
-                <a href={`${city}/${item.link}`} className="food-card-link">
+                <a href={`${locality}/${item.link}`} className="food-card-link">
                   <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                   <p className="food-card-title">{item.title}</p>
                 </a>
@@ -575,7 +533,7 @@ export default function Home() {
             </div>
             <div className="service-image-container">
               <Image src="https://horaservices.com/api/uploads/homepage_decoration.png" alt="Decoration" className="service-image" width={200} height={100} />
-              <button className="book-now2" onClick={() => window.location.href = `${city}/balloon-decoration`} >Book Now</button>
+              <button className="book-now2" onClick={() => window.location.href = `${locality}/balloon-decoration`} >Book Now</button>
             </div>
           </div>
           <div className="service">
@@ -632,7 +590,7 @@ export default function Home() {
                       <li key={index}>{point}</li>
                     ))}
                   </ul>
-                  <a href={`${city}/${category.link}`} className="categoriesCard-explore-more" >
+                  <a href={`${locality}/${category.link}`} className="categoriesCard-explore-more" >
                     Explore More
                   </a>
                 </div>
@@ -640,26 +598,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="localities-box">
-        <h1 className="city-heading">
-        {city ? city.charAt(0).toUpperCase() + city.slice(1) : "City"} Localities
-        </h1>
-        <ul className="localities-list">
-      
-        {cityLocalitiesList.length > 0 ? (
-        cityLocalitiesList.map((locality, index) => (
-          <li key={index} className="locality-item">
-            <button onClick={() => handleClick(locality.name)} className="locality-button">
-              {locality.name}
-            </button>
-          </li>
-        ))
-        ) : (
-        <div className="no-localities">No localities found for this city.</div>
-        )}
-        </ul>
         </div>
 
         <div className="celebrate-container sec-container">

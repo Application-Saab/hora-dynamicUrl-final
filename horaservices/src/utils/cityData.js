@@ -896,3 +896,5 @@ const cityData = {
         bannerImage: "content/img/OIP1.jpg",
     }
 };
+
+export default cityData;

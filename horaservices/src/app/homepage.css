@@ -982,3 +982,56 @@ transform: translateY(-31%);
   justify-content: space-around;
   align-items: center;
 }
+
+/* locality */
+
+.localities-box {
+  border: 2px solid #0c0c0c; /* Blue border for the box */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 1218px; /* Max width of the box */
+  margin: 20px auto; /* Center the box */
+}
+
+.city-heading {
+  font-size: 1.5rem;
+  color: #97538C; /* Blue color for the heading */
+  border-bottom: 2px solid #97538C; /* Border below heading */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: 900;
+}
+
+.localities-list {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Display list items in a row */
+  flex-wrap: wrap; /* Allow wrapping to next line */
+}
+
+.locality-item {
+  margin: 5px; /* Space between buttons */
+}
+
+.locality-button {
+  background: none; /* Remove background */
+  color: #97538C; /* Pink color for text */
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline; /* Underline text */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+  font-weight: bold;
+}
+
+.locality-button:hover {
+  color: #ff149183; /* Darker pink on hover */
+}
+
+.no-localities {
+  font-style: italic;
+  color: #888; /* Gray color for no results text */
+}

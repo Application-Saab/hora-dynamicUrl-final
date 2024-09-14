@@ -396,8 +396,16 @@ function DecorationCatDetails() {
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
-              <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{subCategory}{' > '}{product.name}</h2>
-              <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
+              <h2 style={{ fontSize: "13px", color: "#222" , margin:"5px 0 5px 0" , fontWeight:"500" }}>
+              <a style={{ color: "#9252AA", textDecoration: "none" }} href="/">Home</a>
+              {' > '}
+              <a style={{ color: "#9252AA", textDecoration: "none" }} href={`/balloon-decoration/${catValue}`}>
+              {subCategory}</a>
+
+              {' > '}
+              <span>{product.name}</span>
+              </h2>
+<h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
               <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
@@ -448,7 +456,7 @@ function DecorationCatDetails() {
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
               {getItemInclusion(product.inclusion)}
               {selectedAddOnProduct.length == 0 && (
-                <button style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
+                <button style={styles.Buttonstyle} id="continueButton" className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
               )}
             </div>
 
