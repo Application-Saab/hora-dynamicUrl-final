@@ -372,7 +372,7 @@ export default function Home() {
       title: 'Birthday and Anniversary',
       imageUrl: require('../../../assets/homepage_Celebrate1.png'),
       imgAlt: 'Birthday and Anniversary celebration',
-      link: "https://horaservices.com/balloon-decoration/birthday-decoration",
+      link: "/balloon-decoration/birthday-decoration",
     },
     {
       id: 2,

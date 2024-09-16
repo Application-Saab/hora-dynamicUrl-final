@@ -276,3 +276,14 @@
         margin: 0 5px; /* Smaller margin for mobile */
     }
 }
+
+
+.scrollable-div {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: scroll; /* Makes vertical scrolling */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+  }
+  

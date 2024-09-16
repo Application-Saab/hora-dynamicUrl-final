@@ -150,7 +150,7 @@ const Login = () => {
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('userID', response.data.data._id);
 
-                    sendWelcomeMessage();
+                    await sendWelcomeMessage();
 
                     if (previousPage) {
                         if (previousPage.includes("/book-chef-cook-for-party")) {
@@ -212,48 +212,6 @@ const Login = () => {
             setOtpError('Failed to verify OTP. Please try again.');
         }
     };
-
-
-//     // Function to send the WhatsApp message
-// const sendWelcomeMessage = async () => {
-//     console.log('Sending WhatsApp message to mobile number:', mobileNumber);
-
-//     const options = {
-//         method: 'POST',
-//         url: 'https://public.doubletick.io/whatsapp/message/template',
-//         headers: {
-//             accept: 'application/json',
-//             'content-type': 'application/json',
-//             Authorization: 'key_wZpn79uTfV' // Keep this secure in backend
-//         },
-//         data: {
-//             messages: [
-//                 {
-//                     content: {
-//                         language: 'en',
-//                         templateData: {
-//                             header: {
-//                                 type: 'IMAGE',
-//                                 mediaUrl: 'https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg'
-//                             },
-//                             body: { placeholders: ['sohan'] } // You can replace 'sohan' with dynamic user data if needed
-//                         },
-//                         templateName: 'happy_to_help_v2'
-//                     },
-//                     from: '+917338584828',
-//                     to: mobileNumber // Send to the logged-in user's number
-//                 }
-//             ]
-//         }
-//     };
-
-//     try {
-//         const response = await axios.request(options);
-//         console.log('WhatsApp message response:', response.data);
-//     } catch (error) {
-//         console.error('Error sending WhatsApp message:', error);
-//     }
-// };
 
 
 // Function to send the WhatsApp message

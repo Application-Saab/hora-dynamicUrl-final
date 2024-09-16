@@ -27,10 +27,16 @@ import InfoIcon from '../../assets/info.png';
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Popup from '../../utils/popup';
+import {getChefForPartyFAQSchema} from '../../utils/schema';
 const orangeColor = '#FF6F61';
 const defaultColor = '#B0BEC5';
 
 const CreateOrder = ({ history, currentStep }) => {
+    const productFAQ = getChefForPartyFAQSchema();
+    const [activeIndex, setActiveIndex] = useState(null);
+    const toggleFAQ = (index) => {
+        setActiveIndex(activeIndex === index ? null : index);
+      };
     const [isMobile, setIsMobile] = useState(false);
     const viewBottomSheetRef = useRef(null);
     const bottomSheetRef = useRef(null);
@@ -732,6 +738,30 @@ const CreateOrder = ({ history, currentStep }) => {
                         </div>
                     </Col>
                 </Row>
+                {/* <div>
+      <h1>FAQ</h1>
+      {productFAQ.mainEntity.map((faq, index) => (
+        <div key={index} className="faq-item">
+          <h2>{faq.name}</h2>
+          <p>{faq.acceptedAnswer.text}</p>
+        </div>
+      ))}
+    </div> */}
+
+<div className="faq-container citypage ">
+    <div className="page-width">
+      <h2 className="faq-title">Frequently Asked Questions</h2>
+      {productFAQ.mainEntity.map((faq, index) => (
+        <div key={index} className="faq-item">
+          <h3 className="faq-question" onClick={() => toggleFAQ(index)}>
+            {faq.name}
+            <span className="faq-icon">{activeIndex === index ? '-' : '+'}</span>
+          </h3>
+          {activeIndex === index && <p className="faq-answer">{faq.acceptedAnswer.text}</p>}
+        </div>
+      ))}
+</div>
+</div>
             </div>
             {isWarningVisibleForCuisineCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}
             {isWarningVisibleForDishCount && (<Popup popupMessage={popupMessage} onClose={handleWarningClose} />)}

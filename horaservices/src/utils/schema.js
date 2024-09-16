@@ -249,3 +249,36 @@ export const getDecorationProductOrganizationSchema = (product) => ({
       }
     ]
   });
+
+  // chef for party
+  export const getChefForPartyFAQSchema = () => ({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Chef for party service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Chef for party service, after you have booked your order by selecting the dishes, date, and time of the event, HORA connects the most suitable chef for your order. The chef will come to your location, cook in your kitchen using your ingredients and utensils, clean the platform, and then leave."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who are these chefs and how do we trust them?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We identify chefs from the top restaurants in your city and onboard them through a 10-step verification process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I book the order?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It's very simple to book a chef for a party: just visit the website, click on 'Book now' for a chef for your party, and select the event details like dishes, number of people, and event date. On the final page, you'll see the total amount and can confirm the order. NOTE: If the number of dishes exceeds 7, an extra helper will be required, which will cost an additional 700 Rs. 😊"
+        }
+      }
+    ]
+  });
+  

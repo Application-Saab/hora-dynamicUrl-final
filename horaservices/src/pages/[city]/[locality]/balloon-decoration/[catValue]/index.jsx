@@ -61,6 +61,9 @@ const DecorationCatPage = () => {
     { label: 'Super Hero theme', value: 'Hero' },
     { label: 'Sport Football theme', value: 'Football' },
     { label: 'Unicorn Theme', value: 'Unicorn' },
+    {label: 'Super Hero', value: 'Hero'},
+    {label: 'Flamingo', value: 'Flamingo'},
+    {label: 'Sport Football', value: 'Football'},
   ];
   function getSubCategory(catValue) {
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
