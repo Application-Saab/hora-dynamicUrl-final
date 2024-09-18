@@ -61,7 +61,7 @@ const DecorationCatPage = () => {
     { label: 'Car Theme', value: 'car' },
     { label: 'Circus Theme', value: 'Circus' },
     { label: 'Dinosaur Theme', value: 'Dinosaur' },
-    { label: 'Elsa Theme', value: ' Elsa' },
+    { label: 'Elsa Theme', value: 'Elsa' },
     { label: 'Flamingo Theme', value: 'Flamingo' },
     { label: 'Jungle Theme', value: 'Jungle' },
     { label: 'Kitty Theme', value: 'Kitty' },
@@ -82,6 +82,29 @@ const DecorationCatPage = () => {
     {label: 'Flamingo', value: 'Flamingo'},
     {label: 'Sport Football', value: 'Football'},
   ];
+
+   // Set themeFilter based on query parameter when component mounts or query changes
+   useEffect(() => {
+    if (router.isReady) {
+      const theme = router.query.theme || "all";
+      setThemeFilter(theme);
+    }
+  }, [router.isReady, router.query.theme]);
+
+  // Update URL whenever the themeFilter changes
+  useEffect(() => {
+    if (themeFilter !== "all") {
+      router.push(
+        {
+          pathname: router.pathname, // Current page path
+          query: { ...router.query, theme: themeFilter }, // Add or update the theme in the query
+        },
+        undefined,
+        { shallow: true } // Prevents full page reload
+      );
+    }
+  }, [themeFilter]);
+  
   function getSubCategory(catValue) {
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
 

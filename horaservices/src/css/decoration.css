@@ -662,3 +662,94 @@ a:hover {
   text-decoration: underline; /* Add underline on hover */
   cursor: pointer; /* Change cursor to pointer */
 }
+
+
+/* CTA CSS */
+/* Container styles */
+.card-container-cta {
+  max-width: 33rem;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Header section */
+.header-section-cta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icon-wrapper-cta {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #bfdbfe; /* Light blue */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.user-icon-cta {
+  can-size: 1.5rem;
+  color: #3b82f6; /* Blue */
+}
+
+.header-text-cta {
+  color: #1f2937; /* Dark gray */
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.highlight-cta {
+  color: #ef4444; /* Red */
+}
+
+/* Subtext */
+.subtext-cta {
+  color: #4b5563; /* Gray */
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Button group */
+.button-group-cta {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Button styles */
+.button-cta {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.button-cta:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp-cta {
+  background-color: #22c55e; /* Green */
+  color: white;
+}
+
+.call-cta {
+  background-color: #3b82f6; /* Blue */
+  color: white;
+}
+
+.icon-cta {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
+import { MessageCircle, Plus } from 'lucide-react';
 import buynowImage from '../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../assets/service.png';
@@ -15,6 +16,8 @@ import axios from 'axios';
 import faqData from '../../../../../utils/faqData.json'
 import Tabs from '../../../../../components/Tabs';
 import addOnProductsData from '../../../../../utils/addOnProduct.json';
+// import { InferenceAPI } from 'huggingface/inference';
+
 // Skeleton Loader Component
 const SkeletonLoader = () => {
   return (
@@ -40,7 +43,32 @@ const SkeletonLoader = () => {
   );
 };
 
+
+const API_URL = 'https://api-inference.huggingface.co/models/gpt2';
+const API_KEY = "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"; 
+
+
+const generateProductDescription = async (prompt) => {
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ inputs: prompt })
+    });
+    const result = await response.json();
+    return result[0]?.generated_text || '';
+  } catch (error) {
+    console.error("Error generating description:", error);
+    return '';
+  }
+};
+
+
 function DecorationCatDetails() {
+  const [description, setDescription] = useState('');
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,26 +96,55 @@ function DecorationCatDetails() {
   }, [router.isReady, router.query]);
 
 
+  const handleWhatsApp = () => {
+    const phoneNumber = '7338584828';
+    const message = encodeURIComponent('I want to customize a decoration');
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
+  const handleCall = () => {
+    // Replace with your phone number
+    window.location.href = 'tel:7338584828';
+  };
+
+  // useEffect(() => {
+  //   if (apiProduct && !isFetched) {
+  //     const fetchDecorationDetails = async () => {
+  //       try {
+  //         const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
+  //         const response = await axios.get(url);
+  //         console.log("API Response:", response.data);
+  //         setProduct(response.data.data[0]);
+  //         setSubCategory(getSubCategory(catValue || ''));
+  //         setLoading(false); // Stop loading when data is fetched
+  //       } catch (error) {
+  //         console.error("Error:", error.message);
+  //         setLoading(false); // Stop loading even if there is an error
+  //       }
+  //     };
+  //     fetchDecorationDetails();
+  //   }
+  // }, [apiProduct, catValue]);
 
   useEffect(() => {
-    if (apiProduct && !isFetched) {
-      const fetchDecorationDetails = async () => {
+    if (apiProduct) {
+      const fetchProductDetails = async () => {
         try {
           const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
           const response = await axios.get(url);
-          console.log("API Response:", response.data);
           setProduct(response.data.data[0]);
-          setSubCategory(getSubCategory(catValue || ''));
-          setLoading(false); // Stop loading when data is fetched
+          const prompt = `two good things about this product "${response.data.data[0].name}".`;
+          const generatedDescription = await generateProductDescription(prompt);
+          setDescription(generatedDescription);
+          setLoading(false);
         } catch (error) {
           console.error("Error:", error.message);
-          setLoading(false); // Stop loading even if there is an error
+          setLoading(false);
         }
       };
-      fetchDecorationDetails();
+      fetchProductDetails();
     }
-  }, [apiProduct, catValue]);
-
+  }, [apiProduct]);
 
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
@@ -186,6 +243,8 @@ function DecorationCatDetails() {
     const handleToggle = (index) => {
       setOpenIndex(openIndex === index ? null : index);
     };
+
+    
 
     return (
       <div className="faqSection">
@@ -398,6 +457,7 @@ function DecorationCatDetails() {
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
               <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{subCategory}{' > '}{product.name}</h2>
               <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
+              <p>{description}</p>
               <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
@@ -448,9 +508,35 @@ function DecorationCatDetails() {
                 {getItemInclusion(product.inclusion)}
                 {selectedAddOnProduct.length == 0 && (
                 <button id="continueButton"  style={styles.Buttonstyle} className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
-              )}  
+              )}
+                
               </div>
           
+         {/* CTA Button */}
+        
+         <div className="card-container-cta">
+      <div className="header-section-cta">
+        <div className="icon-wrapper-cta">
+          <span className="user-icon-cta">👤</span>
+        </div>
+        <p className="header-text-cta">
+          Want to <span className="highlight-cta">customize</span> this decoration?
+        </p>
+      </div>
+      <p className="subtext-cta">Talk with our Experts!</p>
+      <div className="button-group-cta">
+        <button onClick={handleWhatsApp} className="button-cta whatsapp-cta">
+          <MessageCircle className="icon-cta" />
+          Whatsapp
+        </button>           
+        <button onClick={() => handleButtonClick(subCategory, product)} className="button-cta call-cta">
+          <Plus className="icon-cta" />
+          ADD ON
+        </button>
+      </div>
+    </div>
+
+
 
             <div className="tab-section-details-productpage">
               <Tabs
