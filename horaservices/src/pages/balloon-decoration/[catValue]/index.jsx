@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { sendGTMEvent  } from '@next/third-parties/google';
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const DecorationCatPage = () => {
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
   const scriptTag = JSON.stringify(schemaOrg);
   const themeFilters = [
-    { label: 'Select Design', value: 'all' },
+    { label: 'Select Theme', value: 'all' },
     { label: 'Astronaut space theme', value: 'Astronaut-space' },
     { label: 'Avengers theme', value: 'Avengers' },
     { label: 'Boss baby theme', value: 'Boss' },
@@ -156,10 +157,11 @@ const DecorationCatPage = () => {
     }
   };
 
+  
   const filteredData = catalogueData.filter(item => {
     let priceCondition = true;
     let themeCondition = true;
-
+  
     // Filter by price
     if (priceFilter === "under2000") {
       priceCondition = item.price < 2000;
@@ -168,17 +170,28 @@ const DecorationCatPage = () => {
     } else if (priceFilter === "above5000") {
       priceCondition = item.price > 5000;
     }
-
+  
     // Filter by theme
     if (themeFilter !== "all") {
       const formattedThemeFilter = themeFilter.toLowerCase().split('-')[0];
       const formattedItemName = item.name.toLowerCase().split('-')[0];
       themeCondition = formattedItemName.includes(formattedThemeFilter);
     }
-
-    // Return true if either price or theme condition is met
+  
+    // Return true if both conditions are met
     return priceCondition && themeCondition;
   });
+  
+  // Apply sorting
+  const sortedData = filteredData.sort((a, b) => {
+    if (priceFilter === 'lowToHigh') {
+      return a.price - b.price;
+    } else if (priceFilter === 'highToLow') {
+      return b.price - a.price;
+    }
+    return 0; // Default sort (no sorting)
+  });
+  
 
   function addSpaces(subCategory) {
     let result = "";
@@ -300,30 +313,29 @@ const DecorationCatPage = () => {
           <div style={{ marginTop: "0px" }}>
             <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0", color: '#9252AA' }}>{selCat} {'Balloon Decoration'} </h1>
             <p style={{ padding: "0px 0px 16px", margin: "0px" }} className="subheading">{trimText('Balloon Decoration and Room Decoration Services for Anniversary, Birthdays, Kids Parties, Baby Showers and more!')}</p>
-            <div style={{ marginBottom: "15px" }} className="filterdropdown d-flex flex-column flex-lg-row align-items-center justify-content-center gap-3" >
-              <div className="d-flex gap-lg-4 gap-2">
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === 'all' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('all')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'all' ? { color: "#fff" } : { color: '#9252AA' }}>All</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === 'under2000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('under2000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'under2000' ? { color: "#fff" } : { color: '#9252AA' }}>Under ₹ 2000</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === '2000to5000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('2000to5000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === '2000to5000' ? { color: "#fff" } : { color: '#9252AA' }}>₹ 2000 - ₹ 5000</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tags" style={priceFilter === 'above5000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('above5000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'above5000' ? { color: "#fff" } : { color: '#9252AA' }}>Above ₹ 5000</p>
-                </div>
-              </div>
+            <div className="filterdropdown d-flex flex-row flex-lg-row align-items-center justify-content-center gap-3">
+  <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}
+    style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+    <option value="all">Sort By: Price</option>
+    <option value="lowToHigh">Price: Low to High</option>
+    <option value="highToLow">Price: High to Low</option>
+    <option value="under2000">Under ₹ 2000</option>
+    <option value="2000to5000">₹ 2000 - ₹ 5000</option>
+    <option value="above5000">Above ₹ 5000</option>
+   
+  </select>
 
-              {/* Theme filter */}
-              {selCat === "Kids Birthday" ? <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
-                style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
-                {themeFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>{filter.label}</option>
-                ))}
-              </select> : null}
-            </div>
+  {/* Theme filter */}
+  {selCat === "Kids Birthday" ? (
+    <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
+      style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+      {themeFilters.map((filter) => (
+        <option key={filter.value} value={filter.value}>{filter.label}</option>
+      ))}
+    </select>
+  ) : null}
+</div>
+
           </div>
         </div>
         <div style={styles.decContainer} className="decContainer">
@@ -333,8 +345,8 @@ const DecorationCatPage = () => {
             </div>
           ))) :
             (
-              (filteredData.length > 0) ? (
-                filteredData.map((item, index) => (
+              (sortedData.length > 0) ? (
+                sortedData.map((item, index) => (
                   <div
                     key={item._id}
                     style={{

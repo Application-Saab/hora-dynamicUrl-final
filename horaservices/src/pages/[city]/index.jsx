@@ -28,6 +28,7 @@ import PhotographyIcon from '../../assets/photography_icon.png';
 import FoodIcon from '../../assets/food_icon.png';
 import EntertainmentIcon from '../../assets/enter_icon.png';
 import '../../app/homepage.css'
+import cityData from '../../utils/cityData';
 // remove later
 import homepage_entertainment1 from '../../assets/homepage_entertainment1.png';
 import homepage_entertainment2 from '../../assets/homepage_entertainment2.png';
@@ -43,6 +44,7 @@ export default function Home() {
   const [showButton, setShowButton] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [city, setCity] = useState(null);
+
   const photographyUrl = () =>{
     window.open(
       'https://api.whatsapp.com/send?phone=+917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
@@ -463,6 +465,14 @@ export default function Home() {
   };
 
 
+   // If city parameter is missing
+   if (!hasCityPageParam) {
+     return <div>Please select a city first.</div>;
+   }
+
+   console.log("City Localities List:", cityLocalitiesList);
+
+
   const formatLocalityName = (name) => {
     return name.replace(/\s+/g, '-').toLowerCase();
   };
@@ -645,23 +655,24 @@ export default function Home() {
         </div>
 
         <div className="localities-box">
-  <h1 className="city-heading">
-    {city ? city.charAt(0).toUpperCase() + city.slice(1) : "City"} Localities
-  </h1>
-  <ul className="localities-list">
-    {cityLocalitiesList.length > 0 ? (
-      cityLocalitiesList.map((locality, index) => (
-        <li key={index} className="locality-item">
-          <button onClick={() => handleClick(locality.name)} className="locality-button">
-            {locality.name}
-          </button>
-        </li>
-      ))
-    ) : (
-      <div className="no-localities">No localities found for this city.</div>
-    )}
-  </ul>
-</div>
+        <h1 className="city-heading">
+        {city ? city.charAt(0).toUpperCase() + city.slice(1) : "City"} Localities
+        </h1>
+        <ul className="localities-list">
+      
+        {cityLocalitiesList.length > 0 ? (
+        cityLocalitiesList.map((locality, index) => (
+          <li key={index} className="locality-item">
+            <button onClick={() => handleClick(locality.name)} className="locality-button">
+              {locality.name}
+            </button>
+          </li>
+        ))
+        ) : (
+        <div className="no-localities">No localities found for this city.</div>
+        )}
+        </ul>
+        </div>
 
         <div className="celebrate-container sec-container">
           <h1 className="celebrate-title">Celebrate With Us

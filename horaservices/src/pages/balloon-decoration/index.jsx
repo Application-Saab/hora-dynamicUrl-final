@@ -28,6 +28,7 @@ import BacheloretteImage from '../../assets/Bachelorette.jpg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { sendGTMEvent  } from '@next/third-parties/google';
 
 import { GoogleTagManager } from '@next/third-parties/google';
 
@@ -56,6 +57,7 @@ const Decoration = () => {
     const hasCityPageParam = city ? true : false;
 
     const openCatItems = (item) => {
+     // sendGTMEvent('event', 'titleClicked', { value: `/balloon-decoration/${item.catValue}` });
         dispatch(setState(item.subCategory, item.imgAlt));
         if (hasCityPageParam) {
             router.push(`/${city}/balloon-decoration/${item.catValue}`);
@@ -171,6 +173,7 @@ const Decoration = () => {
           rating: 100,
           link:"/balloon-decoration/first-night-decoration",
         },
+      
       ];
     
     
@@ -495,20 +498,7 @@ const Decoration = () => {
             rating: 4.7,
             link:"/balloon-decoration/premium-decoration/product/Multi-Balloon-Round-Ring",
           },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711711395150.png',
-            title: 'Silver & White Theme Birthday Decor',
-            price: '₹6349',
-            rating: 4.6,
-            link:"/balloon-decoration/premium-decoration/product/Silver-&-White-Theme-Birthday-Decor",
-          },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1712919978677.png',
-            title: 'Birthday Celebrate 1st Trip Around World',
-            price: '₹6600',
-            rating: 4.3,
-            link:"/balloon-decoration/premium-decoration/product/Birthday-Celebrate-1st-Trip-Around-World",
-          },
+      
           {
             Image: 'https://horaservices.com/api/uploads/attachment-1711528712533.png',
             title: 'Unicorn Theme Birthday Surprise',
@@ -516,13 +506,7 @@ const Decoration = () => {
             rating: 4.6,
             link:"/balloon-decoration/premium-decoration/product/Unicorn-Theme-Birthday-Surprise",
           },
-           {
-            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-            title: 'VIEW ALL',
-            price: '',
-            rating: 100,
-            link:"/balloon-decoration/premium-decoration",
-          },
+           
         ];
         
         const BallonBData= [
@@ -563,6 +547,7 @@ const Decoration = () => {
           },
         ];
 
+    
     return (
         <div>
           <GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
@@ -615,7 +600,7 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
+  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
 </div>
 
 
@@ -631,7 +616,7 @@ const Decoration = () => {
     View More
     </button>
     </div>
-    <DecorationLandingSlider data={birthdayData} category="Birthday" handleViewMore={handleViewMore} />
+    <DecorationLandingSlider data={birthdayData} category="Birthday" />
     </div>
 
 
@@ -684,7 +669,7 @@ const Decoration = () => {
     </button>
     </div>
 
-  <DecorationLandingSlider data={AnniversaryData} category="Anniversary" handleViewMore={handleViewMore} />
+  <DecorationLandingSlider data={AnniversaryData} category="Anniversary" />
 </div>
 
 <div className="slider-container">
@@ -716,7 +701,7 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby" handleViewMore={handleViewMore} />
+  <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby"  />
 </div>
 
 
@@ -750,7 +735,7 @@ const Decoration = () => {
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={BallonBData} category="BallonBouquets" handleViewMore={handleViewMore} />
+  <DecorationLandingSlider data={BallonBData} category="BallonBouquets"  />
 </div>
 </div>
 </div>

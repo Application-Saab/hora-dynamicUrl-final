@@ -27,6 +27,7 @@ import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
 import EntertainmentIcon from '../assets/enter_icon.png';
+import { sendGTMEvent  } from '@next/third-parties/google';
 
 import './homepage.css'
 // remove later
@@ -198,7 +199,7 @@ const settings = {
     ],
   };
 
-
+  
 
 const slides = [
 {
@@ -439,7 +440,8 @@ const CustomerReview = [
   },
 ];
 
-const openSliderLink = (link) => {
+const openSliderLink = (link , title) => {
+  sendGTMEvent('event', 'homePageSliderClicked', { value: title });
   if (link) {
     window.location.href = link; // Redirects to the provided link
   }
@@ -471,7 +473,7 @@ return (
            />
           <div className="carousel-content slide-content">
             <h2 className="party-title1 slide-title">{slide.title}</h2>
-            <button className="slide-button book-now"   onClick={() => openSliderLink(slide.link)}>book Now</button>
+            <button className="slide-button book-now"  onClick={() => openSliderLink(slide.link, slide.title)}>book Now</button>
           </div>
         </div>
       ))}
@@ -489,16 +491,7 @@ return (
       <div key={item.id} className="food-card">
         <a href={item.link} className="food-card-link">
           <Image src={item.image} alt={item.title} className="food-image"  width={200} height={100}/>
-          {/* <p className="food-card-title">{item.title}</p> */}
-
-            {/* Sending GTM event on title click */}
-            <p
-            className="food-card-title"
-            onClick={() => handleTitleClick(item.title)}
-             >
-            {item.title}
-          </p>
-
+          <p className="food-card-title"  onClick={() => handleTitleClick(item.title)}>{item.title}</p>
         </a>
       </div>
     ))}
@@ -509,7 +502,7 @@ return (
     <div key={item.id} className="food-card left-side">
       <a href={item.link} className="food-card-link">
         <Image src={item.image} alt={item.title} className="food-image" width={200} height={100}/>
-        <p className="food-card-title">{item.title}</p>
+        <p className="food-card-title"  onClick={() => handleTitleClick(item.title)}>{item.title}</p>
       </a>
     </div>
   ))}
@@ -519,7 +512,7 @@ return (
       <div key={item.id} className="food-card right-card">
         <a href={item.link} className="food-card-link">
           <Image src={item.image} alt={item.title} className="food-image" width={200} height={100}/>
-          <p className="food-card-title">{item.title}</p>
+          <p className="food-card-title"  onClick={() => handleTitleClick(item.title)}>{item.title}</p>
         </a>
       </div>
     ))}
@@ -537,7 +530,7 @@ return (
     </div>
     <div className="service-image-container">
       <Image src="https://horaservices.com/api/uploads/homepage_decoration.png" alt="Decoration" className="service-image" width={200} height={100}/>
-      <button className="book-now2" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
+      <button className="book-now2" id="home-decoration-sec" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
     </div>
   </div>
   <div className="service">
@@ -549,7 +542,7 @@ return (
     </div>
     <div className="service-image-container">
       <Image src="https://horaservices.com/api/uploads/homepage_photography.png" alt="Photography" className="service-image" width={200} height={100}/>
-      <button className="book-now2" onClick={photographyUrl} >Book Now</button>
+      <button className="book-now2" id="home-phtography-sec-sec" onClick={photographyUrl} >Book Now</button>
     </div>
   </div>
    </div>

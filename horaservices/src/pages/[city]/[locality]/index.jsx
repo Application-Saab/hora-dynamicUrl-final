@@ -8,22 +8,14 @@ import {
   UPDATE_ORDER_STATUS,
 } from "../../../utils/apiconstants";
 import axios from "axios";
-import Head from "next/head";
-import Success from '../../../pages/Success';
-import Failure from '../../../pages/Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
 import whatsppicon from "../../../assets/whatsapp-icon.png";
 import { getHomeOrganizationSchema } from "../../../utils/schema";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../../app/page.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../../app/globals.css';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import DecorationIcon from '../../../assets/decoration_icon.png';
 import PhotographyIcon from '../../../assets/photography_icon.png';
 import FoodIcon from '../../../assets/food_icon.png';
 import EntertainmentIcon from '../../../assets/enter_icon.png';
@@ -372,7 +364,7 @@ export default function Home() {
       title: 'Birthday and Anniversary',
       imageUrl: require('../../../assets/homepage_Celebrate1.png'),
       imgAlt: 'Birthday and Anniversary celebration',
-      link: "/balloon-decoration/birthday-decoration",
+      link: "https://horaservices.com/balloon-decoration/birthday-decoration",
     },
     {
       id: 2,
