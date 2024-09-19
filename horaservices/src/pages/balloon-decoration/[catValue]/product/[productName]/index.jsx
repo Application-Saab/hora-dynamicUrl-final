@@ -68,6 +68,8 @@ const generateProductDescription = async (prompt) => {
 
 
 function DecorationCatDetails() {
+  
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const [description, setDescription] = useState('');
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
@@ -106,6 +108,25 @@ function DecorationCatDetails() {
     // Replace with your phone number
     window.location.href = 'tel:7338584828';
   };
+
+  const [expandedDescriptionIndex, setExpandedDescriptionIndex] = useState(null); // State to track which description is expanded
+
+  const toggleDescription = (index) => {
+    if (expandedDescriptionIndex === index) {
+      setExpandedDescriptionIndex(null); // Collapse if already expanded
+    } else {
+      setExpandedDescriptionIndex(index); // Expand the selected item
+    }
+  };
+
+  const truncateDescription = (description, isExpanded) => {
+    const maxLength = 100; // Set the character limit for truncation
+    if (description.length > maxLength && !isExpanded) {
+      return description.substring(0, maxLength) + "...";
+    }
+    return description;
+  };
+
 
   // useEffect(() => {
   //   if (apiProduct && !isFetched) {
@@ -555,9 +576,61 @@ function DecorationCatDetails() {
         </div>
       </div>
 
+      {isModalOpen && (
+  <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
+      <div className="modal-top-box">
+        <h2>Select Customizations</h2>
+      </div>
+      <div className="modal-middle-box">
+        <div className="modal-card-container">
+          {addOnProductsData.addOnProducts.map((item, index) => {
+            const maxDescriptionLength = 100; // Set the max length of the description before truncating
+
+            return (
+              <div key={index} className="modal-card">
+                <img style={{ width: "150px", height: "150px" }} src={item.image} alt={item.title} className="model-image" />
+                <h3>{item.title}</h3>
+                <p>
+                  {isExpanded || item.description.length <= maxDescriptionLength
+                    ? item.description
+                    : `${item.description.substring(0, maxDescriptionLength)}...`}
+                  {item.description.length > maxDescriptionLength && (
+                    <button onClick={() => setIsExpanded(!isExpanded)} className="see-more-button">
+                      {isExpanded ? 'See Less' : 'See More'}
+                    </button>
+                  )}
+                </p>
+
+                <div className="price-container">
+                  <span className="price">₹ {item.price}</span>
+                  {itemQuantities[item.title] ? (
+                    <div>
+                      <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
+                      <span>{itemQuantities[item.title]}</span>
+                      <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
+                    </div>
+                  ) : (
+                    <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="modal-bottom-box">
+        <p>Total: ₹ {calculateTotalPrice(Number(product.price))}</p>
+        <button className="book-now-button" onClick={handleContinue}>Continue</button>
+      </div>
+    </div>
+  </div>
+)}
+
     
 
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
@@ -595,7 +668,7 @@ function DecorationCatDetails() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

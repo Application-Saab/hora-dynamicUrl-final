@@ -27,7 +27,6 @@ import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
 import EntertainmentIcon from '../assets/enter_icon.png';
-import { sendGTMEvent  } from '@next/third-parties/google';
 
 import './homepage.css'
 // remove later

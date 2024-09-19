@@ -65,7 +65,7 @@ const [decCat, setDecCat] = useState([
                 router.push(`/${city}/balloon-decoration/${item.catValue}`);
             }
             else {
-                router.push(`/balloon-decoration/${item.catValue}`);
+                router.push(`/${city}/balloon-decoration/${item.catValue}`);
             }
         };
     
@@ -439,7 +439,7 @@ const [decCat, setDecCat] = useState([
     .filter(item => item.image) // Filter out items without images
     .map((item, index) => (
     <div key={index} className="imageContainer">
-    <a href={item.link}>
+    <a href={`/${city}/${item.link}`}>
     <Image
     src={item.image}
     className="decCatimage"

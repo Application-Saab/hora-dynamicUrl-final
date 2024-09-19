@@ -26,6 +26,13 @@ import homepage_entertainment2 from '../../../assets/homepage_entertainment2.png
 import homepage_entertainment3 from '../../../assets/homepage_entertainment3.png';
 import homepage_entertainment4 from '../../../assets/homepage_entertainment4.png';
 
+import Slider from 'react-slick';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import DecorationIcon from '../../../assets/decoration_icon.png';
+
 export default function Home() {
   const router = useRouter();
   const [showButton, setShowButton] = useState(false);

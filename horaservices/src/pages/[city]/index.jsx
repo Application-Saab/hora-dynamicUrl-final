@@ -35,7 +35,7 @@ import homepage_entertainment2 from '../../assets/homepage_entertainment2.png';
 import homepage_entertainment3 from '../../assets/homepage_entertainment3.png';
 import homepage_entertainment4 from '../../assets/homepage_entertainment4.png';
 
-import cityData from '../../utils/cityData';
+// import cityData from '../../utils/cityData';
 
 console.log("City Data:", cityData); 
 
@@ -466,11 +466,11 @@ export default function Home() {
 
 
    // If city parameter is missing
-   if (!hasCityPageParam) {
-     return <div>Please select a city first.</div>;
-   }
+  //  if (!hasCityPageParam) {
+  //    return <div>Please select a city first.</div>;
+  //  }
 
-   console.log("City Localities List:", cityLocalitiesList);
+  //  console.log("City Localities List:", cityLocalitiesList);
 
 
   const formatLocalityName = (name) => {
