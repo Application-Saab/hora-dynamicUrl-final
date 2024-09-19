@@ -492,7 +492,7 @@ export default function Home() {
           <div className="food-cards desktop">
             {foodData.map(item => (
               <div key={item.id} className="food-card">
-                <a href={`${locality}/${item.link}`} className="food-card-link">
+                <a href={`/${city}/${locality}/${item.link}`} className="food-card-link">
                   <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                   <p className="food-card-title">{item.title}</p>
                 </a>
@@ -503,7 +503,7 @@ export default function Home() {
           <div className="food-cards mobile">
             {foodData.slice(0, 1).map(item => (
               <div key={item.id} className="food-card left-side">
-                <a href={item.link} className="food-card-link">
+                <a href={`/${city}/${locality}/${item.link}`} className="food-card-link">
                   <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                   <p className="food-card-title">{item.title}</p>
                 </a>
@@ -513,7 +513,7 @@ export default function Home() {
             <div className="food-card  right-side">
               {foodData.slice(1, 3).map(item => (
                 <div key={item.id} className="food-card right-card">
-                  <a href={`${city}/${item.link}`} className="food-card-link">
+                  <a href={`${city}/${locality}/${item.link}`} className="food-card-link">
                     <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                     <p className="food-card-title">{item.title}</p>
                   </a>
@@ -578,7 +578,7 @@ export default function Home() {
           <div className="categoriesCard-container">
             {whereAreYouData.map(category => (
               <div key={category.id} className="categoriesCard-card">
-                <a href={`${city}/${category.link}`} rel="noopener noreferrer">
+                <a href={`${city}/${locality}/${category.link}`} rel="noopener noreferrer">
                   <div className="categoriesCard-image-wrapper">
                     <Image src={category.imageUrl} alt={category.title} className="categoriesCard-image" width={200} height={100} />
                   </div>

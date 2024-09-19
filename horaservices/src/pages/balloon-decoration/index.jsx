@@ -40,8 +40,10 @@ const decCat = [
     { id: '8', image: PremiumImage, name: 'premium Decoration', subCategory: "PremiumDecoration", catValue: "premium-decoration", imgAlt: "Birthday party decoration ideas for adults" },
     { id: '9', image: BallonBImage, name: 'Ballon Bouquets', subCategory: "BallonBouquets", catValue: "balloon-bouquets-decoration", imgAlt: "Balloon Bouquet" },
     {id: '10', Image: "", name: "Haldi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Haldi Event"},  
-        {id: '11', Image: "", name: "Mehendi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Mehendi Event"},
-     
+    {id: '11', Image: "", name: "Mehendi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Mehendi Event"},
+    {id: '11', Image: "", name: "Bachelorette Decoration", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "Bachelorette"},
+    {id: '11', Image: "", name: "proposal decorations", subCategory: "Proposal-Decoration", catValue: "Proposal-Decorations", imgAlt: "proposal decorations"},
+  
 ];
 
 const Decoration = () => {
@@ -117,13 +119,13 @@ const Decoration = () => {
         rating: 4.8,
         link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
       },
-      {
-        Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-        title: 'VIEW ALL',
-        price: '',
-        rating: '',
-        link:"/balloon-decoration/birthday-decoration",
-      },
+      // {
+      //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+      //   title: 'VIEW ALL',
+      //   price: '',
+      //   rating: '',
+      //   link:"/balloon-decoration/birthday-decoration",
+      // },
     ];
     
     
@@ -148,6 +150,14 @@ const Decoration = () => {
           price: '₹1570',
           rating: 4.5,
           link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Rose-Decoration",
+        },
+        {
+          Image: '',  // No image for this slide
+          title: 'View more from First Night Decorations',
+          price: '',  // No price
+          rating: '',  // No rating
+          link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+          isViewMore: true  // Flag to indicate it's a "View more" slide
         },
         {
           Image: 'https://horaservices.com/api/uploads/attachment-1706470671060.png',
@@ -181,6 +191,14 @@ const Decoration = () => {
           price: '₹6600',
           rating: 4.6,
           link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Look-Yellow",
+        },
+        {
+          Image: '',  // No image for this slide
+          title: 'View more from Haldi Mehandi Decorations',
+          price: '',  // No price
+          rating: '',  // No rating
+          link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+          isViewMore: true  // Flag to indicate it's a "View more" slide
         },
         {
           Image: 'https://horaservices.com/api/uploads/attachment-1723290772620.png',
@@ -228,28 +246,54 @@ const Decoration = () => {
           rating: 4.0,
           link:"/balloon-decoration/anniversary-decoration/product/Bed-Decoration-For-First-Night",
         },
-        {
-          Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
-          title: 'Floral Anniversary Decor',
-          price: '₹4400',
-          rating: 4.5,
-          link:"/balloon-decoration/anniversary-decoration/product/Floral-Anniversary-Decor",
-        },
-        {
-          Image: 'https://horaservices.com/api/uploads/attachment-1725951536862.png',
-          title: 'Golden n White Petals Balloon decor',
-          price: '₹2870',
-          rating: 4.8,
-          link:"/balloon-decoration/anniversary-decoration/product/Golden-n-White-Petals-Balloon-decor",
-        },
-        {
-          Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-          title: 'VIEW ALL',
-          price: '',
-          rating: '',
-          link:"/balloon-decoration/anniversary-decoration",
-        },
+        // {
+        //   Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
+        //   title: 'Floral Anniversary Decor',
+        //   price: '₹4400',
+        //   rating: 4.5,
+        //   link:"/balloon-decoration/anniversary-decoration/product/Floral-Anniversary-Decor",
+        // },
+        // {
+        //   Image: 'https://horaservices.com/api/uploads/attachment-1725951536862.png',
+        //   title: 'Golden n White Petals Balloon decor',
+        //   price: '₹2870',
+        //   rating: 4.8,
+        //   link:"/balloon-decoration/anniversary-decoration/product/Golden-n-White-Petals-Balloon-decor",
+        // },
+     
       ];
+
+      const bacheloretteData = [
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1724160189321.png',
+          title: 'Pastel Bride to be Decoration',
+          price: '₹2320',
+          rating: 4.7,
+          link:"/balloon-decoration/bachelorette-decoration/product/Pastel-Bride-to-be-Decoration",
+        },
+  {
+          Image: 'https://horaservices.com/api/uploads/attachment-1724162849757.png',
+          title: 'Classy Bachelorette Wall',
+          price: '₹1870',
+          rating: 4.0,
+          link:"/balloon-decoration/bachelorette-decoration/product/Classy-Bachelorette-Wall",
+        },
+  
+  {
+          Image: 'https://horaservices.com/api/uploads/attachment-1724161735052.png',
+          title: 'Bachelorette Ring Backdrop',
+          price: '₹3550',
+          rating: 4.0,
+          link:"/balloon-decoration/bachelorette-decoration/product/Bachelorette-Ring-Backdrop",
+        },
+  {
+          Image: 'https://horaservices.com/api/uploads/attachment-1724415811393.png',
+          title: 'Bride to be Balloon Arch',
+          price: '₹2390',
+          rating: 4.0,
+          link:"/balloon-decoration/bachelorette-decoration/product/Bride-to-be-Balloon-Arch",
+        },
+  ];
 
       const KidsBirthdayData = [
         {
@@ -309,13 +353,6 @@ const Decoration = () => {
             link:"/balloon-decoration/kids-birthday-decoration/product/Sea-Shell-by-Sea-Shore-Decor",
           },
           {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706520101383.png',
-            title: 'Multi color Birthday Balloon Decoration',
-            price: '₹1299',
-            rating: 4.7,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Multi-color-Birthday-Balloon-Decoration",
-          },
-          {
             Image: 'https://horaservices.com/api/uploads/attachment-1713185070655.png',
             title: 'Mermaid Theme With Birthday Decor',
             price: '₹3550',
@@ -323,25 +360,19 @@ const Decoration = () => {
             link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-With-Birthday-Decor",
           },
           {
+            Image: '',  // No image for this slide
+            title: 'View more from Kids Birthday Decorations',
+            price: '',  // No price
+            rating: '',  // No rating
+            link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+            isViewMore: true  // Flag to indicate it's a "View more" slide
+          },
+          {
             Image: 'https://horaservices.com/api/uploads/attachment-1706521327374.png',
             title: 'Charming Birthday Decoration',
             price: '₹1250',
             rating: 4.2,
             link:"/balloon-decoration/kids-birthday-decoration/product/Charming-Birthday-Decoration",
-          },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
-            title: 'Minnie Mouse Theme Decoration',
-            price: '₹1549',
-            rating: 4.5,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
-          },
-          {
-            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-            title: 'VIEW ALL',
-            price: '',
-            rating: '',
-            link:"/balloon-decoration/kids-birthday-decoration",
           },
         ];
       
@@ -376,6 +407,13 @@ const Decoration = () => {
             rating: 4.8,
             link:"/balloon-decoration/baby-shower-decoration/product/Oh-Baby-With-Green-Decoration",
           },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1726062561916.png',
+            title: 'Oh Baby With Green Decoration',
+            price: '₹5860',
+            rating: 4.5,
+            link:"/balloon-decoration/baby-shower-decoration/product/Teddy%27s-Wonderland-Pink-Decor",
+          },
         ];
       
         const WelcomebabyData= [
@@ -408,19 +446,27 @@ const Decoration = () => {
             link:"/balloon-decoration/welcome-baby-decoration/product/Pink-Theme-Welcome-Baby",
           },
           {
+            Image: '',  // No image for this slide
+            title: 'View more from Welcome Baby Decorations',
+            price: '',  // No price
+            rating: '',  // No rating
+            link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+            isViewMore: true  // Flag to indicate it's a "View more" slide
+          },
+          {
             Image: 'https://horaservices.com/api/uploads/attachment-1711599827419.png',
             title: 'Golden & Pink Theme Baby Welcome',
             price: '₹2599',
             rating: 4.8,
             link:"/balloon-decoration/welcome-baby-decoration/product/Golden-&-Pink-Theme-Baby-Welcome",
           },
-           {
-            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-            title: 'VIEW ALL',
-            price: '',
-            rating: '',
-            link:"/balloon-decoration/welcome-baby-decoration",
-          },
+          //  {
+          //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+          //   title: 'VIEW ALL',
+          //   price: '',
+          //   rating: '',
+          //   link:"/balloon-decoration/welcome-baby-decoration",
+          // },
         ];
       
         const PremiumData= [
@@ -478,6 +524,14 @@ const Decoration = () => {
             rating: 4.1,
             link:"/balloon-decoration/balloon-bouquets-decoration",
           },
+          {
+            Image: '',  // No image for this slide
+            title: 'View more from Ballon Bouquet',
+            price: '',  // No price
+            rating: '',  // No rating
+            link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+            isViewMore: true  // Flag to indicate it's a "View more" slide
+          },
          {
             Image: 'https://horaservices.com/api/uploads/attachment-1712305355842.png',
             title: 'Baby Shark Bouquet',
@@ -485,21 +539,15 @@ const Decoration = () => {
             rating: 4.5,
             link:"/balloon-decoration/balloon-bouquets-decoration",
           },
-           {
-            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-            title: 'VIEW ALL',
-            price: '',
-            rating: '',
-            link:"/balloon-decoration/balloon-bouquets-decoration",
-          },
+          
         ];
 
     
     return (
         <div className="decoration-city-page-sec">
             <Head>
-                <title>Balloon and Flower Decoration @999</title>
-                <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+                <title>HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
+                <meta name="description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
                 <meta name="keywords" content="Balloon and Flower Decoration @999" />
                 <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
                 <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
@@ -507,6 +555,7 @@ const Decoration = () => {
                 <script type="application/ld+json">{scriptTag}</script>
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content="Hora Services" />
+                <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
                 <meta property="og:url" content="https://horaservices.com/balloon-decoration" />
                 <meta property="og:type" content="website" />
             </Head>
@@ -528,7 +577,7 @@ const Decoration = () => {
     ))}
 </div>
 <div className="page-width decorationlanding-slider">
-<div className="slider-container">
+{/* <div className="slider-container">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
     <button 
@@ -539,21 +588,37 @@ const Decoration = () => {
     </button>
     </div>
   <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
-</div>
-    
+</div> */}
+
 <div className="slider-container">
   <div className="slider-header">
-    <h2  onClick={() => handleViewMore("FirstNight")} style={{ cursor:"pointer"}}>First Night Decoration</h2>
-    <button 
+  <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
+  <button 
     className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("FirstNight")}
+    onClick={() => handleViewMore("KidsBirthday")}
     >
     View More
     </button>
     </div>
-  <div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {firstNightData.map((item, index) => (
+    <div>
+    <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
+    </div>
+ 
+</div>
+    
+
+<div className="slider-container ">
+    <div className="slider-header">
+    <h2  onClick={() => handleViewMore("Birthday")} style={{ cursor:"pointer"}}>Birthday Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("Birthday")}
+    >
+    View More
+    </button>
+    </div>
+    <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {birthdayData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}> 
         <Image 
         src={item.Image} 
@@ -587,21 +652,9 @@ const Decoration = () => {
         </a>
     ))}
 </div>
-  </div>
-</div>
-<div className="slider-container ">
-    <div className="slider-header">
-    <h2  onClick={() => handleViewMore("Birthday")} style={{ cursor:"pointer"}}>Birthday Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("Birthday")}
-    >
-    View More
-    </button>
     </div>
-    <DecorationLandingSlider data={birthdayData} category="Birthday" />
-    </div>
-<div className="slider-container">
+
+    <div className="slider-container">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("Haldi-Mehandi")} style={{ cursor:"pointer"}}>Haldi & Mehndi Decoration</h2>
     <button 
@@ -612,54 +665,11 @@ const Decoration = () => {
     </button>
     </div>
     <div>
-    <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {haldiAndMehndiData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
-
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontSize: '17px' , fontWeight:"bold", margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-        </div>
-        </a>
-    ))}
-</div>
+    <DecorationLandingSlider data={haldiAndMehndiData} category="haldi-mehandi"  />
     </div>
  
 </div>
-<div className="slider-container">
-  <div className="slider-header">
-    <h2  onClick={() => handleViewMore("Anniversary")} style={{ cursor:"pointer"}}>Anniversary Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("Anniversary")}
-    >
-    View More
-    </button>
-    </div>
-
-  <DecorationLandingSlider data={AnniversaryData} category="Anniversary" />
-</div>
+    
 <div className="slider-container">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("BabyShower")} style={{ cursor:"pointer"}}>Baby Shower</h2>
@@ -703,6 +713,67 @@ const Decoration = () => {
     ))}
 </div>
 </div>
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("FirstNight")} style={{ cursor:"pointer"}}>First Night Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("FirstNight")}
+    >
+    View More
+    </button>
+    </div>
+  <div>
+  <DecorationLandingSlider data={firstNightData} category="Birthday" />
+
+  </div>
+</div>
+
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("Anniversary")} style={{ cursor:"pointer"}}>Anniversary Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("Anniversary")}
+    >
+    View More
+    </button>
+    </div>
+
+    <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {AnniversaryData.map((item, index) => (
+        <a key={index} className="slider-item" href={item.link}>
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+        </div>
+        </a>
+    ))}
+</div></div>
+
 <div className="slider-container">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("WelcomeBaby")} style={{ cursor:"pointer"}}>Welcome baby</h2>
@@ -760,7 +831,7 @@ const Decoration = () => {
 </div>
 <div className="slider-container">
   <div className="slider-header">
-    <h2 onClick={() => handleViewMore("BallonBouquets")} style={{ cursor:"pointer"}}>Ballon Bouquets</h2>
+    <h2 onClick={() => handleViewMore("BallonBouquets")} style={{ cursor:"pointer"}}>Balloon Bouquets</h2>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("BallonBouquets")}
@@ -769,6 +840,50 @@ const Decoration = () => {
     </button>
     </div>
   <DecorationLandingSlider data={BallonBData} category="BallonBouquets"  />
+</div>
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("bachelorette")} style={{ cursor:"pointer"}}>Bachelorette Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("bachelorette")}
+    >
+    View More
+    </button>
+    </div>
+  <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {bacheloretteData.map((item, index) => (
+        <a key={index} className="slider-item" href={item.link}>
+        <Image 
+        src={item.Image} 
+        alt={item.title} 
+        className="slider-image"
+        width={200}
+        height={250}
+        />
+
+        <div className="slider-item-details">
+        <h3>{item.title}</h3>
+        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
+        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
+        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
+        {item.rating}
+        <FontAwesomeIcon 
+        style={{ 
+        marginBottom: '2px',
+        marginLeft: '8px',  /* Adjust the margin as needed */
+        height: "14px", 
+        color: "#ffc107" 
+        }} 
+        icon={faStar} 
+        />
+        </p>
+        </div>
+        </div>
+        </a>
+    ))}
+</div>
 </div>
 </div>
 </div>

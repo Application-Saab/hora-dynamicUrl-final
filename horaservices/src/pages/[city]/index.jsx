@@ -545,7 +545,7 @@ export default function Home() {
           <div className="food-cards mobile">
             {foodData.slice(0, 1).map(item => (
               <div key={item.id} className="food-card left-side">
-                <a href={item.link} className="food-card-link">
+                <a href={`${city}/${item.link}`} className="food-card-link">
                   <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
                   <p className="food-card-title">{item.title}</p>
                 </a>

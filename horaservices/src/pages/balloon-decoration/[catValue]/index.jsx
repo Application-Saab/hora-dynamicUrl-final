@@ -28,7 +28,7 @@ const DecorationCatPage = () => {
 
       if (queryCatValue) {
         setCatValue(queryCatValue);
-        ///alert(`catValue: ${queryCatValue}`);
+        //alert(`catValue: ${queryCatValue}`);
       }
 
       if (queryCity) {
@@ -62,7 +62,7 @@ const DecorationCatPage = () => {
     { label: 'Car Theme', value: 'car' },
     { label: 'Circus Theme', value: 'Circus' },
     { label: 'Dinosaur Theme', value: 'Dinosaur' },
-    { label: 'Elsa Theme', value: ' Elsa' },
+    { label: 'Elsa Theme', value: 'Elsa' },
     { label: 'Flamingo Theme', value: 'Flamingo' },
     { label: 'Jungle Theme', value: 'Jungle' },
     { label: 'Kitty Theme', value: 'Kitty' },
@@ -231,11 +231,47 @@ const DecorationCatPage = () => {
     return text;
   }
 
+  const PageTitle = (e) =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "HORA Decorations : Kids' Parties Balloon & Flower Decoration Designs by Professionals Starting at ₹1199"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "HORA Decorations : Birthday Balloon & Flower Decoration Designs by Professionals Starting at ₹1199";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "HORA Decorations :Anniversary Decorations with Balloon & Rose Petals Starting at ₹1199"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "HORA Decorations :Choose & Book Elegant First Night Decorations Starting at ₹1199"
+    }
+    else{
+     return("HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
+
+  const getPageMetaDescription = () =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "At Hora, 🎉Explore popular themes like jungle 🌴, Cocomelon 🍉, candy 🍭, unicorn 🦄, dinosaur 🦖, superhero 🦸‍♂️, princess 👑, space 🚀, pirate 🏴‍☠, under the sea 🌊, Baby Boss 👔, Barbie 💖, and cars 🚗. Explore detailed pricing and inclusions, and let our professional team bring your chosen design to life. Book your perfect party decor today! 🎈✨"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "At Hora, 🎈 Explore our wide range of balloon and flower decorations for birthday parties, featuring ring, sequin, wall, and room designs. Discover pricing and inclusions for every balloon color and variety. Customise your celebration and make it unforgettable with our stunning decor. Book your perfect party setup today! 🎉🌟";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "🎉 Explore top-notch anniversary decoration designs and book directly from our website 💖. Find elegant and customizable decor options for your special event. Browse our selection to choose the perfect theme and make your anniversary memorable with seamless online booking. ✨"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
+    }
+    else{
+     return("HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
+
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
-        <title>Balloon and Flower Decoration @999</title>
-        <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <title>{PageTitle(catValue)}</title>
+        <meta name="description" content={getPageMetaDescription()} />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
         <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
         <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
