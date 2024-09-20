@@ -383,7 +383,9 @@ const DecorationCatPage = () => {
                         }}
                         className="pro_name"
                       >
+                        {console.log(item.name)}
                         {item.name}
+                        
                       </p>
                       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
                         <div style={{ flexDirection: 'row', alignItems: 'left', justifyContent: 'space-between' }} className="pro_price">
