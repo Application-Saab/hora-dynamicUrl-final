@@ -48,6 +48,7 @@ const decCat = [
     {id: '12', image: "", name: "Bachelorette Decoration", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "Bachelorette"},
     {id: '13', image: "", name: "proposal decorations", subCategory: "Proposal-Decoration", catValue: "Proposal-Decoration", imgAlt: "proposal decorations"},
 
+
      
 ];
 

@@ -556,9 +556,9 @@ function DecorationCatDetails() {
           <MessageCircle className="icon-cta" />
           Whatsapp
         </button>           
-        <button onClick={() => handleButtonClick(subCategory, product)} className="button-cta call-cta">
+        <button onClick={showAddOnmodal} className="button-cta call-cta">
           <Plus className="icon-cta" />
-          ADD ON
+          Decor Upgrade's
         </button>
       </div>
     </div>
@@ -609,18 +609,18 @@ function DecorationCatDetails() {
                   )}
                 </p>
 
-                <div className="price-container">
-                  <span className="price">₹ {item.price}</span>
-                  {itemQuantities[item.title] ? (
-                    <div>
-                      <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
-                      <span>{itemQuantities[item.title]}</span>
-                      <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
-                    </div>
-                  ) : (
-                    <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
-                  )}
-                </div>
+                  <div className="price-container">
+                    <span className="price">₹ {item.price}</span>
+                    {itemQuantities[item.title] ? (
+                      <div>
+                        <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
+                        <span>{itemQuantities[item.title]}</span>
+                        <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
+                      </div>
+                    ) : (
+                      <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
+                    )}
+                  </div>
               </div>
             );
           })}

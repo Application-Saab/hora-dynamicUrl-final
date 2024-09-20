@@ -7,16 +7,28 @@
         "image": "https://horaservices.com/api/uploads/borad-stand.jpg"
       },
       {
-        "title": "CAKE TABLE WITH STAND 1 PCS",
-        "description": "Cake Table with Stand for displaying and serving cakes with style and stability.",
+        "title": "PAPER CAKE TABLE WITH CAKE STAND",
+        "description": "Decorative piece of furniture that can be used for displaying and serving food at events like weddings and birthdays",
         "price": 571,
-        "image": "https://horaservices.com/api/uploads/cake_table.jpg"
+        "image": "https://i.ibb.co/Yp9W8wm/paper-cake.jpg"
       },
       {
         "title": "SMALL HALL DECOR (100 Balloons)",
         "description": "Small Hall Decor to add charm and elegance to compact spaces.",
         "price": 385,
         "image": "https://i.ibb.co/ckW9QzS/small-hall-decor.jpg"
+      },
+      {
+        "title": "Backdrop stand on rent",
+        "description": "Backdrop stand ( 6*8 ft height ) on rent for 1 day, to avoid sticking tapes to your wall",
+        "price": 800,
+        "image": "https://i.ibb.co/Th7qpv9/back-drop-stand.jpg"
+      },
+      {
+        "title": "Add Golden Heart Foil Balloon",
+        "description": "Add 2 Golden Heart shape foil balloon (18 inch)",
+        "price": 90,
+        "image": "https://i.ibb.co/FVWgTj1/add-golden.jpg"
       },
       {
         "title": "SMALL HALL DECOR (200 Balloons)",
@@ -31,21 +43,9 @@
         "image": "https://horaservices.com/api/uploads/entery=deocration-300-ballons.jpg"
       },
       {
-        "title": "CEILING DECOR Embellishments (100 Balloons)",
-        "description": "Ceiling Decor to add a touch of elegance and creativity to overhead spaces.",
-        "price": 385,
-        "image": "https://horaservices.com/api/uploads/celing-ballons.jfif"
-      },
-      {
-        "title": "SMALL PILLAR (20 Balloons without numbers foil)",
-        "description": "Small Pillar for adding a touch of sophistication and structure to any space.",
-        "price": 57,
-        "image": "https://horaservices.com/api/uploads/ballon-pillar-without-number.jfif"
-      },
-      {
         "title": "NAME AND PICTURE BANNER (Size- 6*6)",
         "description": "Personalized Name and Picture Banner to showcase custom designs and memorable moments.",
-        "price": 1211,
+        "price": 1080,
         "image": "https://horaservices.com/api/uploads/name&picture-banner.jfif"
       },
       {
@@ -61,19 +61,13 @@
         "image": "https://horaservices.com/api/uploads/neon-light-big-size.jfif"
       },
       {
-        "title": "NAME MARQUEE (Small Size 8 Inch) (Up to 7 Letters)",
+        "title": "NAME MARQUEE (Small Size 9 Inch) (Up to 7 Letters)",
         "description": "Name Marquee for a bold and personalized display of names or messages.",
         "price": 500,
         "image": "https://horaservices.com/api/uploads/marquee-light-9inch.jfif"
       },
       {
-        "title": "NAME MARQUEE (Large Size 32 Inch) (Up to 7 Letters)",
-        "description": "Name Marquee for a bold and personalized display of names or messages.",
-        "price": 4000,
-        "image": "https://horaservices.com/api/uploads/marquee-light-32inch.jfif"
-      },
-      {
-        "title": "NAME MARQUEE (Small Size 8 Inch)",
+        "title": "NAME MARQUEE (Small Size 9 Inch)",
         "description": "Name Marquee for a bold and eye-catching display that highlights names or messages with style.",
         "price": 142,
         "image": "https://horaservices.com/api/uploads/marquee-light-8inch.jfif"
@@ -81,8 +75,14 @@
       {
         "title": "NAME MARQUEE (Large Size 32 Inch)",
         "description": "Name Marquee for a bold and eye-catching display that highlights names or messages with style.",
-        "price": 571,
+        "price": 714,
         "image": "https://horaservices.com/api/uploads/marquee-light-32-seoncd-inch.jfif"
+      },
+      {
+        "title": "NAME MARQUEE (Large Size 32 Inch) (Up to 7 Letters)",
+        "description": "Name Marquee for a bold and personalized display of names or messages.",
+        "price": 4000,
+        "image": "https://horaservices.com/api/uploads/marquee-light-32inch.jfif"
       },
       {
         "title": "NAME FOIL BALLOON (Small Size) (Up to 10 Characters)",
@@ -97,20 +97,14 @@
         "image": "https://horaservices.com/api/uploads/backdrop-stand.jfif"
       },
       {
-        "title": "PAPER CAKE TABLE WITH CAKE STAND",
-        "description": "RENTED",
-        "price": 720,
-        "image": "https://i.ibb.co/Yp9W8wm/paper-cake.jpg"
-      },
-      {
         "title": "1 FOCUS LED LIGHT",
-        "description": "RENTED",
+        "description": "Lamp that produces a bright, even light spot without glare or hot spots",
         "price": 220,
         "image": "https://i.ibb.co/y8GDzqh/focus-led-light.jpg"
       },
       {
         "title": "CEILING DECOR (100 Balloon)",
-        "description": "",
+        "description": "Add a festive atmosphere to a space and can be customized for any occasion",
         "price": 457,
         "image": "https://i.ibb.co/HndS9ZF/ceiling.jpg"
       },
@@ -119,12 +113,6 @@
         "description": "( HAVING 60 BALLOON AND 3 FOIL BALLOON )",
         "price": 215,
         "image": "https://i.ibb.co/2KnRs2y/3-balloon-pillar.jpg"
-      },
-      {
-        "title": "Backdrop stand on rent",
-        "description": "Backdrop stand ( 6*8 ft height ) on rent for 1 day, to avoid sticking tapes to your wall",
-        "price": 800,
-        "image": "https://i.ibb.co/Th7qpv9/back-drop-stand.jpg"
       },
       {
         "title": "Add 16 inch Digit Foil Balloon",
@@ -153,30 +141,24 @@
       {
         "title": "Birthday Photography Packages",
         "description": "Inclusions: 1. Unlimited photos click (Practically 150-200 photos) 2. All to be shared in soft copy 3. Color correct is free for all photos 4. Additionally 20 specific pictures (selected by customer) can be edited. (After 20 photos, 70 Rs extra per picture) 5. Candid Photos  6. Photographer would be available for 4 hours (After 4 hours, 450 Rs extra per hour)",
-        "price": 5000,
+        "price": 4500,
         "image": "https://i.ibb.co/Cn2ptX2/birthday-photography.jpg"
       },
       {
         "title": "Add a Magic Show",
         "description": "A magician to perform on stage The magician will usually perform fun magic tricks standing at one place. Performance duration will be 60min-120min Music tracks will be carried by the magician to play while magic show ❌Sound system and Mic",
-        "price": 5000,
+        "price": 4999,
         "image": "https://i.ibb.co/mSXqr3t/add-magic.jpg"
       },
       {
         "title": "Baby Shower Photography Packages",
         "description": "1. Unlimited photos click (Practically 150-200 photos) 2. All to be shared in soft copy 3. Color correct is free for all photos 4. Additionally 20 specific pictures (selected by customer) can be edited. (After 20 photos, 70 Rs extra per picture) 5. Candid Photos 6. Photographer would be available for 4 hours (After 4 hours, 450 Rs extra per hour) ",
-        "price": 5000,
+        "price": 4500,
         "image": "https://i.ibb.co/WFbtQwC/baby-shower-photography.jpg"
       },
       {
-        "title": "Add Golden Heart Foil Balloon",
-        "description": "Add 2 Golden Heart shape foil balloon (18 inch)",
-        "price": 90,
-        "image": "https://i.ibb.co/FVWgTj1/add-golden.jpg"
-      },
-      {
-        "title": "Live Cartoon Mascots For Kids Birthday Party",
-        "description": "1 Live cartoon character who can greet and play with the children at your party The character will be available for 3 hrs The character will also be present for cake cutting Available characters are Mickey, Minnie, Chotabheem, Panda, Motu, Patlu, Doraemon, Chutki etc Mention your interested character name while booking, It will be arranged based on the availability",
+        "title": "Cartoon Mascots For Kids Birthday Party",
+        "description": "1 cartoon character who can greet and play with the children at your party The character will be available for 3 hrs The character will also be present for cake cutting Available characters are Mickey, Minnie, Chotabheem, Panda, Motu, Patlu, Doraemon, Chutki etc Mention your interested character name while booking, It will be arranged based on the availability",
         "price": 3280,
         "image": "https://i.ibb.co/ZGY47BH/cartoon-mascots.jpg"
       },
