@@ -473,7 +473,7 @@ function DecorationCatDetails() {
             <Zoom>
               <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} 
               alt={`balloon decoration ${altTagCatValue} ${product.name} ${product.price}`} 
-              style={{ width: "100%", height: "auto" }} width={300} height={300} />
+              style={{ width: "100%", height: "auto" }} width={600} height={600} />
               </Zoom>
               <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                 <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
@@ -609,18 +609,18 @@ function DecorationCatDetails() {
                   )}
                 </p>
 
-                  <div className="price-container">
-                    <span className="price">₹ {item.price}</span>
-                    {itemQuantities[item.title] ? (
-                      <div>
-                        <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
-                        <span>{itemQuantities[item.title]}</span>
-                        <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
-                      </div>
-                    ) : (
-                      <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
-                    )}
-                  </div>
+                <div className="price-container">
+                  <span className="price">₹ {item.price}</span>
+                  {itemQuantities[item.title] ? (
+                    <div>
+                      <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
+                      <span>{itemQuantities[item.title]}</span>
+                      <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
+                    </div>
+                  ) : (
+                    <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
+                  )}
+                </div>
               </div>
             );
           })}

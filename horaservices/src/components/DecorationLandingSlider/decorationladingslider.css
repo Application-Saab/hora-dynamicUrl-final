@@ -13,6 +13,17 @@
     padding: 10px;
     background-color: #fff; /* Add a background color to make the gap visible */
 }
+.view-more-slide {
+  cursor: pointer;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.view-more-slide h3 {
+    font-size: 18px;
+    line-height: 24px;
+}
 .slick-slide{
     margin-left: 8px;
     margin-right: 8px;
@@ -20,6 +31,7 @@
 }
 .slider-container.slider-decoration-inner.decoration-item-grid{
     margin-bottom: 40px !important;
+    gap: 0px !important;
 }
 
 .slider-image {
@@ -80,7 +92,8 @@
 .slider-container.slider-decoration-inner.decoration-item-grid{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap:16px;
 }
 .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
     width: 24%;
@@ -145,7 +158,7 @@
     }
 
     .slider-item h3 {
-        font-size: 14px;
+        font-size: 13px;
         margin: 0;
         padding: 5px 2px 9px;
         min-height: 30px;

@@ -463,13 +463,17 @@ return (
 <Slider {...homeslidersettings}>
       {slides.map((slide, index) => (
         <div key={index} className="slide-container">
-          <Image src={slide.image} alt={slide.title} 
-           width={1200} 
-           height={400} 
-          //  objectFit="cover" 
-           layout="responsive" 
-           className="responsive-image"
-           />
+       <Image 
+  src={slide.image} 
+  alt={slide.title} 
+  width={1200} 
+  height={400} 
+  layout="responsive" 
+  className="responsive-image" 
+  priority={true}  // Preloads the image for improved LCP
+  quality={75}     // Adjust quality to balance performance and visual fidelity
+/>
+
           <div className="carousel-content slide-content">
             <h2 className="party-title1 slide-title">{slide.title}</h2>
             <button className="slide-button book-now"  onClick={() => openSliderLink(slide.link, slide.title)}>book Now</button>
@@ -489,7 +493,17 @@ return (
     {foodData.map(item => (
       <div key={item.id} className="food-card">
         <a href={item.link} className="food-card-link">
-          <Image src={item.image} alt={item.title} className="food-image"  width={200} height={100}/>
+         <Image 
+  src={item.image} 
+  alt={item.title} 
+  className="food-image" 
+  width={200} 
+  height={100} 
+  layout="responsive"  // Ensures the image is responsive
+  quality={75}         // Adjust quality for better compression
+  priority={false}     // Use priority={true} if this is an above-the-fold image
+/>
+
           <p className="food-card-title"  onClick={() => handleTitleClick(item.title)}>{item.title}</p>
         </a>
       </div>

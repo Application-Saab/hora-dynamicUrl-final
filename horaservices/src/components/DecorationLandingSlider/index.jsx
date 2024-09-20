@@ -11,8 +11,8 @@ dots: false,
 infinite: true,
 speed: 500,
 slidesToShow: 4,
-slidesToScroll: 2,
-autoplay: true,  // Enable autoplay
+slidesToScroll: 1,
+// autoplay: true,  // Enable autoplay
 autoplaySpeed: 3000,  // Adjust the speed for auto-slide (in milliseconds)
 responsive: [
 {
@@ -37,43 +37,47 @@ responsive: [
 
 
 return (
-<div className="slider-container slider-decoration-inner">
-<Slider {...sliderSettings}>
-    {data.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
-
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
+    <div className="slider-container slider-decoration-inner">
+    <Slider {...sliderSettings}>
+      {data.map((item, index) => (
+        <div key={index} className="slider-item">
+          {item.isViewMore ? (
+            <div className="view-more-slide" onClick={() => handleViewMore(category)}>
+              <h3 style={{ textAlign: 'center', cursor: 'pointer' }}>{item.title}</h3>
+            </div>
+          ) : (
+            <a href={item.link}>
+              <Image
+                src={item.Image}
+                alt={item.title}
+                className="slider-image"
+                width={200}
+                height={250}
+              />
+              <div className="slider-item-details">
+                <h3>{item.title}</h3>
+                <div style={{ justifyContent: "space-between", alignItems: "center", display: "flex", flexDirection: "row" }}>
+                  <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px', margin: "0" }}>{item.price}</p>
+                  <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>
+                    {item.rating}
+                    <FontAwesomeIcon
+                      style={{
+                        marginBottom: '2px',
+                        marginLeft: '8px',
+                        height: "14px",
+                        color: "#ffc107"
+                      }}
+                      icon={faStar}
+                    />
+                  </p>
+                </div>
+              </div>
+            </a>
+          )}
         </div>
-
-        </div>
-
-
-        </a>
-    ))}
-</Slider>
-</div>
+      ))}
+    </Slider>
+  </div>
 );
 };
 

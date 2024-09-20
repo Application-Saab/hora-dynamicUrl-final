@@ -28,6 +28,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Link from "next/link";
+import '../../../../app/globals.css';
 
 
 const Decoration = () => {
@@ -81,286 +82,473 @@ const [decCat, setDecCat] = useState([
         };
     
         const birthdayData = [
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1705585784757.png',
+            title: 'Blushing Celebration Birthday Decor',
+            price: '₹1650',
+            rating: 4.7,
+            link:"/balloon-decoration/birthday-decoration/product/Blushing-Celebration-Birthday-Decor",
+          },
+          {
+          Image: 'https://horaservices.com/api/uploads/attachment-1711727911194.png',
+          title: 'Delightful White & Golden Decoration',
+          price: '₹4650',
+          rating: 4.6,
+          link:"/balloon-decoration/birthday-decoration/product/Delightful-White-&-Golden-Decoration",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1725181762865.png',
+            title: 'Maroon White Birthday Decor',
+            price: '₹3250',
+            rating: 4.1,
+            link:"/balloon-decoration/birthday-decoration/product/Maroon-White-Birthday-Decor",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1711568028341.png',
+            title: 'Birthday Party at Home Black & White',
+            price: '₹1999',
+            rating: 4.4,
+            link:"/balloon-decoration/birthday-decoration/product/Birthday-Party-at-Home-Black-&-White",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1706520980436.png',
+            title: 'Classic Attractive Decoration',
+            price: '₹6499',
+            rating: 4.7,
+            link:"/balloon-decoration/birthday-decoration/product/Classic-Attractive-Decoration",
+          },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1725541669342.png',
+            title: 'Purple Pink n Gold Shimmer Decor',
+            price: '₹7420',
+            rating: 4.8,
+            link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
+          },
+          // {
+          //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+          //   title: 'VIEW ALL',
+          //   price: '',
+          //   rating: '',
+          //   link:"/balloon-decoration/birthday-decoration",
+          // },
+        ];
+        
+        
+        const firstNightData = [
             {
-              Image: 'https://horaservices.com/api/uploads/attachment-1705579946309.png',
-              title: 'Simple Room Decoration',
-              price: '₹1199',
-              rating: 4.7,
-              link:"/balloon-decoration/birthday-decoration",
+              Image: 'https://horaservices.com/api/uploads/attachment-1712942470417.png',
+              title: 'Bed Decor With Love Moment',
+              price: '₹2400',
+              rating: 4.5,
+              link:"/balloon-decoration/first-night-decoration/product/Bed-Decor-With-Love-Moment-",
             },
             {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711601912449.png',
-            title: 'Elegant Vibes Happy Birthday',
-            price: '₹3500',
-            rating: 4.6,
-            link:"balloon-decoration/birthday-decoration",
+              Image: 'https://horaservices.com/api/uploads/attachment-1713196298004.png',
+              title: 'Heart Room With Decor Rose Petal',
+              price: '₹5700',
+              rating: 4.5,
+              link:"/balloon-decoration/first-night-decoration/product/Heart-Room-With-Decor-Rose-Petal--",
             },
             {
-              Image: 'https://horaservices.com/api/uploads/attachment-1706464222384.png',
-              title: 'Golden & Silver Ring Decoration',
-              price: '₹3000',
-              rating: 4.1,
-              link:"/balloon-decoration/birthday-decoration",
+              Image: 'https://horaservices.com/api/uploads/attachment-1713195839177.png',
+              title: 'First Night With Rose Decoration',
+              price: '₹1570',
+              rating: 4.5,
+              link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Rose-Decoration",
             },
             {
-              Image: 'https://horaservices.com/api/uploads/attachment-1706463835447.png',
-              title: 'Multi Balloon Round Ring',
-              price: '₹4670',
-              rating: 4.4,
-              link:"/balloon-decoration/birthday-decoration",
+              Image: '',  // No image for this slide
+              title: 'View more from First Night Decorations',
+              price: '',  // No price
+              rating: '',  // No rating
+              link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+              isViewMore: true  // Flag to indicate it's a "View more" slide
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1706470671060.png',
+              title: 'Romantic Wedding Room Decor',
+              price: '₹1600',
+              rating: 4.3,
+              link:"/balloon-decoration/first-night-decoration/product/Romantic-Wedding-Room-Decor",
+            },
+          
+          ];
+        
+        
+          const haldiAndMehndiData = [
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1723290555708.png',
+              title: 'Haldi Decoration Ring Look',
+              price: '₹14080',
+              rating: 4.6,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Ring-Look",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1722693437219.png',
+              title: 'Mehendi Decoration Green Style',
+              price: '₹13500',
+              rating: 4.6,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Green-Style",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1723209813542.png',
+              title: 'Mehendi Decoration Look Yellow',
+              price: '₹6600',
+              rating: 4.6,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Look-Yellow",
+            },
+            {
+              Image: '',  // No image for this slide
+              title: 'View more from Haldi Mehandi Decorations',
+              price: '',  // No price
+              rating: '',  // No rating
+              link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+              isViewMore: true  // Flag to indicate it's a "View more" slide
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1723290772620.png',
+              title: 'Haldi Decoration Stage',
+              price: '₹13920',
+              rating: 4.3,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Stage",
             },
           ];
-          
-          
-          const firstNightData = [
+        
+        
+          const AnniversaryData = [
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1706461267921.png',
+              title: 'Lavender Rose Extravaganza Anniversary Decor',
+              price: '₹2999',
+              rating: 4.6,
+              link:"/balloon-decoration/anniversary-decoration/product/Lavender-Rose-Extravaganza-Anniversary-Decor",
+            },
+           {
+              Image: 'https://horaservices.com/api/uploads/attachment-1706460114319.png',
+              title: 'White & Gold Enchantment Anniversary Decoration',
+              price: '₹2499',
+              rating: 4.2,
+              link:"/balloon-decoration/anniversary-decoration/product/White-&-Gold-Enchantment-Anniversary-Decoration",
+            },
+           {
+              Image: 'https://horaservices.com/api/uploads/attachment-1713965416898.png',
+              title: 'Anniversary Decoration With Ring Shape',
+              price: '₹4250',
+              rating: 4.5,
+              link:"/balloon-decoration/anniversary-decoration/product/Anniversary-Decoration-With-Ring-Shape",
+            },
+           {
+              Image: 'https://horaservices.com/api/uploads/attachment-1725953653670.png',
+              title: 'Rose and Gold Heaven Balloon Decor',
+              price: '₹8350',
+              rating: 4.5,
+              link:"/balloon-decoration/anniversary-decoration/product/Rose-and-Gold-Heaven-Balloon-Decor",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1713189291302.png',
+              title: 'Bed Decoration For First Night',
+              price: '₹2840',
+              rating: 4.0,
+              link:"/balloon-decoration/anniversary-decoration/product/Bed-Decoration-For-First-Night",
+            },
+            // {
+            //   Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
+            //   title: 'Floral Anniversary Decor',
+            //   price: '₹4400',
+            //   rating: 4.5,
+            //   link:"/balloon-decoration/anniversary-decoration/product/Floral-Anniversary-Decor",
+            // },
+            // {
+            //   Image: 'https://horaservices.com/api/uploads/attachment-1725951536862.png',
+            //   title: 'Golden n White Petals Balloon decor',
+            //   price: '₹2870',
+            //   rating: 4.8,
+            //   link:"/balloon-decoration/anniversary-decoration/product/Golden-n-White-Petals-Balloon-decor",
+            // },
+         
+          ];
+    
+          const bacheloretteData = [
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1724160189321.png',
+              title: 'Pastel Bride to be Decoration',
+              price: '₹2320',
+              rating: 4.7,
+              link:"/balloon-decoration/bachelorette-decoration/product/Pastel-Bride-to-be-Decoration",
+            },
+      {
+              Image: 'https://horaservices.com/api/uploads/attachment-1724162849757.png',
+              title: 'Classy Bachelorette Wall',
+              price: '₹1870',
+              rating: 4.0,
+              link:"/balloon-decoration/bachelorette-decoration/product/Classy-Bachelorette-Wall",
+            },
+      
+      {
+              Image: 'https://horaservices.com/api/uploads/attachment-1724161735052.png',
+              title: 'Bachelorette Ring Backdrop',
+              price: '₹3550',
+              rating: 4.0,
+              link:"/balloon-decoration/bachelorette-decoration/product/Bachelorette-Ring-Backdrop",
+            },
+      {
+              Image: 'https://horaservices.com/api/uploads/attachment-1724415811393.png',
+              title: 'Bride to be Balloon Arch',
+              price: '₹2390',
+              rating: 4.0,
+              link:"/balloon-decoration/bachelorette-decoration/product/Bride-to-be-Balloon-Arch",
+            },
+      ];
+    
+          const KidsBirthdayData = [
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1726056840221.png',
+              title: 'Metallic Blue n White Glow Balloon Decor',
+              price: '₹2560',
+              rating: 4.5,
+              link:"/balloon-decoration/kids-birthday-decoration/product/Metallic-Blue-n-White-Glow-Balloon-Decor",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
+              title: 'Minnie Mouse Theme Decoration',
+              price: '₹1549',
+              rating: 4.5,
+              link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1713198322285.png',
+              title: 'Cocomelon Theme For Birthday Kids',
+              price: '₹2299',
+              rating: 4.5,
+              link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-Theme-For-Birthday-Kids",
+            },
               {
-                Image: 'https://horaservices.com/api/uploads/attachment-1705582807178.png',
-                title: 'Romantic Heart Balloon',
-                price: '₹1429',
-                rating: 4.5,
-                link:"/balloon-decoration/first-night-decoration/product/Romantic-Heart-Balloon-Decoration",
-              },
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1706470026330.png',
-                title: 'Wedding Night Room Decoration',
-                price: '₹1900',
-                rating: 4.5,
-                link:"/balloon-decoration/first-night-decoration/product/Wedding-Night-Room-Decoration",
-              },
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1706470815566.png',
-                title: 'Wedding Night Decoration',
-                price: '₹2250',
-                rating: 4.5,
-                link:"/balloon-decoration/first-night-decoration/product/Wedding-Night-Decoration",
-              },
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1711614540709.png',
-                title: 'Lightning With Heart Room Decor',
-                price: '₹1450',
-                rating: 4.3,
-                link:"/balloon-decoration/first-night-decoration/product/Lightning-With-Heart-Room-Decor",
-              },
-            ];
-          
-          
-            const haldiAndMehndiData = [
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1722688345222.png',
-                title: 'Mehendi Decoration Green Look',
-                price: '₹16200',
+                Image: 'https://horaservices.com/api/uploads/attachment-1706464928126.png',
+                title: 'Mickey Ring Birthday Decoration',
+                price: '₹2699',
                 rating: 4.6,
-                link:"/balloon-decoration/haldi-mehendi-decoration",
-              },
-              {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1722692831708.png',
-                title: 'Haldi With Green Backdrop',
-                price: '₹9680',
-                rating: 4.5,
-                link:"/balloon-decoration/haldi-mehendi-decoration",
-              },
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1722935098782.png',
-                title: 'Mehendi Decoration Look',
-                price: '₹17200',
-                rating: 4.6,
-                link:"/balloon-decoration/haldi-mehendi-decoration",
-              },
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1722969484208.png',
-                title: 'Mehendi With Orange Theme',
-                price: '₹7000',
-                rating: 4.6,
-                link:"/balloon-decoration/haldi-mehendi-decoration",
-              },
-            ];
-          
-            const AnniversaryData = [
-              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1705947179768.png',
-                title: 'Roseate Radiance Anniversary Decor',
-                price: '₹1999',
-                rating: 4.6,
-                link:"/balloon-decoration/anniversary-decoration",
+                link:"/balloon-decoration/kids-birthday-decoration/product/Mickey-Ring-Birthday-Decoration",
               },
              {
-                Image: 'https://horaservices.com/api/uploads/attachment-1706442984306.png',
-                title: 'Love You Room Decor',
+                Image: 'https://horaservices.com/api/uploads/attachment-1711527333610.png',
+                title: 'Cocomelon theme With Shining Balloons',
+                price: '₹6570',
+                rating: 4.4,
+                link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-theme-With-Shining-Balloons",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711535459259.png',
+                title: 'Mermaid Theme Birthday Ring Decor',
+                price: '₹5999',
+                rating: 4.3,
+                link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-Birthday-Ring-Decor",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711525915897.png',
+                title: '4th Birthday Cocomelon Theme Ring Decor',
+                price: '₹7560',
+                rating: 4.7,
+                link:"/balloon-decoration/kids-birthday-decoration/product/4th-Birthday-Cocomelon-Theme-Ring-Decor",
+              },
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1726057785648.png',
+                title: 'Sea Shell by Sea Shore Decor',
+                price: '₹2740',
+                rating: 4.4,
+                link:"/balloon-decoration/kids-birthday-decoration/product/Sea-Shell-by-Sea-Shore-Decor",
+              },
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713185070655.png',
+                title: 'Mermaid Theme With Birthday Decor',
+                price: '₹3550',
+                rating: 4.8,
+                link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-With-Birthday-Decor",
+              },
+              {
+                Image: '',  // No image for this slide
+                title: 'View more from Kids Birthday Decorations',
+                price: '',  // No price
+                rating: '',  // No rating
+                link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+                isViewMore: true  // Flag to indicate it's a "View more" slide
+              },
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1706521327374.png',
+                title: 'Charming Birthday Decoration',
                 price: '₹1250',
                 rating: 4.2,
-                link:"/balloon-decoration/anniversary-decoration",
-              },
-             {
-                Image: 'https://horaservices.com/api/uploads/attachment-1706443182006.png',
-                title: 'Rose Gold Anniversary Decor',
-                price: '₹1599',
-                rating: 4.5,
-                link:"/balloon-decoration/anniversary-decoration",
-              },
-             {
-                Image: 'https://horaservices.com/api/uploads/attachment-1706459807177.png',
-                title: 'Canopy Red Heart Decor',
-                price: '₹4286',
-                rating: 4.5,
-                link:"/balloon-decoration/anniversary-decoration",
+                link:"/balloon-decoration/kids-birthday-decoration/product/Charming-Birthday-Decoration",
               },
             ];
+          
     
-            const KidsBirthdayData = [
-                {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
-                  title: 'Minnie Mouse Theme Decor',
-                  price: '₹1549',
-                  rating: 4.6,
-                  link:"/balloon-decoration/kids-birthday-decoration/product/Minnie-Mouse-Theme-Decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705948813744.png',
-                  title: 'Unicorn Backdrop Decor',
-                  price: '₹4399',
-                  rating: 4.4,
-                  link:"/balloon-decoration/kids-birthday-decoration/product/Unicorn-Backdrop-Decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706520101383.png',
-                  title: 'Multi color Birthday Balloon',
-                  price: '₹1299',
-                  rating: 4.3,
-                  link:"/balloon-decoration/kids-birthday-decoration/product/Multi-color-Birthday-Balloon-Decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706810405540.png',
-                  title: 'Cute and Simple Birthday Decor',
-                  price: '₹2299',
-                  rating: 4.7,
-                  link:"/balloon-decoration/kids-birthday-decoration/product/Cute-and-Simple-Birthday-Decoration",
-                },
-              ];
+          
+            const BabyShowerData= [
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713010630004.png',
+                title: 'Oh Baby Decor With Baby Feet',
+                price: '₹3000',
+                rating: 4.2,
+                link:"/balloon-decoration/baby-shower-decoration/product/Oh-Baby-Decor-With-Baby-Feet",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1705598937315.png',
+                title: 'Golden, Pink and Blue Baby Shower',
+                price: '₹2299',
+                rating: 4.5,
+                link:"/balloon-decoration/baby-shower-decoration/product/Golden,-Pink-and-Blue-Baby-Shower",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711536118870.png',
+                title: 'Rosy Whispers Baby Shower',
+                price: '₹6120',
+                rating: 4.2,
+                link:"/balloon-decoration/baby-shower-decoration/product/Rosy-Whispers-Baby-Shower",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713379165376.png',
+                title: 'Oh Baby With Green Decoration',
+                price: '₹6270',
+                rating: 4.8,
+                link:"/balloon-decoration/baby-shower-decoration/product/Oh-Baby-With-Green-Decoration",
+              },
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1726062561916.png',
+                title: 'Oh Baby With Green Decoration',
+                price: '₹5860',
+                rating: 4.5,
+                link:"/balloon-decoration/baby-shower-decoration/product/Teddy%27s-Wonderland-Pink-Decor",
+              },
+            ];
+          
+            const WelcomebabyData= [
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713382130916.png',
+                title: 'Welcome Baby By Teddy Theme',
+                price: '₹4150',
+                rating: 4.8,
+                link:"/balloon-decoration/welcome-baby-decoration/product/Welcome-Baby-By-Teddy-Theme",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713010968590.png',
+                title: 'Light Baby Decoration',
+                price: '₹3750',
+                rating: 4.5,
+                link:"/balloon-decoration/welcome-baby-decoration/product/Light-Baby-Decoration-",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1706471168212.png',
+                title: 'Pastel Theme Baby Welcome',
+                price: '₹1999',
+                rating: 4.7,
+                link:"/balloon-decoration/welcome-baby-decoration/product/Pastel-Theme-Baby-Welcome",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1706471308375.png',
+                title: 'Pink Theme Welcome Baby',
+                price: '₹2070',
+                rating: 4.2,
+                link:"/balloon-decoration/welcome-baby-decoration/product/Pink-Theme-Welcome-Baby",
+              },
+              {
+                Image: '',  // No image for this slide
+                title: 'View more from Welcome Baby Decorations',
+                price: '',  // No price
+                rating: '',  // No rating
+                link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+                isViewMore: true  // Flag to indicate it's a "View more" slide
+              },
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711599827419.png',
+                title: 'Golden & Pink Theme Baby Welcome',
+                price: '₹2599',
+                rating: 4.8,
+                link:"/balloon-decoration/welcome-baby-decoration/product/Golden-&-Pink-Theme-Baby-Welcome",
+              },
+              //  {
+              //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+              //   title: 'VIEW ALL',
+              //   price: '',
+              //   rating: '',
+              //   link:"/balloon-decoration/welcome-baby-decoration",
+              // },
+            ];
+          
+            const PremiumData= [
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1713005111181.png',
+                title: 'Birthday Decor With Cocomelon Setup',
+                price: '₹8770',
+                rating: 4.4,
+                link:"/balloon-decoration/premium-decoration/product/Birthday-Decor-With-Cocomelon-Setup",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1712938054361.png',
+                title: 'Boy & Girl Baby Shower Theme',
+                price: '₹7650',
+                rating: 4.6,
+                link:"/balloon-decoration/premium-decoration/product/Boy-&-Girl-Baby-Shower-Theme",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1706463835447.png',
+                title: 'Multi Balloon Round Ring',
+                price: '₹4670',
+                rating: 4.7,
+                link:"/balloon-decoration/premium-decoration/product/Multi-Balloon-Round-Ring",
+              },
+          
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711528712533.png',
+                title: 'Unicorn Theme Birthday Surprise',
+                price: '₹7399',
+                rating: 4.6,
+                link:"/balloon-decoration/premium-decoration/product/Unicorn-Theme-Birthday-Surprise",
+              },
+               
+            ];
             
-              const BabyShowerData= [
-                {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705598818463.png',
-                  title: 'Cloudy Theme Baby Shower',
-                  price: '₹1899',
-                  rating: 4.2,
-                  link:"/balloon-decoration/baby-shower-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705598937315.png',
-                  title: 'Golden, Pink and Blue Baby Shower',
-                  price: '₹2299',
-                  rating: 4.5,
-                  link:"/balloon-decoration/baby-shower-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705599152481.png',
-                  title: 'Baby Pink Baby Shower',
-                  price: '₹2700',
-                  rating: 4.2,
-                  link:"/balloon-decoration/baby-shower-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1711520474508.png',
-                  title: 'OH BABY Light Decoration',
-                  price: '₹3399',
-                  rating: 4.8,
-                  link:"/balloon-decoration/baby-shower-decoration",
-                },
-              ];
-            
-              const WelcomebabyData= [
-                {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706471308375.png',
-                  title: 'Pink Theme Welcome Baby',
-                  price: '₹2070',
-                  rating: 4.8,
-                  link:"/balloon-decoration/welcome-baby-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706471595779.png',
-                  title: 'Blue Theme Welcome Baby Boy',
-                  price: '₹1899',
-                  rating: 4.5,
-                  link:"/balloon-decoration/welcome-baby-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1711458529679.png',
-                  title: 'Oh Baby Classy Decoration',
-                  price: '₹2999',
-                  rating: 4.7,
-                  link:"/balloon-decoration/welcome-baby-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1711555526222.png',
-                  title: 'Welcome Baby Decoration',
-                  price: '₹1899',
-                  rating: 4.2,
-                  link:"/balloon-decoration/welcome-baby-decoration",
-                },
-              ];
-            
-              const PremiumData= [
-                {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705586477880.png',
-                  title: 'Open Area Birthday Decoration',
-                  price: '₹6999',
-                  rating: 4.4,
-                  link:"/balloon-decoration/premium-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706528142518.png',
-                  title: 'Canopy Birthday Decoration',
-                  price: '₹4999',
-                  rating: 4.6,
-                  link:"/balloon-decoration/premium-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1706534258221.png',
-                  title: 'Multi-Colored Baby Shower',
-                  price: '₹6120',
-                  rating: 4.7,
-                  link:"/balloon-decoration/premium-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1711540983547.png',
-                  title: 'Car Theme With Mickey Mouse',
-                  price: '₹6235',
-                  rating: 4.6,
-                  link:"/balloon-decoration/premium-decoration",
-                },
-              ];
+            const BallonBData= [
+              {
+                Image: 'https://horaservices.com/api/uploads/attachment-1705949316251.png',
+                title: 'I Love You Balloon Bouquet',
+                price: '₹1800',
+                rating: 4.3,
+                link:"/balloon-decoration/balloon-bouquets-decoration",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1705949583322.png',
+                title: 'LOVE Balloon Bouquet',
+                price: '₹1350',
+                rating: 4.6,
+                link:"/balloon-decoration/balloon-bouquets-decoration",
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1711542379923.png',
+                title: 'Barbie Balloon Bouquet',
+                price: '₹1450',
+                rating: 4.1,
+                link:"/balloon-decoration/balloon-bouquets-decoration",
+              },
+              {
+                Image: '',  // No image for this slide
+                title: 'View more from Ballon Bouquet',
+                price: '',  // No price
+                rating: '',  // No rating
+                link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+                isViewMore: true  // Flag to indicate it's a "View more" slide
+              },
+             {
+                Image: 'https://horaservices.com/api/uploads/attachment-1712305355842.png',
+                title: 'Baby Shark Bouquet',
+                price: '₹1420',
+                rating: 4.5,
+                link:"/balloon-decoration/balloon-bouquets-decoration",
+              },
               
-              const BallonBData= [
-                {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705949316251.png',
-                  title: 'I Love You Balloon Bouquet',
-                  price: '₹1800',
-                  rating: 4.3,
-                  link:"/balloon-decoration/balloon-bouquets-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1705949583322.png',
-                  title: 'LOVE Balloon Bouquet',
-                  price: '₹1350',
-                  rating: 4.6,
-                  link:"/balloon-decoration/balloon-bouquets-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1711542379923.png',
-                  title: 'Barbie Balloon Bouquet',
-                  price: '₹1450',
-                  rating: 4.1,
-                  link:"/balloon-decoration/balloon-bouquets-decoration",
-                },
-               {
-                  Image: 'https://horaservices.com/api/uploads/attachment-1712305355842.png',
-                  title: 'Baby Shark Bouquet',
-                  price: '₹1420',
-                  rating: 4.5,
-                  link:"/balloon-decoration/balloon-bouquets-decoration",
-                },
-              ];
-            
+            ];
+    
+        
+             
 
     const getCatData = async (subCategory) => {
         try {
@@ -382,9 +570,10 @@ const [decCat, setDecCat] = useState([
     return (
         <div className="decoration-city-page-sec">
         <Head>
-        <title>Balloon and Flower Decoration @999</title>
-        <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <title>HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
+        <meta name="description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
         <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
         <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
