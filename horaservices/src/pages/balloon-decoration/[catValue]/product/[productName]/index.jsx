@@ -45,28 +45,96 @@ const SkeletonLoader = () => {
   );
 };
 
+const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const API_KEY = "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";
 
-const API_URL = 'https://api-inference.huggingface.co/models/gpt2';
-const API_KEY = "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"; 
+const cleanHtmlContent = (htmlString) => {
+  if (!htmlString) return '';
+  const withoutTags = htmlString.replace(/<[^>]*>/g, ''); // Remove HTML tags
+  const withoutSpecialChars = withoutTags.replace(/&#[^;]*;/g, ' '); // Replace HTML entities with space
+  return withoutSpecialChars.trim();
+};
 
-
-const generateProductDescription = async (prompt) => {
+const generateProductDescription = async (product) => {
   try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
+    let inclusionList = '';
+    if (Array.isArray(product.inclusion) && product.inclusion.length > 0) {
+      inclusionList = cleanHtmlContent(product.inclusion[0]);
+      inclusionList = inclusionList.split('-').filter(item => item.trim() !== '').slice(0, 3).join(', ');
+    }
+
+    const prompt = `Create a compelling 5-line product description for "${product.name}":
+    1. Introduce the product and its main purpose.
+    2. Highlight its key feature or benefit.
+    3. Mention the price: ₹${product.price}
+    4. List top inclusions: ${inclusionList}
+    5. Conclude with a call to action or unique selling point.
+    Keep each line concise and impactful.`;
+
+    const response = await axios.post(API_URL, {
+      model: "openai/gpt-3.5-turbo",
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    }, {
       headers: {
         'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ inputs: prompt })
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://horaservices.com',  // Replace with your actual website
+        'X-Title': 'HoraServices'  // Replace with your app name
+      }
     });
-    const result = await response.json();
-    return result[0]?.generated_text || '';
+
+    return response.data.choices[0].message.content || '';
   } catch (error) {
     console.error("Error generating description:", error);
     return '';
   }
 };
+
+// const API_URL = 'https://api-inference.huggingface.co/models/gpt2';
+// const API_KEY = "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"; 
+
+// const cleanHtmlContent = (htmlString) => {
+//   if (!htmlString) return '';
+//   const withoutTags = htmlString.replace(/<[^>]*>/g, ''); // Remove HTML tags
+//   const withoutSpecialChars = withoutTags.replace(/&#[^;]*;/g, ' '); // Replace HTML entities with space
+//   return withoutSpecialChars.trim();
+// };
+
+// const generateProductDescription = async (product) => {
+//   try {
+//     let inclusionList = '';
+//     if (Array.isArray(product.inclusion) && product.inclusion.length > 0) {
+//       inclusionList = cleanHtmlContent(product.inclusion[0]);
+//       inclusionList = inclusionList.split('-')
+//         .filter(item => item.trim() !== '')
+//         .map(item => item.trim())
+//         .join(', ');
+//     }
+    
+//     const prompt = `Create a brief and engaging product description for "${product.name}". 
+//     Price: ₹${product.price}. 
+//     Inclusions: ${inclusionList}. 
+//     Highlight two key benefits of this product in five lines or less, emphasizing urgency and desirability.`;
+
+//     const response = await fetch(API_URL, {
+//       method: 'POST',
+//       headers: {
+//         'Authorization': `Bearer ${API_KEY}`,
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ inputs: prompt })
+//     });
+//     const result = await response.json();
+//     return result[0]?.generated_text || '';
+//   } catch (error) {
+//     console.error("Error generating description:", error);
+//     return '';
+//   }
+// };
+
+
 
 
 function DecorationCatDetails() {
@@ -129,35 +197,16 @@ function DecorationCatDetails() {
     return description;
   };
 
-
-  // useEffect(() => {
-  //   if (apiProduct && !isFetched) {
-  //     const fetchDecorationDetails = async () => {
-  //       try {
-  //         const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
-  //         const response = await axios.get(url);
-  //         console.log("API Response:", response.data);
-  //         setProduct(response.data.data[0]);
-  //         setSubCategory(getSubCategory(catValue || ''));
-  //         setLoading(false); // Stop loading when data is fetched
-  //       } catch (error) {
-  //         console.error("Error:", error.message);
-  //         setLoading(false); // Stop loading even if there is an error
-  //       }
-  //     };
-  //     fetchDecorationDetails();
-  //   }
-  // }, [apiProduct, catValue]);
-
+  
   useEffect(() => {
     if (apiProduct) {
       const fetchProductDetails = async () => {
         try {
           const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
           const response = await axios.get(url);
-          setProduct(response.data.data[0]);
-          const prompt = `two good things about this product "${response.data.data[0].name}".`;
-          const generatedDescription = await generateProductDescription(prompt);
+          const productData = response.data.data[0];
+          setProduct(productData);
+          const generatedDescription = await generateProductDescription(productData);
           setDescription(generatedDescription);
           setLoading(false);
         } catch (error) {
