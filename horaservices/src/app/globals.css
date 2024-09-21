@@ -1645,6 +1645,10 @@ h4.contact-us-heading a {
     margin-bottom: 1px;
     font-weight: 600;
   }
+  button.dec-continueButton {
+    margin: 16px auto 12px !important;
+    width: 95% !important;
+}
 
   h6.order-otp {
     font-size: 14px !important;

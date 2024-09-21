@@ -15,13 +15,13 @@
 }
 .view-more-slide {
   cursor: pointer;
-    height: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 380px;
 }
 .view-more-slide h3 {
-    font-size: 18px;
+    font-size: 18px !important;
     line-height: 24px;
 }
 .slick-slide{
@@ -29,10 +29,7 @@
     margin-right: 8px;
     max-height: 230px;
 }
-.slider-container.slider-decoration-inner.decoration-item-grid{
-    margin-bottom: 40px !important;
-    gap: 0px !important;
-}
+
 
 .slider-image {
     width: 100%;
@@ -93,7 +90,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    gap:16px;
+    gap:16px !important;
 }
 .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
     width: 24%;
@@ -116,6 +113,21 @@
     left: 10px !important;
     z-index: 1111 !important;
 }
+@media (max-width: 641px) {
+    .slider-image {
+        height: 230px;
+        margin-bottom: 8px;
+        object-fit: cover;
+        grid-row: 1;
+    }
+    .view-more-slide {
+        min-height: 360px;
+    }
+    .slider-container.slider-decoration-inner.decoration-item-grid{
+        margin-bottom: 40px !important;
+        gap: 0px !important;
+    }
+}
 @media (max-width: 468px) {
     .slick-next{
         right: 10px !important;
@@ -135,10 +147,17 @@
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    .view-more-slide {
+        min-height: 240px;
+    }
     .slick-slide{
         margin-left: 5px;
         margin-right: 5px;
         max-height: 140px;
+    }
+    .slider-container.slider-decoration-inner.decoration-item-grid{
+        margin-bottom: 40px !important;
+        gap: 0px !important;
     }
     .slider-container.slider-decoration-inner {
         margin-top: 1px;
@@ -184,8 +203,32 @@
 }
 
 @media (max-width: 345px) {
+    .slider-item h3 {
+        font-size: 12px;
+    }
     .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
         width: 46%;
         margin-bottom: 20px;
+    }
+    .view-more-slide {
+        min-height: 243px;
+    }
+    .slider-container.slider-decoration-inner.decoration-item-grid{
+        margin-bottom: 40px !important;
+        gap: 0px !important;
+    }
+}
+
+@media (max-width: 330px) {
+    .slider-container.slider-decoration-inner.decoration-item-grid{
+        margin-bottom: 40px !important;
+        gap: 0px !important;
+    }
+    .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
+        width: 46%;
+        margin-bottom: 20px;
+    }
+    .view-more-slide {
+        min-height: 243px;
     }
 }

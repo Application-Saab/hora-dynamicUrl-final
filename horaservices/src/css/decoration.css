@@ -537,7 +537,114 @@ margin-top: 10px;
   cursor: pointer;
 }
 
+/* CTA CSS */
 
+/* Container styles */
+
+.card-container-cta {
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px 13px;
+  margin-bottom: 10px;
+}
+/* Header section */
+
+.header-section-cta {
+  display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: flex-start;
+    column-gap: 10px;
+}
+
+.icon-wrapper-cta {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #bfdbfe; /* Light blue */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.user-icon-cta {
+  can-size: 1.5rem;
+  color: #3b82f6; /* Blue */
+}
+
+.header-text-cta {
+  color: #1f2937; /* Dark gray */
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.addon-section-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.highlight-cta {
+  color: #ef4444; /* Red */
+}
+
+/* Subtext */
+.subtext-cta {
+  color: rgb(157, 74, 147);
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+/* Button group */
+
+.button-group-cta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* Button styles */
+
+
+  .button-cta {
+    padding: 10px 0px;
+    font-weight: bold;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    border: none;
+    width: 44% !important;
+    font-size: 13px;
+
+}
+
+.button-cta:hover {
+  transform: scale(1.05);
+}
+.whatsapp-cta {
+  border: 2px solid #22c55e;
+    color: #22c55e;
+    background-color: #fff;
+}
+.call-cta {
+  background-color: #3b82f6; /* Blue */
+  color: white;
+}
+.icon-cta {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+}
 
 @media (max-width:800px){
   .slick-prev:before, .slick-next:before {
@@ -646,6 +753,16 @@ img {
 }
 .decorationlanding-slider h2 {
     font-size: 16px;
+}
+.button-cta
+{
+  padding: 7px 0px;
+  font-size: 11px;
+}
+.icon-cta {
+  width: 14px;
+  height: 14px;
+  margin-right: 3px;
 }
 }
 

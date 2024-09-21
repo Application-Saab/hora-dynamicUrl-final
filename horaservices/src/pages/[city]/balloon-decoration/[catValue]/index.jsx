@@ -204,19 +204,28 @@ const DecorationCatPage = () => {
 
   const PageTitle = (e) =>{
     if(catValue === "kids-birthday-decoration"){
-      return "HORA Decorations : Kids' Parties Balloon & Flower Decoration Designs by Professionals Starting at ₹1199"
+      return "Kids' Birthday Balloon Decoration by Professionals Decorators, Starting at ₹1199"
     }
     else if(catValue === "birthday-decoration"){
-      return "HORA Decorations : Birthday Balloon & Flower Decoration Designs by Professionals Starting at ₹1199";
+      return "Birthday Balloon Decoration at Home by Professionals  Decorators, Starting at ₹1199";
     }
     else if(catValue === "anniversary-decoration"){
-      return "HORA Decorations :Anniversary Decorations with Balloon & Rose Petals Starting at ₹1199"
+      return "Anniversary Decorations with Balloon & Rose Petals, Starting at ₹1199"
     }
     else if(catValue === "first-night-decoration"){
-      return "HORA Decorations :Choose & Book Elegant First Night Decorations Starting at ₹1199"
+      return "First Night Decorations with Balloon & Rose Petals, Starting at ₹1199"
+    }
+    else if(catValue === "baby-shower-decoration") {
+      return "Baby Shower with Latest Designs by Professionals  Decorators Starting at ₹1199"
+    }
+    else if (catValue === "/welcome-baby-decoration"){
+      return "Baby Welcome Decoration at home by Professionals  Decorators, Starting at ₹1199"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Haldi Decoration with Latest Designs starting at ₹3000"
     }
     else{
-     return("HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
     }
   }
 
@@ -233,11 +242,13 @@ const DecorationCatPage = () => {
     else if(catValue === "first-night-decoration"){
       return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
     }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Brighten up your Haldi ceremony with vibrant and elegant décor! 🌼✨ Explore our stunning Haldi decoration setups, featuring traditional elements, colorful floral arrangements, and custom designs to make your event unforgettable. 🌸💛"
+    }
     else{
-     return("HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
     }
   }
-
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
@@ -252,6 +263,8 @@ const DecorationCatPage = () => {
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}`} />
         <meta property="og:type" content="website" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
+
       </Head>
       <>
         <div style={{ textAlign: "center", justifyContent: "center", alignItems: "center" }}>

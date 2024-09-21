@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
+import { MessageCircle, Plus } from 'lucide-react';
 import buynowImage from '../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../assets/service.png';
@@ -68,6 +69,12 @@ function DecorationCatDetails() {
   }, [router.isReady, router.query]);
 
 
+  const handleWhatsApp = () => {
+    const phoneNumber = '7338584828';
+    const message = encodeURIComponent('I want to customize a decoration');
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+
+  };
 
   useEffect(() => {
     if (apiProduct && !isFetched) {
@@ -174,6 +181,9 @@ function DecorationCatDetails() {
     }
     setButtonClickCount(buttonClickCount + 1);
   };
+  const handleAddOnClick = (subCategory, product) => {
+    showAddOnmodal(subCategory, product);
+  }
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -381,6 +391,7 @@ function DecorationCatDetails() {
         <script type="application/ld+json">{faqScriptTag}</script>
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Hora Services" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}/product/${product.name}`} />
         <meta property="og:type" content="website" />
       </Head>
@@ -445,11 +456,15 @@ function DecorationCatDetails() {
                     </div>
 
                   </p>
-                  {/* {isClient && window.innerWidth > 800 ? */}
+                  
                   <button style={styles.Buttonstyle}  id="continueButton"  className="dec-continueButton" onClick={() => handleCheckout(subCategory, product, selectedAddOnProduct)}>Continue</button>
-                  {/* : null} */}    </>
+                    
+                  </>
               </ul>
             )}
+
+
+
 
 
 
@@ -460,6 +475,34 @@ function DecorationCatDetails() {
               )}
             </div>
 
+      <div className="card-container-cta">
+      <div className="header-section-cta">
+        <div className="addon-section-buttons">
+        <div className="icon-wrapper-cta">
+          <span className="user-icon-cta">👤</span>
+        </div>
+        <p className="header-text-cta">
+          Want to <span className="highlight-cta">customize</span> this decoration?
+          {/* <p className="subtext-cta">Talk with our Experts!</p> */}
+        </p>
+        </div>
+              
+       
+      </div>
+     
+      <div className="button-group-cta">
+        <button onClick={handleWhatsApp} className="button-cta whatsapp-cta">
+          <MessageCircle className="icon-cta" />
+          Whatsapp
+        </button>           
+        <button onClick={showAddOnmodal} className="button-cta call-cta">
+          <Plus className="icon-cta" />
+          Decor Upgrade's
+        </button>
+      </div>
+    </div>
+
+
 
             <div className="tab-section-details-productpage">
               <Tabs
@@ -469,10 +512,10 @@ function DecorationCatDetails() {
               />
             </div>
 
-            <div className="similar-products">
+            {/* <div className="similar-products">
               <h2>Similar Products</h2>
               {getSimilarProducts(product)}
-            </div>
+            </div> */}
 
           </div>
         </div>
