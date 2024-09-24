@@ -202,6 +202,7 @@ const DecorationCatPage = () => {
     return text;
   }
 
+ 
   const PageTitle = (e) =>{
     if(catValue === "kids-birthday-decoration"){
       return `Kids Birthday Balloon Decoration in ${city} by Professionals Decorators, Starting at ₹1199`

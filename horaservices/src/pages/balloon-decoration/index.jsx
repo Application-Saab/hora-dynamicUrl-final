@@ -66,6 +66,8 @@ const Decoration = () => {
         }
     };
 
+   
+
     const handleViewMore = (category) => {
         const categoryItem = decCat.find(cat => cat.subCategory === category);
         console.log('Category Item:', categoryItem); 
