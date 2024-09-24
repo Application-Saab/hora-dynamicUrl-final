@@ -26,15 +26,14 @@ import "slick-carousel/slick/slick-theme.css";
 import DecorationIcon from '../assets/decoration_icon.png';
 import PhotographyIcon from '../assets/photography_icon.png';
 import FoodIcon from '../assets/food_icon.png';
-import EntertainmentIcon from '../assets/enter_icon.png';
 import { sendGTMEvent  } from '@next/third-parties/google';
 
 import './homepage.css'
 // remove later
-import homepage_entertainment1 from '../assets/homepage_entertainment1.png';
-import homepage_entertainment2 from '../assets/homepage_entertainment2.png';
-import homepage_entertainment3 from '../assets/homepage_entertainment3.png';
-import homepage_entertainment4 from '../assets/homepage_entertainment4.png';
+// import homepage_entertainment1 from '../assets/homepage_entertainment1.png';
+// import homepage_entertainment2 from '../assets/homepage_entertainment2.png';
+// import homepage_entertainment3 from '../assets/homepage_entertainment3.png';
+// import homepage_entertainment4 from '../assets/homepage_entertainment4.png';
 
 export default function Home() {
 const router = useRouter();
@@ -204,21 +203,21 @@ const settings = {
 
 const slides = [
 {
- image: "https://horaservices.com/api/uploads/homepage_slider1.png",
+ image: "https://horaservices.com/api/uploads/homepage_slider1.webp",
   title: 'Decoration at your step',
   description: 'Transform your space with our expert decorators',
   imgAlt: 'Decoration services at your step',
   link:"/balloon-decoration"
 },
 {
-  image: "https://horaservices.com/api/uploads/homepage_slider2.png",
+  image: "https://horaservices.com/api/uploads/homepage_slider2.webp",
   title: 'Party Food Delivery',
   description: 'Delicious food for all your party needs',
   imgAlt: 'Party food delivery service',
   link:"/book-chef-cook-for-party"
 },
 {
-  image: "https://horaservices.com/api/uploads/homepage_slider3.png",
+  image: "https://horaservices.com/api/uploads/homepage_slider3.webp",
   title: 'Live Cooking at Spot',
   description: 'Book top-notch performers for your event',
   imgAlt: 'Live cooking at event location',
@@ -229,64 +228,64 @@ const slides = [
 const foodData = [
   {
     id: 1,
-    image: "https://horaservices.com/api/uploads/homepage_food1.png",
+    image: "https://horaservices.com/api/uploads/homepage_food1.webp",
     title: "Bulk Food Delivery",
     imgAlt: "Bulk food delivery service",
     link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
   },
   {
     id: 2,
-    image: "https://horaservices.com/api/uploads/homepage_food2.png",
+    image: "https://horaservices.com/api/uploads/homepage_food2.webp",
     title: "Chef For Party",
     imgAlt: "Chef cooking for a party",
     link:"/book-chef-cook-for-party"
   },
   {
     id: 3,
-    image: "https://horaservices.com/api/uploads/homepage_food3.png",
+    image: "https://horaservices.com/api/uploads/homepage_food3.webp",
     title: "Live Catering",
     imgAlt: "Live catering service at an event",
     link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
   },
 ];
 
-const EntertainmentData = [
-  { 
-    id: 1, 
-    title: 'Tattoo Artist', 
-    imageUrl: homepage_entertainment1, 
-    link: '#', 
-    imgAlt: 'Tattoo artist providing services at an event' 
-  },
-  { 
-    id: 2, 
-    title: 'Magician', 
-    imageUrl: homepage_entertainment2, 
-    link: '#', 
-    imgAlt: 'Magician performing at an event' 
-  },
-  { 
-    id: 3, 
-    title: 'Party Host', 
-    imageUrl: homepage_entertainment3, 
-    link: '#', 
-    imgAlt: 'Party host engaging with guests' 
-  },
-  { 
-    id: 4, 
-    title: 'Mascot', 
-    imageUrl: homepage_entertainment4, 
-    link: '#', 
-    imgAlt: 'Mascot character entertaining at an event' 
-  },
-];
+// const EntertainmentData = [
+//   { 
+//     id: 1, 
+//     title: 'Tattoo Artist', 
+//     imageUrl: homepage_entertainment1, 
+//     link: '#', 
+//     imgAlt: 'Tattoo artist providing services at an event' 
+//   },
+//   { 
+//     id: 2, 
+//     title: 'Magician', 
+//     imageUrl: homepage_entertainment2, 
+//     link: '#', 
+//     imgAlt: 'Magician performing at an event' 
+//   },
+//   { 
+//     id: 3, 
+//     title: 'Party Host', 
+//     imageUrl: homepage_entertainment3, 
+//     link: '#', 
+//     imgAlt: 'Party host engaging with guests' 
+//   },
+//   { 
+//     id: 4, 
+//     title: 'Mascot', 
+//     imageUrl: homepage_entertainment4, 
+//     link: '#', 
+//     imgAlt: 'Mascot character entertaining at an event' 
+//   },
+// ];
 
 const whereAreYouData = [
   {
     id: 1,
     title: 'Decoration',
     link: '/balloon-decoration',
-    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.png",
+    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.webp",
     imgAlt: 'Event decoration service',
     points: [
       '✨Choose from 1000+ unique designs for any Event - Birthdays, Anniversaries, Baby showers, Weddings, and more!',
@@ -299,7 +298,7 @@ const whereAreYouData = [
     id: 2,
     title: 'Chef For Party',
     link: '/book-chef-cook-for-party',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.png",
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.webp",
     imgAlt: 'Chef services for party events',
     points: [
         " ✨ HORA brings professional chefs to your kitchen",
@@ -314,7 +313,7 @@ const whereAreYouData = [
     id: 3,
     title: 'Food Delivery',
     link: '/party-food-delivery-live-catering-buffet/party-food-delivery',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.png",
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.webp",
     imgAlt: 'Food delivery services for events',
     points: [
       '✨🎉 Enjoy food delivery with',
@@ -329,7 +328,7 @@ const whereAreYouData = [
     id: 4,
     title: 'Live Catering',
     link: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.png",
+    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.webp",
     imgAlt: 'Live Catering services',
     points: [
       '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
@@ -344,7 +343,7 @@ const whereAreYouData = [
     id: 5,
     title: 'Entertainment',
     link: '/',
-    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.png",
+    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.webp",
     imgAlt: 'Event food delivery services',
     points: [
       '✨ Make your event unforgettable by engaging your guests! ✨ Choose from over 10 amazing services:',
@@ -462,7 +461,8 @@ return (
           <Image src={slide.image} alt={slide.title} 
            width={1200} 
            height={400} 
-          //  objectFit="cover" 
+           quality={100}         // Adjust quality for better compression
+           priority={false} 
            layout="responsive" 
            className="responsive-image"
            />
@@ -524,7 +524,7 @@ return (
       </h2>
     </div>
     <div className="service-image-container">
-      <Image src="https://horaservices.com/api/uploads/homepage_decoration.png" alt="Decoration" className="service-image" width={200} height={100}/>
+      <Image src="https://horaservices.com/api/uploads/homepage_decoration.webp" alt="Decoration" className="service-image" width={200} height={100}/>
       <button className="book-now2" id="home-decoration-sec" onClick={() => window.location.href = '/balloon-decoration'} >Book Now</button>
     </div>
   </div>
@@ -536,7 +536,7 @@ return (
       </h2>
     </div>
     <div className="service-image-container">
-      <Image src="https://horaservices.com/api/uploads/homepage_photography.png" alt="Photography" className="service-image" width={200} height={100}/>
+      <Image src="https://horaservices.com/api/uploads/homepage_photography.webp" alt="Photography" className="service-image" width={200} height={100}/>
       <button className="book-now2" id="home-phtography-sec-sec" onClick={photographyUrl} >Book Now</button>
     </div>
   </div>

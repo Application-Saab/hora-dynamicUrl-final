@@ -7,17 +7,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons"
 import { useParams } from "react-router-dom";
 import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM } from '../../../../utils/apiconstants';
 import DecorationLandingSlider from  '../../../../components/DecorationLandingSlider';
-import BirthdayImage from '../../../../assets/Birthday_dec_cat.jpeg';
-import FirstnightImage from '../../../../assets/first_night_cat_dec.jpeg'
-import AnniversaryImage from '../../../../assets/aniversary_Cat_Dec.jpeg'
-import KidsbirthdayImage from '../../../../assets/kids_birthday_decoration.jpeg'
-import BabyShowerImage from '../../../../assets/baby-shower-dec-cat.jpeg'
-import WelcomebabyImage from '../../../../assets/welcome_baby_dec.jpeg'
-import PremiumImage from '../../../../assets/preminumdecor.jpeg'
-import CarbootImage from '../../../../assets/car_boot.jpg'
 import getFAQs from "@/components/JsonData/faqData";
 import getCityParagraphs from "@/components/JsonData/cityParagraphs";
-import BallonBImage from '../../../../assets/Balloon-B-new.jpeg'
 import { getDecorationOrganizationSchema, getProductFAQSchema } from '../../../../utils/schema';
 import { setState } from '../../../../actions/action';
 import { useRouter } from "next/router";
@@ -53,15 +44,19 @@ const [catalogueData, setCatalogueData] = useState([]);
 const [activeIndex, setActiveIndex] = useState(null);
 const [showMore, setShowMore] = useState(false);
 const [decCat, setDecCat] = useState([
-        { id: '2', image: BirthdayImage, link:"/balloon-decoration/birthday-decoration" , name: 'Birthday', subCategory: "Birthday" , catValue:"birthday-decoration" , imgAlt:"A Gorgeous Candy Birthday Decoration Surprise!" },
-        { id: '3', image: FirstnightImage, link:"/balloon-decoration/first-night-decoration" , name: 'First Night', subCategory: "FirstNight" , catValue:"first-night-decoration" , imgAlt:"Add extra happiness quotient to your wedding night with our exclusive décor package"},
-        { id: '4', image: AnniversaryImage, link:"/balloon-decoration/anniversary-decoration" , name: 'Anniversary', subCategory: "Anniversary"  , catValue:"anniversary-decoration" , imgAlt:"Immerse yourself in a world of romance with our mesmerizing anniversary decorations."},
-        { id: '5', image: KidsbirthdayImage, link:"/balloon-decoration/kids-birthday-decoration" , name: 'Kids Birthday', subCategory: "KidsBirthday" , catValue:"kids-birthday-decoration" , imgAlt:"Flutter into a world of whimsy with our exclusive Whimsical Flutter-themed Welcome Baby Decorations." },
-        { id: '6', image: BabyShowerImage, link:"/balloon-decoration/baby-shower-decoration" , name: 'Baby Shower', subCategory: "BabyShower" , catValue:"baby-shower-decoration" , imgAlt:"Celebrate the transformation into motherhood with Our Gilded Baby Shower Decorations." },
-        { id: '7', image: WelcomebabyImage, link:"/balloon-decoration/welcome-baby-decoration" , name: 'Welcome Baby', subCategory: "WelcomeBaby" , catValue:"welcome-baby-decoration" , imgAlt:"A Pastel Theme Oh Baby Decor for your Baby Shower Celebrations!"},
-        { id: '8', image: PremiumImage, link:"/balloon-decoration/premium-decoration" , name: 'premium Decoration', subCategory: "PremiumDecoration"  , catValue:"premium-decoration" , imgAlt:"Birthday party decoration ideas for adults" },
-        { id: '9', image: BallonBImage, link:"/balloon-decoration/balloon-bouquets-decoration" , name: 'Ballon Bouquets', subCategory: "BallonBouquets" , catValue:"balloon-bouquets-decoration" , imgAlt:"Balloon Bouquet" },
-         ]);
+  { id: '2', image: "https://horaservices.com/api/uploads/Birthday_dec_cat.webp", name: 'Birthday', subCategory: "Birthday", catValue: "birthday-decoration", imgAlt: "A Gorgeous Candy Birthday Decoration Surprise!" },
+  { id: '3', image: "https://horaservices.com/api/uploads/first_night_cat_dec.webp", name: 'First Night', subCategory: "FirstNight", catValue: "first-night-decoration", imgAlt: "Add extra happiness quotient to your wedding night with our exclusive décor package" },
+  { id: '4', image: "https://horaservices.com/api/uploads/aniversary_Cat_Dec.webp", name: 'Anniversary', subCategory: "Anniversary", catValue: "anniversary-decoration", imgAlt: "Immerse yourself in a world of romance with our mesmerizing anniversary decorations." },
+  { id: '5', image: "https://horaservices.com/api/uploads/kids_birthday_decoration.webp", name: 'Kids Birthday', subCategory: "KidsBirthday", catValue: "kids-birthday-decoration", imgAlt: "Flutter into a world of whimsy with our exclusive Whimsical Flutter-themed Welcome Baby Decorations." },
+  { id: '6', image: "https://horaservices.com/api/uploads/baby-shower-dec-cat.webp", name: 'Baby Shower', subCategory: "BabyShower", catValue: "baby-shower-decoration", imgAlt: "Celebrate the transformation into motherhood with Our Gilded Baby Shower Decorations." },
+  { id: '7', image: "https://horaservices.com/api/uploads/welcome_baby_dec.webp", name: 'Welcome Baby', subCategory: "WelcomeBaby", catValue: "welcome-baby-decoration", imgAlt: "A Pastel Theme Oh Baby Decor for your Baby Shower Celebrations!" },
+  { id: '8', image: "https://horaservices.com/api/uploads/preminumdecor.webp	", name: 'premium Decoration', subCategory: "PremiumDecoration", catValue: "premium-decoration", imgAlt: "Birthday party decoration ideas for adults" },
+  { id: '9', image: "https://horaservices.com/api/uploads/Balloon-B-new.webp", name: 'Ballon Bouquets', subCategory: "BallonBouquets", catValue: "balloon-bouquets-decoration", imgAlt: "Balloon Bouquet" },
+  {id: '10', Image: "", name: "Haldi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Haldi Event"},  
+  {id: '11', Image: "", name: "Mehendi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Mehendi Event"},
+  {id: '11', Image: "", name: "Bachelorette Decoration", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "Bachelorette"},
+  {id: '11', Image: "", name: "proposal decorations", subCategory: "Proposal-Decoration", catValue: "Proposal-Decorations", imgAlt: "proposal decorations"},
+    ]);
 
          const toggleFAQ = (index) => {
             setActiveIndex(activeIndex === index ? null : index);
@@ -586,6 +581,8 @@ const [decCat, setDecCat] = useState([
     className="decCatimage"
     alt={item.imgAlt}
     onClick={() => openCatItems(item)}
+    width={300}
+    height={300}
     />
     </a>
 
