@@ -35,7 +35,13 @@ const Decoration = () => {
 const dispatch = useDispatch();
 const router = useRouter();
 let { city, locality } = router.query;
-console.log(locality, "locality");
+if (city) {
+  city = city.charAt(0).toUpperCase() + city.slice(1);
+  alert(city)
+}
+if (locality) {
+  locality = locality.charAt(0).toUpperCase() + locality.slice(1);
+}
 const schemaOrg = getDecorationOrganizationSchema();
 const scriptTag = JSON.stringify(schemaOrg);
 const faqSchema = getProductFAQSchema(city);
@@ -157,14 +163,6 @@ const [decCat, setDecCat] = useState([
               link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Rose-Decoration",
             },
             {
-              Image: '',  // No image for this slide
-              title: 'View more from First Night Decorations',
-              price: '',  // No price
-              rating: '',  // No rating
-              link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
-              isViewMore: true  // Flag to indicate it's a "View more" slide
-            },
-            {
               Image: 'https://horaservices.com/api/uploads/attachment-1706470671060.png',
               title: 'Romantic Wedding Room Decor',
               price: '₹1600',
@@ -196,14 +194,6 @@ const [decCat, setDecCat] = useState([
               price: '₹6600',
               rating: 4.6,
               link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Look-Yellow",
-            },
-            {
-              Image: '',  // No image for this slide
-              title: 'View more from Haldi Mehandi Decorations',
-              price: '',  // No price
-              rating: '',  // No rating
-              link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
-              isViewMore: true  // Flag to indicate it's a "View more" slide
             },
             {
               Image: 'https://horaservices.com/api/uploads/attachment-1723290772620.png',
@@ -570,7 +560,7 @@ const [decCat, setDecCat] = useState([
     return (
         <div className="decoration-city-page-sec">
         <Head>
-        <title>HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
+        <title>HORA Decorations in {city} in {locality} : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
         <meta name="description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
         <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />

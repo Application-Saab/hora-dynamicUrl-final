@@ -204,28 +204,28 @@ const DecorationCatPage = () => {
 
   const PageTitle = (e) =>{
     if(catValue === "kids-birthday-decoration"){
-      return "Kids' Birthday Balloon Decoration by Professionals Decorators, Starting at ₹1199"
+      return `Kids Birthday Balloon Decoration in ${city} by Professionals Decorators, Starting at ₹1199`
     }
     else if(catValue === "birthday-decoration"){
-      return "Birthday Balloon Decoration at Home by Professionals  Decorators, Starting at ₹1199";
+      return `Birthday Balloon Decoration ${city} at Home by Professionals  Decorators, Starting at ₹1199`;
     }
     else if(catValue === "anniversary-decoration"){
-      return "Anniversary Decorations with Balloon & Rose Petals, Starting at ₹1199"
+      return `Anniversary Decorations in ${city} with Balloon & Rose Petals, Starting at ₹1199`;
     }
     else if(catValue === "first-night-decoration"){
-      return "First Night Decorations with Balloon & Rose Petals, Starting at ₹1199"
+      return `First Night Decorations in ${city} with Balloon & Rose Petals, Starting at ₹1199`;
     }
     else if(catValue === "baby-shower-decoration") {
-      return "Baby Shower with Latest Designs by Professionals  Decorators Starting at ₹1199"
+      return `Baby Shower in ${city} with Latest Designs by Professionals  Decorators Starting at ₹1199`;
     }
     else if (catValue === "/welcome-baby-decoration"){
-      return "Baby Welcome Decoration at home by Professionals  Decorators, Starting at ₹1199"
+      return `Baby Welcome Decoration in ${city} at home by Professionals  Decorators, Starting at ₹1199`;
     }
     else if (catValue === "haldi-mehendi-decoration"){
-      return "Haldi Decoration with Latest Designs starting at ₹3000"
+      return `Haldi Decoration in ${city} with Latest Designs starting at ₹3000`
     }
     else{
-     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+     return(`Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings in ${city} – Starting at ₹1199`)
     }
   }
 

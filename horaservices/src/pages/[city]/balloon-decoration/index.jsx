@@ -33,6 +33,9 @@ const Decoration = () => {
 const dispatch = useDispatch();
 const router = useRouter();
 let { city } = router.query;
+if (city) {
+  city = city.charAt(0).toUpperCase() + city.slice(1);
+}
 const schemaOrg = getDecorationOrganizationSchema();
 const scriptTag = JSON.stringify(schemaOrg);
 const faqSchema = getProductFAQSchema(city);
@@ -379,10 +382,15 @@ const [decCat, setDecCat] = useState([
         });
     }, []);
 
+    function capitalizeCity(city) {
+      return city.charAt(0).toUpperCase() + city.slice(1);
+  }
+
+
     return (
         <div className="decoration-city-page-sec">
         <Head>
-        <title>HORA Decorations : Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
+        <title>HORA Decorations in {city}: Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199</title>
         <meta name="description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
         <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />

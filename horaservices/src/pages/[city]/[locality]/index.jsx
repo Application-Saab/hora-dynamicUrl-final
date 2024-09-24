@@ -8,6 +8,7 @@ import {
   UPDATE_ORDER_STATUS,
 } from "../../../utils/apiconstants";
 import axios from "axios";
+import Head from 'next/head';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
 import whatsppicon from "../../../assets/whatsapp-icon.png";
 import { getHomeOrganizationSchema } from "../../../utils/schema";
@@ -461,6 +462,21 @@ export default function Home() {
   return (
     <>
       <div className="page-width">
+      <Head>
+        <title>Hora Services</title>
+        <meta name="description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
+        <meta name="keywords" content="Balloon and Flower Decoration @999" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
+        <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
+        <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
+        <script type="application/ld+json">{scriptTag}</script>
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Hora Services" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
+        <meta property="og:url" content="https://horaservices.com/balloon-decoration" />
+        <meta property="og:type" content="website" />
+      </Head>
         <div className="party-services homeslider">
           <h1 className="party-title">All party services on one platform</h1>
           <div className="home-slider-inner">
