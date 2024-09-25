@@ -470,6 +470,8 @@ img.dish-image.selected {
   height: 81px;
   border-radius: 50%;
   margin: -30px auto 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 2.5);
+  border: 1px solid #efefef;
 }
 
 .order-container .dish-name {

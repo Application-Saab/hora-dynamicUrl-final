@@ -319,7 +319,7 @@ const CreateOrder = ({ history, currentStep }) => {
                             View All
                         </Button>
                     </div>
-                    <div className="dish-item">
+                    <div className="dish-item 12">
                         {expandedCategories.includes(item.mealObject._id)
                             ? item.dish.map((dish, index) => {
                                 const dishImage = dish.image
@@ -347,14 +347,18 @@ const CreateOrder = ({ history, currentStep }) => {
                                         }}
                                     >
                                         {selectedImage ? (
-                                            <Image
-                                                src={selectedImage}
-                                                alt={dish.name}
-                                                className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""
-                                                    }`}
-                                                width={300}
-                                                height={300}
-                                            />
+                                            <div 
+                                            className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                                            style={{
+                                                backgroundImage: `url(${selectedImage})`,
+                                                backgroundSize: 'cover, cover', // Ensures both images cover the element
+                                                backgroundPosition: 'center, center' // Centers both images
+                                            }}
+                                            >
+                                           
+                                            </div>
+                                           
+                                            
                                         ) : (
                                             <div
                                                 className={`dish-placeholder ${selectedDishes.includes(dish._id) ? "selected" : ""
@@ -433,14 +437,15 @@ const CreateOrder = ({ history, currentStep }) => {
                                         }}
                                     >
                                         {selectedImage ? (
-                                            <Image
-                                                src={selectedImage}
-                                                alt={dish.name}
-                                                className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""
-                                                    }`}
-                                                width={300}
-                                                height={300}
-                                            />
+                                             <div 
+                                             className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                                             style={{
+                                                 backgroundImage: `url(${selectedImage})`,
+                                                 backgroundSize: 'cover, cover', // Ensures both images cover the element
+                                                 backgroundPosition: 'center, center' // Centers both images
+                                             }}
+                                             >
+                                                </div>
                                         ) : (
                                             <div
                                                 className={`dish-placeholder ${selectedDishes.includes(dish._id) ? "selected" : ""

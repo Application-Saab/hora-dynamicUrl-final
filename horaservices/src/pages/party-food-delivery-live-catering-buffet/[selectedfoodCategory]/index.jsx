@@ -275,13 +275,15 @@ const FoodDeliveryCreateOrder = (currentStep) => {
                     }}
                   >
                     {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
+                      <div 
+                      className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                      style={{
+                          backgroundImage: `url(${selectedImage})`,
+                          backgroundSize: 'cover, cover', // Ensures both images cover the element
+                          backgroundPosition: 'center, center' // Centers both images
+                      }}
+                      >
+                         </div>
                     ) : (
                       <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
                     )}
@@ -326,13 +328,15 @@ const FoodDeliveryCreateOrder = (currentStep) => {
                     }}
                   >
                     {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
+                      <div 
+                      className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                      style={{
+                          backgroundImage: `url(${selectedImage})`,
+                          backgroundSize: 'cover, cover', // Ensures both images cover the element
+                          backgroundPosition: 'center, center' // Centers both images
+                      }}
+                      >
+                         </div>
                     ) : (
                       <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
                     )}
