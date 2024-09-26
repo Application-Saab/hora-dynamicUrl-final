@@ -56,6 +56,7 @@ function DecorationCatDetails() {
   const [subCategory, setSubCategory] = useState('');
   const [catValue, setCatValue] = useState('');
   const altTagCatValue = catValue.replace(/-/g, ' ');
+  const [discountInfo, setDiscountInfo] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state
   // Use useEffect to handle router query
   useEffect(() => {
@@ -83,18 +84,51 @@ function DecorationCatDetails() {
           const url = `${BASE_URL}${GET_DECORATION_BY_NAME}${apiProduct}`;
           const response = await axios.get(url);
           console.log("API Response:", response.data);
-          setProduct(response.data.data[0]);
+          
+          // Assuming the product has a price property
+          const fetchedProduct = response.data.data[0];
+          setProduct(fetchedProduct);
           setSubCategory(getSubCategory(catValue || ''));
+  
+          // Calculate discount info if price is available
+          if (fetchedProduct && fetchedProduct.price) {
+            const price = fetchedProduct.price;
+
+            const discountDetails = getDiscountedPrice(price);
+            setDiscountInfo(discountDetails);
+          } else {
+            console.error("Price is not available in the fetched product.");
+          }
+  
           setLoading(false); // Stop loading when data is fetched
         } catch (error) {
           console.error("Error:", error.message);
           setLoading(false); // Stop loading even if there is an error
         }
       };
+  
       fetchDecorationDetails();
     }
-  }, [apiProduct, catValue]);
-
+  }, [apiProduct, catValue, isFetched]);
+  
+  const getDiscountedPrice = (price) => {
+    let discount;
+  
+    // Determine the discount percentage based on the item price
+    if (price < 3000) {
+        discount = 20; // 20% discount
+    } else if (price >= 3000 && price <= 5000) {
+        discount = 27; // 27% discount
+    } else {
+        discount = 35; // 35% discount for prices above 5000
+    }
+  
+    const discountedPrice = parseFloat(price) * (1 + parseFloat(discount) / 100); // Calculate the discounted price
+    const discountDifference = Math.abs(parseFloat(price) - discountedPrice); // Get the absolute difference
+  
+    return { discount, discountedPrice, discountDifference }; // Return discount percentage, discounted price, and discount difference
+  };
+  
 
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
@@ -416,8 +450,26 @@ function DecorationCatDetails() {
               {' > '}
               <span>{product.name}</span>
               </h2>
-<h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
-              <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
+              <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
+              <div className="pro-details-price">
+              <p  style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
+              <p style={{
+                            color: '#444',
+                            fontWeight: '700',
+                            fontSize: 18,
+                            textAlign: "left",
+                            margin: "10px 0px 7px",
+                            textDecoration: 'line-through'
+                          }}
+                          >
+                             ₹ {Math.floor(discountInfo?.discountedPrice)}
+                          </p>
+                          <div className="decorationdiscount-details">
+                      ₹ {Math.floor(discountInfo?.discountDifference || 0)} {'off'}
+                      </div>
+              </div>
+              
+                        
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
               <p className="m-0 p-0" style={{ color: '#9252AA', fontWeight: '500', fontSize: 17, margin: "0px", padding: "0 0 0 10px" }}>({getRandomNumber(20, 500)})</p>

@@ -1053,8 +1053,21 @@ h4.contact-us-heading a {
 
   .pri_details {
     margin: 15px 0 0;
+    flex-direction: column;
   }
+  .pro_price {
+    justify-content: flex-start !important;
+    gap: 8px;
+    align-items: center;
+}
+.decCatPage .decimagecontainer  .pro_price p:first-child {
+  font-size: 18px !important;
+  margin-right: 2px !important;
+}
 
+.slider-item-details .pri_details {
+  margin: 0 !important;
+}
   .prod-detailsp {
     padding-left: 0px;
   }

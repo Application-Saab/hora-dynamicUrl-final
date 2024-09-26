@@ -44,6 +44,9 @@ const DecorationCatPage = () => {
   const [selCat, setSelCat] = useState("");
   const [catId, setCatId] = useState("");
   const [loading, setLoading] = useState(true);
+  const [discountPercentage, setDiscountPercentage] = useState(0); // State for the discount percentage
+  const [discountedPrice, setDiscountedPrice] = useState(0); // State for the discounted price
+  const [discountDifference , setDiscountDifference] = useState(0)
   const [catalogueData, setCatalogueData] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
   //   const navigate = useNavigate();
@@ -188,24 +191,48 @@ const DecorationCatPage = () => {
     }
   };
 
-  const getSubCatItems = async () => {
-    try {
+  const getDiscountedPrice = (price) => {
+    let discount;
+
+    // Determine the discount percentage based on the item price
+    if (price < 3000) {
+        discount = 20; // 20% discount
+    } else if (price >= 3000 && price <= 5000) {
+        discount = 27; // 27% discount
+    } else {
+        discount = 35; // 35% discount for prices above 5000
+    }
+
+    const discountedPrice = price * (1 + discount / 100); // Calculate the discounted price
+    const discountDifference =   Math.abs(price - discountedPrice);;
+    return { discount, discountedPrice , discountDifference }; // Return both discount percentage and discounted price
+};
+
+const getSubCatItems = async () => {
+  try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
       if (response.status === API_SUCCESS_CODE) {
-        const decoratedData = response.data.data.map(item => ({
-          ...item,
-          rating: getRandomRating(),
-          userCount: getRandomNumber(20, 500)
-        }));
-        setCatalogueData(decoratedData);
+          const decoratedData = response.data.data.map(item => {
+              const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
+              return {
+                  ...item,
+                  rating: getRandomRating(),
+                  userCount: getRandomNumber(20, 500),
+                  discountPercentage: discount, // Add discount percentage
+                  discountedPrice: discountedPrice ,// Add discounted price
+                  discountDifference: discountDifference
+              };
+          });
+          setCatalogueData(decoratedData);
       }
-    } catch (error) {
+  } catch (error) {
       console.log('Error Fetching Data:', error.message);
-    } finally {
+  } finally {
       setLoading(false);
-    }
-  };
+  }
+};
+
 
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
@@ -301,6 +328,9 @@ const DecorationCatPage = () => {
     }
   }, [themeFilter]);
 
+  
+  
+
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
@@ -374,6 +404,9 @@ const DecorationCatPage = () => {
                       <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
                       </div>
+                      <div className="decorationdiscount">
+                      ₹ {item.discountDifference.toFixed(0)} {'off'} 
+                      </div>
                     </div>
                     {/* End of Watermark */}
                     <div className='px-2 py-2'>
@@ -394,18 +427,31 @@ const DecorationCatPage = () => {
                       >
                         {item.name}
                       </p>
-                      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
-                        <div style={{ flexDirection: 'row', alignItems: 'left', justifyContent: 'space-between' }} className="pro_price">
-                          <p style={{
-                            color: '#9252AA',
+                      <div style={{ display: "flex",  justifyContent: "space-between", alignItems: "top" }} className="pri_details">
+                        <div style={{ alignItems: 'left', justifyContent: 'space-between' , display:"flex" }} className="pro_price">
+                        <p  style={{
+                  
                             fontWeight: '700',
-                            fontSize: 17,
+                            fontSize: 15,
+                            color: '#9252AA',
+                            textAlign: "left",
+                            margin: "10px 10px 7px 0",
+            
+                          }}>₹{item.price} </p>
+                          <p style={{
+                            color: '#444',
+                            fontWeight: '700',
+                            fontSize: 15,
                             textAlign: "left",
                             margin: "10px 0px 7px",
+                            textDecoration: 'line-through'
                           }}
-                            className="pro_price"
-                          > ₹ {item.price}</p>
-                        </div>
+                          >
+                             ₹{Math.floor(item.discountedPrice.toFixed(2))} 
+                          </p>
+
+                         
+                       </div>
                         <div className="d-flex align-items-center rating-sec">
                           <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
@@ -445,10 +491,11 @@ const DecorationCatPage = () => {
 const styles = {
   decContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     // alignItems: 'center',
     display: "inline-flex",
     flexWrap: "wrap",
+    padding:"1% 1% 0"
   },
   decCatimage: {
     width: "100%",
@@ -458,15 +505,14 @@ const styles = {
   },
   imageContainer: {
     position: "relative",
-    width: '270px',
+    width: '300px',
     backgroundColor: "#fff",
     marginBottom: 40,
     boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
     borderRadius: "5px",
-    overflow: "hidden", // Ensure the image stays within the container
     transition: "transform 0.3s ease-in-out", // Smooth transition effect for zoom
     margin: "10px 12px 20px",
-    padding: "6px 5px 10px",
+    padding: "4px 4px 10px",
   },
   zoomedContainer: {
     transform: "scale(1.1)", // Scale the container by 10% on hover
