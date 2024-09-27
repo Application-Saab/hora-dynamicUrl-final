@@ -247,9 +247,9 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const renderDishItem = ({ item }) => (
     <div className='w-100'>
       {item.dish.length > 0 ?
-        <div>
+        <>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "9px 19px 0px 6px" }}>
-            <h1 style={{ color: "#000", fontSize: "110%", marginBottom: "13px" }}>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
+            <h1 style={{ color: "#222", fontSize: "110%", marginBottom: "13px" , fontWeight:"700" }} className='cat-Name'>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
             <Button onClick={() => handleViewAll(item.mealObject._id)} style={{ color: expandedCategories.includes(item.mealObject._id) ? '#000' : '#fff', fontWeight: '400', textDecorationLine: 'none', fontSize: 12 }}
               className={`viewbtn ${expandedCategories.includes(item.mealObject._id)
                 ? "clickedviewAll"
@@ -366,7 +366,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
             }
           </div>
           <div className='chef-divider' style={{ marginTop: "20px" }}></div>
-        </div>
+        </>
         : null
       }
     </div>

@@ -13,7 +13,7 @@ export const getDecorationOrganizationSchema = () => ({
     "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.5",
-    "reviewCount": "2005"
+    "reviewCount": "4566"
   },
     "sameAs": [
       "https://www.facebook.com/people/Hora/61550111701616/",
@@ -45,7 +45,7 @@ export const getDecorationOrganizationSchema = () => ({
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.5",
-      "reviewCount": "2005"
+      "reviewCount": "1388"
     }
   });
 
@@ -64,7 +64,7 @@ export const getDecorationProductOrganizationSchema = (product) => ({
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.5",
-      "reviewCount": "2005"
+      "reviewCount": "5600"
     }
   });
 

@@ -449,6 +449,7 @@ button.pluBtn {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  column-gap: 0.5%;
 }
 
 p.dish-name.selected {
@@ -467,21 +468,21 @@ img.dish-image.selected {
 
 .dish-image {
   width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  margin: -30px auto 0;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 2.5);
-  border: 1px solid #efefef;
+    height: 90px;
+    border-radius: 50%;
+    margin: -30px auto 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 7);
 }
 
 .order-container .dish-name {
   color: rgb(157, 74, 147) !important;
-  font-size: 85%;
-  text-align: left;
-  padding: 18px 12px 0px;
-  font-weight: 500;
-  margin: 0;
-  min-height: 75px;
+    font-size: 97%;
+    text-align: left;
+    padding: 18px 12px 0px;
+    font-weight: 600;
+    margin: 0;
+    min-height: 68px;
+    line-height: 19px;
 }
 
 .dish-price {
@@ -505,13 +506,47 @@ img.dish-image.selected {
 }
 
 .non-veg-border {
-  border-bottom: 2px solid red;
+  position: relative;
+}
+.non-veg-border::before
+{
+  content: '';
+  position: absolute;
 }
 
-.veg-border {
-  border-bottom: 2px solid green;
-  /* Adjust color as needed */
+.non-veg-border::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* z-index: -1; */
+  WIDTH: 71%;
+  border-bottom: 4px solid red;
+  margin: 0 auto;
 }
+
+
+.veg-border {
+  position: relative;
+}
+.veg-border::before
+{
+  content: '';
+  position: absolute;
+}
+
+.veg-border::before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* z-index: -1; */
+  WIDTH: 71%;
+  border-bottom: 4px solid green;
+  margin: 0 auto;
+}
+
+
 
 p.ordersummeryname,
 .ordersummeryprice {
@@ -636,6 +671,24 @@ h4.contact-us-heading a {
   align-items: center;
   font-size: 16px;
   font-weight: 600;
+}
+
+.dish-placeholder {
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgb(157, 74, 147) ;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: rgb(157, 74, 147) ;
+   margin-top: -23px;
+  border-radius: 50px;
+  font-size: 12px;
+  background-color: #fff;
+  font-weight: 400;
 }
 
 /* select date chef flow */
@@ -1133,7 +1186,8 @@ h4.contact-us-heading a {
   }
 
   .billheading {
-    font-size: 79% !important;
+    font-size: 86% !important;
+    font-weight: 600;
   }
 
   .selectdateContainersec {
@@ -1392,8 +1446,9 @@ h4.contact-us-heading a {
   }
 
   .order-container .dish-name {
-    font-size: 73%;
-    min-height: 62px;
+    font-size: 77%;
+    min-height: 56px;
+    padding: 9px 14px 7px
   }
 
   .dish-item-inner {
@@ -1487,6 +1542,11 @@ h4.contact-us-heading a {
   .textContainerhome h2 {
     padding: 4px 8% 5px !important;
   }
+  .cat-Name{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 0px !important;
+  }
 
   p.ordersummeryname,
   .ordersummeryprice {
@@ -1535,7 +1595,7 @@ h4.contact-us-heading a {
   }
 
   .dish-item-inner {
-    height: 134px;
+    height: 161px;
   }
 
   .d-flex.justify-content-between.w-100.px-3.dishPrice {
@@ -1555,9 +1615,10 @@ h4.contact-us-heading a {
   }
 
   .order-container .dish-name {
-    font-size: 62%;
-    min-height: 45px;
-    padding: 13px 11px 7px;
+    font-size: 87%;
+    min-height: 60px !important;
+    padding: 16px 11px 7px;
+    line-height: 15px;
   }
 
   p.subheading {
@@ -1645,12 +1706,12 @@ h4.contact-us-heading a {
   }
 
   .dish-item-inner {
-    height: 123px;
+    height: 150px;
   }
 
   .dish-image {
-    width: 70px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -1681,7 +1742,8 @@ h4.contact-us-heading a {
 
 
   p.billheading {
-    font-size: 65% !important;
+    font-size: 77% !important;
+    font-weight: 500 !important
   }
 
   p.selectdateContainerheadig {
@@ -1703,10 +1765,16 @@ h4.contact-us-heading a {
     font-size: 93% !important;
     padding: 0 20px !important;
   }
+  .dish-item{
+    gap:0;
+  }
 
 }
 
 @media (max-width: 321px) {
+  p.billheading {
+    font-size: 65% !important;
+  }
   .order-container .dish-name {
     font-size: 55%;
     min-height: 43px;
@@ -1714,7 +1782,11 @@ h4.contact-us-heading a {
   }
 
   .dish-item-inner {
-    height: 115px;
+    height: 143px;
+  }
+  .dish-image {
+    width: 70px;
+    height: 70px;
   }
 }
 
