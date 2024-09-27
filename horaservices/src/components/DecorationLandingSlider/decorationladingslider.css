@@ -15,7 +15,7 @@
 }
 .view-more-slide {
   cursor: pointer;
-    height: 240px;
+    height: 381px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +31,7 @@
 }
 .slider-container.slider-decoration-inner.decoration-item-grid{
     margin-bottom: 40px !important;
-    gap: 0px !important;
+    gap: 14px !important;
 }
 
 .slider-image {
@@ -118,7 +118,7 @@
 }
 @media (max-width: 468px) {
     .slick-next{
-        right: 10px !important;
+        right: 8px !important;
     }
     .slick-prev, .slick-next{
         top:38% !important;
@@ -127,11 +127,11 @@
         padding: 0;
         margin: 0 0 13px 0}
     .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
-        width: 47%;
+        width: 45%;
         margin-bottom: 20px;
     }
     .slider-container {
-        padding: 0 3px;
+        /* padding: 0 3px; */
         margin-top: 10px;
         margin-bottom: 20px;
     }
@@ -189,3 +189,27 @@
         margin-bottom: 20px;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .price-original {
+        font-size: 10px; /* Adjust original price size */
+        margin-top: 10px;
+      }
+    
+      .price-discount {
+        font-size: 12px; /* Adjust discount price size */
+        margin-top: 10px;
+      }
+    
+      .discount-percentage {
+        font-size: 10px; /* Smaller size for discount percentage */
+        margin-top: 10px;
+      }
+  
+    .rating {
+      font-size: 8px;
+      margin-bottom: 10px; /* Smaller size for rating */
+      margin-top: 10px;
+    }
+  }
+  

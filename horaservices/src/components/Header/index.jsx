@@ -48,6 +48,34 @@ function Header() {
   const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
   const [popupMessage, setPopupMessage] = useState({}); // State for popup message
 
+  useEffect(() => {
+    const disableContextMenu = (e) => {
+      e.preventDefault();
+    };
+    
+    document.addEventListener('contextmenu', disableContextMenu);
+    
+    return () => {
+      document.removeEventListener('contextmenu', disableContextMenu);
+    };
+  }, []);
+
+  useEffect(() => {
+    const disableDevTools = (e) => {
+      if (e.keyCode === 123 || 
+          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67)) ||
+          (e.ctrlKey && e.keyCode === 85)) {
+        e.preventDefault();
+      }
+    };
+  
+    document.addEventListener('keydown', disableDevTools);
+    
+    return () => {
+      document.removeEventListener('keydown', disableDevTools);
+    };
+  }, []);
+  
 
   useEffect(() => {
     function handleClickOutside(event) {

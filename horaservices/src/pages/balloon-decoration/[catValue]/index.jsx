@@ -15,6 +15,19 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { sendGTMEvent  } from '@next/third-parties/google';
+import BabyDecoration from '../../../assets/baby_boy_kids.jpg';
+
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+
+const dummyItems = [
+  {
+    name: 'Product 1',
+    discountPrice: "₹800",
+    rating: 4.5,
+    userCount: 120,
+  }
+];
+
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
@@ -83,28 +96,38 @@ const DecorationCatPage = () => {
     {label: 'Flamingo', value: 'Flamingo'},
     {label: 'Sport Football', value: 'Football'},
   ];
+// Set themeFilter based on query parameter when component mounts or query changes
+useEffect(() => {
+  if (router.isReady) {
+    const theme = router.query.theme || "all";
+    console.log("Setting themeFilter to:", theme); // Log the theme value
+    setThemeFilter(theme);
+  }
+}, [router.isReady, router.query.theme]);
 
-   // Set themeFilter based on query parameter when component mounts or query changes
-   useEffect(() => {
-    if (router.isReady) {
-      const theme = router.query.theme || "all";
-      setThemeFilter(theme);
-    }
-  }, [router.isReady, router.query.theme]);
+// Update URL whenever the themeFilter changes
+useEffect(() => {
+  if (themeFilter !== "all") {
+    console.log("Current pathname:", router.pathname); // Log the current pathname
+    console.log("Current query (before update):", router.query); // Log the current query before updating
+    console.log("Updating URL with themeFilter:", themeFilter); // Log the themeFilter value
+    router.push(
+      {
+        pathname: router.pathname, // Current page path
+        query: { ...router.query, theme: themeFilter }, // Add or update the theme in the query
+        
+      },
+      undefined,
+      { shallow: true } // Prevents full page reload
+    );
+  }
+}, [themeFilter]);
 
-  // Update URL whenever the themeFilter changes
-  useEffect(() => {
-    if (themeFilter !== "all") {
-      router.push(
-        {
-          pathname: router.pathname, // Current page path
-          query: { ...router.query, theme: themeFilter }, // Add or update the theme in the query
-        },
-        undefined,
-        { shallow: true } // Prevents full page reload
-      );
-    }
-  }, [themeFilter]);
+
+
+       // Save the theme filter to localStorage
+       localStorage.setItem('selectedTheme12', themeFilter);
+       console.log('selectedTheme12', themeFilter);
   
   function getSubCategory(catValue) {
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
@@ -244,7 +267,7 @@ const DecorationCatPage = () => {
   //   }
   // };
 
-  const handleViewDetails = (subCategory, catValue, product) => {
+  const handleViewDetails = (subCategory, catValue, product, discountPrice) => {
     const productName = product.name.replace(/ /g, "-");
   
     // Construct the product data for GTM
@@ -256,7 +279,8 @@ const DecorationCatPage = () => {
           item_id: product.id,        // Product ID
           category: subCategory,      // Sub-category or main category
           category_value: catValue,   // Additional category data
-          price: product.price        // Product price (if applicable)
+          price: product.price,        // Product price (if applicable)
+          discount_price: discountPrice // Add discount price to GTM data
         }]
       }
     };
@@ -268,8 +292,14 @@ const DecorationCatPage = () => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(productData);
   
+    
+
     // Dispatch the state or perform your routing
-    dispatch(setState(subCategory, orderType, catValue, product));
+    // dispatch(setState(subCategory, orderType, catValue, product));
+    dispatch(setState(subCategory, orderType, catValue, {
+      ...product,
+      discountPrice: discountPrice
+    }));
   
     if (hasCityPageParam) {
       router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
@@ -329,6 +359,35 @@ const DecorationCatPage = () => {
     }
   }
 
+
+  const data = [
+    { title: "Avengers", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_03-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Avengers" },
+    { title: "Baby Boss", image: BabyDecoration, link: "kids-birthday-decoration?theme=Boss" },
+    { title: "Barbie", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Girl's_Desktop_08-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Barbie"},
+    { title: "Cocomelon", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Girl's_Desktop_06-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Cocomelon"},
+    { title: "Elsa", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Car", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Circle", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Jungle", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Kitty", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Mickey", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" },
+    { title: "Sport", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" }
+  ];
+
+    // State to manage the number of visible items
+  const [visibleItems, setVisibleItems] = useState(5);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Function to show more or fewer items
+  const toggleItems = () => {
+    if (isExpanded) {
+      setVisibleItems(5);  // Reset to 5 items
+    } else {
+      setVisibleItems(data.length);  // Show all items
+    }
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
@@ -372,8 +431,45 @@ const DecorationCatPage = () => {
   ) : null}
 </div>
 
+<div className="themes-container">
+  <h1 className="page-title">Decoration Themes</h1>
+  <div className="themes-grid">
+    {data.map((item, index) => ( // Removed visibleItems to show all items
+      <div key={index} className="theme-item">
+        <a href={item.link} className="theme-link">
+          <h3 className="theme-title">{item.title}</h3>
+        </a>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+{/* 
+<div className="themes-container">
+      <h1 className="page-title">Decoration Themes</h1>
+      <div className="themes-grid">
+        {data.map((item, index) => (
+          <div key={index} className="theme-item">
+             <a href={item.link}>
+            <Image src={item.image} alt={item.title} className="theme-image"  
+             width={200}  // Add the desired width
+             height={200} // Add the desired height
+             />
+             </a>
+            <h3 className="theme-title">{item.title}</h3>
+          </div>
+        ))}
+      </div>
+    
+      
+    </div> */}
+    
+
+
           </div>
         </div>
+        
         <div style={styles.decContainer} className="decContainer">
           {loading ? ([1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
             <div className="decimagecontainer" key={index} style={styles.imageContainer}>
@@ -403,7 +499,7 @@ const DecorationCatPage = () => {
                       </div>
                     </div>
                     {/* End of Watermark */}
-                    <div className='px-2 py-2'>
+                    {/* <div className='px-2 py-2'>
                       <p
                         style={{
                           marginHorizontal: 3,
@@ -440,7 +536,103 @@ const DecorationCatPage = () => {
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
+
+
+<div>
+  {dummyItems.map((items, index) => {
+    const originalPrice = parseFloat(item.price.replace('₹', '').replace(',', ''));
+    console.log(originalPrice, "originalPrice");
+    const discountPrice = items.discountPrice ? parseFloat(items.discountPrice.replace('₹', '').replace(',', '')) : null;
+    console.log(discountPrice, "discountPrice");
+    const discountPercentage = discountPrice ? Math.round(((originalPrice - discountPrice) / originalPrice) * 100) : null;
+    console.log(discountPercentage, "discountPercentage");
+
+    return (
+      <div key={index} className='px-2 py-2'>
+        <p
+          className="pro_name"
+          style={{
+            marginHorizontal: 3,
+            textAlign: 'left',
+            fontWeight: '600',
+            fontSize: "16px",
+            marginTop: "4px",
+            color: '#9252AA',
+            lineHeight: "18px",
+            marginBottom: "0px",
+          }}
+        >
+          {item.name}
+        </p>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" }} className="pri_details">
+          <div style={{ flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }} className="pro_price">
+            <div>
+              {items.discountPrice ? (
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                  <p style={{
+                    color: '#87A2FF',
+                    fontWeight: '700',
+                    fontSize: 15,
+                    textAlign: "left",
+                    margin: "10px 5px 7px 0px",
+                    textDecoration: "line-through", // Strikethrough for original price
+                  }}>
+                    ₹ {item.price} 
+                  </p>
+                  <p style={{
+                    color: '#9252AA', 
+                    fontWeight: '700',
+                    fontSize: 15,
+                    textAlign: "left",
+                    margin: "10px 0px 7px",
+                  }}>
+                    {items.discountPrice}
+                  </p>
+                  {/* Display discount percentage */}
+                  <p style={{
+                    color: 'red',
+                    fontWeight: 'bold',
+                    fontSize: 13,
+                    textAlign: "left",
+                    marginLeft: "8px",
+                    marginTop: "18px",
+                  }}>
+                    🔻 {discountPercentage}%
+                  </p>
+                </div>
+              ) : (
+                <p style={{
+                  color: '#9252AA',
+                  fontWeight: '700',
+                  fontSize: 17,
+                  textAlign: "left",
+                  margin: "10px 0px 7px",
+                }}>
+                  ₹ {items.price}
+                </p>
+              )}
+            </div>
+          </div>
+          <div style={{ marginTop: "15px" }} className="d-flex align-items-center rating-sec">
+            <p className="m-0 p-0" style={{fontWeight: '500', fontSize: 15, margin: "0px", color: '#9252AA' }}>
+              {items.rating}
+              <span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}>
+                <FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} />
+              </span>
+            </p>
+            <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 15, margin: "0px", padding: "0 0 0 2px" }}>
+              ({items.userCount})
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
+
                   </div>
                 ))
               ) : (

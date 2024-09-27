@@ -87,6 +87,7 @@ const Decoration = () => {
         Image: 'https://horaservices.com/api/uploads/attachment-1705585784757.png',
         title: 'Blushing Celebration Birthday Decor',
         price: '₹1650',
+        priceDiscount: '₹1320', 
         rating: 4.7,
         link:"/balloon-decoration/birthday-decoration/product/Blushing-Celebration-Birthday-Decor",
       },
@@ -94,6 +95,7 @@ const Decoration = () => {
       Image: 'https://horaservices.com/api/uploads/attachment-1711727911194.png',
       title: 'Delightful White & Golden Decoration',
       price: '₹4650',
+      priceDiscount: '₹1320', 
       rating: 4.6,
       link:"/balloon-decoration/birthday-decoration/product/Delightful-White-&-Golden-Decoration",
       },
@@ -101,6 +103,7 @@ const Decoration = () => {
         Image: 'https://horaservices.com/api/uploads/attachment-1725181762865.png',
         title: 'Maroon White Birthday Decor',
         price: '₹3250',
+        priceDiscount: '₹1320', 
         rating: 4.1,
         link:"/balloon-decoration/birthday-decoration/product/Maroon-White-Birthday-Decor",
       },
@@ -108,6 +111,7 @@ const Decoration = () => {
         Image: 'https://horaservices.com/api/uploads/attachment-1711568028341.png',
         title: 'Birthday Party at Home Black & White',
         price: '₹1999',
+        priceDiscount: '₹1320', 
         rating: 4.4,
         link:"/balloon-decoration/birthday-decoration/product/Birthday-Party-at-Home-Black-&-White",
       },
@@ -115,6 +119,7 @@ const Decoration = () => {
         Image: 'https://horaservices.com/api/uploads/attachment-1706520980436.png',
         title: 'Classic Attractive Decoration',
         price: '₹6499',
+        priceDiscount: '₹1320', 
         rating: 4.7,
         link:"/balloon-decoration/birthday-decoration/product/Classic-Attractive-Decoration",
       },
@@ -124,6 +129,13 @@ const Decoration = () => {
         price: '₹7420',
         rating: 4.8,
         link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
+      },
+      {
+        Image: 'https://horaservices.com/api/uploads/attachment-1711627816925.png',
+        title: 'Happy Birthday Pink Butterflies Theme',
+        price: '₹2914',
+        rating: 4.6,
+        link:"/balloon-decoration/birthday-decoration/product/Happy-Birthday-Pink-Butterflies-Theme",
       },
       {
         Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
@@ -287,6 +299,34 @@ const Decoration = () => {
           rating: 4.0,
           link:"/balloon-decoration/anniversary-decoration/product/Bed-Decoration-For-First-Night",
         },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1706443182006.png',
+          title: 'Rose Gold Anniversary Decoration',
+          price: '₹1599',
+          rating: 4.8,
+          link:"/balloon-decoration/anniversary-decoration/product/Rose-Gold-Anniversary-Decoration",
+     },
+     {
+      Image: 'https://horaservices.com/api/uploads/attachment-1711554024363.png',
+      title: 'Happy 1st Year Anniversary Decoration',
+      price: '₹1299',
+      rating: 4.7,
+      link:"/balloon-decoration/anniversary-decoration/product/Happy-1st-Year-Anniversary-Decoration",
+ },
+ {
+  Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+  title: 'VIEW ALL',
+  price: '',
+  rating: 100,
+  link:"/balloon-decoration/haldi-mehendi-decoration",
+},
+//  {
+//   Image: 'https://horaservices.com/api/uploads/attachment-1711567186882.png',
+//   title: 'Elegant Anniversary Party Surprise',
+//   price: '₹1699',
+//   rating: 4.5,
+//   link:"/balloon-decoration/anniversary-decoration/product/Elegant-Anniversary-Party-Surprise",
+// },
         // {
         //   Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
         //   title: 'Floral Anniversary Decor',
@@ -606,6 +646,7 @@ const Decoration = () => {
                 <GoogleTagManager gtmId="GTM-K3SCKLTZ" />
             
             </Head>
+            
             <div  className="decContainerSec decPage">
     {decCat
     .filter(item => item.image) // Filter out items without images
@@ -655,54 +696,82 @@ const Decoration = () => {
     </div>
  
 </div>
-    
 
-<div className="slider-container ">
-    <div className="slider-header">
-    <h2  onClick={() => handleViewMore("Birthday")} style={{ cursor:"pointer"}}>Birthday Decoration</h2>
+<div className="slider-container">
+  <div className="slider-header">
+    <h2 onClick={() => handleViewMore("Birthday")} style={{ cursor: "pointer" }}>Birthday Decoration</h2>
     <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("Birthday")}
+      className="viewbtn btn btn-primary" 
+      onClick={() => handleViewMore("Birthday")}
     >
-    View More
+      View More
     </button>
-    </div>
-    <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {birthdayData.map((item, index) => (
+  </div>
+  
+
+  <div className="slider-container">
+  
+  <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {birthdayData.map((item, index) => {
+      // Calculate percentage discount if priceDiscount exists
+      const originalPrice = parseFloat(item.price.replace('₹', '').replace(',', ''));
+      const discountPrice = item.priceDiscount ? parseFloat(item.priceDiscount.replace('₹', '').replace(',', '')) : null;
+      const discountPercentage = discountPrice ? Math.round(((originalPrice - discountPrice) / originalPrice) * 100) : null;
+
+      return (
         <a key={index} className="slider-item" href={item.link}> 
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
-
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px' , margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-
-        </div>
-
-
+          <Image 
+            src={item.Image} 
+            alt={item.title} 
+            className="slider-image"
+            width={200}
+            height={250}
+          />
+          <div className="slider-item-details">
+            <h3>{item.title}</h3>
+            <div style={{ justifyContent: "space-between", alignItems: "center", display: "flex", flexDirection: "row" }}>
+              <div>
+                <p style={{ margin: "0", display: "flex", alignItems: "center" }}>
+                  <span style={{ color: "#87A2FF", fontWeight: 'bold', fontSize: '17px', marginRight: '8px', textDecoration: item.priceDiscount ? 'line-through' : 'none' }}>
+                    {item.price}
+                  </span>
+                  {item.priceDiscount && (
+                    <>
+                      <span style={{ color: "#9252AA", fontWeight: 'bold', fontSize: '17px', marginRight: '8px' }}>
+                        {item.priceDiscount}
+                      </span>
+                      {/* Show the down arrow and percentage discount */}
+                      <span style={{ color: 'red', fontWeight: 'bold', fontSize: '16px' }}>
+                        🔻 {discountPercentage}%
+                      </span>
+                    </>
+                  )}
+                </p>
+              </div>
+              <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>
+                {item.rating}
+                <FontAwesomeIcon 
+                  style={{ 
+                    marginBottom: '2px',
+                    marginLeft: '8px', 
+                    height: "14px", 
+                    color: "#ffc107" 
+                  }} 
+                  icon={faStar} 
+                />
+              </p>
+            </div>
+          </div>
         </a>
-    ))}
+      );
+    })}
+  </div>
 </div>
-    </div>
+
+  
+</div>
+
+
 
     <div className="slider-container">
   <div className="slider-header">

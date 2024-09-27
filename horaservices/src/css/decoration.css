@@ -756,3 +756,43 @@ a:hover {
   height: 1.25rem;
   margin-right: 0.5rem;
 }
+
+
+/* kids decoration grid */
+
+.themes-container {
+  padding: 20px;
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+}
+
+.theme-item {
+  background-color: white; /* White background */
+  border: 2px solid #4a90e2; /* Change border color if needed */
+  border-radius: 8px;
+  padding:8px; /* Reduced padding */
+  text-align: center;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add slight shadow for depth */
+  width: 100px;
+}
+
+.theme-item:hover {
+  transform: scale(1.02); /* Slightly reduce scale effect on hover */
+}
+
+.theme-link {
+  text-decoration: none;
+  color: black; /* Black text color */
+}
+
+.theme-title {
+  font-size: 0.9rem; /* Smaller font size */
+  font-weight: bold;
+  color: black; /* Ensure the text color is black */
+  margin-top: 4px;
+}

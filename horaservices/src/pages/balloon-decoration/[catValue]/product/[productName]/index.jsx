@@ -45,53 +45,6 @@ const SkeletonLoader = () => {
   );
 };
 
-const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const API_KEY = "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";
-
-const cleanHtmlContent = (htmlString) => {
-  if (!htmlString) return '';
-  const withoutTags = htmlString.replace(/<[^>]*>/g, ''); // Remove HTML tags
-  const withoutSpecialChars = withoutTags.replace(/&#[^;]*;/g, ' '); // Replace HTML entities with space
-  return withoutSpecialChars.trim();
-};
-
-const generateProductDescription = async (product) => {
-  try {
-    let inclusionList = '';
-    if (Array.isArray(product.inclusion) && product.inclusion.length > 0) {
-      inclusionList = cleanHtmlContent(product.inclusion[0]);
-      inclusionList = inclusionList.split('-').filter(item => item.trim() !== '').slice(0, 3).join(', ');
-    }
-
-    const prompt = `Create a compelling 5-line product description for "${product.name}":
-    1. Introduce the product and its main purpose.
-    2. Highlight its key feature or benefit.
-    3. Mention the price: ₹${product.price}
-    4. List top inclusions: ${inclusionList}
-    5. Conclude with a call to action or unique selling point.
-    Keep each line concise and impactful.`;
-
-    const response = await axios.post(API_URL, {
-      model: "openai/gpt-3.5-turbo",
-      messages: [
-        { role: "user", content: prompt }
-      ]
-    }, {
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://horaservices.com',  // Replace with your actual website
-        'X-Title': 'HoraServices'  // Replace with your app name
-      }
-    });
-
-    return response.data.choices[0].message.content || '';
-  } catch (error) {
-    console.error("Error generating description:", error);
-    return '';
-  }
-};
-
 // const API_URL = 'https://api-inference.huggingface.co/models/gpt2';
 // const API_KEY = "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"; 
 
@@ -156,6 +109,8 @@ function DecorationCatDetails() {
   const [catValue, setCatValue] = useState('');
   const altTagCatValue = catValue.replace(/-/g, ' ');
   const [loading, setLoading] = useState(true); // Add a loading state
+
+  console.log(catValue, "catValueproductdetail");
   // Use useEffect to handle router query
   useEffect(() => {
     if (router.isReady) {
@@ -198,6 +153,61 @@ function DecorationCatDetails() {
   };
 
   
+
+const selectedTheme = localStorage.getItem('selectedTheme12');
+console.log(selectedTheme, "selectedTheme12"); // Use this value as needed
+
+
+const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+const API_KEY = "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";
+
+const cleanHtmlContent = (htmlString) => {
+  if (!htmlString) return '';
+  const withoutTags = htmlString.replace(/<[^>]*>/g, ''); // Remove HTML tags
+  const withoutSpecialChars = withoutTags.replace(/&#[^;]*;/g, ' '); // Replace HTML entities with space
+  return withoutSpecialChars.trim();
+};
+
+const generateProductDescription = async (product) => {
+  try {
+    let inclusionList = '';
+    if (Array.isArray(product.inclusion) && product.inclusion.length > 0) {
+      inclusionList = cleanHtmlContent(product.inclusion[0]);
+      inclusionList = inclusionList.split('-')
+        .filter(item => item.trim() !== '')
+        .map(item => item.trim())
+        .join(', ');
+    }
+
+
+    const prompt = `Create a product description paragraph for SEO in 100 words for a decoration product with the following information:
+    Type: Balloon Decoration
+    Category: "${catValue}"
+    Theme: "${selectedTheme}"
+    Inclusion: "${inclusionList}"`;
+    
+
+    const response = await axios.post(API_URL, {
+      model: "openai/gpt-3.5-turbo",
+      messages: [
+        { role: "user", content: prompt }
+      ]
+    }, {
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://horaservices.com',  // Replace with your actual website
+        'X-Title': 'HoraServices'  // Replace with your app name
+      }
+    });
+
+    return response.data.choices[0].message.content || '';
+  } catch (error) {
+    console.error("Error generating description:", error);
+    return '';
+  }
+};
+  
   useEffect(() => {
     if (apiProduct) {
       const fetchProductDetails = async () => {
@@ -217,6 +227,8 @@ function DecorationCatDetails() {
       fetchProductDetails();
     }
   }, [apiProduct]);
+
+  
 
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
@@ -499,6 +511,11 @@ function DecorationCatDetails() {
     return <SkeletonLoader />; // Show skeleton loader while loading
   }
 
+  const originalPrice = product.price;
+const discountedPrice = 800;
+const discountPercentage = Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
+
+
   return (
     <div className="App" style={{ backgroundColor: "#EDEDED" }}>
       <Head>
@@ -533,8 +550,21 @@ function DecorationCatDetails() {
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
               <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{subCategory}{' > '}{product.name}</h2>
               <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product.name}</h1>
-              <p>{description}</p>
-              <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p>
+    
+              {/* <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product.price}</p> */}
+
+              <div>
+    <p className='mb-2' style={{ display: 'flex', alignItems: 'center' }}>
+    <span style={{color: "rgb(150, 82, 141)", fontWeight: "bold",  marginRight: "10px", fontSize: "18px" }}>₹ {discountedPrice}</span> {/* Discounted price */}
+      <del style={{color: "rgb(183 151 151)", fontWeight: "700", fontSize: "15px"}}>₹ {originalPrice}</del> {/* Original price with strike-through */}
+      <span style={{marginLeft: "10px", color: "#28A745", fontSize: "14px", fontWeight: "600" }}>
+      ({discountPercentage}% OFF) {/* Discount percentage with arrow down */}
+      </span>
+    </p>
+  </div>
+
+
+
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
               <p className="m-0 p-0" style={{ color: '#9252AA', fontWeight: '500', fontSize: 17, margin: "0px", padding: "0 0 0 10px" }}>({getRandomNumber(20, 500)})</p>
@@ -587,7 +617,8 @@ function DecorationCatDetails() {
               )}
                 
               </div>
-          
+        
+
          {/* CTA Button */}
         
          <div className="card-container-cta">
@@ -611,6 +642,13 @@ function DecorationCatDetails() {
         </button>
       </div>
     </div>
+
+
+{/* API DEscription */}
+    <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px" , backgroundColor:"#fff"}}>
+              <div style={{ fontSize: "21px", borderBottom: "1px solid #e7eff9", marginBottom: "10px" }}>Description</div>
+              <p>{description}</p>
+              </div>
 
 
 

@@ -67,7 +67,7 @@ const [decCat, setDecCat] = useState([
                 router.push(`/${city}/${locality}/balloon-decoration/${item.catValue}`);
             }
             else {
-                router.push(`/balloon-decoration/${item.catValue}`);
+                router.push(`/${city}/${locality}/balloon-decoration/${item.catValue}`);
             }
         };
     
@@ -124,13 +124,20 @@ const [decCat, setDecCat] = useState([
             rating: 4.8,
             link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
           },
-          // {
-          //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-          //   title: 'VIEW ALL',
-          //   price: '',
-          //   rating: '',
-          //   link:"/balloon-decoration/birthday-decoration",
-          // },
+          {
+            Image: 'https://horaservices.com/api/uploads/attachment-1711627816925.png',
+            title: 'Happy Birthday Pink Butterflies Theme',
+            price: '₹2914',
+            rating: 4.6,
+            link:"/balloon-decoration/birthday-decoration/product/Happy-Birthday-Pink-Butterflies-Theme",
+          },
+          {
+            Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+            title: 'VIEW ALL',
+            price: '',
+            rating: 100,
+            link:"/balloon-decoration/birthday-decoration",
+          },
         ];
         
         
@@ -171,6 +178,20 @@ const [decCat, setDecCat] = useState([
               rating: 4.3,
               link:"/balloon-decoration/first-night-decoration/product/Romantic-Wedding-Room-Decor",
             },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1713178826666.png',
+              title: 'First Night With Dim Light Decor',
+              price: '₹1550',
+              rating: 4.3,
+              link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Dim-Light-Decor",
+            },
+            {
+              Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+              title: 'VIEW ALL',
+              price: '',
+              rating: 100,
+              link:"/balloon-decoration/first-night-decoration",
+            },
           
           ];
         
@@ -182,6 +203,13 @@ const [decCat, setDecCat] = useState([
               price: '₹14080',
               rating: 4.6,
               link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Ring-Look",
+            },
+            {
+                Image: 'https://horaservices.com/api/uploads/attachment-1723290234806.png',
+              title: 'Haldi Decoration Yellow Looks',
+              price: '₹8700',
+              rating: 4.5,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Yellow-Looks",
             },
             {
               Image: 'https://horaservices.com/api/uploads/attachment-1722693437219.png',
@@ -211,6 +239,20 @@ const [decCat, setDecCat] = useState([
               price: '₹13920',
               rating: 4.3,
               link:"/balloon-decoration/haldi-mehendi-decoration/product/Haldi-Decoration-Stage",
+            },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1722969101388.png',
+              title: 'Mehendi Decoration Attractive Look',
+              price: '₹17800',
+              rating: 4.1,
+              link:"/balloon-decoration/haldi-mehendi-decoration/product/Mehendi-Decoration-Attractive-Look",
+            },
+            {
+              Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+              title: 'VIEW ALL',
+              price: '',
+              rating: 100,
+              link:"/balloon-decoration/haldi-mehendi-decoration",
             },
           ];
         
@@ -251,6 +293,34 @@ const [decCat, setDecCat] = useState([
               rating: 4.0,
               link:"/balloon-decoration/anniversary-decoration/product/Bed-Decoration-For-First-Night",
             },
+            {
+              Image: 'https://horaservices.com/api/uploads/attachment-1706443182006.png',
+              title: 'Rose Gold Anniversary Decoration',
+              price: '₹1599',
+              rating: 4.8,
+              link:"/balloon-decoration/anniversary-decoration/product/Rose-Gold-Anniversary-Decoration",
+         },
+         {
+          Image: 'https://horaservices.com/api/uploads/attachment-1711554024363.png',
+          title: 'Happy 1st Year Anniversary Decoration',
+          price: '₹1299',
+          rating: 4.7,
+          link:"/balloon-decoration/anniversary-decoration/product/Happy-1st-Year-Anniversary-Decoration",
+     },
+     {
+      Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
+      title: 'VIEW ALL',
+      price: '',
+      rating: 100,
+      link:"/balloon-decoration/haldi-mehendi-decoration",
+    },
+    //  {
+    //   Image: 'https://horaservices.com/api/uploads/attachment-1711567186882.png',
+    //   title: 'Elegant Anniversary Party Surprise',
+    //   price: '₹1699',
+    //   rating: 4.5,
+    //   link:"/balloon-decoration/anniversary-decoration/product/Elegant-Anniversary-Party-Surprise",
+    // },
             // {
             //   Image: 'https://horaservices.com/api/uploads/attachment-1718046543520.png',
             //   title: 'Floral Anniversary Decor',
@@ -382,6 +452,7 @@ const [decCat, setDecCat] = useState([
             ];
           
     
+            // https://drive.google.com/file/d/1zSUd5itXLDv1E4NplF5Eo6U7OYnVCArd/view?usp=sharing
           
             const BabyShowerData= [
               {
@@ -584,27 +655,31 @@ const [decCat, setDecCat] = useState([
         <meta property="og:url" content="https://horaservices.com/balloon-decoration" />
         <meta property="og:type" content="website" />
       </Head>
+
 <div  className="decContainerSec decPage">
     {decCat
     .filter(item => item.image) // Filter out items without images
     .map((item, index) => (
     <div key={index} className="imageContainer">
-    <a href={item.link}>
     <Image
     src={item.image}
     className="decCatimage"
     alt={item.imgAlt}
     onClick={() => openCatItems(item)}
     />
-    </a>
 
     </div>
     ))}
 </div>
+
+
+
 <div className="page-width decorationlanding-slider">
-<div className="slider-container">
+{/* <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("KidsBirthday")}>
     <h2>Kids Birthday Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("KidsBirthday")}
@@ -612,23 +687,39 @@ const [decCat, setDecCat] = useState([
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday" handleViewMore={handleViewMore} />
-</div>
-    
+  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
+</div> */}
+
 <div className="slider-container">
   <div className="slider-header">
-    <h2>First Night Decoration</h2>
-    <button 
+  <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
+  <button 
     className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("FirstNight")}
+    onClick={() => handleViewMore("KidsBirthday")}
     >
     View More
     </button>
     </div>
-  <div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {firstNightData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}> 
+    <div>
+    <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
+    </div>
+ 
+</div>
+    
+
+<div className="slider-container ">
+    <div className="slider-header">
+    <h2  onClick={() => handleViewMore("Birthday")} style={{ cursor:"pointer"}}>Birthday Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("Birthday")}
+    >
+    View More
+    </button>
+    </div>
+    <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {birthdayData.map((item, index) => (
+        <a key={index} className="slider-item" onClick={() => handleViewMore("Birthday")}> 
         <Image 
         src={item.Image} 
         alt={item.title} 
@@ -661,23 +752,28 @@ const [decCat, setDecCat] = useState([
         </a>
     ))}
 </div>
-  </div>
-</div>
-<div className="slider-container ">
-    <div className="slider-header">
-    <h2>Birthday Decoration</h2>
+    </div>
+
+    <div className="slider-container">
+  <div className="slider-header">
+  <a  onClick={() => handleViewMore("FirstNight")}>
+    <h2>First Night Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("Birthday")}
+    onClick={() => handleViewMore("FirstNight")}
     >
     View More
     </button>
     </div>
-    <DecorationLandingSlider data={birthdayData} category="Birthday" handleViewMore={handleViewMore} />
-    </div>
-<div className="slider-container">
+  <DecorationLandingSlider data={firstNightData} category="FirstNight" handleViewMore={handleViewMore} />
+</div>
+
+    <div className="slider-container">
   <div className="slider-header">
-    <h2>Haldi & Mehndi Decoration</h2>
+  <a  onClick={() => handleViewMore("Haldi-Mehandi")}>
+    <h2>Haldi & Mehandi Decoration</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("Haldi-Mehandi")}
@@ -686,44 +782,48 @@ const [decCat, setDecCat] = useState([
     </button>
     </div>
     <div>
-    <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {haldiAndMehndiData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
-        <Image 
-        src={item.Image} 
-        alt={item.title} 
-        className="slider-image"
-        width={200}
-        height={250}
-        />
-
-        <div className="slider-item-details">
-        <h3>{item.title}</h3>
-        <div style={{ justifyContent:"space-between" , alignItems:"center" , display:"flex" , flexDirection:"row"}}>
-        <p style={{ color: "#9252AA", fontSize: '17px' , fontWeight:"bold", margin:"0" }}>{item.price}</p>
-        <p style={{ fontSize: '17px', color: 'rgb(146, 82, 170)' }}>  {/* Adjust the font size as needed */}
-        {item.rating}
-        <FontAwesomeIcon 
-        style={{ 
-        marginBottom: '2px',
-        marginLeft: '8px',  /* Adjust the margin as needed */
-        height: "14px", 
-        color: "#ffc107" 
-        }} 
-        icon={faStar} 
-        />
-        </p>
-        </div>
-        </div>
-        </a>
-    ))}
-</div>
+    <DecorationLandingSlider data={haldiAndMehndiData} category="haldi-mehandi"  />
     </div>
  
 </div>
+    
 <div className="slider-container">
   <div className="slider-header">
-    <h2>Anniversary Decoration</h2>
+  <a  onClick={() => handleViewMore("BabyShower")}>
+    <h2>Baby Shower</h2>
+    </a>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("BabyShower")}
+    >
+    View More
+    </button>
+    </div>
+
+  <DecorationLandingSlider data={BabyShowerData} category="BabyShower" handleViewMore={handleViewMore} />
+</div>
+
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("FirstNight")} style={{ cursor:"pointer"}}>First Night Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("FirstNight")}
+    >
+    View More
+    </button>
+    </div>
+  <div>
+  <DecorationLandingSlider data={firstNightData} category="Birthday" />
+
+  </div>
+</div>
+
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("Anniversary")} style={{ cursor:"pointer"}}>Anniversary Decoration</h2>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("Anniversary")}
@@ -732,21 +832,9 @@ const [decCat, setDecCat] = useState([
     </button>
     </div>
 
-  <DecorationLandingSlider data={AnniversaryData} category="Anniversary" handleViewMore={handleViewMore} />
-</div>
-<div className="slider-container">
-  <div className="slider-header">
-    <h2>Baby Shower</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("BabyShower")}
-    >
-    View More
-    </button>
-    </div>
-  <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {BabyShowerData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
+    <div className="slider-container slider-decoration-inner decoration-item-grid">
+    {AnniversaryData.map((item, index) => (
+        <a key={index} className="slider-item" onClick={() => handleViewMore("Anniversary")}>
         <Image 
         src={item.Image} 
         alt={item.title} 
@@ -775,11 +863,11 @@ const [decCat, setDecCat] = useState([
         </div>
         </a>
     ))}
-</div>
-</div>
+</div></div>
+
 <div className="slider-container">
   <div className="slider-header">
-    <h2>Welcome baby</h2>
+    <h2  onClick={() => handleViewMore("WelcomeBaby")} style={{ cursor:"pointer"}}>Welcome baby</h2>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("WelcomeBaby")}
@@ -787,11 +875,16 @@ const [decCat, setDecCat] = useState([
     View More
     </button>
     </div>
-  <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby" handleViewMore={handleViewMore} />
+  <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby"  />
 </div>
+
+
+
 <div className="slider-container">
   <div className="slider-header">
+  <a  onClick={() => handleViewMore("PremiumDecoration")}>
     <h2>Premium Decors</h2>
+    </a>
     <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("PremiumDecoration")}
@@ -799,9 +892,37 @@ const [decCat, setDecCat] = useState([
     View More
     </button>
     </div>
+  <DecorationLandingSlider data={PremiumData} category="PremiumDecoration" handleViewMore={handleViewMore} />
+</div>
+
+
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2 onClick={() => handleViewMore("BallonBouquets")} style={{ cursor:"pointer"}}>Balloon Bouquets</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("BallonBouquets")}
+    >
+    View More
+    </button>
+    </div>
+  <DecorationLandingSlider data={BallonBData} category="BallonBouquets"  />
+</div>
+
+<div className="slider-container">
+  <div className="slider-header">
+    <h2  onClick={() => handleViewMore("bachelorette")} style={{ cursor:"pointer"}}>Bachelorette Decoration</h2>
+    <button 
+    className="viewbtn  btn btn-primary" 
+    onClick={() => handleViewMore("bachelorette")}
+    >
+    View More
+    </button>
+    </div>
   <div className="slider-container slider-decoration-inner decoration-item-grid">
-    {PremiumData.map((item, index) => (
-        <a key={index} className="slider-item" href={item.link}>
+    {bacheloretteData.map((item, index) => (
+        <a key={index} className="slider-item" onClick={() => handleViewMore("bachelorette")} >
         <Image 
         src={item.Image} 
         alt={item.title} 
@@ -832,19 +953,8 @@ const [decCat, setDecCat] = useState([
     ))}
 </div>
 </div>
-<div className="slider-container">
-  <div className="slider-header">
-    <h2>Ballon Bouquets</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("BallonBouquets")}
-    >
-    View More
-    </button>
-    </div>
-  <DecorationLandingSlider data={BallonBData} category="BallonBouquets" handleViewMore={handleViewMore} />
 </div>
-</div>
+
 
 {/* faq */}
 <div className="faq-container citypage">
