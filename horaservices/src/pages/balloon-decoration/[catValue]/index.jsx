@@ -505,7 +505,7 @@ const styles = {
   },
   imageContainer: {
     position: "relative",
-    width: '300px',
+    width: '270px',
     backgroundColor: "#fff",
     marginBottom: 40,
     boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
