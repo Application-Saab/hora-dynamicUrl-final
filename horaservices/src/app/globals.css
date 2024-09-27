@@ -515,7 +515,6 @@ img.dish-image.selected {
 }
 
 .non-veg-border::before {
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -536,7 +535,6 @@ img.dish-image.selected {
 }
 
 .veg-border::before {
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
