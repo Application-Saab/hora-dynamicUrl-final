@@ -208,27 +208,27 @@ export default function Home() {
 
   const slides = [
     {
-      image: "https://horaservices.com/api/uploads/homepage_slider1.png",
+     image: "https://horaservices.com/api/uploads/homepage_slider1.webp",
       title: 'Decoration at your step',
       description: 'Transform your space with our expert decorators',
       imgAlt: 'Decoration services at your step',
-      link: "/balloon-decoration"
+      link:"/balloon-decoration"
     },
     {
-      image: "https://horaservices.com/api/uploads/homepage_slider2.png",
+      image: "https://horaservices.com/api/uploads/homepage_slider2.webp",
       title: 'Party Food Delivery',
       description: 'Delicious food for all your party needs',
       imgAlt: 'Party food delivery service',
-      link: "/book-chef-cook-for-party"
+      link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
     },
     {
-      image: "https://horaservices.com/api/uploads/homepage_slider3.png",
+      image: "https://horaservices.com/api/uploads/homepage_slider3.webp",
       title: 'Live Cooking at Spot',
       description: 'Book top-notch performers for your event',
       imgAlt: 'Live cooking at event location',
-      link: "/party-food-delivery-live-catering-buffet/party-food-delivery"
+      link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
     }
-  ];
+    ];
 
   const foodData = [
     {

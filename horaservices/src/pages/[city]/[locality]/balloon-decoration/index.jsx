@@ -28,7 +28,6 @@ const router = useRouter();
 let { city, locality } = router.query;
 if (city) {
   city = city.charAt(0).toUpperCase() + city.slice(1);
-  alert(city)
 }
 if (locality) {
   locality = locality.charAt(0).toUpperCase() + locality.slice(1);

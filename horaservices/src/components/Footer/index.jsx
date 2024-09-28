@@ -29,8 +29,8 @@ const footerColumns = [
       { text: 'Waiter for Party and Occasions', href: '/contactus' },
       { text: 'Bar Tender for Party and Occasions', href: '/contactus' },
       { text: 'Cleaner for Party and Occasions', href: '/contactus' },
-      { text: 'Occasions', href: '/' },
-      { text: 'Cuisine', href: '/' },
+      { text: 'Live Catering' , href:"/caterers"},
+      { text: 'Food Delivery for Parties' , href:"/bulk-food-delivery"},
     ],
   },
   {

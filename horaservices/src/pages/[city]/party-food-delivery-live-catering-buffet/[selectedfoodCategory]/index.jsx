@@ -1,639 +1,711 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import { Step, Label, Divider } from 'semantic-ui-react'; // Replace with actual library
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Modal, Button, Container, Row, Col, Spinner } from 'react-bootstrap';
-import { BASE_URL, GET_CUISINE_ENDPOINT, API_SUCCESS_CODE, GET_MEAL_DISH_ENDPOINT } from '../../../../utils/apiconstants';
-// import { useNavigate } from 'react-router-dom';
-import RectanglePurple from '../../../../assets/Rectanglepurple.png';
-import RectangleWhite from '../../../../assets/rectanglewhite.png';
-import MinusIcon from '../../../../assets/minus.png';
-import PlusIcon from '../../../../assets/plus.png';
-// import { useParams } from "react-router-dom";
-import warningImage from "../../../../assets/Group.png";
-import Popup from '../../../../utils/popup';
-import SkeletonLoader from "../../../../utils/chefSkeleton";
-import SelectDishes from "../../../../assets/selectDish.png";
-import SelectDateTime from "../../../../assets/event.png";
-import SelectConfirmOrder from "../../../../assets/confirm_order.png";
-import separator from "../../../../assets/separator.png";
-import InfoIcon from '../../../../assets/info.png';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import '../../../../css/chefOrder.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import {
+  BASE_URL,
+  PAYMENT,
+  PAYMENT_STATUS,
+  API_SUCCESS_CODE,
+  UPDATE_ORDER_STATUS,
+} from "../../utils/apiconstants";
+import axios from "axios";
+import Head from "next/head";
+import Success from '../../pages/Success';
+import Failure from '../../pages/Failure';
+// import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
+import whatsppicon from "../../assets/whatsapp-icon.png";
+import { getHomeOrganizationSchema } from "../../utils/schema";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "../../../app/page.module.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../app/globals.css';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import DecorationIcon from '../../../assets/decoration_icon.png';
+import PhotographyIcon from '../../../assets/photography_icon.png';
+import FoodIcon from '../../assets/food_icon.png';
+import EntertainmentIcon from '../../../assets/enter_icon.png';
+import '../../../app/homepage.css'
+import cityData from '../../utils/cityData';
+// remove later
+// import homepage_entertainment1 from '../../assets/homepage_entertainment1.png';
+// import homepage_entertainment2 from '../../assets/homepage_entertainment2.png';
+// import homepage_entertainment3 from '../../assets/homepage_entertainment3.png';
+// import homepage_entertainment4 from '../../assets/homepage_entertainment4.png';
 
-import { sendGTMEvent, GoogleTagManager } from '@next/third-parties/google';
-
-const FoodDeliveryCreateOrder = (currentStep) => {
-  const viewBottomSheetRef = useRef(null);
-  const bottomSheetRef = useRef(null);
+export default function Home() {
   const router = useRouter();
-  console.log(router)
-  const { selectedfoodCategory } = router.query;
-  const [selectedOption, setSelectedOption] = useState('');
-  // const selectedOption = router.asPath.split('/').pop();
-  const [orderType, setOrderType] = useState(2);
-  const [isDishSelected, setIsDishSelected] = useState(false);
-  const [selected, setSelected] = useState('veg');
-  const [cuisines, setCuisines] = useState([]);
-  const [selectedCuisines, setSelectedCuisines] = useState([]);
-  const [expandedCategories, setExpandedCategories] = useState([]);
-  const [mealList, setMealList] = useState([]);
-  const [isSelectedDish, setIsSelectedDish] = useState(false);
-  const [dishDetail, setDishDetail] = useState(null);
-  const [selectedCount, setSelectedCount] = useState(0);
-  const [selectedDishes, setSelectedDishes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [isViewAllSheetOpen, setIsViewAllSheetOpen] = useState(false);
-  const [selectedDishPrice, setSelectedDishPrice] = useState(0);
-  const [selectedDishDictionary, setSelectedDishDictionary] = useState({});
-  const [isNonVegSelected, setIsNonVegSelected] = useState(false);
-  const [isVegSelected, setIsVegSelected] = useState(true);
-  const [isPopupVisible, setPopupVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
-  const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] = useState(false);
-  const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] = useState(false);
-  const [isViewAllExpanded, setIsViewAllExpanded] = useState(false);
-  const [popupMessage, setPopupMessage] = useState({
-    image: "",
-    title: "",
-    body: "",
-    button: "",
-  });
+  const [showButton, setShowButton] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [city, setCity] = useState(null);
+
+  const photographyUrl = () =>{
+    window.open(
+      'https://api.whatsapp.com/send?phone=+917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
+      '_blank'
+    );
+  }
+  const schemaOrg = getHomeOrganizationSchema();
+  const scriptTag = JSON.stringify(schemaOrg);
 
   useEffect(() => {
-    if (selectedfoodCategory) {
-      setSelectedOption(selectedfoodCategory);
-    }
-  }, [selectedfoodCategory]);
-
-  // const navigate = useNavigate();
-
-  const handleWarningClose = () => {
-    setWarningVisibleForDishCount(false);
-    setWarningVisibleForCuisineCount(false);
-    setWarningVisibleForTotalAmount(false);
-  };
-
-  // get category of cuisines
-
-  useEffect(() => {
-
-    const fetchCuisineData = async () => {
-      try {
-        const url = BASE_URL + GET_CUISINE_ENDPOINT;
-        const requestData = {
-          type: 'cuisine',
-        };
-        const response = await axios.post(url, requestData, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.status == API_SUCCESS_CODE) {
-          const names = response.data.data.configuration.map(({ _id, name }) => [
-            _id,
-            name,
-          ]);
-          setCuisines(names);
-        }
-      } catch (error) {
-        console.log('Error Fetching Data:', error.message);
+    console.log(router.query)
+    console.log('Router is ready');
+    if (router.isReady) {
+      console.log('Router is ready');
+      const { city } = router.query;
+      if (city) {
+        setCity(city);
+        console.log(`City from query: ${city}`);
+      } else {
+        console.log('City is undefined');
       }
+    }
+  }, [router.isReady, router.query]);
+
+  useEffect(() => {
+    setShowButton(window.innerWidth > 800);
+    function handleResize() {
+      setShowButton(window.innerWidth > 800);
     };
-    fetchCuisineData();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
-    if (cuisines.length > 0 && selectedCuisines.length === 0) {
-      handleCuisinePress(cuisines[0][0]);
-    }
-  }, [cuisines, selectedCuisines]);
+    const checkPaymentStatus = async (transactionId) => {
+      try {
+        const storedUserID = await localStorage.getItem("userID");
+        const apiUrl = BASE_URL + PAYMENT_STATUS + "/" + transactionId;
 
-  const renderItem = ({ item }) => {
-    const isSelected = selectedCuisines.includes(item[0]);
+        const response = await axios.post(
+          apiUrl,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-    return (
-      <div className="d-flex align-items-center justify-content-between mb-2">
-        <Button
-          variant={isSelected ? 'primary' : 'outline-primary'}
-          onClick={() => handleCuisinePress(item[0])}
-          className='cusinebtn'
-        >
-          {item[1]}
-        </Button>
-        {expandedCategories.includes(item[0]) && (
-          <ListGroup className="d-flex flex-wrap">
-            {cuisines.map((cuisine, index) => (
-              <ListGroupItem
-                key={index}
-                className="flex-grow-1"
-                style={{ flexBasis: 'calc(25% - 10px)', margin: '5px' }} // Adjust margin and flexBasis as needed
-              >
-                {renderItem({ item: cuisine })}
-              </ListGroupItem>
-            ))}
-          </ListGroup>
-        )}
-      </div>
-    );
-  };
+        if (response.data && response.data.message) {
+          const message = response.data.message;
 
-  const handleIncreaseQuantity = (dish, isSelected) => {
-    if (selectedDishes.length >= 15 && !isSelected) {
-      setWarningVisibleForDishCount(true);
-      setPopupMessage({
-        img: warningImage,
-        title: "Total Dishes Selected can not be more than 15 Dish.",
-        body: "",
-        button: "Contact Us",
-      });
-    } else {
-      const updatedSelectedDishes = [...selectedDishes];
-      const updatedSelectedDishDictionary = { ...selectedDishDictionary };
-      const dishPriceValue = parseInt(dish.cuisineArray[0], 10);
-      console.log("dishPriceValue" + dishPriceValue)
-      if (!isNaN(dishPriceValue)) { // Check if the parsed value is not NaN
-        if (updatedSelectedDishes.includes(dish._id)) {
-          const index = updatedSelectedDishes.indexOf(dish._id);
-          updatedSelectedDishes.splice(index, 1);
-          const updatedPrice = selectedDishPrice - dishPriceValue;
-          setSelectedDishPrice(updatedPrice);
+          if (message === "PAYMENT_SUCCESS") {
+            const url = BASE_URL + UPDATE_ORDER_STATUS;
+
+            const token = await localStorage.getItem("token");
+
+            const requestData = {
+              status: 1,
+              _id: transactionId,
+            };
+
+            const response = await axios.post(url, requestData, {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: token,
+              },
+            });
+
+            router.push("/Success");
+          } else {
+            router.push("/Failure");
+          }
         } else {
-          updatedSelectedDishes.push(dish._id);
-          const updatedPrice = selectedDishPrice + dishPriceValue;
-          setSelectedDishPrice(updatedPrice);
+          console.log("API response does not contain a message field");
         }
+      } catch (error) {
+        console.error("Error checking payment status:", error);
+        throw error; // Rethrow the error for the caller to handle
       }
-      setSelectedDishes(updatedSelectedDishes);
-      setSelectedCount(updatedSelectedDishes.length);
+    };
 
-      if (updatedSelectedDishDictionary[dish._id]) {
-        delete updatedSelectedDishDictionary[dish._id];
-      } else {
-        updatedSelectedDishDictionary[dish._id] = dish;
-      }
-      setSelectedDishDictionary(updatedSelectedDishDictionary);
-      setIsDishSelected(updatedSelectedDishes.length > 0);
+    const queryParams = new URLSearchParams(window.location.search);
+    const transactionId = queryParams.get("transaction")
+
+    if (transactionId) {
+      checkPaymentStatus(transactionId);
     }
-  };
-
-  //handleCuisinePress is used to handle cuisine clicks and called from above function
-  const handleCuisinePress = cuisineId => {
-    if (selectedCuisines.length < 3 || selectedCuisines.includes(cuisineId)) {
-      setSelectedCuisines(prevSelected => {
-        if (prevSelected.includes(cuisineId)) {
-          return prevSelected.filter(item => item !== cuisineId);
-        } else {
-          return [...prevSelected, cuisineId];
-        }
-      });
-    } else {
-      // Display a popup or handle the case where the user tries to select more than 3 cuisines
-      setWarningVisibleForCuisineCount(true);
-      setPopupMessage({
-        img: warningImage,
-        title: "One chef is only expert in 3 cuisine only.",
-        body: "Our chef is expert in cuisines only please select appropriate number of cuisines to continue",
-        button: "Continue",
-      });
-    }
-  };
-
-  const fetchMealBasedOnCuisine = async () => {
-    try {
-      setLoading(true);
-      const url = BASE_URL + GET_MEAL_DISH_ENDPOINT;
-      const is_dish = isNonVegSelected ? 0 : 1;
-      console.log(selectedCuisines);
-      const requestData = {
-        cuisineId: ["65f1b256aaba27208a89865f"],
-        is_dish: is_dish,
-      };
-      const response = await axios.post(url, requestData, {
-        headers: {
-          'Content-Type': 'application/json',
+  }, [router]);
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
         },
-      });
-      if (response.status == API_SUCCESS_CODE) {
-        // Assuming response is your API response
-        const filteredMealList = response.data.data.map(item => ({
-          ...item,
-          dish: item.dish
-        }));
-
-        setMealList(filteredMealList);
-
-      }
-    } catch (error) {
-      console.log('Error Fetching Data:', error.message);
-    } finally {
-      setLoading(false); // Set loading to false when the API request is completed
-    }
-  };
-
-  useEffect(() => {
-    if (selectedCuisines.length > 0 && selectedCuisines.length <= 3) {
-      fetchMealBasedOnCuisine();
-    } else {
-      setMealList([]);
-      setSelectedDishDictionary({});
-      setIsDishSelected(false);
-      setSelectedDishes([]);
-      setSelectedCount(0);
-      setSelectedDishPrice(0);
-    }
-  }, [selectedCuisines, isNonVegSelected]);
-
-  const renderDishItem = ({ item }) => (
-    <div className='w-100'>
-      {item.dish.length > 0 ?
-        <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "9px 19px 0px 6px" }}>
-            <h1 style={{ color: "#000", fontSize: "110%", marginBottom: "13px" }}>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
-            <Button onClick={() => handleViewAll(item.mealObject._id)} style={{ color: expandedCategories.includes(item.mealObject._id) ? '#000' : '#fff', fontWeight: '400', textDecorationLine: 'none', fontSize: 12 }}
-              className={`viewbtn ${expandedCategories.includes(item.mealObject._id)
-                ? "clickedviewAll"
-                : ""
-                }`}>View All</Button>
-          </div>
-          <div className="dish-item">
-            {expandedCategories.includes(item.mealObject._id) ? (
-              item.dish.map((dish, index) => {
-                const dishImage = dish.image ? `https://horaservices.com/api/uploads/${dish.image}` : '';
-                const specialApplianceImage = dish.special_appliance_id.length > 0 && dish.special_appliance_id[0].image
-                  ? `https://horaservices.com/api/uploads/${dish.special_appliance_id[0].image}`
-                  : '';
-                const selectedImage = selectedDishes.includes(dish._id) ? dishImage : dishImage;
-
-                return (
-                  <div key={index} className={`dish-item-inner ${dish.is_dish === 1 ? 'veg-border' : 'non-veg-border'}`}
-                    style={{
-                      backgroundImage: `url(${selectedDishes.includes(dish._id)
-                        ? RectanglePurple.src
-                        : RectangleWhite.src
-                        })`
-                    }}
-                  >
-                    {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
-                    ) : (
-                      <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
-                    )}
-                    <p className={`dish-name ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>
-                      {isDishSelected && dish.special_appliance_id.length > 0 && selectedDishes.includes(dish._id)
-                        ? dish.special_appliance_id[0].name
-                        : dish.name}
-                    </p>
-                    <div className="d-flex justify-content-between w-100 px-3">
-                      <span className={`dish-price ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>
-                        ₹ {dish.cuisineArray[0]}
-                      </span>
-                      <Button className="pluBtn" onClick={() => handleIncreaseQuantity(dish, selectedDishes.includes(dish._id))}>
-                        <Image
-                          src={
-                            selectedDishes.includes(dish._id) ? MinusIcon : PlusIcon
-                          }
-                          width={21}
-                          height={21}
-                        />
-                      </Button>
-                    </div>
-                    <div className={`dish-indicator ${dish.is_dish === 1 ? 'veg' : 'non-veg'}`}></div>
-                  </div>
-                );
-              })) :
-              (item.dish.slice(0, 7).map((dish, index) => {
-                const dishImage = dish.image ? `https://horaservices.com/api/uploads/${dish.image}` : '';
-                const specialApplianceImage = dish.special_appliance_id.length > 0 && dish.special_appliance_id[0].image
-                  ? `https://horaservices.com/api/uploads/${dish.special_appliance_id[0].image}`
-                  : '';
-                const selectedImage = selectedDishes.includes(dish._id) ? dishImage : dishImage;
-
-                return (
-                  <div key={index} className={`dish-item-inner ${dish.is_dish === 1 ? 'veg-border' : 'non-veg-border'}`}
-
-                    style={{
-                      backgroundImage: `url(${selectedDishes.includes(dish._id)
-                        ? RectanglePurple.src
-                        : RectangleWhite.src
-                        })`
-                    }}
-                  >
-                    {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
-                    ) : (
-                      <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
-                    )}
-                    <p className={`dish-name ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>
-                      {isDishSelected && dish.special_appliance_id.length > 0 && selectedDishes.includes(dish._id)
-                        ? dish.special_appliance_id[0].name
-                        : dish.name}
-                    </p>
-                    <div className="d-flex justify-content-between w-100 px-3">
-                      <span className={`dish-price ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>
-                        ₹ {dish.cuisineArray[0]}
-                      </span>
-                      <Button className="pluBtn" onClick={() => handleIncreaseQuantity(dish, selectedDishes.includes(dish._id))}>
-                        <Image
-                          src={
-                            selectedDishes.includes(dish._id) ? MinusIcon : PlusIcon
-                          }
-                          width={21}
-                          height={21}
-                        />
-                      </Button>
-                    </div>
-                    <div className={`dish-indicator ${dish.is_dish === 1 ? 'veg' : 'non-veg'}`}></div>
-                  </div>
-                );
-              }))
-            }
-          </div>
-          <div className='chef-divider' style={{ marginTop: "20px" }}></div>
-        </div>
-        : null
-      }
-    </div>
-  );
-console.log('selectedOption',selectedOption)
-  const addDish = selectedDishPrice => {
-    if (!selectedDishDictionary || Object.keys(selectedDishDictionary).length === 0) {
-      console.error("selectedDishDictionary is undefined or empty");
-      return; // Exit the function early if the dictionary is undefined or empty
-  }
-    const selectedDishQuantities = Object.values(selectedDishDictionary).map(item => {
-      return {
-        name: item.name,
-        image: item.image,
-        price: item.cuisineArray[0],
-        quantity: item.cuisineArray[1],
-        unit: item.cuisineArray[2],
-        id: item.mealId
-      };
-    });
-    // router.push(`/party-food-delivery-live-catering-buffet-select-date/${selectedOption}`, { state: { selectedDishDictionary, selectedDishPrice, selectedDishes, orderType , isDishSelected , selectedCount , selectedDishQuantities  , selectedOption} });
-    router.push({
-      pathname: `/party-food-delivery-live-catering-buffet-select-date/${selectedOption}`,
-      query: {
-        selectedDishDictionary: JSON.stringify(selectedDishDictionary),
-        selectedDishPrice,
-        selectedDishes,
-        orderType,
-        isDishSelected,
-        selectedCount,
-        selectedDishQuantities: JSON.stringify(selectedDishQuantities),
-        selectedOption
       },
-    });
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  const closeBottomSheet = () => {
-    setDishDetail(null);
-    bottomSheetRef.current.close();
+  const homeslidersettings = {
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    fade: true, // Enables the fade effect
+    autoplaySpeed: 2500,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  const addDishAndCloseBottomSheet = () => {
-    closeBottomSheet();
+  const celebrateslidersettings = {
+    infinite: true,
+    speed: 300,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  const RenderBottomSheetContent = () => (
-    <div className="bottom-sheet-content">
-      <Image
-        src={`https://horaservices.com/api/uploads/${dishDetail.image}`}
-        alt={dishDetail.name}
-        className="bottom-sheet-image"
-        width={300}
-        height={300}
-      />
-      <h5 className="bottom-sheet-title">{dishDetail.name}</h5>
-      <hr />
-      <p className="bottom-sheet-description">{dishDetail.description}</p>
-      <div className="bottom-sheet-info">
-        <div className="info-item">
-          <strong>Per Plate Qty:</strong> {dishDetail.per_plate_qty.qty ? `${dishDetail.per_plate_qty.qty} ${dishDetail.per_plate_qty.unit}` : 'NA'}
-        </div>
-        <div className="info-item">
-          <strong>Price Per Plate:</strong> {dishDetail.dish_rate ? `₹ ${dishDetail.dish_rate}` : 'NA'}
-        </div>
-        <div className="info-item">
-          <strong>Price:</strong> {dishDetail.price ? `₹ ${dishDetail.price}` : 'NA'}
-        </div>
-      </div>
-      <Button variant="primary" onClick={addDishAndCloseBottomSheet}>
-        Add Dish
-      </Button>
-    </div>
-  );
 
-  const openBottomSheet = (dish, ref) => {
-    setDishDetail(dish);
-    ref.current.open();
-  };
 
-  const closeViewAllSheet = () => {
-    setIsViewAllSheetOpen(false);
-  };
+  const slides = [
+    {
+     image: "https://horaservices.com/api/uploads/homepage_slider1.webp",
+      title: 'Decoration at your step',
+      description: 'Transform your space with our expert decorators',
+      imgAlt: 'Decoration services at your step',
+      link:"/balloon-decoration"
+    },
+    {
+      image: "https://horaservices.com/api/uploads/homepage_slider2.webp",
+      title: 'Party Food Delivery',
+      description: 'Delicious food for all your party needs',
+      imgAlt: 'Party food delivery service',
+      link:"/book-chef-cook-for-party"
+    },
+    {
+      image: "https://horaservices.com/api/uploads/homepage_slider3.webp",
+      title: 'Live Cooking at Spot',
+      description: 'Book top-notch performers for your event',
+      imgAlt: 'Live cooking at event location',
+      link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
+    }
+    ];
+    
+    const foodData = [
+      {
+        id: 1,
+        image: "https://horaservices.com/api/uploads/homepage_food1.webp",
+        title: "Bulk Food Delivery",
+        imgAlt: "Bulk food delivery service",
+        link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
+      },
+      {
+        id: 2,
+        image: "https://horaservices.com/api/uploads/homepage_food2.webp",
+        title: "Chef For Party",
+        imgAlt: "Chef cooking for a party",
+        link:"/book-chef-cook-for-party"
+      },
+      {
+        id: 3,
+        image: "https://horaservices.com/api/uploads/homepage_food3.webp",
+        title: "Live Catering",
+        imgAlt: "Live catering service at an event",
+        link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
+      },
+    ];
+    
+    // const EntertainmentData = [
+    //   { 
+    //     id: 1, 
+    //     title: 'Tattoo Artist', 
+    //     imageUrl: homepage_entertainment1, 
+    //     link: '#', 
+    //     imgAlt: 'Tattoo artist providing services at an event' 
+    //   },
+    //   { 
+    //     id: 2, 
+    //     title: 'Magician', 
+    //     imageUrl: homepage_entertainment2, 
+    //     link: '#', 
+    //     imgAlt: 'Magician performing at an event' 
+    //   },
+    //   { 
+    //     id: 3, 
+    //     title: 'Party Host', 
+    //     imageUrl: homepage_entertainment3, 
+    //     link: '#', 
+    //     imgAlt: 'Party host engaging with guests' 
+    //   },
+    //   { 
+    //     id: 4, 
+    //     title: 'Mascot', 
+    //     imageUrl: homepage_entertainment4, 
+    //     link: '#', 
+    //     imgAlt: 'Mascot character entertaining at an event' 
+    //   },
+    // ];
+    
+    const whereAreYouData = [
+      {
+        id: 1,
+        title: 'Decoration',
+        link: '/balloon-decoration',
+        imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.webp",
+        imgAlt: 'Event decoration service',
+        points: [
+          '✨Choose from 1000+ unique designs for any Event - Birthdays, Anniversaries, Baby showers, Weddings, and more!',
+          '✨Get your venue decorated in just 2 hours, indoors or outdoors.',
+          '✨Best prices, timely service, and support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 2,
+        title: 'Chef For Party',
+        link: '/book-chef-cook-for-party',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.webp",
+        imgAlt: 'Chef services for party events',
+        points: [
+            " ✨ HORA brings professional chefs to your kitchen",
+          '✨ They use your ingredients and utensils 🍳',
+          '✨ Experience 400 restaurant-style dishes. 🍲',
+          '✨ Affordable & customizable. 💰',
+          '✨ Full hygiene control. 🧼',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 3,
+        title: 'Food Delivery',
+        link: '/party-food-delivery-live-catering-buffet/party-food-delivery',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.webp",
+        imgAlt: 'Food delivery services for events',
+        points: [
+          '✨🎉 Enjoy food delivery with',
+          '✨ Best prices , Timely service',
+          '✨ Delicious taste',
+          '✨ Good packing' ,
+          '✨ Guaranteed support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 4,
+        title: 'Live Catering',
+        link: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.webp",
+        imgAlt: 'Live Catering services',
+        points: [
+          '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
+          '✨ Best prices , Timely service',
+          '✨ Delicious taste',
+          '✨ Good packing' ,
+          '✨ Guaranteed support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 5,
+        title: 'Entertainment',
+        link: '/',
+        imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.webp",
+        imgAlt: 'Event food delivery services',
+        points: [
+          '✨ Make your event unforgettable by engaging your guests! ✨ Choose from over 10 amazing services:',
+          '🎨 Tattoo Artist' , 
+          '🎩 Magician',
+          '🎉 Party Host' , 
+          '🐻 Mascot ',
+          '🌿 Mehandi',
+          '💅 Nail Art ..and so much more!'
+        ],
+      },
+    ];
+    
+    const celebrateData = [
+      {
+        id: 1,
+        title: 'Birthday and Anniversary',
+        imageUrl: require('../assets/homepage_Celebrate1.png'),
+        imgAlt: 'Birthday and Anniversary celebration',
+        link: "https://horaservices.com/balloon-decoration/birthday-decoration",
+      },
+      {
+        id: 2,
+        title: 'House Parties',
+        imageUrl: require('../assets/homepage_Celebrate2.png'),
+        imgAlt: 'House parties celebration',
+      },
+      {
+        id: 3,
+        title: 'Corporate Events',
+        imageUrl: require('../assets/homepage_Celebrate3.png'),
+        imgAlt: 'Corporate events celebration',
+      },
+      {
+        id: 4,
+        title: 'Wedding Events',
+        imageUrl: require('../assets/homepage_Celebrate4.png'),
+        imgAlt: 'Wedding events celebration',
+      },
+      {
+        id: 5,
+        title: 'Gatherings',
+        imageUrl: require('../assets/homepage_Celebrate5.png'),
+        imgAlt: 'Gatherings celebration',
+      },
+      {
+        id: 6,
+        title: 'Kids Events',
+        imageUrl: require('../assets/homepage_Celebrate6.png'),
+        imgAlt: 'Kids events celebration',
+      },
+    ];
+    
+    const CustomerReview = [
+      {
+        id: 1,
+        name: "hemant singh",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjU_D6MAIAmJm4BrWTwjmEUcdUPXGbQOutY3YUmEfozjR0EDCDlbfQ=s32-rw",
+        imgAlt: 'hemant singh review',
+        rating: 5,
+        review: "HORA have experienced and trained staff.  they effortlessly executed my event with grace. The food was not only delicious but also elegantly presented, leaving my guests raving about the taste and variety.",
+      },
+      {
+        id: 2,
+        name: "SANDIP RAI",
+        image: "https://play-lh.googleusercontent.com/a/ACg8ocJ3rwU_SQsSWbLiTYa9DsB3xjuM1Qa2oUzyowa6bka5AsXukg=s32-rw-mo",
+        imgAlt: 'SANDIP RAI review',
+        rating: 5,
+        review: "The decoration was so good and magical.I booked this decoration for my lil ones bday and I was very happy the way the canopy was set up and decorated by Sandeep from Hora. Greate Job!!"
+      },
+      {
+        id: 3,
+        name: "Ashu Tiwari",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjWDqzjOJ19p-lbksp72dtFtEozrxlyX3-grQi0fSoiFSm8RrR9H=s32-rw",
+        imgAlt: 'Ashu Tiwari review',
+        rating: 5,
+        review: "Food was too good . I mean all dishes were good and quantity was good .every guest appreciated the taste and love it so much.Will definitely recommend to anyone looking for food services"
+      },
+      {
+        id: 4,
+        name: "Vijeta Sunda",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjVFRB3pRXxtJgvV6QWB7tLW9JFDG-QiY8oHr22n_pQIQJaN_WD87w=s32-rw",
+        imgAlt: 'Vijeta Sunda review',
+        rating: 4,
+        review: "What a delightful experience we had..I'm so grateful for sending me the best Chef Vipin Kumar Arya who was so so experienced and skilled and dedicated...we had a party of 25people and he made it so easy for me and all"
+      },
+      {
+        id: 5,
+        name: "Sneha",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjWYlq3OV6In6sCw_X91EexqX7q9FdazSyOJ-ROxRw63-BEbUnuB_A=s32-rw",
+        imgAlt: 'Jerome Bell review repeated',
+        rating: 4,
+        review: "The decorations were festive and vibrant, creating the perfect atmosphere for our celebration. Their professionalism and creativity were top-notch.. Very Good and amazing suppport"
+      },
+    ];
 
-  const openViewAllSheet = (dish, ref) => {
-    setDishDetail(dish);
-    setIsViewAllSheetOpen(true);
-  };
-
-  const handleSwitchChange = value => {
-    setSelected(value);
-    if (value === 'veg') {
-      setIsVegSelected(true);
-      setIsNonVegSelected(false);
-    } else {
-      setIsVegSelected(false);
-      setIsNonVegSelected(true);
+  const openSliderLink = (link, city) => {
+    if (link) {
+      window.location.href = `/${city}/${link}`; // Redirects to the provided link
+      //window.location.href = link; // Redirects to the provided link
     }
   };
 
-  const handleViewAll = categoryId => {
-    setIsViewAllExpanded(!isViewAllExpanded);
-
-    setExpandedCategories(prevExpanded =>
-      categoryId === prevExpanded[0]
-        ? prevExpanded.length === 1 ? [] : prevExpanded.slice(1) // If the first category is clicked, toggle its expansion state only if it's not the only expanded category
-        : prevExpanded.includes(categoryId)
-          ? prevExpanded.filter(id => id !== categoryId)
-          : [...prevExpanded, categoryId],
-    );
+  const formatLocalityName = (name) => {
+    return name.replace(/\s+/g, '-').toLowerCase();
   };
 
-  if (loading) {
-    return <SkeletonLoader loading={true} />;
-  }
+   const normalizedCity = city ? city.toLowerCase() : '';
+   console.log("Normalized City:", normalizedCity); 
+
+   const hasCityPageParam = city ? true : false;
+   console.log("Has City Page Param:", hasCityPageParam); 
+
+   const [cityLocalitiesList, setCityLocalitiesList] = useState([]);
+
+   useEffect(() => {
+     console.log("UseEffect Triggered"); 
+     if (normalizedCity) {
+       const localities = cityData[normalizedCity]?.cityLocalitiesList || [];
+       console.log("Fetched Localities:", localities); // Log fetched localities
+       setCityLocalitiesList(localities);
+     }
+   }, [normalizedCity]);
+
+   const handleClick = (localityName) => {
+    const formattedLocalityName = formatLocalityName(localityName);
+
+    router.push({
+      pathname: `/${normalizedCity}/${formattedLocalityName}`, 
+    });
+  };
+
+
+
+   // If city parameter is missing
+   if (!hasCityPageParam) {
+     return <div>Please select a city first.</div>;
+   }
+
+   console.log("City Localities List:", cityLocalitiesList);
+
+
 
   return (
-    <div className="chef-create-order">
-      <GoogleTagManager gtmId="GTM-K3SCKLTZ" />;
-      <div className="order-container chef">
-        <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-          <Image style={{ width: "20px", height: '20px', marginRight: "10px" }} src={InfoIcon} />
-          <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
-        </div>
-        <div className="range-bar">
-          <Step active={true.toString()} className="step1">
-            <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
-            <Label active={true.toString()}>Select Dishes</Label>
-          </Step>
-          <div className="sep-image">
-            <Image src={separator} />
-          </div>
-          <Step className="step2">
-            <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
-            <Label>Select Date & Time</Label>
-          </Step>
-          <div className="sep-image">
-            <Image src={separator} />
-          </div>
-          <Step className="step3">
-            <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
-            <Label>Select Confirm Order</Label>
-          </Step>
-        </div>
-      </div>
-      <div className="order-container chef-bottum">
-        <Row className="d-flex justify-content-start">
-          <div style={{ display: "flex", margin: "10px 0 0" }}>
-            <div style={{ marginRight: "10px" }}>
-              <Button
-                variant={
-                  selected === "veg" ? "success" : "outline-success"
-                }
-                onClick={() => handleSwitchChange("veg")}
-                className="cuisinebtn"
-              >
-                Only Veg
-              </Button>
-            </div>
-            <div>
-              <Button
-                variant={
-                  selected === "non-veg" ? "danger" : "outline-danger"
-                }
-                onClick={() => handleSwitchChange("non-veg")}
-                className="cuisinebtn"
-              >
-                Non-Veg
-              </Button>
-            </div>
-          </div>
-          <div
-            className="chef-divider"
-            style={{ marginTop: "20px" }}
-          ></div>
-        </Row>
-
-        <Row className="mt-1">
-          <Col>
-            {selectedCuisines.length > 0 && (
-              <ListGroup className="dish-list">
-                {mealList.map((meal) => (
-                  <div className='w-100'>
-                    <ListGroupItem key={meal._id} className="dish-item">
-                      {renderDishItem({ item: meal })}
-                    </ListGroupItem>
+    <>
+      <div className="page-width">
+        <div className="party-services homeslider">
+          <h1 className="party-title">All party services on one platform</h1>
+          <div className="home-slider-inner">
+            <Slider {...homeslidersettings}>
+              {slides.map((slide, index) => (
+                <div key={index} className="slide-container">
+                  <Image src={slide.image} alt={slide.title}
+                    width={1200}
+                    height={400}
+                    //  objectFit="cover" 
+                    layout="responsive"
+                    className="responsive-image"
+                  />
+                  <div className="carousel-content slide-content">
+                    <h2 className="party-title1 slide-title">{slide.title}</h2>
+                    <button className="slide-button book-now" onClick={() => openSliderLink(slide.link , city)}>book Now</button>
                   </div>
-                ))}
-              </ListGroup>
-            )}
-          </Col>
-        </Row>
+                </div>
+              ))}
+            </Slider>
+          </div>
 
-        <Row>
-          <Col>
-            <div
-              style={{
-                position: "fixed",
-                bottom: 0,
-                width: "100%",
-                backgroundColor: "#EDEDED",
-                borderTop: "1px solid #efefef",
-                padding: "15px 0",
-                left: "0",
-              }}
-            >
-              <Button
-                onClick={() => addDish(selectedDishPrice)}
-                style={{
-                  width: "50%",
-                  backgroundColor: isDishSelected
-                    ? "#9252AA"
-                    : "#F9E9FF",
-                  borderColor: isDishSelected ? "#9252AA" : "#F9E9FF",
-                }}
-                disabled={!isDishSelected}
-                className="continuebtnchef"
-              >
-                <div
-                  style={{
-                    className: "continueButtonLeftText",
-                    color: isDishSelected ? "white" : "#fff",
-                  }}
-                >
-                  Continue
+        </div>
+        <div className="food-container sec-container">
+          <h1 className="food-title">
+            <span>Food</span>
+            <span><Image src={FoodIcon} alt="Food Icon" className="food-icon" /></span>
+          </h1>
+          <div className="food-cards desktop">
+            {foodData.map(item => (
+              <div key={item.id} className="food-card">
+                <a href={`${city}/${item.link}`} className="food-card-link">
+                  <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
+                  <p className="food-card-title">{item.title}</p>
+                </a>
+              </div>
+            ))}
+          </div>
+
+          <div className="food-cards mobile">
+            {foodData.slice(0, 1).map(item => (
+              <div key={item.id} className="food-card left-side">
+                <a href={`${city}/${item.link}`} className="food-card-link">
+                  <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
+                  <p className="food-card-title">{item.title}</p>
+                </a>
+              </div>
+            ))}
+
+            <div className="food-card  right-side">
+              {foodData.slice(1, 3).map(item => (
+                <div key={item.id} className="food-card right-card">
+                  <a href={`${city}/${item.link}`} className="food-card-link">
+                    <Image src={item.image} alt={item.title} className="food-image" width={200} height={100} />
+                    <p className="food-card-title">{item.title}</p>
+                  </a>
                 </div>
-                <div
-                  style={{
-                    className: "continueButtonRightText",
-                    color: isDishSelected ? "white" : "#fff",
-                  }}
-                >
-                  {selectedCount} Items
-                </div>
-              </Button>
+              ))}
             </div>
+          </div>
 
-          </Col>
-        </Row>
+        </div>
+        <div className="dec-photo-con sec-container">
+          <div className="service">
+            <div className="service-header">
+              <h2 className='services-h2'>
+                Decoration
+                <Image src={DecorationIcon} alt="Decoration Icon" className="service-icon" />
+              </h2>
+            </div>
+            <div className="service-image-container">
+              <Image src="https://horaservices.com/api/uploads/homepage_decoration.webp" alt="Decoration" className="service-image" width={200} height={100} />
+              <button className="book-now2" onClick={() => window.location.href = `${city}/balloon-decoration`} >Book Now</button>
+            </div>
+          </div>
+          <div className="service">
+            <div className="service-header">
+              <h2 className='services-h2'>
+                Photography
+                <Image src={PhotographyIcon} alt="Photography Icon" className="service-icon" />
+              </h2>
+            </div>
+            <div className="service-image-container">
+              <Image src="https://horaservices.com/api/uploads/homepage_photography.webp" alt="Photography" className="service-image" width={200} height={100} />
+              <button className="book-now2" onClick={photographyUrl} >Book Now</button>
+
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="entertainment-container sec-container">
+  <h1 className="entertainment-header">
+    Entertainment 
+    <Image src={EntertainmentIcon} alt="Entertainment Icon" className="food-icon" />
+  </h1>
+  <div className="entertainment-grid">
+    {EntertainmentData.map(category => (
+      <div key={category.id} className="category-card">
+        <a href={category.link} rel="noopener noreferrer">
+          <div className="category-image-wrapper">
+            <Image src={category.imageUrl} alt={category.title} className="category-image" />
+            <p className="category-title">{category.title}</p>
+          </div>
+        </a>
       </div>
-      <Modal show={isViewAllSheetOpen} onHide={closeViewAllSheet}>
-        <Modal.Header closeButton>
-          <Modal.Title>View All</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{dishDetail && <RenderBottomSheetContent />}</Modal.Body>
-      </Modal>
-      {(isWarningVisibleForCuisineCount || isWarningVisibleForDishCount) && (
-        <Popup popupMessage={popupMessage} onClose={handleWarningClose} />
-      )}
-    </div>
+    ))}
+  </div>
+  </div> */}
+        <div className="entertainment-container where-are-you-sec sec-container">
+          <h1 className="entertainment-header-whatAre">
+            What are you <span className="pink-text">into?</span>
+          </h1>
+
+          <h3 className='services-h3'>We offer a variety of services , differing in the total value of needed.</h3>
+          <div className="categoriesCard-container">
+            {whereAreYouData.map(category => (
+              <div key={category.id} className="categoriesCard-card">
+                <a href={`${city}/${category.link}`} rel="noopener noreferrer">
+                  <div className="categoriesCard-image-wrapper">
+                    <Image src={category.imageUrl} alt={category.title} className="categoriesCard-image" width={200} height={100} />
+                  </div>
+                </a>
+                <div className="what-are-sec">
+                  <p className="categoriesCard-title">{category.title}</p>
+                  <ul className="categoriesCard-points">
+                    {category.points.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
+                  <a href={`${city}/${category.link}`} className="categoriesCard-explore-more" >
+                    Explore More
+                  </a>
+                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="localities-box">
+        <h1 className="city-heading">
+        {city ? city.charAt(0).toUpperCase() + city.slice(1) : "City"} Localities
+        </h1>
+        <ul className="localities-list">
+      
+        {cityLocalitiesList.length > 0 ? (
+        cityLocalitiesList.map((locality, index) => (
+          <li key={index} className="locality-item">
+            <button onClick={() => handleClick(locality.name)} className="locality-button">
+              {locality.name}
+            </button>
+          </li>
+        ))
+        ) : (
+        <div className="no-localities">No localities found for this city.</div>
+        )}
+        </ul>
+        </div>
+
+        <div className="celebrate-container sec-container">
+          <h1 className="celebrate-title">Celebrate With Us
+            <Image src={DecorationIcon} alt="Entertainment Icon" className="service-icon" />
+          </h1>
+          <p className="celebrate-subtitle">You can easily search for what category of item you want to order.</p>
+          <div className="categories-cards">
+            <Slider {...celebrateslidersettings}>
+              {celebrateData.map(category => (
+                <div key={category.id} className="categories-card">
+                  <a href={category.link} rel="noopener noreferrer">
+                    <Image src={category.imageUrl} alt={category.title} className="categories-image" />
+                  </a>
+                  <p className="categories-title">{category.title}</p>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+
+        </div>
+
+        <div className="customer-review-container sec-container">
+          <h2 className='customer-review-h2'>Customer Review</h2>
+          <Slider {...settings}  >
+            {CustomerReview.map(({ id, name, image, rating, review }) => (
+              <div key={id} className="review-card">
+                <div className="review-header">
+                  <Image src={image} alt={name} className="review-image" width={100} height={100} />
+                  <div>
+                    <h3 className="review-name">{name}</h3>
+                    <div className="review-rating">{"⭐".repeat(rating)}</div>
+                  </div>
+                </div>
+                <p className="review-text">{review}</p>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+
+      </div>
+      <div>
+        <Link href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">
+          <Image className='whatappicon' src={whatsppicon} alt="WhatsApp Icon" />
+        </Link>
+      </div>
+    </>
   );
-};
-
-const styles = {
-  imageContainer: {
-    position: "relative",
-    width: "270px",
-    backgroundColor: "#fff",
-    marginBottom: 40,
-    boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
-    borderRadius: "5px",
-    overflow: "hidden",
-    transition: "transform 0.3s ease-in-out",
-    margin: "10px 12px 20px",
-    padding: "6px 5px 10px",
-  },
-  dish: {
-    width: "32px",
-    height: "32px",
-  },
-};
-
-export default FoodDeliveryCreateOrder;
+}

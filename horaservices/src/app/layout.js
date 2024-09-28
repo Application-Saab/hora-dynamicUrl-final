@@ -4,8 +4,11 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { GoogleTagManager } from '@next/third-parties/google'
+import { getHomeOrganizationSchema } from "../utils/schema";
 
 const inter = Inter({ subsets: ["latin"] });
+const schemaOrg = getHomeOrganizationSchema();
+const scriptTag = JSON.stringify(schemaOrg);
 
 export default function RootLayout({ children }) {
   return (
@@ -18,7 +21,7 @@ export default function RootLayout({ children }) {
         <meta property="og:description" content="Want to book a cook for home near you? Hire skilled cooks for a day or book a chef for a party at home with Hora. chef near me . Get chef for a birthday or house party in Mumbai, Bangalore & Delhi NCR,  Hora, Hora services, Horaservices" />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1711520474508.png" />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706459457063.png" />
-        {/* <script type="application/ld+json">{scriptTag}</script> */}
+        <script type="application/ld+json">{scriptTag}</script>
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content="https://horaservices.com" />

@@ -1,34 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-BASE_URL,
-PAYMENT,
-PAYMENT_STATUS,
-API_SUCCESS_CODE,
-UPDATE_ORDER_STATUS,
-} from "../utils/apiconstants";
 import axios from "axios";
 import Head from "next/head";
-import Success from '../pages/Success';
-import Failure from '../pages/Failure';
-// import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
-import whatsppicon from "../assets/whatsapp-icon.png";
-import { getHomeOrganizationSchema } from "../utils/schema";
+import whatsppicon from "../../assets/whatsapp-icon.png";
+import { getHomeOrganizationSchema } from "../../utils/schema";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "../../app/page.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './globals.css';
+import '../../app/globals.css';
 import Slider from 'react-slick'; 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import DecorationIcon from '../assets/decoration_icon.png';
-import PhotographyIcon from '../assets/photography_icon.png';
-import FoodIcon from '../assets/food_icon.png';
+import DecorationIcon from '../../assets/decoration_icon.png';
+import PhotographyIcon from '../../assets/photography_icon.png';
+import FoodIcon from '../../assets/food_icon.png';
 import { sendGTMEvent  } from '@next/third-parties/google';
 
-import './homepage.css'
+import '../../app/homepage.css'
 // remove later
 // import homepage_entertainment1 from '../assets/homepage_entertainment1.png';
 // import homepage_entertainment2 from '../assets/homepage_entertainment2.png';
@@ -201,244 +191,231 @@ const settings = {
     sendGTMEvent('event', 'titleClicked', { value: title });
   }
 
-const slides = [
-{
- image: "https://horaservices.com/api/uploads/homepage_slider1.webp",
-  title: 'Decoration at your step',
-  description: 'Transform your space with our expert decorators',
-  imgAlt: 'Decoration services at your step',
-  link:"/balloon-decoration"
-},
-{
-  image: "https://horaservices.com/api/uploads/homepage_slider2.webp",
-  title: 'Party Food Delivery',
-  description: 'Delicious food for all your party needs',
-  imgAlt: 'Party food delivery service',
-  link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
-},
-{
-  image: "https://horaservices.com/api/uploads/homepage_slider3.webp",
-  title: 'Live Cooking at Spot',
-  description: 'Book top-notch performers for your event',
-  imgAlt: 'Live cooking at event location',
-  link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
-}
-];
-
-const foodData = [
-  {
-    id: 1,
-    image: "https://horaservices.com/api/uploads/homepage_food1.webp",
-    title: "Bulk Food Delivery",
-    imgAlt: "Bulk food delivery service",
-    link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
-  },
-  {
-    id: 2,
-    image: "https://horaservices.com/api/uploads/homepage_food2.webp",
-    title: "Chef For Party",
-    imgAlt: "Chef cooking for a party",
-    link:"/book-chef-cook-for-party"
-  },
-  {
-    id: 3,
-    image: "https://horaservices.com/api/uploads/homepage_food3.webp",
-    title: "Live Catering",
-    imgAlt: "Live catering service at an event",
-    link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
-  },
-];
-
-// const EntertainmentData = [
-//   { 
-//     id: 1, 
-//     title: 'Tattoo Artist', 
-//     imageUrl: homepage_entertainment1, 
-//     link: '#', 
-//     imgAlt: 'Tattoo artist providing services at an event' 
-//   },
-//   { 
-//     id: 2, 
-//     title: 'Magician', 
-//     imageUrl: homepage_entertainment2, 
-//     link: '#', 
-//     imgAlt: 'Magician performing at an event' 
-//   },
-//   { 
-//     id: 3, 
-//     title: 'Party Host', 
-//     imageUrl: homepage_entertainment3, 
-//     link: '#', 
-//     imgAlt: 'Party host engaging with guests' 
-//   },
-//   { 
-//     id: 4, 
-//     title: 'Mascot', 
-//     imageUrl: homepage_entertainment4, 
-//     link: '#', 
-//     imgAlt: 'Mascot character entertaining at an event' 
-//   },
-// ];
-
-const whereAreYouData = [
-  {
-    id: 1,
-    title: 'Decoration',
-    link: '/balloon-decoration',
-    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.webp",
-    imgAlt: 'Event decoration service',
-    points: [
-      '✨Choose from 1000+ unique designs for any Event - Birthdays, Anniversaries, Baby showers, Weddings, and more!',
-      '✨Get your venue decorated in just 2 hours, indoors or outdoors.',
-      '✨Best prices, timely service, and support',
-      '✨ 4.8 ⭐ Rating...', 
-    ],
-  },
-  {
-    id: 2,
-    title: 'Chef For Party',
-    link: '/book-chef-cook-for-party',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.webp",
-    imgAlt: 'Chef services for party events',
-    points: [
-        " ✨ HORA brings professional chefs to your kitchen",
-      '✨ They use your ingredients and utensils 🍳',
-      '✨ Experience 400 restaurant-style dishes. 🍲',
-      '✨ Affordable & customizable. 💰',
-      '✨ Full hygiene control. 🧼',
-      '✨ 4.8 ⭐ Rating...', 
-    ],
-  },
-  {
-    id: 3,
-    title: 'Food Delivery',
-    link: '/party-food-delivery-live-catering-buffet/party-food-delivery',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.webp",
-    imgAlt: 'Food delivery services for events',
-    points: [
-      '✨🎉 Enjoy food delivery with',
-      '✨ Best prices , Timely service',
-      '✨ Delicious taste',
-      '✨ Good packing' ,
-      '✨ Guaranteed support',
-      '✨ 4.8 ⭐ Rating...', 
-    ],
-  },
-  {
-    id: 4,
-    title: 'Live Catering',
-    link: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering',
-    imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.webp",
-    imgAlt: 'Live Catering services',
-    points: [
-      '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
-      '✨ Best prices , Timely service',
-      '✨ Delicious taste',
-      '✨ Good packing' ,
-      '✨ Guaranteed support',
-      '✨ 4.8 ⭐ Rating...', 
-    ],
-  },
-  {
-    id: 5,
-    title: 'Entertainment',
-    link: '/',
-    imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.webp",
-    imgAlt: 'Event food delivery services',
-    points: [
-      '✨ Make your event unforgettable by engaging your guests! ✨ Choose from over 10 amazing services:',
-      '🎨 Tattoo Artist' , 
-      '🎩 Magician',
-      '🎉 Party Host' , 
-      '🐻 Mascot ',
-      '🌿 Mehandi',
-      '💅 Nail Art ..and so much more!'
-    ],
-  },
-];
-
-const celebrateData = [
-  {
-    id: 1,
-    title: 'Birthday and Anniversary',
-    imageUrl: require('../assets/homepage_Celebrate1.png'),
-    imgAlt: 'Birthday and Anniversary celebration',
-    link: "https://horaservices.com/balloon-decoration/birthday-decoration",
-  },
-  {
-    id: 2,
-    title: 'House Parties',
-    imageUrl: require('../assets/homepage_Celebrate2.png'),
-    imgAlt: 'House parties celebration',
-  },
-  {
-    id: 3,
-    title: 'Corporate Events',
-    imageUrl: require('../assets/homepage_Celebrate3.png'),
-    imgAlt: 'Corporate events celebration',
-  },
-  {
-    id: 4,
-    title: 'Wedding Events',
-    imageUrl: require('../assets/homepage_Celebrate4.png'),
-    imgAlt: 'Wedding events celebration',
-  },
-  {
-    id: 5,
-    title: 'Gatherings',
-    imageUrl: require('../assets/homepage_Celebrate5.png'),
-    imgAlt: 'Gatherings celebration',
-  },
-  {
-    id: 6,
-    title: 'Kids Events',
-    imageUrl: require('../assets/homepage_Celebrate6.png'),
-    imgAlt: 'Kids events celebration',
-  },
-];
-
-const CustomerReview = [
-  {
-    id: 1,
-    name: "hemant singh",
-    image: "https://play-lh.googleusercontent.com/a-/ALV-UjU_D6MAIAmJm4BrWTwjmEUcdUPXGbQOutY3YUmEfozjR0EDCDlbfQ=s32-rw",
-    imgAlt: 'hemant singh review',
-    rating: 5,
-    review: "HORA have experienced and trained staff.  they effortlessly executed my event with grace. The food was not only delicious but also elegantly presented, leaving my guests raving about the taste and variety.",
-  },
-  {
-    id: 2,
-    name: "SANDIP RAI",
-    image: "https://play-lh.googleusercontent.com/a/ACg8ocJ3rwU_SQsSWbLiTYa9DsB3xjuM1Qa2oUzyowa6bka5AsXukg=s32-rw-mo",
-    imgAlt: 'SANDIP RAI review',
-    rating: 5,
-    review: "The decoration was so good and magical.I booked this decoration for my lil ones bday and I was very happy the way the canopy was set up and decorated by Sandeep from Hora. Greate Job!!"
-  },
-  {
-    id: 3,
-    name: "Ashu Tiwari",
-    image: "https://play-lh.googleusercontent.com/a-/ALV-UjWDqzjOJ19p-lbksp72dtFtEozrxlyX3-grQi0fSoiFSm8RrR9H=s32-rw",
-    imgAlt: 'Ashu Tiwari review',
-    rating: 5,
-    review: "Food was too good . I mean all dishes were good and quantity was good .every guest appreciated the taste and love it so much.Will definitely recommend to anyone looking for food services"
-  },
-  {
-    id: 4,
-    name: "Vijeta Sunda",
-    image: "https://play-lh.googleusercontent.com/a-/ALV-UjVFRB3pRXxtJgvV6QWB7tLW9JFDG-QiY8oHr22n_pQIQJaN_WD87w=s32-rw",
-    imgAlt: 'Vijeta Sunda review',
-    rating: 4,
-    review: "What a delightful experience we had..I'm so grateful for sending me the best Chef Vipin Kumar Arya who was so so experienced and skilled and dedicated...we had a party of 25people and he made it so easy for me and all"
-  },
-  {
-    id: 5,
-    name: "Sneha",
-    image: "https://play-lh.googleusercontent.com/a-/ALV-UjWYlq3OV6In6sCw_X91EexqX7q9FdazSyOJ-ROxRw63-BEbUnuB_A=s32-rw",
-    imgAlt: 'Jerome Bell review repeated',
-    rating: 4,
-    review: "The decorations were festive and vibrant, creating the perfect atmosphere for our celebration. Their professionalism and creativity were top-notch.. Very Good and amazing suppport"
-  },
-];
+  const slides = [
+    {
+      image: "https://horaservices.com/api/uploads/homepage_slider2.webp",
+      title: 'Party Food Delivery',
+      description: 'Delicious food for all your party needs',
+      imgAlt: 'Party food delivery service',
+      link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
+    },
+   
+    ];
+    
+    const foodData = [
+      {
+        id: 1,
+        image: "https://horaservices.com/api/uploads/homepage_food1.webp",
+        title: "Bulk Food Delivery",
+        imgAlt: "Bulk food delivery service",
+        link:"/party-food-delivery-live-catering-buffet/party-food-delivery"
+      },
+      {
+        id: 2,
+        image: "https://horaservices.com/api/uploads/homepage_food2.webp",
+        title: "Chef For Party",
+        imgAlt: "Chef cooking for a party",
+        link:"/book-chef-cook-for-party"
+      },
+      {
+        id: 3,
+        image: "https://horaservices.com/api/uploads/homepage_food3.webp",
+        title: "Live Catering",
+        imgAlt: "Live catering service at an event",
+        link:"/party-food-delivery-live-catering-buffet/party-live-buffet-catering"
+      },
+    ];
+    
+    // const EntertainmentData = [
+    //   { 
+    //     id: 1, 
+    //     title: 'Tattoo Artist', 
+    //     imageUrl: homepage_entertainment1, 
+    //     link: '#', 
+    //     imgAlt: 'Tattoo artist providing services at an event' 
+    //   },
+    //   { 
+    //     id: 2, 
+    //     title: 'Magician', 
+    //     imageUrl: homepage_entertainment2, 
+    //     link: '#', 
+    //     imgAlt: 'Magician performing at an event' 
+    //   },
+    //   { 
+    //     id: 3, 
+    //     title: 'Party Host', 
+    //     imageUrl: homepage_entertainment3, 
+    //     link: '#', 
+    //     imgAlt: 'Party host engaging with guests' 
+    //   },
+    //   { 
+    //     id: 4, 
+    //     title: 'Mascot', 
+    //     imageUrl: homepage_entertainment4, 
+    //     link: '#', 
+    //     imgAlt: 'Mascot character entertaining at an event' 
+    //   },
+    // ];
+    
+    const whereAreYouData = [
+      {
+        id: 1,
+        title: 'Decoration',
+        link: '/balloon-decoration',
+        imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu1.webp",
+        imgAlt: 'Event decoration service',
+        points: [
+          '✨Choose from 1000+ unique designs for any Event - Birthdays, Anniversaries, Baby showers, Weddings, and more!',
+          '✨Get your venue decorated in just 2 hours, indoors or outdoors.',
+          '✨Best prices, timely service, and support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 2,
+        title: 'Chef For Party',
+        link: '/book-chef-cook-for-party',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu2.webp",
+        imgAlt: 'Chef services for party events',
+        points: [
+            " ✨ HORA brings professional chefs to your kitchen",
+          '✨ They use your ingredients and utensils 🍳',
+          '✨ Experience 400 restaurant-style dishes. 🍲',
+          '✨ Affordable & customizable. 💰',
+          '✨ Full hygiene control. 🧼',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 3,
+        title: 'Food Delivery',
+        link: '/party-food-delivery-live-catering-buffet/party-food-delivery',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu3.webp",
+        imgAlt: 'Food delivery services for events',
+        points: [
+          '✨🎉 Enjoy food delivery with',
+          '✨ Best prices , Timely service',
+          '✨ Delicious taste',
+          '✨ Good packing' ,
+          '✨ Guaranteed support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 4,
+        title: 'Live Catering',
+        link: '/party-food-delivery-live-catering-buffet/party-live-buffet-catering',
+        imageUrl:  "https://horaservices.com/api/uploads/homepage_whatareu4.webp",
+        imgAlt: 'Live Catering services',
+        points: [
+          '🎉 Enjoy the full buffet/ Catering setup with hot and fresh food cooked by professional chefs starting @300 per plate ',
+          '✨ Best prices , Timely service',
+          '✨ Delicious taste',
+          '✨ Good packing' ,
+          '✨ Guaranteed support',
+          '✨ 4.8 ⭐ Rating...', 
+        ],
+      },
+      {
+        id: 5,
+        title: 'Entertainment',
+        link: '/',
+        imageUrl: "https://horaservices.com/api/uploads/homepage_whatareu5.webp",
+        imgAlt: 'Event food delivery services',
+        points: [
+          '✨ Make your event unforgettable by engaging your guests! ✨ Choose from over 10 amazing services:',
+          '🎨 Tattoo Artist' , 
+          '🎩 Magician',
+          '🎉 Party Host' , 
+          '🐻 Mascot ',
+          '🌿 Mehandi',
+          '💅 Nail Art ..and so much more!'
+        ],
+      },
+    ];
+    
+    const celebrateData = [
+      {
+        id: 1,
+        title: 'Birthday and Anniversary',
+        imageUrl: require('../../assets/homepage_Celebrate1.png'),
+        imgAlt: 'Birthday and Anniversary celebration',
+        link: "https://horaservices.com/balloon-decoration/birthday-decoration",
+      },
+      {
+        id: 2,
+        title: 'House Parties',
+        imageUrl: require('../../assets/homepage_Celebrate2.png'),
+        imgAlt: 'House parties celebration',
+      },
+      {
+        id: 3,
+        title: 'Corporate Events',
+        imageUrl: require('../../assets/homepage_Celebrate3.png'),
+        imgAlt: 'Corporate events celebration',
+      },
+      {
+        id: 4,
+        title: 'Wedding Events',
+        imageUrl: require('../../assets/homepage_Celebrate4.png'),
+        imgAlt: 'Wedding events celebration',
+      },
+      {
+        id: 5,
+        title: 'Gatherings',
+        imageUrl: require('../../assets/homepage_Celebrate5.png'),
+        imgAlt: 'Gatherings celebration',
+      },
+      {
+        id: 6,
+        title: 'Kids Events',
+        imageUrl: require('../../assets/homepage_Celebrate6.png'),
+        imgAlt: 'Kids events celebration',
+      },
+    ];
+    
+    const CustomerReview = [
+      {
+        id: 1,
+        name: "hemant singh",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjU_D6MAIAmJm4BrWTwjmEUcdUPXGbQOutY3YUmEfozjR0EDCDlbfQ=s32-rw",
+        imgAlt: 'hemant singh review',
+        rating: 5,
+        review: "HORA have experienced and trained staff.  they effortlessly executed my event with grace. The food was not only delicious but also elegantly presented, leaving my guests raving about the taste and variety.",
+      },
+      {
+        id: 2,
+        name: "SANDIP RAI",
+        image: "https://play-lh.googleusercontent.com/a/ACg8ocJ3rwU_SQsSWbLiTYa9DsB3xjuM1Qa2oUzyowa6bka5AsXukg=s32-rw-mo",
+        imgAlt: 'SANDIP RAI review',
+        rating: 5,
+        review: "The decoration was so good and magical.I booked this decoration for my lil ones bday and I was very happy the way the canopy was set up and decorated by Sandeep from Hora. Greate Job!!"
+      },
+      {
+        id: 3,
+        name: "Ashu Tiwari",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjWDqzjOJ19p-lbksp72dtFtEozrxlyX3-grQi0fSoiFSm8RrR9H=s32-rw",
+        imgAlt: 'Ashu Tiwari review',
+        rating: 5,
+        review: "Food was too good . I mean all dishes were good and quantity was good .every guest appreciated the taste and love it so much.Will definitely recommend to anyone looking for food services"
+      },
+      {
+        id: 4,
+        name: "Vijeta Sunda",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjVFRB3pRXxtJgvV6QWB7tLW9JFDG-QiY8oHr22n_pQIQJaN_WD87w=s32-rw",
+        imgAlt: 'Vijeta Sunda review',
+        rating: 4,
+        review: "What a delightful experience we had..I'm so grateful for sending me the best Chef Vipin Kumar Arya who was so so experienced and skilled and dedicated...we had a party of 25people and he made it so easy for me and all"
+      },
+      {
+        id: 5,
+        name: "Sneha",
+        image: "https://play-lh.googleusercontent.com/a-/ALV-UjWYlq3OV6In6sCw_X91EexqX7q9FdazSyOJ-ROxRw63-BEbUnuB_A=s32-rw",
+        imgAlt: 'Jerome Bell review repeated',
+        rating: 4,
+        review: "The decorations were festive and vibrant, creating the perfect atmosphere for our celebration. Their professionalism and creativity were top-notch.. Very Good and amazing suppport"
+      },
+    ];
 
 const openSliderLink = (link , title) => {
   sendGTMEvent('event', 'homePageSliderClicked', { value: title });
@@ -452,6 +429,20 @@ const openSliderLink = (link , title) => {
 return (
 <>
   <div className="page-width">
+        <Head>
+        <title>HORA Caterers: Tailored Modern Catering – Choose, Customize, Book!</title>
+        <meta name="description" content="Discover HORA Catering for exquisite veg and non-veg options, featuring a diverse menu including Chinese, North Indian, Italian, and Continental cuisines. 🍽️ Perfect for house parties, corporate events, weddings, and birthday celebrations! 🎉 We ensure your occasion is deliciously memorable. 🌟 Customize your menu today! 😊🎈" />
+        <meta name="keywords" content="HORA Caterers: Tailored Modern Catering – Choose, Customize, Book!" />
+        <meta property="og:title" content="HORA Caterers: Tailored Modern Catering – Choose, Customize, Book!" />
+        <meta property="og:description" content="Discover HORA Catering for exquisite veg and non-veg options, featuring a diverse menu including Chinese, North Indian, Italian, and Continental cuisines. 🍽️ Perfect for house parties, corporate events, weddings, and birthday celebrations! 🎉 We ensure your occasion is deliciously memorable. 🌟 Customize your menu today! 😊🎈" />
+        <meta property="og:image" content="https://horaservices.com/api/uploads/homepage_whatareu4.webp" />
+        <script type="application/ld+json">{scriptTag}</script>
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Hora Services" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
+        <meta property="og:url" content="https://horaservices.com/caterers" />
+        <meta property="og:type" content="website" />
+        </Head>
     <div className="party-services homeslider">
      <h1 className="party-title">All party services on one platform</h1>
 <div className="home-slider-inner">
