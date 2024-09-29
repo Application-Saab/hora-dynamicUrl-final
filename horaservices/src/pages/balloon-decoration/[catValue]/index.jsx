@@ -337,8 +337,8 @@ const getSubCatItems = async () => {
         <title>{PageTitle(catValue)}</title>
         <meta name="description" content={getPageMetaDescription()} />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
-        <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
-        <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <meta property="og:title" content={PageTitle(catValue)} />
+        <meta property="og:description" content={getPageMetaDescription()} />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
         <script type="application/ld+json">{scriptTag}</script>
         <meta name="robots" content="index, follow" />

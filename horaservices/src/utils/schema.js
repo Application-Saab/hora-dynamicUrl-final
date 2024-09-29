@@ -7,7 +7,7 @@ export const getDecorationOrganizationSchema = () => ({
     "alternateName": "Hora Services",
     "url": "https://horaservices.com",
     "keywords": "birthday decoration, anniversary decoration, party themes decorations, candlelight dinners, welcome baby decoration, baby shower decoration, first night decorations, haldi decoration, mehndi decoration, balloon room decoration, birthday decorators near me",
-    "description": "birthday decoration, anniversary decoration, party themes decorations, candlelight dinners, welcome baby decoration, baby shower decoration, first night decorations, haldi decoration, mehndi decoration, balloon room decoration, birthday decorators near me",
+    "description": "🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊",
     "logo": "https://horaservices.com//api/uploads/logo-icon.png",
     "priceRange": "999-39999",
     "aggregateRating": {
@@ -28,17 +28,68 @@ export const getDecorationOrganizationSchema = () => ({
     ]
   });
 
+
+  const PageTitle = (catValue) =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "Kids' Birthday Balloon Decoration by Professionals Decorators, Starting at ₹1199"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "Birthday Balloon Decoration at Home by Professionals  Decorators, Starting at ₹1199";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "Anniversary Decorations with Balloon & Rose Petals, Starting at ₹1199"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "First Night Decorations with Balloon & Rose Petals, Starting at ₹1199"
+    }
+    else if(catValue === "baby-shower-decoration") {
+      return "Baby Shower with Latest Designs by Professionals  Decorators Starting at ₹1199"
+    }
+    else if (catValue === "/welcome-baby-decoration"){
+      return "Baby Welcome Decoration at home by Professionals  Decorators, Starting at ₹1199"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Haldi Decoration with Latest Designs starting at ₹3000"
+    }
+    else{
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
+
+  const getPageMetaDescription = (catValue) =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "At Hora, 🎉Explore popular themes like jungle 🌴, Cocomelon 🍉, candy 🍭, unicorn 🦄, dinosaur 🦖, superhero 🦸‍♂️, princess 👑, space 🚀, pirate 🏴‍☠, under the sea 🌊, Baby Boss 👔, Barbie 💖, and cars 🚗. Explore detailed pricing and inclusions, and let our professional team bring your chosen design to life. Book your perfect party decor today! 🎈✨"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "At Hora, 🎈 Explore our wide range of balloon and flower decorations for birthday parties, featuring ring, sequin, wall, and room designs. Discover pricing and inclusions for every balloon color and variety. Customise your celebration and make it unforgettable with our stunning decor. Book your perfect party setup today! 🎉🌟";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "🎉 Explore top-notch anniversary decoration designs and book directly from our website 💖. Find elegant and customizable decor options for your special event. Browse our selection to choose the perfect theme and make your anniversary memorable with seamless online booking. ✨"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Brighten up your Haldi ceremony with vibrant and elegant décor! 🌼✨ Explore our stunning Haldi decoration setups, featuring traditional elements, colorful floral arrangements, and custom designs to make your event unforgettable. 🌸💛"
+    }
+    else{
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
+
   export const getDecorationCatOrganizationSchema = (categoryName) => ({
     "@context": "https://schema.org",
     "@type": "Product",
     "brand": "Hora Services",
     "name": `${categoryName}`,
+    "keywords": PageTitle(categoryName),
+    "description": getPageMetaDescription(categoryName),
+    "url": `https://horaservices.com/balloon-decoration/${categoryName}`,
     "image": [
       "https://horaservices.com/api/uploads/attachment-1706520980436.png",
       "https://horaservices.com/api/uploads/attachment-1711520474508.png",
       "https://horaservices.com/api/uploads/attachment-1706459457063.png"
     ],
-    "description": `Book the Coolest Birthday Decorations for Kids in Bangalore. Themed, balloon decorations, or activities for kids, get only the best for your kid with Hora Services.`,
     "brand": "Horservices.com",
     "sku": `${categoryName?.toLowerCase().replace(/\s/g, '-')}`,
     "priceRange": "999-39999",
@@ -75,20 +126,26 @@ export const getDecorationProductOrganizationSchema = (product) => ({
     "name": "Hora",
     "alternateName": "Hora Services",
     "url": "https://horaservices.com",
-    "description": "Want to book a cook for home near you? Hire skilled cooks for a day or book a chef for a party at home with Hora. Get chef for a birthday or house party in Mumbai, Bangalore & Delhi NCR, Hora, Hora services, Horaservices",
-    "type": "website",
+    "description": "🍽️ Food (Live Catering | Bulk Food Delivery | Chef for Party) 🎨 Decoration (Balloon Decoration | Flower Decoration) | 📸 Photography 🎉 Entertainment. Discover the ultimate solution for party planning with Hora’s one-stop platform. Customise your party packages, create your ideal celebration, and book everything you need all in one place. We make planning effortless and enjoyable! 🎈✨",
+    "keywords": "Personal chef, private chef to cook in home in India, home chef, book a cook near you, chef at home, Private cook in Mumbai, Book a cook for home near you, Hire Chef in Bangalore, Private Chef in Delhi, Catering service, balloon, decoration, celebration, party, birthday, anniversary, decorator, candle light dinner,  surprises, couples, bouquets , online caterers, catering services, best caterers, birthday party catering, birthday caterers, party catering, home catering, corporate catering, caterers for small parties, wedding caterers",
     "logo": "https://horaservices.com/api/uploads/logo-icon.png",
     "sameAs": [
-      "https://www.facebook.com/people/Hora/61550111701616/",
-      "https://www.instagram.com/horaservices/?fbclid=IwAR0PktJ-rl5rKC6YGSZ8BSw3m8o9qMfLpJchO17FCEZuCXKxvASZWRymifA",
-      "https://www.youtube.com/channel/UCj5gMUjptHut0aGYHxCbE5g",
-      "https://horaservices.com"
+        "https://www.facebook.com/people/Hora/61550111701616/",
+        "https://www.instagram.com/horaservices/",
+        "https://www.youtube.com/channel/UCj5gMUjptHut0aGYHxCbE5g",
+        "https://horaservices.com"
     ],
     "image": [
       "https://horaservices.com/api/uploads/attachment-1706520980436.png",
       "https://horaservices.com/api/uploads/attachment-1711520474508.png",
-      "https://horaservices.com/api/uploads/attachment-1706459457063.png"
-    ]
+      "https://horaservices.com/api/uploads/homepage_whatareu4.webp",
+      "https://horaservices.com/api/uploads/homepage_whatareu2.webp",
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "reviewCount": "10600"
+    }
   });
 
 

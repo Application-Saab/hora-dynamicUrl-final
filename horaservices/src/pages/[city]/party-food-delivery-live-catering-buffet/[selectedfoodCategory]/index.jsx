@@ -1,34 +1,25 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  BASE_URL,
-  PAYMENT,
-  PAYMENT_STATUS,
-  API_SUCCESS_CODE,
-  UPDATE_ORDER_STATUS,
-} from "../../utils/apiconstants";
 import axios from "axios";
 import Head from "next/head";
-import Success from '../../pages/Success';
-import Failure from '../../pages/Failure';
 // import { useNavigate , Link, useLocation } from 'react-router-dom'; // Import useNavigate
-import whatsppicon from "../../assets/whatsapp-icon.png";
-import { getHomeOrganizationSchema } from "../../utils/schema";
+import whatsppicon from "../../../../assets/whatsapp-icon.png";
+import { getHomeOrganizationSchema } from "../../../../utils/schema";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../../app/page.module.css";
+import styles from "../../../../app/page.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../../app/globals.css';
+import '../../../../app/globals.css';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import DecorationIcon from '../../../assets/decoration_icon.png';
-import PhotographyIcon from '../../../assets/photography_icon.png';
-import FoodIcon from '../../assets/food_icon.png';
-import EntertainmentIcon from '../../../assets/enter_icon.png';
-import '../../../app/homepage.css'
-import cityData from '../../utils/cityData';
+import DecorationIcon from '../../../../assets/decoration_icon.png';
+import PhotographyIcon from '../../../../assets/photography_icon.png';
+import FoodIcon from '../../../../assets/food_icon.png';
+import EntertainmentIcon from '../../../../assets/enter_icon.png';
+import '../../../../app/homepage.css'
+import cityData from '../../../../utils/cityData';
 // remove later
 // import homepage_entertainment1 from '../../assets/homepage_entertainment1.png';
 // import homepage_entertainment2 from '../../assets/homepage_entertainment2.png';
@@ -372,38 +363,38 @@ export default function Home() {
       {
         id: 1,
         title: 'Birthday and Anniversary',
-        imageUrl: require('../assets/homepage_Celebrate1.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate1.png'),
         imgAlt: 'Birthday and Anniversary celebration',
         link: "https://horaservices.com/balloon-decoration/birthday-decoration",
       },
       {
         id: 2,
         title: 'House Parties',
-        imageUrl: require('../assets/homepage_Celebrate2.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate2.png'),
         imgAlt: 'House parties celebration',
       },
       {
         id: 3,
         title: 'Corporate Events',
-        imageUrl: require('../assets/homepage_Celebrate3.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate3.png'),
         imgAlt: 'Corporate events celebration',
       },
       {
         id: 4,
         title: 'Wedding Events',
-        imageUrl: require('../assets/homepage_Celebrate4.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate4.png'),
         imgAlt: 'Wedding events celebration',
       },
       {
         id: 5,
         title: 'Gatherings',
-        imageUrl: require('../assets/homepage_Celebrate5.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate5.png'),
         imgAlt: 'Gatherings celebration',
       },
       {
         id: 6,
         title: 'Kids Events',
-        imageUrl: require('../assets/homepage_Celebrate6.png'),
+        imageUrl: require('../../../../assets/homepage_Celebrate6.png'),
         imgAlt: 'Kids events celebration',
       },
     ];
