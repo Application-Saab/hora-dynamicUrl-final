@@ -248,7 +248,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     <div className='w-100'>
       {item.dish.length > 0 ?
         <>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "9px 19px 0px 6px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "5px 4px 0px 0px" }}>
             <h1 style={{ color: "#222", fontSize: "110%", marginBottom: "13px" , fontWeight:"700" }} className='cat-Name'>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
             <Button onClick={() => handleViewAll(item.mealObject._id)} style={{ color: expandedCategories.includes(item.mealObject._id) ? '#000' : '#fff', fontWeight: '400', textDecorationLine: 'none', fontSize: 12 }}
               className={`viewbtn ${expandedCategories.includes(item.mealObject._id)
@@ -467,6 +467,7 @@ console.log('selectedOption',selectedOption)
   };
 
   const handleViewAll = categoryId => {
+
     setIsViewAllExpanded(!isViewAllExpanded);
 
     setExpandedCategories(prevExpanded =>
@@ -486,7 +487,7 @@ console.log('selectedOption',selectedOption)
     <div className="chef-create-order">
       <div className="order-container chef">
         <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-          <Image style={{ width: "20px", height: '20px', marginRight: "10px" }} src={InfoIcon} />
+          <Image style={{ width: "20px", height: '20px', marginRight: "5px" }} src={InfoIcon} />
           <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
         </div>
         <div className="range-bar">
@@ -538,7 +539,7 @@ console.log('selectedOption',selectedOption)
           </div>
           <div
             className="chef-divider"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "13px" }}
           ></div>
         </Row>
 

@@ -1453,7 +1453,7 @@ const FoodDeliveryCheckout = () => {
                                     <p style={{ padding: 4, color: '#000', fontSize: 13, fontWeight: '700', marginBottom: 0 }}>Dishes selected</p>
                                 </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' }}>
+                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' , gap:"10px" }}>
                                     {selectedDishQuantities.map((item, index) => (
                                         <RenderDishQuantity key={index} item={item} />
                                     ))}
@@ -1638,7 +1638,7 @@ const FoodDeliveryCheckout = () => {
                                         <div>
                 
 
-                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }} className='foode-deliry-mobile'>
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", flexFlow: "wrap" , gap:"10px" }} className='foode-deliry-mobile'>
                                         {selectedDishQuantities.map((item, index) => (
                                         <RenderDishQuantity key={index} item={item} />
                                         ))}

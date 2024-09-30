@@ -264,6 +264,7 @@ li.inclusionstyle {
 
 .tabButton {
   border: none;
+  width: 50%;
 }
 
 button.continuebtnchef.btn.btn-primary {
@@ -495,7 +496,7 @@ img.dish-image.selected {
 
 .selected {
   font-weight: bold;
-  border: 2px solid #007bff;
+  /* border: 2px solid  rgb(157, 74, 147) ; */
 }
 
 .footSec ul,
@@ -555,8 +556,12 @@ p.ordersummeryname,
 .ordersummaryproduct {
   border: 1px solid #efefef;
   padding: 10px;
-  width: 15%;
-  margin: 0 10px 13px 10px;
+  width: 20%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .ordersummaryproduct img {
@@ -691,6 +696,9 @@ h4.contact-us-heading a {
 
 /* select date chef flow */
 @media (max-width: 800px) {
+  .dishes-selected .ingredientleftsec img {
+    max-height: 34px;
+}
   div#faqQ {
     padding: 0 20px;
   }
@@ -1525,7 +1533,7 @@ h4.contact-us-heading a {
     }
 
     .ordersummaryproduct {
-      width: 22% !important;
+      width: 45% !important;
     }
   }
   .decDetailsRightInner {
@@ -1665,9 +1673,15 @@ h4.contact-us-heading a {
   }
 
   .ingredientleftsec {
-    margin-right: 8% !important;
+    margin-right: 4% !important;
     width: 50% !important;
   }
+  .dishes-selected .ingredientsec{
+    padding: 6px 5px !important;
+  }
+  .dishes-selected .ingredientrightsec {
+    font-size: 10px !important;
+}
 
   .ingredientrightsecsibheading {
     font-size: 70% !important;
@@ -1750,7 +1764,7 @@ h4.contact-us-heading a {
   }
 
   .ingredientrightsec {
-    font-size: 10px !important;
+    font-size: 13px !important;
   }
 
   .tabButton {

@@ -76,7 +76,7 @@ const [decCat, setDecCat] = useState([
             }
         };
     
-        const birthdayData = [
+        const birthdayData = [ 
             {
               Image: 'https://horaservices.com/api/uploads/attachment-1705579946309.png',
               title: 'Simple Room Decoration',

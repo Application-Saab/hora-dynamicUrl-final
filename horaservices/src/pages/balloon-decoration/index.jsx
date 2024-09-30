@@ -601,7 +601,7 @@ const Decoration = () => {
                 <meta property="og:description" content="🎉 Explore a wide range of stunning decoration designs for every event and party, including 🎂 birthdays, 🧸 kids' parties, 💍 anniversaries, 💃 bachelorette parties, 👶 baby showers, 🍼 naming ceremonies, and 🌙 first nights. Choose your ideal design and book directly through our website for a seamless experience. Need help? Reach out to us at 7338584828 for friendly support and personalised assistance. 😊" />
                 <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
                 <meta property="og:image:alt" content="birthday decoration, anniversary decoration, party themes decorations, candlelight dinners, welcome baby decoration, baby shower decoration, first night decorations, haldi decoration, mehndi decoration, balloon room decoration, birthday decorators near me" />
-                <script type="application/ld+json">{scriptTag}</script>
+                <script type="application/ld+json">{scriptTag}</script>  
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content="Hora Services" />
                 <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
