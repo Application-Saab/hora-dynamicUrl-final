@@ -57,12 +57,6 @@ export default function Home() {
       console.log('Router is ready');
       const { city } = router.query;
       if (city) {
-        if(city === "caterers"){
-          router.push("/caterers");  
-        }
-        if(city === "bulk-food-delivery"){
-          router.push("/bulk-food-delivery");  
-        }
         setCity(city);
         console.log(`City from query: ${city}`);
       } else {
