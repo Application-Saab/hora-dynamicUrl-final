@@ -51,6 +51,12 @@ const Checkout = () => {
     setIsClient(true)
   }, [])
 
+  useEffect(() => {
+    if (router.query.comment) {
+      setComment(router.query.comment); // Set the comment from query
+    }
+  }, [router.query.comment]); // Run when the comment changes
+
   /// order.type is 2 for chef
   /// order.type is 1 for decoration
   /// order.type is 3 for waiter
@@ -396,12 +402,19 @@ const Checkout = () => {
                 {combinedDateTimeError && <p className="text-danger" style={{ fontSize: '12px', marginBottom: "0px" }}>The selected date and time must be at least 24 hours from now.</p>}
                 <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
                   <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                  <textarea className=' rounded border border-1 p-1 bg-white text-black'
+                  {/* <textarea className=' rounded border border-1 p-1 bg-white text-black'
                     value={comment}
                     onChange={handleComment}
                     rows={3}
                     placeholder="Enter your comment."
-                  />
+                  /> */}
+    <textarea
+        className='rounded border border-1 p-1 bg-white text-black'
+        value={comment}  // Control the textarea value
+        onChange={(e) => setComment(e.target.value)}  // Update state on change
+        rows={3}
+        placeholder="Enter your comment."
+      />
                 </div>
                 <div>
                   <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>

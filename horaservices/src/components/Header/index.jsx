@@ -60,21 +60,21 @@ function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    const disableDevTools = (e) => {
-      if (e.keyCode === 123 || 
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67)) ||
-          (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-      }
-    };
+  // useEffect(() => {
+  //   const disableDevTools = (e) => {
+  //     if (e.keyCode === 123 || 
+  //         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 67)) ||
+  //         (e.ctrlKey && e.keyCode === 85)) {
+  //       e.preventDefault();
+  //     }
+  //   };
   
-    document.addEventListener('keydown', disableDevTools);
+  //   document.addEventListener('keydown', disableDevTools);
     
-    return () => {
-      document.removeEventListener('keydown', disableDevTools);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('keydown', disableDevTools);
+  //   };
+  // }, []);
   
 
   useEffect(() => {

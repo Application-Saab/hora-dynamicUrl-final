@@ -20,6 +20,8 @@ import Tabs from '../../../../../components/Tabs';
 import addOnProductsData from '../../../../../utils/addOnProduct.json';
 // import { InferenceAPI } from 'huggingface/inference';
 
+import LOGOIMAGE from "../../../../../assets/new_logo_light.png.png";
+
 // Skeleton Loader Component
 const SkeletonLoader = () => {
   return (
@@ -391,48 +393,94 @@ const generateProductDescription = async (product) => {
   ];
 
 
-  const handleCheckout = (subCategory, product, selectedAddOnProduct) => {
-    const stateData = {
-      from: window.location.pathname,
-      subCategory,
-      product: JSON.stringify(product),
-      orderType,
-      catValue,
-      selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
-      itemQuantities: JSON.stringify(itemQuantities),
-      totalAmount: totalAmount,
-    };
+  const [comment, setComment] = useState('');
 
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-      router.push({
-        pathname: '/login',
-        query: {
-          from: window.location.pathname,
-          subCategory,
-          product: JSON.stringify(product),
-          orderType,
-          catValue,
-          selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
-          itemQuantities: JSON.stringify(itemQuantities),
-          totalAmount: totalAmount,
-        }
-      });
-    } else {
-      router.push({
-        pathname: '/checkout',
-        query: {
-          from: window.location.pathname,
-          subCategory,
-          product: JSON.stringify(product),
-          orderType,
-          catValue,
-          selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
-          itemQuantities: JSON.stringify(itemQuantities),
-          totalAmount: totalAmount,
-        }
-      });
-    }
+// Function to handle textarea changes
+const handleComment = (event) => {
+  setComment(event.target.value);
+};
+
+const handleCheckout = (subCategory, product, selectedAddOnProduct) => {
+  const stateData = {
+    from: window.location.pathname,
+    subCategory,
+    product: JSON.stringify(product),
+    orderType,
+    catValue,
+    selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+    itemQuantities: JSON.stringify(itemQuantities),
+    totalAmount: totalAmount,
+    comment,  // Add the comment to stateData
   };
+
+  const queryParams = {
+    from: window.location.pathname,
+    subCategory,
+    product: JSON.stringify(product),
+    orderType,
+    catValue,
+    selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+    itemQuantities: JSON.stringify(itemQuantities),
+    totalAmount: totalAmount,
+    comment: comment,  // Add comment to query parameters
+  };
+
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    router.push({
+      pathname: '/login',
+      query: queryParams,
+    });
+  } else {
+    router.push({
+      pathname: '/checkout',
+      query: queryParams,
+    });
+  }
+};
+
+
+    // const handleCheckout = (subCategory, product, selectedAddOnProduct) => {
+    //   const stateData = {
+    //     from: window.location.pathname,
+    //     subCategory,
+    //     product: JSON.stringify(product),
+    //     orderType,
+    //     catValue,
+    //     selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+    //     itemQuantities: JSON.stringify(itemQuantities),
+    //     totalAmount: totalAmount,
+    //   };
+
+    //   if (localStorage.getItem("isLoggedIn") !== "true") {
+    //     router.push({
+    //       pathname: '/login',
+    //       query: {
+    //         from: window.location.pathname,
+    //         subCategory,
+    //         product: JSON.stringify(product),
+    //         orderType,
+    //         catValue,
+    //         selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+    //         itemQuantities: JSON.stringify(itemQuantities),
+    //         totalAmount: totalAmount,
+    //       }
+    //     });
+    //   } else {
+    //     router.push({
+    //       pathname: '/checkout',
+    //       query: {
+    //         from: window.location.pathname,
+    //         subCategory,
+    //         product: JSON.stringify(product),
+    //         orderType,
+    //         catValue,
+    //         selectedAddOnProduct: JSON.stringify(selectedAddOnProduct),
+    //         itemQuantities: JSON.stringify(itemQuantities),
+    //         totalAmount: totalAmount,
+    //       }
+    //     });
+    //   }
+    // };
 
   function addSpaces(subCategory) {
     let result = "";
@@ -541,9 +589,9 @@ const discountPercentage = Math.round(((originalPrice - discountedPrice) / origi
               alt={`balloon decoration ${altTagCatValue} ${product.name} ${product.price}`} 
               style={{ width: "100%", height: "auto" }} width={600} height={600} />
               </Zoom>
-              <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
-              </div>
+              <div style={{ position: "absolute", bottom: 6, right: 20, borderRadius: "50%", padding: 10 }}>
+                      <Image src={LOGOIMAGE} alt="Hora" style={{ width: "100px", height: "100px", opacity: 0.6 }} />
+                      </div>
             </div>
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
@@ -617,7 +665,17 @@ const discountPercentage = Math.round(((originalPrice - discountedPrice) / origi
               )}
                 
               </div>
-        
+
+              {/* comments */}
+              <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+                  <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
+              <textarea className=' rounded border border-1 p-1 bg-white text-black'
+                    value={comment}
+                    onChange={handleComment}
+                    rows={3}
+                    placeholder="Enter your comment."
+                  />        
+                  </div>
 
          {/* CTA Button */}
         

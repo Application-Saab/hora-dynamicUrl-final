@@ -19,6 +19,8 @@ import BabyDecoration from '../../../assets/baby_boy_kids.jpg';
 
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
+import LOGOIMAGE from "../../../assets/new_logo_light.png.png";
+
 const dummyItems = [
   {
     name: 'Product 1',
@@ -29,12 +31,157 @@ const dummyItems = [
 ];
 
 
+const birthdayCatDescription = {
+  "birthday-decoration": [
+    {
+      "title": "The Art of Birthday Decoration - Hora Services Style!",
+      "htmlContent": `<p>
+      Birthdays are more than just a celebration of growing up. They are moments to stop, breathe, and take in the life you lived the past year. To reminisce, to be thankful, and most of all, to feel loved. And what better way to celebrate these auspicious new beginnings than amidst your loved ones in a place decked up like a palace!
+      </p><p>We, at CherishX, have been in the business of birthday decorations for years now, and each celebration still brings a smile to our faces. To be able to make such a special occasion even more special with our unique birthday decorations is a blessing and we do not take it for granted. Over the years, we have perfected this art so that you can have Instaworthy events in the comfort of your homes.</p>
+      <p>We aim to make sure you can enjoy these special moments to the fullest without any stress. So leave the planning and decorating to us as we liven up your event. We are here to provide experiences that, and it is a promise, will last you a lifetime!</p>`
+    },
+    {
+      "title": "Birthday Decoration at home in Delhi NCR",
+      "htmlContent": `<p>One for Everyone!</p>
+      <p>Every person is unique in their own way, and so should their celebrations! This is a list of tried and tested ideas for an amazing birthday bash to tickle your brain. Pick and choose to find the best combination that works for you, and make it a reality with our customisable birthday decorations!</p>
+      <p>If you fancy a party where excitement knows no bounds, we are here to plan it with you!</p>`
+    },
+    {
+      "title": "Simple Birthday Decorations",
+      "htmlContent": `<p>Some folks like to have low-key lives, and we should give them what they want. For souls who do not like to complicate things, these  are simplistic, convenient, and extremely affordable.</p>
+      <p>As they often say, Less is More!</p>`
+    },
+    {
+      "title": "Aesthetic Birthday Decorations",
+      "htmlContent": `<p>You can always base a birthday decoration at home around a single material that the birthday person likes. Some have an affinity for balloons while some people really dig flowers. And there are some who like the chic vibes of neon signs that make pictures futuristic! Find an aesthetic that suits your taste, be it balloon decorations or a bed of flowers, and just make the party come alive!</p>`
+    },
+    {
+      "title": "Romantic Birthday Decorations",
+      "htmlContent": `<p>Never forget, you get brownie points if you remember your partner’s birthday and you can amass even more if you plan them a surprise! Romance them off their feet with a great dining experience, or decorate their room like a floating castle, so you can make their smiles go wider than their eyes on the special day.</p>
+      <p>For the love you hold for your significant other, here are some amazing birthday decorations, some for him annd of course, some for her!</p>
+      <p>what's a birthday without a present! Find the perfect gift here to match the occasion!
+      <a href="http://localhost:3000/balloon-decoration/" target="_blank" style="color: blue; text-decoration: underline;">understand</a></p>`
+    },
+    {
+      "title": "Kids Birthday Decorations",
+      "htmlContent": `<p>When it comes to kids, you have to make the day as special as it can be so that when they grow up and celebrate even more, they will always remember the birthdays they had in their childhood. Nothing better than making it a memory as loving as it would be nostalgic.</p>
+      <p>These are some ideas for first birthdays that they might not remember but will definitely look back to in pictures. So do well!</p>
+      <p>If your kid loved the Boss Baby movie or has an intense love for unicorns or simply cannot stop humming the latest Cocomelon jingle, these kids themed decorations  are just the thing for you. Greet them with a birthday celebration as wonderful as the adventures of Spider-Man and we promise, their happiness will be at an all-time high!</p>
+      <p>You can also book exciting birthday activities like magic shows and tattoo parlors (temporary and safe, don’t worry!) here for a birthday as happening as the stories they tell when they are back from school!</p>`
+    },
+    {
+      "title": "Pet-safe Decoration for Paw-fect Birthdays",
+      "htmlContent": `<p>Pets are a part of the family, and every pet parent will agree with us. So don’t forget to celebrate their birthdays with a party as joyous as their smiles!</p>`
+    },
+    {
+      "title": "Open Space Decorations",
+      "htmlContent": `<p>Some celebrations should best happen under the open sky so you can feel the breeze as it flickers the candle on the cake and makes it a scene right out of the movies! So plan a party on your terrace or garden, or even the boot space of a car, the possibilities are simply endless!</p>
+      <p>Remember, you can share with us the plans in your mind and our team of experts will try their best to make it happen for a spectacular birthday celebration!</p>`
+    },
+    {
+      "title": "Where Can You Find Us?",
+      "htmlContent": `<p>CherishX is available online at all times and at our headquarters during office hours in Delhi. Our services extend all over India in every major state and city like
+      Delhi NCR, Mumbai, Bangalore, Hyderabad, and more. So you can be planning an event in Delhi NCR and we will be there in a jiffy.</p>
+      <p>Our support team is always ready to assist you with any and every decoration need. You can contact us through calls, WhatsApp, mail, and many other social media channels.</p>
+      <p>We would love to hear from you about our services and even be a part of your tags on social media.</p>
+      <p>Also, feel free to find out the services available in Delhi NCR on our website by simply navigating to it in the location section. Our team of experts are available PAN - India so you can be in Jammu or Chennai or Kolkata , we will be there with our best foot forward.</p>
+      <p>Here’s to beautiful celebrations!</p>
+      <p>Want birthday decorations at your home in Delhi NCR? Look no further than at CherishX!</p>`
+    },
+    {
+      "title": "Why Choose Us?",
+      "htmlContent": `<ul>
+  <li style="font-weight:400" aria-level="1">We have an extensive catalogue of birthday decorations to choose what suits your needs.</li>
+  <li style="font-weight:400" aria-level="1">Expect on-time delivery of our services always!</li>
+  <li style="font-weight:400" aria-level="1">Our team of expert decorators have an experience of more than 7 years on the job.</li>
+  <li style="font-weight:400" aria-level="1">Our PAN India availability means the chance of an amazing birthday party is always near you!</li>
+  <li style="font-weight:400" aria-level="1">We provide not decorations, but beautiful experiences at affordable rates that you can customise to your heart’s desire.</li>
+</ul>`
+    },
+    {
+      "title": "Book Your Dates Now!",
+      "htmlContent": `<p>The way forward is extremely simple!</p>
+      <ol>
+  <li style="font-weight:400" aria-level="1">Pick your favourite experience from the vast number of choices.</li>
+  <li style="font-weight:400" aria-level="1">Set your area and date to check for availability.</li>
+  <li style="font-weight:400" aria-level="1">Customise according to your wants and needs.</li>
+  <li style="font-weight:400" aria-level="1">And you are done! With a press of a button, you are now promised the most beautiful of birthday celebrations.</li>
+</ol>
+<p>Our team will visit promptly at the desired time and set everything up, so you can relax and focus on enjoying the special day with your loved ones.</p>`
+    }
+  ],
+  "kids-birthday-decoration": [
+    {
+      "title": "Trending Kids Birthday Party Decorations Other Activities",
+      "htmlContent": `<p>Children bring boundless energy and a perpetual spirit of celebration wherever they go. When it comes to their birthdays, the excitement is unparalleled, making it imperative to organize a spectacular party. Recognizing the sensitivity and enthusiasm that children have for their special day, we present the Kids Birthday Party Decoration and Celebration. With this comprehensive birthday package, you can effortlessly enhance your child's birthday festivities, ensuring a truly memorable experience for them and their guests.</p>
+      <p>When you think of a kids' birthday party, a plethora of ideas, vibrant colors, exciting themes, and character-infused decorations likely come to mind. It's no secret that children adore games and activities, making party entertainers a crucial element for a successful celebration. However, staying within a budget while planning such an event can be quite challenging. Enter our Kids Birthday Party Decorations Activities, designed to make the process seamless. Featuring gender-based decoration themes and a range of styles, you can explore various options. Personalize your party with engaging activities, delectable cakes, and even thoughtful return gifts – it's the ultimate package for an unforgettable celebration!</p>
+      <p>We recognize that you may have additional questions, and simply presenting our perspective might not cover all your inquiries. To bridge this gap, we've conducted thorough research and assembled a comprehensive list of frequently asked questions. This compilation serves as a valuable resource to provide answers to common queries, offering clarity and making it easier for you to navigate and understand our services.</p>`
+    },
+    {
+      "title": "How can I plan kids birthday party under budget near me?",
+      "htmlContent": `<p>Organizing kids birthday party can be quite a challenge, especially when considering various factors, with budget being the foremost concern. Our Kids Birthday Party Decorations offer a thoughtfully planned and budget-friendly package, encompassing all essential elements for hosting a remarkable celebration for your little one. With a diverse range of options, from decorations to activities and even return gifts, we present a comprehensive selection at your fingertips with just one click.</p>
+      <p>Themed parties play a crucial role in fostering creativity and imagination in children. By immersing them in a world filled with their favorite characters or concepts, kids are encouraged to explore their imaginations, enhancing cognitive development and problem-solving skills. The joy and excitement experienced during a kids birthday party celebration contribute to a positive and happy childhood, creating a sense of wonder and curiosity.</p>
+      <p>We understand the importance of every detail in bringing a theme to life, from decorations to activities and even personalized elements. What sets us apart is our dedication to providing a hassle-free experience for parents. We, along with our party entertainers, take care of the meticulous planning, leaving you free to enjoy the celebration with your child. Our themes are not just visually appealing but are also designed to align with age-appropriate content, ensuring that the experience is both enjoyable and safe for all the young participants.</p>`
+    },
+    {
+      "title": "Where can I find the best 6 month birthday decoration near me?",
+      "htmlContent": `<p>Celebrating your baby's six-month milestone is a precious moment, and we're here to make it extraordinary! With our Sweet Donor 6 Month Birthday Decoration, we ensure your little one's celebration is filled with joy and wonder. Trust us to bring forth an atmosphere so delightful that your kid's half-birthday will radiate absolute fun and create lasting memories.</p>
+      <p>At this tender age, every milestone is a significant achievement, and we understand the importance of commemorating it in a special way. Our half birthday decor is infused with elements that go beyond the ordinary, creating a magical ambiance that perfectly complements this unique occasion. From charming decorations to interactive elements, we've got everything covered to make your baby's half-birthday celebration truly memorable.</p>`
+    },
+    {
+      "title": "Suggest some birthday party organizers for my kids birthday party decoration.",
+      "htmlContent": `<p>Secure the perfect celebration for your child's birthday by booking our expert services. Our team comprises skilled and professional birthday party organizers including experienced decorators who are committed to bringing your envisioned decor to life. Take advantage of the convenience of our one-stop booking platform, where you can not only reserve exquisite decorations but also add on exciting activities, personalized e-invites, and a delectable cake. Experience the ease of having an entire celebration package at your fingertips – a delightful deal that ensures your child's special day is filled with joy and memorable moments.Where can I find good first birthday party decoration near me?</p>
+      <p>At CherishX, we proudly present the finest and most adorable first birthday party decoration for baby boy and baby girl both. Our premium decorations are designed for longevity and create a picturesque aura that sets the stage for a memorable celebration. Choose from a diverse range of decoration themes, including popular characters like Boss Baby, Spiderman, Cocomelon, Mini Mouse, Barbie, and the famous Birthday Princess Theme Decoration, and many more.</p>
+      <p>For those who prefer non-character-based themes, we also offer balloon decoration for 1st birthday party boy and girl both. Our meticulously designed decoration backdrops are poised to transform your space into a joyous and vibrant scene, ensuring smiles are guaranteed throughout the entire celebration. Cherish the special moments with our enchanting 1st birthday party decorations, where every detail is crafted to make your little one's milestone truly magical.</p>`
+    },
+    {
+      "title": "Where can I get childrens birthday decorations near me?",
+      "htmlContent": `<p>Experience the pinnacle of childrens birthday decorations with our theme-based offerings, promising to take your little one's celebration to new heights. From the charming Boss Baby theme to the enchanting world of unicorns, we offer a diverse array of themes to suit every preference. Our booking process is exceptionally user-friendly, organized by gender-specific themes to ensure a hassle-free experience. No complications, just seamless decoration booking for your kids birthday party.</p>
+      <p>But that's not all – we go beyond decorations. If you're on the lookout for additional services like engaging kids birthday activities, personalized e-invites, or even delicious cakes, look no further. Everything you need is conveniently available on our website, just a tap away. Elevate your little one's birthday celebration effortlessly with our comprehensive services. Book the best in children's birthday decorations and create magical memories that will be cherished for years to come.</p>`
+    },
+    {
+      "title": "What All Areas Do you Service in Pune for Kids Birthday Party Decoration Delivery?",
+      "htmlContent": `<p>We cover ALL localities in  We cover ALL areas in Pune- Kothrud, Viman Nagar, Wadgaon Sheri, Kharadi, Hinjewadi, Hadapsar, Karve Nagar, Koregaon Park, Kalyani Nagar, Wagholi,Boat Club Road, Model Colony, Aundh, Erandwane, Senapati Bapat Road, Wakad, Baner, Bavdhan, Balewadi, Ravet, Sinhagad Road, Undri, Mundhwa, Viman Nagar, Amanora Park Town, Magarpatta City, Lohgaon, Keshav Nagar, Pimpri-Chinchwad, and more. </p>`
+    },
+    {
+      "title": "What are the Major Cities where you provide the Kids Birthday Party Decoration Delivery Service?",
+      "htmlContent": `<p>What are the Major Cities where you provide the Kids Birthday Party Decoration Delivery Service?</p>
+      <p>Delhi</p>
+      <p>Bangalore</p>
+      <p>Kolkata</p>
+      <p>Pune</p>
+      <p>Indore</p>
+      <p>Mumbai</p>
+      <p>Hyderabad</p>
+      <p>Jaipur</p>
+      <p>Lucknow</p>`
+    },
+    {
+      "title": "Why choose CherishX for your Kids Birthday Party decoration in Pune ?",
+      "htmlContent": `<p>We empathize with your emotions! Recognizing the significance of your event, we go the extra mile to provide you with top-notch decorations, the finest gifts, and enchanting candlelight dinners. Our goal is to create an unforgettable experience for you, ensuring every detail is meticulously arranged. Explore our collection of unique kids birthday party decorations online to surprise your boyfriend, girlfriend, mother, father, wife, or husband. We are committed to ensuring both you and your loved ones are delighted and happy with our efforts!</p>
+      <p>Our commitment to quality is unwavering—we consistently use fresh, premium items. However, we believe our customers are the best advocates. Feel free to peruse our reviews before booking any birthday or anniversary cakes or gift combos from our website. Their experiences will speak volumes about our dedication to delivering excellence.</p>`
+    },
+    {
+      "title": "How do I Book Kids Birthday Party Decorations Online in Pune with CherishX?",
+      "htmlContent": `<p>Follow the steps below to book with us:</p>
+      <ul>
+<li font-weight:="" aria-level="">Choose a Gift online according to your choice.</li>
+<li font-weight:="" aria-level="">Select the date and time for the delivery.</li>
+<li font-weight:="" aria-level="">Fill in the required details like your address, requirements, customizations, etc.</li>
+<li font-weight:="" aria-level="">Complete the payment process.</li>
+</ul>
+<p>Sit back and relax – our team has everything under control, and you're all set!</p>`
+    }
+  ]
+};
+
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   //   let { city } = useParams();
   const [city, setCity] = useState('');
   const [catValue, setCatValue] = useState('');
+  
   useEffect(() => {
     if (router.isReady) {
       const { catValue: queryCatValue, city: queryCity } = router.query;
@@ -123,6 +270,12 @@ useEffect(() => {
   }
 }, [themeFilter]);
 
+const [showAll, setShowAll] = useState(false); // State to track if all items should be shown
+
+ // Toggle function to show/hide more items
+ const toggleShowAll = () => {
+  setShowAll((prev) => !prev);
+};
 
 
        // Save the theme filter to localStorage
@@ -374,6 +527,9 @@ useEffect(() => {
     { title: "Sport", image: "https://cheetah.cherishx.com/website_layout/Decoration-Themes-Boy's_Desktop_21-min.jpg?format=avif", link: "kids-birthday-decoration?theme=Elsa" }
   ];
 
+
+ 
+
     // State to manage the number of visible items
   const [visibleItems, setVisibleItems] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -387,6 +543,10 @@ useEffect(() => {
     }
     setIsExpanded(!isExpanded);
   };
+
+  // const currentCategoryContent = birthdayCatDescription[catValue];
+  const currentCategoryContent = birthdayCatDescription[catValue] || []; // Get content based on catValue
+
 
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
@@ -494,8 +654,9 @@ useEffect(() => {
                     <div style={{ position: "relative" }}>
                       <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
-                      <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
+                      <div style={{ position: "absolute", bottom: 6, right: 20, borderRadius: "50%", padding: 10 }}>
+                      <Image src={LOGOIMAGE} alt="Hora" style={{ width: "80px", height: "80px", opacity: 0.6 }} />
+
                       </div>
                     </div>
                     {/* End of Watermark */}
@@ -658,6 +819,43 @@ useEffect(() => {
           }
           </div> */}
         </div>
+        
+
+        {/* <div className="category-content">
+  {currentCategoryContent ? (
+    currentCategoryContent.map((item, index) => (
+      <div key={index} className="category-item">
+        <h1>{item.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: item.htmlContent }}></div>
+      </div>
+    ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+</div> */}
+
+<div className="category-content">
+      {currentCategoryContent.length > 0 ? (
+        currentCategoryContent
+          .slice(0, showAll ? currentCategoryContent.length : 2) // Show all if `showAll` is true, otherwise show first 2
+          .map((item, index) => (
+            <div key={index} className="category-item">
+              <h1>{item.title}</h1>
+              <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+            </div>
+          ))
+      ) : (
+        <p className="no-content-message">No content available for this category.</p>
+      )}
+      {currentCategoryContent.length > 2 && ( // Only show button if there are more than 2 items
+        <button onClick={toggleShowAll} className="toggle-btn">
+          {showAll ? 'See Less' : 'See More'}
+        </button>
+      )}
+    </div>
+
+
+
       </>
     </div>
   );
