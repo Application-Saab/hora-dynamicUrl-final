@@ -150,7 +150,7 @@ const Decoration = () => {
           title: 'View more from First Night Decorations',
           price: '',  // No price
           rating: '',  // No rating
-          link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+          link: "/balloon-decoration/first-night-decoration",  // Link to the full section
           isViewMore: true  // Flag to indicate it's a "View more" slide
         },
         {
@@ -191,7 +191,7 @@ const Decoration = () => {
           title: 'View more from Haldi Mehandi Decorations',
           price: '',  // No price
           rating: '',  // No rating
-          link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+          link: "/balloon-decoration/haldi-mehendi-decoration ",  // Link to the full section
           isViewMore: true  // Flag to indicate it's a "View more" slide
         },
         {
@@ -341,10 +341,10 @@ const Decoration = () => {
           },
           {
             Image: 'https://horaservices.com/api/uploads/attachment-1726057785648.png',
-            title: 'Sea Shell by Sea Shore Decor',
-            price: '₹2740',
+            title: 'Mermaid Sea Shell Shore Decor',
+            price: '₹2117',
             rating: 4.4,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Sea-Shell-by-Sea-Shore-Decor",
+            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Sea-Shell-Shore-Decor",
           },
           {
             Image: 'https://horaservices.com/api/uploads/attachment-1713185070655.png',
@@ -444,7 +444,7 @@ const Decoration = () => {
             title: 'View more from Welcome Baby Decorations',
             price: '',  // No price
             rating: '',  // No rating
-            link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+            link: "/balloon-decoration/welcome-baby-decoration",  // Link to the full section
             isViewMore: true  // Flag to indicate it's a "View more" slide
           },
           {
@@ -454,13 +454,6 @@ const Decoration = () => {
             rating: 4.8,
             link:"/balloon-decoration/welcome-baby-decoration/product/Golden-&-Pink-Theme-Baby-Welcome",
           },
-          //  {
-          //   Image: 'https://i.ibb.co/CBpdDWV/VIEW-ALL.png',
-          //   title: 'VIEW ALL',
-          //   price: '',
-          //   rating: '',
-          //   link:"/balloon-decoration/welcome-baby-decoration",
-          // },
         ];
       
         const PremiumData= [
@@ -628,18 +621,6 @@ const Decoration = () => {
     ))}
 </div>
 <div className="page-width decorationlanding-slider">
-{/* <div className="slider-container">
-  <div className="slider-header">
-    <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
-    <button 
-    className="viewbtn  btn btn-primary" 
-    onClick={() => handleViewMore("KidsBirthday")}
-    >
-    View More
-    </button>
-    </div>
-  <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
-</div> */}
 
 <div className="slider-container">
   <div className="slider-header">
@@ -969,7 +950,7 @@ const Decoration = () => {
     ))}
 </div>
 </div>
-<div className="slider-container">
+{/* <div className="slider-container">
   <div className="slider-header">
     <h2 onClick={() => handleViewMore("BallonBouquets")} style={{ cursor:"pointer"}}>Balloon Bouquets</h2>
     <button 
@@ -980,7 +961,7 @@ const Decoration = () => {
     </button>
     </div>
   <DecorationLandingSlider data={BallonBData} category="BallonBouquets"  />
-</div>
+</div> */}
 
 <div className="slider-container">
   <div className="slider-header">

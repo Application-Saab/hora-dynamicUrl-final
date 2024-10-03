@@ -2,10 +2,12 @@ import React from 'react';
 import Slider from 'react-slick';
 import './decorationladingslider.css';
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
 
-const DecorationLandingSlider = ({ data, category, handleViewMore }) => {
+const DecorationLandingSlider = ({ data, category, handleViewMore , city }) => {
+  const router = useRouter();
 const sliderSettings = {
 dots: false,
 infinite: true,
@@ -89,6 +91,17 @@ const getDiscountedDifference = (price) => {
 };
 
 
+const handleSliderViewMore = (link , city) =>{
+  if(city){
+    router.push(`/${city}/${link}`); 
+  }
+  else{
+    router.push(`/${link}`);
+  }
+
+}
+
+
 
 return (
     <div className="slider-container slider-decoration-inner">
@@ -96,11 +109,11 @@ return (
       {data.map((item, index) => (
         <div key={index} className="slider-item">
           {item.isViewMore ? (
-            <div className="view-more-slide" onClick={() => handleViewMore(category)}>
+            <div className="view-more-slide" onClick={() => handleSliderViewMore(item.link , city)}>
               <h3 style={{ textAlign: 'center', cursor: 'pointer' }}>{item.title}</h3>
             </div>
           ) : (
-            <a href={item.link} style={{ position:"relative"}}>
+            <div onClick={() => handleSliderViewMore(item.link , city)} style={{ position:"relative"}}>
               <Image
                 src={item.Image}
                 alt={item.title}
@@ -148,7 +161,7 @@ return (
                   </p> */}
                 </div>
               </div>
-            </a>
+            </div>
           )}
         </div>
       ))}

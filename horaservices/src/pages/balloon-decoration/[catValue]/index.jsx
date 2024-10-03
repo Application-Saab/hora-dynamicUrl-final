@@ -331,6 +331,7 @@ const getSubCatItems = async () => {
   
   
 
+  
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>

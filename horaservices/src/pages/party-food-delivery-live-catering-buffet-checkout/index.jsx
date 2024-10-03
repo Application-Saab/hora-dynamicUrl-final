@@ -458,7 +458,7 @@ const FoodDeliveryCheckout = () => {
                     <p className='ordersummeryname'>{item.name}</p>
                     {
             selectedDeliveryOption === 'party-food-delivery' ? 
-            <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
+            <div style={{ fontSize: "90%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
             :
             null
           }
@@ -1352,14 +1352,14 @@ const FoodDeliveryCheckout = () => {
                                 </div>
 
                                 <div style={{ paddingTop: "5px" }}>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
                                     </div>
                                     {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
                                     {discountedPrice > 0 && (
                                         <div>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center" }}>
+                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center"  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
                                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
                                                 </div>
@@ -1372,7 +1372,7 @@ const FoodDeliveryCheckout = () => {
                                     )}
                                     {selectedDeliveryOption === 'party-food-delivery' && (
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "4px", margin: "0px 0 17px 0" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "4px", margin: "0px 0 17px 0"  , borderBottom:"1px solid rgb(215, 215, 215)"  , borderTop:"1px solid rgb(215, 215, 215)"}}>
                                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                     <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                         <div style={{ width: 19, height: 19, borderWidth: 1, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -1397,7 +1397,7 @@ const FoodDeliveryCheckout = () => {
                                             </div>
 
                                             <div>
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
                                                     <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
                                                         {totalPrice - discountedPrice > 4000 ? (
@@ -1416,7 +1416,7 @@ const FoodDeliveryCheckout = () => {
                                     )}
                                     {selectedDeliveryOption === 'party-live-buffet-catering' && (
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4 }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4   , borderBottom:"1px solid rgb(215, 215, 215)"}}>
                                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                     <button onClick={() => setIncludeTables(!includeTables)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                         <div style={{ width: 19, height: 19, borderWidth: 1, borderColor: includeTables ? '#008631' : '#008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -1436,7 +1436,7 @@ const FoodDeliveryCheckout = () => {
                                         </div>
                                     )}
                                     {/* Calculation for final total amount */}
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
                                     </div>
@@ -1459,10 +1459,28 @@ const FoodDeliveryCheckout = () => {
                                     ))}
                                 </div>
                             </div>
-                            <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                <h5 className='mt-2'>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className=' rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
-                            </div>
+                            <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: " baseline",
+                justifyContent: " space-between",
+                paddingTop: 12,
+                width:"100%",
+
+              }}
+            >
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
+                Need more info?
+              </p>
+           
+                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
+           
+            </div>
+
+          </div>
                         </div>
                     </div>
                 </div>
@@ -1481,30 +1499,31 @@ const FoodDeliveryCheckout = () => {
                         <div>
                             <div className="rightSeccheckout chef" style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "20px", backgroundColor: "#fff", borderRadius: "20px", width: "59%" }}>
                                 <div className='rightcheckoutsec' style={{ padding: "6px  0 0 " }}>
-
+                                    <h1 style={{ fontSize:"20px" , fontWeight:"600" , marginBottom:"8px"}}>Order Summary</h1>
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
-                                        <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Total Dishes</label>
+                                        <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10  , border:"1px solid #d7d7d7"}}>
+                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Total Dishes</label>
                                             <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {selectedDishesFoodDelivery && Object.keys(selectedDishesFoodDelivery).length}</p>
                                         </div>
                                         {peopleCount > 0 ?
-                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Number of people</label>
+                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10 , border:"1px solid #d7d7d7"}}>
+                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Number of people</label>
                                                 <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}>{peopleCount}</p>
                                             </div>
                                             :
                                             null
                                         }
                                     </div>
-                                    <div className='chef-divider' style={{ marginTop: "10px", marginBottom: "10px" }}></div>
+                                   
                                     <div style={{ paddingHorizontal: 5 }}>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 11  , borderBottom:"1px solid rgb(215, 215, 215)"}}>
+                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' , marginBottom:10 }}>Item Total</p>
+                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px'  , marginBottom:10 }}>₹ {totalPrice}</p>
                                         </div>
+                                        
                                         {discountedPrice > 0 && (
-                                            <div>
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center" }}>
+                                           
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, alignItems: "center"  }}>
                                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
                                                     </div>
@@ -1512,13 +1531,12 @@ const FoodDeliveryCheckout = () => {
                                                         {'-'} ₹ {discountedPrice}
                                                     </p>
                                                 </div>
-                                                {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                            </div>
+                                          
                                         )}
 
                                         {selectedDeliveryOption === 'party-food-delivery' && (
                                             <div>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "7px 4px", marginTop: 4 }}>
+                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "7px 4px", marginTop: 0 , marginBottom:10 , borderTop:" 1px solid rgb(215, 215, 215)" , borderBottom:"1px solid rgb(215, 215, 215)"}}>
                                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                         <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                             <div style={{ width: 19, height: 19, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -1536,7 +1554,7 @@ const FoodDeliveryCheckout = () => {
                                                     </div>
                                                 </div>
                                                 {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Packing Cost</p>
                                                     <div style={{ display: 'flex', color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600' }}> ₹ {packingCost}</p>
@@ -1544,7 +1562,7 @@ const FoodDeliveryCheckout = () => {
                                                 </div>
 
                                                 <div>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
                                                         <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
                                                             {totalPrice - discountedPrice > 4000 ? (
@@ -1583,12 +1601,12 @@ const FoodDeliveryCheckout = () => {
                                             </div>
                                         )}
 
-                                        <div className='chef-divider'></div>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                       
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 , paddingTop:8 ,  borderTop:"1px solid rgb(215, 215, 215)"}}>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 }}>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Advance Payment</p>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateAdvancePayment()}</p>
                                         </div>
@@ -1648,10 +1666,28 @@ const FoodDeliveryCheckout = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                    <h5 className='fs-6 mt-2'>Need more info?</h5>
-                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", fontSize: "13px" }} className='bg-white rounded-5 ms-1 '>Contact Us</button>
-                                </div>
+                                <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: " baseline",
+                justifyContent: " space-between",
+                paddingTop: 12,
+                width:"100%",
+
+              }}
+            >
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
+                Need more info?
+              </p>
+           
+                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
+           
+            </div>
+
+          </div>
 
                                 <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
                                     background: "rgb(157, 74,147, 28%)"

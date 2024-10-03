@@ -1,18 +1,18 @@
 'use client';
 import { Inter } from "next/font/google";
+import Head from "next/head"; 
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { GoogleTagManager } from '@next/third-parties/google'
-import { getHomeOrganizationSchema } from "../utils/schema";
 
 const inter = Inter({ subsets: ["latin"] });
-const schemaOrg = getHomeOrganizationSchema();
-const scriptTag = JSON.stringify(schemaOrg);
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <GoogleTagManager />
+      </Head>
       <body className={inter.className}>
         <Header />
         {children}

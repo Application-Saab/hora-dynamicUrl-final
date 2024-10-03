@@ -980,13 +980,15 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
 
     quantity = Math.round(quantity);
     let unit = item.unit;
-
     if (quantity >= 1000) {
       quantity = quantity / 1000;
       if (unit === 'Gram') {
         unit = 'KG';
       } else if (unit === 'ml') {
         unit = 'L';
+      }
+      else if (unit === 'Peices') {
+        unit = 'PCS';
       }
     }
 
@@ -1283,6 +1285,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                 alignItems: " baseline",
                 justifyContent: " space-between",
                 paddingTop: 12,
+                width:"100%",
 
               }}
             >
