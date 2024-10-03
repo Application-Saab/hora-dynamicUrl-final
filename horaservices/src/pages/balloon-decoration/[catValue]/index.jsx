@@ -15,6 +15,9 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { sendGTMEvent  } from '@next/third-parties/google';
+// In your main component file
+import categoryFooterData from '../../../utils/categoryFooterData';
+
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
@@ -328,7 +331,16 @@ const getSubCatItems = async () => {
     }
   }, [themeFilter]);
 
-  
+  const [showAll, setShowAll] = useState(false); // State to track if all items should be shown
+
+ // Toggle function to show/hide more items
+ const toggleShowAll = () => {
+  setShowAll((prev) => !prev);
+};
+
+
+   // const currentCategoryContent = birthdayCatDescription[catValue];
+   const currentCategoryContent = categoryFooterData[catValue] || []; // Get content based on catValue
   
 
   return (
@@ -483,6 +495,49 @@ const getSubCatItems = async () => {
           }
           </div> */}
         </div>
+
+        {/* <div className="category-content">
+      {currentCategoryContent.length > 0 ? (
+        currentCategoryContent
+          .slice(0, showAll ? currentCategoryContent.length : 2) // Show all if `showAll` is true, otherwise show first 2
+          .map((item, index) => (
+            <div key={index} className="category-item">
+              <h1>{item.title}</h1>
+              <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+            </div>
+          ))
+      ) : (
+        <p className="no-content-message">No content available for this category.</p>
+      )}
+      {currentCategoryContent.length > 2 && ( // Only show button if there are more than 2 items
+        <button onClick={toggleShowAll} className="toggle-btn">
+          {showAll ? 'See Less' : 'See More'}
+        </button>
+      )}
+    </div> */}
+
+
+<div className="category-content">
+  {currentCategoryContent.length > 0 ? (
+    currentCategoryContent
+      .slice(0, showAll ? currentCategoryContent.length : 2)
+      .map((item, index) => (
+        <div key={index} className="category-item">
+          <h1>{item.title}</h1>
+          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        </div>
+      ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+  {currentCategoryContent.length > 2 && (
+    <button onClick={toggleShowAll} className="toggle-btn">
+      {showAll ? 'See Less' : 'See More'}
+    </button>
+  )}
+</div>
+
+
       </>
     </div>
   );
