@@ -24,6 +24,7 @@ function DecorationCatDetails() {
   // Determine which values to use
   const subCategory = stateSubCategory || urlSubCategory;
   const catValue = stateCatValue || urlCatValue;
+  const altTagCatValue = catValue.replace(/-/g, ' ');
   const product = stateProduct || formattedProductName;
   const schemaOrg = getDecorationProductOrganizationSchema(product);
   const scriptTag = JSON.stringify(schemaOrg);
@@ -124,6 +125,7 @@ function DecorationCatDetails() {
         <script type="application/ld+json">{scriptTag}</script>
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Hora Services" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}/product/${product.name}`} />
         <meta property="og:type" content="website" />
       </Head>
@@ -131,7 +133,7 @@ function DecorationCatDetails() {
         <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "10px", position: "relative" }} className="decDetails">
           <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">
             <div style={{ width: "80%", boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", margin: "0 auto", position: "relative" }} className="decDetailsImage">
-              <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} alt="decoration-image" style={{ width: "100%", height: "auto" }} width={300} height={300} />
+              <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${product.name} ${product.price}`} style={{ width: "100%", height: "auto" }} width={300} height={300} />
               <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
                 <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
               </div>

@@ -20,7 +20,6 @@ const DecorationCatPage = () => {
   const router = useRouter();
     // let { city } = useParams();
   const { city, catValue } = router.query;
-  console.log(router)
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();
@@ -127,6 +126,7 @@ const DecorationCatPage = () => {
       priceCondition = item.price > 5000;
     }
 
+
     // Filter by theme
     if (themeFilter !== "all") {
       const formattedThemeFilter = themeFilter.toLowerCase().split('-')[0];
@@ -202,12 +202,60 @@ const DecorationCatPage = () => {
     return text;
   }
 
+ 
+  const PageTitle = (e) =>{
+    if(catValue === "kids-birthday-decoration"){
+      return `Kids Birthday Balloon Decoration in ${city} by Professionals Decorators, Starting at ₹1199`
+    }
+    else if(catValue === "birthday-decoration"){
+      return `Birthday Balloon Decoration ${city} at Home by Professionals  Decorators, Starting at ₹1199`;
+    }
+    else if(catValue === "anniversary-decoration"){
+      return `Anniversary Decorations in ${city} with Balloon & Rose Petals, Starting at ₹1199`;
+    }
+    else if(catValue === "first-night-decoration"){
+      return `First Night Decorations in ${city} with Balloon & Rose Petals, Starting at ₹1199`;
+    }
+    else if(catValue === "baby-shower-decoration") {
+      return `Baby Shower in ${city} with Latest Designs by Professionals  Decorators Starting at ₹1199`;
+    }
+    else if (catValue === "/welcome-baby-decoration"){
+      return `Baby Welcome Decoration in ${city} at home by Professionals  Decorators, Starting at ₹1199`;
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return `Haldi Decoration in ${city} with Latest Designs starting at ₹3000`
+    }
+    else{
+     return(`Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings in ${city} – Starting at ₹1199`)
+    }
+  }
+
+  const getPageMetaDescription = () =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "At Hora, 🎉Explore popular themes like jungle 🌴, Cocomelon 🍉, candy 🍭, unicorn 🦄, dinosaur 🦖, superhero 🦸‍♂️, princess 👑, space 🚀, pirate 🏴‍☠, under the sea 🌊, Baby Boss 👔, Barbie 💖, and cars 🚗. Explore detailed pricing and inclusions, and let our professional team bring your chosen design to life. Book your perfect party decor today! 🎈✨"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "At Hora, 🎈 Explore our wide range of balloon and flower decorations for birthday parties, featuring ring, sequin, wall, and room designs. Discover pricing and inclusions for every balloon color and variety. Customise your celebration and make it unforgettable with our stunning decor. Book your perfect party setup today! 🎉🌟";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "🎉 Explore top-notch anniversary decoration designs and book directly from our website 💖. Find elegant and customizable decor options for your special event. Browse our selection to choose the perfect theme and make your anniversary memorable with seamless online booking. ✨"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Brighten up your Haldi ceremony with vibrant and elegant décor! 🌼✨ Explore our stunning Haldi decoration setups, featuring traditional elements, colorful floral arrangements, and custom designs to make your event unforgettable. 🌸💛"
+    }
+    else{
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
-        <title>Balloon and Flower Decoration @999</title>
-        <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
-        <meta name="keywords" content="Balloon and Flower Decoration @999" />
+      <title>{PageTitle(catValue)}</title>
+      <meta name="description" content={getPageMetaDescription()} />
+      <meta name="keywords" content="Balloon and Flower Decoration @999" />
         <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
         <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
@@ -216,6 +264,8 @@ const DecorationCatPage = () => {
         <meta name="author" content="Hora Services" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}`} />
         <meta property="og:type" content="website" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
+
       </Head>
       <>
         <div style={{ textAlign: "center", justifyContent: "center", alignItems: "center" }}>
@@ -319,7 +369,7 @@ const DecorationCatPage = () => {
                 <div style={{ textAlign: "center", width: "100%", padding: "20px 0" }}>
                   <span>Reach out to our support team for this</span>
                   <span style={{ marginLeft: "10px" }}>
-                    <Link className="conactus" href="https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
+                    <Link className="conactus" href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
                   </span>
                 </div>
               )

@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
 
+// Tab Component
 function Tab({ label, isActive, onClick }) {
   return (
-    <div className={`tab ${isActive ? 'active' : ''}`} onClick={onClick}>
+    <div 
+      className={`tab ${isActive ? 'active' : ''}`} 
+      onClick={onClick}
+      style={{ cursor: 'pointer', padding: '10px', borderBottom: isActive ? '2px solid #9252AA' : 'none' }}
+    >
       {label}
     </div>
   );
 }
 
+// Tabs Component
 function Tabs({ tabs, defaultTab }) {
   const [activeTab, setActiveTab] = useState(defaultTab);
 
-  const handleClick = (tab) => {
-    setActiveTab(tab);
+  const handleClick = (tabId) => {
+    setActiveTab(tabId);
   };
 
   return (
-    <div className="tabs">
-      {tabs.map(tab => (
-        <Tab
-          key={tab.label}
-          label={tab.label}
-          isActive={activeTab === tab.label}
-          onClick={() => handleClick(tab.label)}
-        />
-      ))}
+    <div className="tabs-container">
+      <div className="tabs">
+        {tabs.map(tab => (
+          <Tab
+            key={tab.id}
+            label={tab.title}
+            isActive={activeTab === tab.id}
+            onClick={() => handleClick(tab.id)}
+          />
+        ))}
+      </div>
+      <div className="tab-content">
+        {tabs.find(tab => tab.id === activeTab)?.content}
+      </div>
     </div>
   );
 }

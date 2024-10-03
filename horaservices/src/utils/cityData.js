@@ -1,5 +1,5 @@
 const cityData = {
-    Delhi: {
+    delhi: {
         bannerImage: "test",
         cityLocalitiesList:
             [
@@ -86,7 +86,7 @@ const cityData = {
 
             ]
     },
-    Gurugram: {
+    gurugram: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { name: "Ardee city" },
@@ -211,7 +211,7 @@ const cityData = {
             { name: "Sector 59" }
         ]
     },
-    Ghaziabad: {
+    ghaziabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Abhay Khand" },
@@ -296,7 +296,7 @@ const cityData = {
             { "name": "Patel Nagar I" }
         ]
     },
-    Faridabad: {
+    faridabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Adarsh Colony" },
@@ -383,7 +383,7 @@ const cityData = {
         ]
 
     },
-    Noida: {
+    noida: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList: [
             { "name": "Ambedkar city" },
@@ -470,7 +470,7 @@ const cityData = {
         ]
 
     },
-    Bengaluru: {
+    bengaluru: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
             [
@@ -557,7 +557,94 @@ const cityData = {
                 // Add more localities here
             ]
     },
-    Hyderabad: {
+    bangalore: {
+        bannerImage: "content/img/OIP1.jpg",
+        cityLocalitiesList:
+            [
+                { "name": "A Narayanapura" },
+                { "name": "Akshya Nagar" },
+                { "name": "Allalasandra" },
+                { "name": "Ambalipura" },
+                { "name": "Anagalapura" },
+                { "name": "Anand Nagar" },
+                { "name": "Azad Nagar" },
+                { "name": "B Narayanapura" },
+                { "name": "Babusapalaya" },
+                { "name": "Bagalakunte" },
+                { "name": "Bagalur" },
+                { "name": "Bagaluru" },
+                { "name": "Bagepalli" },
+                { "name": "Baiyappanahalli" },
+                { "name": "Balagere" },
+                { "name": "Balaji Nagar" },
+                { "name": "Baliganapalli" },
+                { "name": "Banashankari" },
+                { "name": "Banaswadi" },
+                { "name": "Banjara Layout" },
+                { "name": "Bank Avenue Colony" },
+                { "name": "Bannerghatta" },
+                { "name": "Bapuji Nagar" },
+                { "name": "Basapura" },
+                { "name": "Basavanagar" },
+                { "name": "Basavanagudi" },
+                { "name": "Basavanna Nagar" },
+                { "name": "Basaveshwara Nagar" },
+                { "name": "Battarahalli" },
+                { "name": "Begur" },
+                { "name": "Belathur" },
+                { "name": "Bellahalli" },
+                { "name": "Bellandur" },
+                { "name": "Bennigana Halli" },
+                { "name": "Benson Town" },
+                { "name": "Bettahalasur" },
+                { "name": "Bhoganhalli" },
+                { "name": "Bhoopasandra" },
+                { "name": "Bidadi" },
+                { "name": "Bidrahalli" },
+                { "name": "Bikkanahalli" },
+                { "name": "Bilekahalli" },
+                { "name": "Bommanahalli" },
+                { "name": "Bommasandra" },
+                { "name": "Bommenahalli" },
+                { "name": "Brookefield" },
+                { "name": "BTM Layout" },
+                { "name": "Budigere" },
+                { "name": "Budigere Cross" },
+                { "name": "Byatarayanapura" },
+                { "name": "Cambridge Layout" },
+                { "name": "Carmelaram" },
+                { "name": "Challaghatta" },
+                { "name": "Chamarajpet" },
+                { "name": "Channasandra" },
+                { "name": "Cheemasandra" },
+                { "name": "Chickpet" },
+                { "name": "Chikballapur" },
+                { "name": "Chikbanavara" },
+                { "name": "Chikka Tirupathi" },
+                { "name": "Chikkaballapur" },
+                { "name": "Chikkabanavara" },
+                { "name": "Chikkabidarakallu" },
+                { "name": "Chikkalasandra" },
+                { "name": "Chikkanagamangala" },
+                { "name": "Chikkanahalli" },
+                { "name": "Chikkasandra" },
+                { "name": "Chinnapanahalli" },
+                { "name": "Chintamani" },
+                { "name": "Choodasandra" },
+                { "name": "Cooke Town" },
+                { "name": "Cottonpet" },
+                { "name": "Cox Town" },
+                { "name": "Cubbon Park" },
+                { "name": "CV Raman Nagar" },
+                { "name": "Dabaspete" },
+                { "name": "Dasarahalli" },
+                { "name": "Dayananda Nagar" },
+                { "name": "Deepanjali Nagar" },
+                { "name": "Defence Colony" }
+                // Add more localities here
+            ]
+    },
+    hyderabad: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
         [
@@ -645,7 +732,7 @@ const cityData = {
           ]
           
     },
-    Mumbai: {
+    mumbai: {
         bannerImage: "content/img/OIP1.jpg",
         cityLocalitiesList:
             [
@@ -772,40 +859,42 @@ const cityData = {
             ]
 
     },
-    Indore: {
+    indore: {
         bannerImage: "content/img/OIP1.jpg",
     },
-    Chennai: {
+    chennai: {
         bannerImage: "content/img/OIP1.jpg",
     },
-    Pune: {
+    pune: {
         bannerImage: "content/img/OIP1.jpg",
     },
-    Surat: {
+    surat: {
         bannerImage: "content/img/OIP1.jpg",
     },
-    Bhopal: {
+    bhopal: {
         bannerImage: "content/img/OIP1.jpg",
     },
     kolkata: {
         bannerImage: "content/img/OIP1.jpg",
     },
-    Kanpur:{
+    kanpur:{
         bannerImage: "content/img/OIP1.jpg",
     },
-    Lucknow:{
+    lucknow:{
         bannerImage: "content/img/OIP1.jpg",
     },
-    Goa:{
+    goa:{
         bannerImage: "content/img/OIP1.jpg",
     },
-    Jaipur:{
+    jaipur:{
         bannerImage: "content/img/OIP1.jpg",
     },
-    Ahmedabad:{
+    ahmedabad:{
         bannerImage: "content/img/OIP1.jpg",
     },
-    Chandigarh:{
+    chandigarh:{
         bannerImage: "content/img/OIP1.jpg",
     }
 };
+
+export default cityData;

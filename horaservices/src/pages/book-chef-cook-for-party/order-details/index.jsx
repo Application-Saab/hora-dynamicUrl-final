@@ -55,6 +55,7 @@ const SelectDate = ({ history, currentStep }) => {
     if (selectedDishDictionary) {
         try {
             selectedDishDictionary = JSON.parse(selectedDishDictionary);
+            selectedDishes = JSON.parse(selectedDishes);
         } catch (error) {
             console.error('Error parsing selectedDishDictionary:', error);
         }
@@ -237,12 +238,16 @@ const SelectDate = ({ history, currentStep }) => {
     });
 
     const minPeopleCount = 1
-    const maxPeopleCount = 100
-    const step = 10;
+    const maxPeopleCount = 35
+    const step = 1;
 
     const increasePeopleCount = () => {
-        setPeopleCount(peopleCount + 1)
-        setDishPrice(parseInt(dishPrice) + 49)
+        if (peopleCount >= 35) {
+            alert("You cannot select more than 35 people.");
+        } else {
+            setPeopleCount(peopleCount + 1);
+            setDishPrice(parseInt(dishPrice) + 49);
+        }
     }
 
     const decreasePeopleCount = () => {
@@ -252,7 +257,7 @@ const SelectDate = ({ history, currentStep }) => {
         }
     }
     const handleRangeChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         setPeopleCount(value);
         setDishPrice(value * 49); // Assuming 49 is the unit price
@@ -336,7 +341,7 @@ const SelectDate = ({ history, currentStep }) => {
     const getTotalIngredients = () => {
         let totalIngredients = {};
         for (const dishId in data) {
-            console.log('dishId2' + dishId);
+            // console.log('dishId2' + dishId);
             const dish = data[dishId];
             if (dish.ingredientUsed) {
                 dish.ingredientUsed.forEach((ingredient) => {
@@ -367,7 +372,7 @@ const SelectDate = ({ history, currentStep }) => {
                 });
             }
         }
-        console.log('totalIngredients', totalIngredients)
+        // console.log('totalIngredients', totalIngredients)
         return Object.values(totalIngredients);
     };
 
@@ -435,7 +440,7 @@ const SelectDate = ({ history, currentStep }) => {
                 </div>
                 <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
                     <div style={{ fontSize: "70%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
-                    <div style={{ fontSize: "140%", fontWeight: '700', color: '#9252AA', textTransform: "lowerCase" }}
+                    <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA', textTransform: "lowerCase" }}
                         className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
                 </div>
             </div>
@@ -550,7 +555,7 @@ const SelectDate = ({ history, currentStep }) => {
             );
         } else if (activeTab === 'right') {
             let totalIngredientsList = getTotalIngredients();
-            console.log('totalIngredientsList', totalIngredientsList)
+            // console.log('totalIngredientsList', totalIngredientsList)
             return <RightTabContent ingredientList={totalIngredientsList} />;
         }
     };
@@ -594,9 +599,9 @@ const SelectDate = ({ history, currentStep }) => {
             }} className='selectdateContainersec'>
                 <div style={{ width: "98%", margin: "10px", padding: "10px 30px" }} className='selectdateContainer'>
                     <div style={{ backgroundColor: "#fff", borderRadius: "10px", padding: "10px 10px 20px 15px" }} className='peoplecontsec'>
-                        <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
+                        {/* <div style={{ display: "flex", padding: 7, flexDirection: 'row', borderRadius: 5, marginTop: 5, marginBottom: 10, backgroundColor: 'rgba(211, 75, 233, 0.10)', justifyContent: 'flex-start', alignItems: 'top' }}>
                             <div style={{ color: "#9252AA", fontWeight: '500', fontSize: 11 }}>Note: Additional charge of 700 applies for more than 7 dishes.</div>
-                        </div>
+                        </div> */}
                         <div className="header-section">
                             <div className="heading">How many people you are hosting?</div>
                             <div className="control-buttons">
