@@ -19,12 +19,17 @@ import { sendGTMEvent  } from '@next/third-parties/google';
 import categoryFooterData from '../../../utils/categoryFooterData';
 
 
+
+import * as XLSX from 'xlsx'; // Import xlsx library
+
+
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   //   let { city } = useParams();
   const [city, setCity] = useState('');
   const [catValue, setCatValue] = useState('');
+  console.log(catValue, "catvaluesjkljfsdjfkdsl");
   useEffect(() => {
     if (router.isReady) {
       const { catValue: queryCatValue, city: queryCity } = router.query;
@@ -215,6 +220,7 @@ const getSubCatItems = async () => {
   try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+      console.log(response, "catvalueresponse");
       if (response.status === API_SUCCESS_CODE) {
           const decoratedData = response.data.data.map(item => {
               const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
@@ -224,10 +230,15 @@ const getSubCatItems = async () => {
                   userCount: getRandomNumber(20, 500),
                   discountPercentage: discount, // Add discount percentage
                   discountedPrice: discountedPrice ,// Add discounted price
-                  discountDifference: discountDifference
+                  discountDifference: discountDifference,
+                  inclusion: item.inclusion.join(', '), // Join the inclusion array into a single string
+                  catValue: catValue // Add catValue to each item
               };
           });
           setCatalogueData(decoratedData);
+
+           // Call the function to export data to Excel
+          //  exportToExcel(decoratedData);
       }
   } catch (error) {
       console.log('Error Fetching Data:', error.message);
@@ -236,6 +247,17 @@ const getSubCatItems = async () => {
   }
 };
 
+
+// Function to export data to Excel
+const exportToExcel = (data) => {
+  // Create a new workbook and a new worksheet
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Catalogue Data');
+
+  // Generate the Excel file and prompt user to download
+  XLSX.writeFile(wb, 'catalogue_data.xlsx');
+};
 
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");

@@ -86,34 +86,87 @@ const categoryFooterData = {
       {
         "title": "What are Some Birthday Theme Suggestions?",
         "htmlContent": `<p>
-       <ul class="theme-list">
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Astronaut-space' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Astronaut space theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Avengers' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Avengers theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Boss' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Boss baby theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=shark' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Baby shark theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Barbie' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Barbie theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Cocomelon' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Cocomelon theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=car' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Car theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Circus' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Circus theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Dinosaur' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Dinosaur theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Elsa' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Elsa theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Flamingo' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Flamingo theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Jungle' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Jungle theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Kitty' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Kitty theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Lion' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Lion King theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mickey-Mouse' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mickey Mouse theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mickey-Minnie' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mickey and Minnie theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Minecraft' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Minecraft theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mermaid' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mermaid theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Pikachu-Pokemon' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Pokemon and Pikachu theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Princess' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Princess theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Panda' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Panda theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Traffic' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Traffic theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=dogs' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Super dogs theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Hero' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Super Hero theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Football' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Sport Football theme</a></li>
-    <li><a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Unicorn' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Unicorn theme</a></li>
+     <ul class="theme-list" style="list-style-type: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap;">
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Astronaut-space' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Astronaut space theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Avengers' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Avengers theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Boss' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Boss baby theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=shark' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Baby shark theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Barbie' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Barbie theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Cocomelon' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Cocomelon theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=car' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Car theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Circus' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Circus theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Dinosaur' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Dinosaur theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Elsa' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Elsa theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Flamingo' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Flamingo theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Jungle' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Jungle theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Kitty' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Kitty theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Lion' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Lion King theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mickey-Mouse' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mickey Mouse theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mickey-Minnie' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mickey and Minnie theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Minecraft' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Minecraft theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Mermaid' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Mermaid theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Pikachu-Pokemon' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Pokemon and Pikachu theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Princess' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Princess theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Panda' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Panda theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Traffic' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Traffic theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=dogs' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Super dogs theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Hero' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Super Hero theme</a>
+    </li>
+    <li style="margin-right: 15px;">
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Football' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Sport Football theme</a>
+    </li>
+    <li>
+        <a href='https://horaservices.com/balloon-decoration/kids-birthday-decoration?theme=Unicorn' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Unicorn theme</a>
+    </li>
 </ul>
+
 
 
         </p>`
@@ -141,32 +194,50 @@ const categoryFooterData = {
         <p>But that's not all – we go beyond decorations. If you're on the lookout for additional services like engaging kids birthday activities, personalized e-invites, or even delicious cakes, look no further. Everything you need is conveniently available on our website, just a tap away. Elevate your little one's birthday celebration effortlessly with our comprehensive services. Book the best in children's birthday decorations and create magical memories that will be Hora Servicesed for years to come.</p>`
       },
       {
-        "title": "What All Areas Do you Service in Pune for Kids Birthday Party Decoration Delivery?",
-        "htmlContent": `<p>We cover ALL localities in  We cover ALL areas in Pune- Kothrud, Viman Nagar, Wadgaon Sheri, Kharadi, Hinjewadi, Hadapsar, Karve Nagar, Koregaon Park, Kalyani Nagar, Wagholi,Boat Club Road, Model Colony, Aundh, Erandwane, Senapati Bapat Road, Wakad, Baner, Bavdhan, Balewadi, Ravet, Sinhagad Road, Undri, Mundhwa, Viman Nagar, Amanora Park Town, Magarpatta City, Lohgaon, Keshav Nagar, Pimpri-Chinchwad, and more. </p>`
-      },
+          "title": "What All Areas Do You Service for Kids Birthday Party Decoration Delivery?",
+          "htmlContent": `<p>We cover ALL areas in India - Jaipur, Delhi, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Ahmedabad, Pune, Surat, Kanpur, Nagpur, Visakhapatnam, Bhopal, Patna, Vadodara, and more.</p>`
+        }
+,        
       {
         "title": "What are the Major Cities where you provide the Kids Birthday Party Decoration Delivery Service?",
-        "htmlContent": `<p>What are the Major Cities where you provide the Kids Birthday Party Decoration Delivery Service?</p>
-      <ul>
-    <li><a href='https://horaservices.com/Delhi/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Delhi</a></li>
-    <li><a href='https://horaservices.com/Gurugram/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Gurugram</a></li>
-    <li><a href='https://horaservices.com/Ghaziabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Ghaziabad</a></li>
-    <li><a href='https://horaservices.com/Faridabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Faridabad</a></li>
-    <li><a href='https://horaservices.com/Noida/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Noida</a></li>
-    <li><a href='https://horaservices.com/Bengaluru/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Bengaluru</a></li>
-    <li><a href='https://horaservices.com/Bangalore/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Bangalore</a></li>
-    <li><a href='https://horaservices.com/Hyderabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Hyderabad</a></li>
-</ul>
-
-`
-      },
+        "htmlContent": `
+          <p>What are the Major Cities where you provide the Kids Birthday Party Decoration Delivery Service?</p>
+          <ul style="list-style-type: none; padding: 0; margin: 0; display: flex;">
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Delhi/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Delhi</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Gurugram/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Gurugram</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Ghaziabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Ghaziabad</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Faridabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Faridabad</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Noida/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Noida</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Bengaluru/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Bengaluru</a>
+            </li>
+            <li style="margin-right: 15px;">
+              <a href='https://horaservices.com/Bangalore/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Bangalore</a>
+            </li>
+            <li>
+              <a href='https://horaservices.com/Hyderabad/balloon-decoration/kids-birthday-decoration' style='color: rgb(150, 82, 141); font-weight: bold; text-decoration: underline;'>Hyderabad</a>
+            </li>
+          </ul>
+        `
+      }
+,      
       {
-        "title": "Why choose Hora Services for your Kids Birthday Party decoration in Pune ?",
+        "title": "Why choose Hora Services for your Kids Birthday Party decoration ?",
         "htmlContent": `<p>We empathize with your emotions! Recognizing the significance of your event, we go the extra mile to provide you with top-notch decorations, the finest gifts, and enchanting candlelight dinners. Our goal is to create an unforgettable experience for you, ensuring every detail is meticulously arranged. Explore our collection of unique kids birthday party decorations online to surprise your boyfriend, girlfriend, mother, father, wife, or husband. We are committed to ensuring both you and your loved ones are delighted and happy with our efforts!</p>
         <p>Our commitment to quality is unwavering—we consistently use fresh, premium items. However, we believe our customers are the best advocates. Feel free to peruse our reviews before booking any birthday or anniversary cakes or gift combos from our website. Their experiences will speak volumes about our dedication to delivering excellence.</p>`
       },
       {
-        "title": "How do I Book Kids Birthday Party Decorations Online in Pune with Hora Services?",
+        "title": "How do I Book Kids Birthday Party Decorations Online with Hora Services?",
         "htmlContent": `<p>Follow the steps below to book with us:</p>
         <ul>
   <li font-weight:="" aria-level="">Choose a Gift online according to your choice.</li>
@@ -189,7 +260,7 @@ const categoryFooterData = {
           },
           {
             "title": "Anniversary Decoration Themes",
-            "htmlContent": `<p>Get the most trending and tasteful decorations for your anniversary celebration and make it Insta-worthy memories with your partner! Visit our website to find the best anniversary decorations available in Pune.</p>
+            "htmlContent": `<p>Get the most trending and tasteful decorations for your anniversary celebration and make it Insta-worthy memories with your partner! Visit our website to find the best anniversary decorations available.</p>
             <p>Below are some decoration themes carefully crafted with experience by our team of decorators, just for you!</p>`
           },
           {
@@ -214,10 +285,10 @@ const categoryFooterData = {
           },
           {
             "title": "Where Can You Find Us?",
-            "htmlContent": `<p>Be it a scenic location in the mountains or at your home in Pune, Hora Services's promise to deliver PAN India always stands true. So you can celebrate your anniversary, birthday, or any other occasion in the comfort of Pune, and we will be there. While we have our headquarters in Delhi, we operate in every corner of the country to the best of our abilities.</p>
+            "htmlContent": `<p>Be it a scenic location in the mountains or at your home, Hora Services's promise to deliver PAN India always stands true. So you can celebrate your anniversary, birthday, or any other occasion in the comfort at your home, and we will be there. While we have our headquarters in Delhi, we operate in every corner of the country to the best of our abilities.</p>
             <p>Be sure to check out our social media to see our vision and all the celebrations we have contributed to. Our support team is chronically online and is available 24/7 for every customer need.</p>
             <p>You can also tag us in your pictures and videos so our decorators can take pride in their work. A happy customer is a satisfied customer, and that's our goal, always!</p>
-            <p>So head over to our catalogue of various decoration experiences and find the one that suits your aesthetic. Make sure you select Pune in the location section to find the available decorations in your area and keep celebrating!</p>`
+            <p>So head over to our catalogue of various decoration experiences and find the one that suits your aesthetic. Make sure you find the available decorations in your area and keep celebrating!</p>`
           },
           {
             "title": "Why Choose Us?",
@@ -230,12 +301,12 @@ const categoryFooterData = {
 <p>Check our reviews online so you can make up your mind, and let the best handle the best anniversary celebration of your life!</p>`
           },
           {
-            "title": "Plan the Perfect Anniversary Surprise in Pune",
+            "title": "Plan the Perfect Anniversary Surprise",
             "htmlContent": `<p>Remember the date, that’s the first step. Next, you have to book our anniversary decorations at home that will create the perfect atmosphere to sweep them off their feet!</p>
             <p>All you need to do is:</p>
             <ol>
 <li style="font-weight:400" aria-level="1">Browse through our website and find the perfect experience for you.</li>
-<li style="font-weight:400" aria-level="1">Confirm the date and its availability in Pune.</li>
+<li style="font-weight:400" aria-level="1">Confirm the date and its availability.</li>
 <li style="font-weight:400" aria-level="1">Customise according to your needs and budget.</li>
 <li style="font-weight:400" aria-level="1">And click! You are all done.</li>
 </ol>
@@ -288,7 +359,7 @@ const categoryFooterData = {
     "baby-shower-decoration":
     [
         {
-            "title": "Get Blissful Baby Shower Decorations with Hora Services In Pune",
+            "title": "Get Blissful Baby Shower Decorations with Hora Services",
             "htmlContent": "<p>Are you all excited to unveil our most heartwarming baby shower decorations? If so, then get ready for your godh bharai celebration in the most beautiful way ever!</p>"
           },
           {
@@ -352,24 +423,20 @@ const categoryFooterData = {
             "htmlContent": "<p>We can go overboard with baby shower decorations but there is always a way to make it a budget-friendly and fun party. To host a budget-friendly baby shower, the following are some suggestions:</p><ul><li>Invite only those people who matter to you and are happy to see you. Don’t gather people just because they are a friend.</li><li>Ask for help. Friends and family will always be there to help you.</li><li>Go the DIY way! Homemade food and decorations can save you money.</li><li>Opt for simple yet tasty finger foods and drinks.</li><li>Be creative and set a budget.</li><li>Use natural light to your advantage instead of spending on electricity.</li></ul><p>So, these are a few things that will help you when it comes to organizing your Godh Bharai celebrations.</p>"
           },
           {
-            "title":"What are the Major Cities where you provide Baby Shower Decoration Services?",
+            "title": "What are the Major Cities where you provide Baby Shower Decoration Services?",
             "htmlContent": `<p>Well, we provide our services in many cities. Over the years, we have expanded our reach to new areas and cities. At present, we are offering our services to the following cities-</p>
-            <ul>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/delhi-ncr/baby-shower">Delhi NCR</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/jaipur/baby-shower">Jaipur</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/bangalore/baby-shower">Bangalore</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/kolkata/baby-shower">Kolkata</a></li>
-<li style="font-weight:400" aria-level="1">Pune</li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/hyderabad/baby-shower">Hyderabad</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/mumbai/baby-shower">Mumbai</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/kanpur/baby-shower">Kanpur</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/chennai/baby-shower">Chennai</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/jammu/baby-shower">Jammu</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/lucknow/baby-shower">Lucknow</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/chandigarh/baby-shower">Chandigarh</a></li>
-<li style="font-weight:400" aria-level="1"><a href="https://Hora Services.com/experiences/ahmedabad/baby-shower">Ahmedabad</a></li>
-</ul>`
-          },
+            <ul style="display: flex; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 0;">
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/Delhi/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Delhi</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/gurugram/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Gurugram</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/ghaziabad/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Ghaziabad</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/faridabad/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Faridabad</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/noida/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Noida</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/bengaluru/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Bengaluru</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/hyderabad/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Hyderabad</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/mumbai/balloon-decoration/baby-shower-decoration" style="color: rgb(150, 82, 141); font-weight: 400; text-decoration: underline;">Mumbai</a></li>
+            </ul>`
+        }
+,        
           {
             "title": "Why Choose Hora Services for Baby Shower Decorations?",
             "htmlContent": "<p>When you choose Hora Services, you will receive complete assistance with your decorations. From basic baby shower decorations to more elaborate setups, our team will guide you. Moreover, our decor services are budget-friendly and we make sure to provide the best to our clients. So, go ahead and book us for your baby shower decorations now.</p>"
@@ -451,7 +518,7 @@ const categoryFooterData = {
         },
         {
           "title": "Why Choose Hora Services for Exclusive Decorations in Delhi NCR?",
-          "htmlContent": `<p>We understand your emotions! We know how important the event is for you and this is why we put our all to give you the <a href="https://Hora Services.com/experiences/balloon-room-decorations">best decorations</a>, the Best Gifts, and <a href="https://Hora Services.com/experiences/candlelight-dinner">candlelight dinners</a>. We arrange an event that is worth remembering for you! You can choose <strong>beautiful Premium Decorations for Birthdays, Anniversaries, Baby shower Celebrations</strong> and more. We do our best to keep you and your loved one happy!</p><p>We always use good quality and fresh items. But we always let our customers speak for us, you can go ahead and read our reviews before booking any decoration, Birthday or anniversary cakes or gift combo from our website.</p>`
+          "htmlContent": `<p>We understand your emotions! We know how important the event is for you and this is why we put our all to give you the best decorations, the Best Gifts, and candlelight dinners. We arrange an event that is worth remembering for you! You can choose <strong>beautiful Premium Decorations for Birthdays, Anniversaries, Baby shower Celebrations</strong> and more. We do our best to keep you and your loved one happy!</p><p>We always use good quality and fresh items. But we always let our customers speak for us, you can go ahead and read our reviews before booking any decoration, Birthday or anniversary cakes or gift combo from our website.</p>`
         },
         {
           "title": "How do I Book Premium Decoration Online in Delhi NCR with Hora Services?",
@@ -467,19 +534,19 @@ const categoryFooterData = {
           },
           {
             title: "Gifts For Boyfriend On Birthday To Make His Day Extra Special",
-            htmlContent: `<p>Selecting the perfect gifts for your boyfriend on his birthday is a delightful way to show your love and appreciation. Whether he's into gadgets, sports, or has a flair for fashion, tailoring the gift to his interests makes it all the more special. Along with that, don’t forget to appreciate him with our special balloon bouquets or with a bouquet of chocolates. Custom birthday gifts are always way more special than expensive birthday gifts. Isn’t it? Gift them a <a href="https://Hora Services.com/experience/4448/pune/golden-and-purple-balloon-bouquet">Golden & Purple Balloon Bouquet</a>, <a href="https://Hora Services.com/experience/3169/pune/white-love-stand-bouquet">White Love Stand Bouquet</a>, and more.</p>`
+            htmlContent: `<p>Selecting the perfect gifts for your boyfriend on his birthday is a delightful way to show your love and appreciation. Whether he's into gadgets, sports, or has a flair for fashion, tailoring the gift to his interests makes it all the more special. Along with that, don’t forget to appreciate him with our special balloon bouquets or with a bouquet of chocolates. Custom birthday gifts are always way more special than expensive birthday gifts. Isn’t it? Gift them a Golden & Purple Balloon Bouquet, White Love Stand Bouquet, and more.</p>`
           },
           {
             title: "Good Presents For Girlfriend To Bring A Smile On Her Face",
-            htmlContent: `<p>Discover the best presents for your girlfriend's birthday or anniversary to bring a smile to her face. We have many options for you such as <a href="https://Hora Services.com/experience/3016/pune/kiss-me-balloon-bouquet">Kiss Me Balloon Bouquet</a> and more.</p>`
+            htmlContent: `<p>Discover the best presents for your girlfriend's birthday or anniversary to bring a smile to her face. We have many options for you such as Kiss Me Balloon Bouquet and more.</p>`
           },
           {
             title: "Out Of The Box Birthday| Anniversary Presents To Husband",
-            htmlContent: `<p>Finding the ideal anniversary or birthday present for your husband is a heartfelt endeavor to celebrate love. Check out our special birthday gift ideas such as the <a href="https://Hora Services.com/experience/3759/pune/chrome-birthday-balloon-bouquet">Chrome Birthday Balloon Bouquet</a> and more.</p>`
+            htmlContent: `<p>Finding the ideal anniversary or birthday present for your husband is a heartfelt endeavor to celebrate love. Check out our special birthday gift ideas such as the Chrome Birthday Balloon Bouquet and more.</p>`
           },
           {
             title: "Extraordinary Anniversary| Birthday Gifts For Wife To Make Her Happy",
-            htmlContent: `<p>Selecting the ideal birthday gift for your wife is a delightful opportunity to express your love and appreciation. Make her day truly memorable with our bouquet gifts and more. We have beautiful options such as the <a href="https://Hora Services.com/experience/4456/pune/star-surprise-balloon-bouquet">Star Surprise Balloon Bouquet</a> and more.</p>`
+            htmlContent: `<p>Selecting the ideal birthday gift for your wife is a delightful opportunity to express your love and appreciation. Make her day truly memorable with our bouquet gifts and more. We have beautiful options such as the Star Surprise Balloon Bouquet and more.</p>`
           },
           {
             title: "How Do The Variants Of These Balloon Boxes & Bouquets Make Stunning Gift Options?",
@@ -503,7 +570,7 @@ const categoryFooterData = {
           },
           {
             title: "What Customizations are available in the Surprise Balloon Bouquets Delivery?",
-            htmlContent: `<ul>
+            htmlContent: `<ul style="margin-left: 15px;">
                             <li>Cake</li>
                             <li>Teddy bear</li>
                             <li>Bouquet</li>
@@ -516,7 +583,7 @@ const categoryFooterData = {
           {
             title: "Occasions for Balloon Bouquets and More",
             htmlContent: `<p>We provide 100+ options for balloon bouquets for birthdays and bouquets for anniversaries. Our offerings also include:</p>
-                          <ul>
+                          <ul style="margin-left: 15px;">
                             <li>Birthday gifts for boyfriend</li>
                             <li>Bouquets for girlfriends</li>
                             <li>Romantic birthday gifts for husband</li>
@@ -530,11 +597,11 @@ const categoryFooterData = {
           },
           {
             title: "Online Bouquet Delivery Services",
-            htmlContent: `<p>Yes, we provide online bouquet delivery in Pune and other cities to make your celebrations memorable. You can find a variety of bubble balloon boxes that can be a perfect gift for anniversaries, birthdays, baby showers, and more.</p>`
+            htmlContent: `<p>Yes, we provide online bouquet delivery and other cities to make your celebrations memorable. You can find a variety of bubble balloon boxes that can be a perfect gift for anniversaries, birthdays, baby showers, and more.</p>`
           },
           {
             title: "Organizing a Balloon Box Surprise",
-            htmlContent: `<p>You may find it difficult to organise a balloon box surprise, but if you find a good place where you can have it arranged, it’ll become easier! You can choose to have a look at our Hora Services website, where you’ll find many options for balloon boxes. You can select one and have a balloon box delivered to your home or your friend’s in Pune.</p>`
+            htmlContent: `<p>You may find it difficult to organise a balloon box surprise, but if you find a good place where you can have it arranged, it’ll become easier! You can choose to have a look at our Hora Services website, where you’ll find many options for balloon boxes. You can select one and have a balloon box delivered to your home or your friend’s.</p>`
           },
           {
             title: "Helium Balloon Box Availability",
@@ -544,7 +611,7 @@ const categoryFooterData = {
           {
             title: "Flower Options for Complete Bouquets",
             htmlContent: `<p>Birthday flowers and balloons go hand in hand. We have many flower options such as:</p>
-                          <ul>
+                          <ul style="margin-left: 15px;">
                             <li>Lily Bouquet</li>
                             <li>Rose Bouquet</li>
                             <li>Purple Bouquet</li>
@@ -559,22 +626,23 @@ const categoryFooterData = {
           },
 
           {
-            title: "Do you provide Online Bouquet Delivery in Pune?",
-            htmlContent: `<p>Yes, we provide online bouquet delivery in Pune and other cities to make your celebrations memorable.</p>`
+            title: "Do you provide Online Bouquet Delivery?",
+            htmlContent: `<p>Yes, we provide online bouquet delivery and other cities to make your celebrations memorable.</p>`
           },
           {
-            title: "What Areas Do you Service for Balloon Bouquets or Boxes in Pune?",
-            htmlContent: `<p>We cover ALL areas in Pune- Kothrud, Viman Nagar, Hinjewadi, and more. Visit our website for full service details.</p>`
+            title: "What Areas Do you Service for Balloon Bouquets or Boxes?",
+          "htmlContent": `<p>We cover ALL areas in India - Jaipur, Delhi, Mumbai, Kolkata, Chennai, Bengaluru, Hyderabad, Ahmedabad, Pune, Surat, Kanpur, Nagpur, Visakhapatnam, Bhopal, Patna, Vadodara, and more.</p>`
           },
           {
             title: "What are the Major Cities where you provide Balloon Bouquet Gifts?",
-            htmlContent: `<ul>
-                            <li><a href="https://Hora Services.com/experiences/delhi-ncr/balloon-boxes">Delhi NCR</a></li>
-                            <li><a href="https://Hora Services.com/experiences/jaipur/balloon-boxes">Jaipur</a></li>
-                            <li><a href="https://Hora Services.com/experiences/bangalore/balloon-boxes">Bangalore</a></li>
-                            <li><a href="https://Hora Services.com/experiences/kolkata/balloon-boxes">Kolkata</a></li>
-                          </ul>`
-          },
+            htmlContent: `<ul style="display: flex; flex-wrap: wrap; list-style-type: none; padding: 0; margin: 0;">
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/Delhi/balloon-decoration/balloon-bouquets-decoration" style="color: rgb(150, 82, 141); text-decoration: underline;">Delhi NCR</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/jaipur/balloon-decoration/balloon-bouquets-decoration" style="color: rgb(150, 82, 141); text-decoration: underline;">Jaipur</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/bangalore/balloon-decoration/balloon-bouquets-decoration" style="color: rgb(150, 82, 141); text-decoration: underline;">Bangalore</a></li>
+                <li style="margin-right: 15px;"><a href="https://horaservices.com/kolkata/balloon-decoration/balloon-bouquets-decoration" style="color: rgb(150, 82, 141); text-decoration: underline;">Kolkata</a></li>
+            </ul>`
+        }
+,        
           {
             title: "How do I Book a Surprise Balloon Gift Box with Hora Services?",
             htmlContent: `<p>You can book a Balloon Gift Box on Hora Services by following the below steps:</p>
