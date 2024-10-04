@@ -15,6 +15,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { sendGTMEvent  } from '@next/third-parties/google';
+// In your main component file
+import categoryFooterData from '../../../utils/categoryFooterData';
+
+
+
+import * as XLSX from 'xlsx'; // Import xlsx library
+
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
@@ -22,6 +29,7 @@ const DecorationCatPage = () => {
   //   let { city } = useParams();
   const [city, setCity] = useState('');
   const [catValue, setCatValue] = useState('');
+  console.log(catValue, "catvaluesjkljfsdjfkdsl");
   useEffect(() => {
     if (router.isReady) {
       const { catValue: queryCatValue, city: queryCity } = router.query;
@@ -212,6 +220,7 @@ const getSubCatItems = async () => {
   try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+      console.log(response, "catvalueresponse");
       if (response.status === API_SUCCESS_CODE) {
           const decoratedData = response.data.data.map(item => {
               const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
@@ -221,10 +230,15 @@ const getSubCatItems = async () => {
                   userCount: getRandomNumber(20, 500),
                   discountPercentage: discount, // Add discount percentage
                   discountedPrice: discountedPrice ,// Add discounted price
-                  discountDifference: discountDifference
+                  discountDifference: discountDifference,
+                  inclusion: item.inclusion.join(', '), // Join the inclusion array into a single string
+                  catValue: catValue // Add catValue to each item
               };
           });
           setCatalogueData(decoratedData);
+
+           // Call the function to export data to Excel
+          //  exportToExcel(decoratedData);
       }
   } catch (error) {
       console.log('Error Fetching Data:', error.message);
@@ -233,6 +247,17 @@ const getSubCatItems = async () => {
   }
 };
 
+
+// Function to export data to Excel
+const exportToExcel = (data) => {
+  // Create a new workbook and a new worksheet
+  const ws = XLSX.utils.json_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Catalogue Data');
+
+  // Generate the Excel file and prompt user to download
+  XLSX.writeFile(wb, 'catalogue_data.xlsx');
+};
 
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
@@ -328,7 +353,16 @@ const getSubCatItems = async () => {
     }
   }, [themeFilter]);
 
-  
+  const [showAll, setShowAll] = useState(false); // State to track if all items should be shown
+
+ // Toggle function to show/hide more items
+ const toggleShowAll = () => {
+  setShowAll((prev) => !prev);
+};
+
+
+   // const currentCategoryContent = birthdayCatDescription[catValue];
+   const currentCategoryContent = categoryFooterData[catValue] || []; // Get content based on catValue
   
 
   
@@ -484,6 +518,49 @@ const getSubCatItems = async () => {
           }
           </div> */}
         </div>
+
+        {/* <div className="category-content">
+      {currentCategoryContent.length > 0 ? (
+        currentCategoryContent
+          .slice(0, showAll ? currentCategoryContent.length : 2) // Show all if `showAll` is true, otherwise show first 2
+          .map((item, index) => (
+            <div key={index} className="category-item">
+              <h1>{item.title}</h1>
+              <div dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+            </div>
+          ))
+      ) : (
+        <p className="no-content-message">No content available for this category.</p>
+      )}
+      {currentCategoryContent.length > 2 && ( // Only show button if there are more than 2 items
+        <button onClick={toggleShowAll} className="toggle-btn">
+          {showAll ? 'See Less' : 'See More'}
+        </button>
+      )}
+    </div> */}
+
+
+<div className="category-content">
+  {currentCategoryContent.length > 0 ? (
+    currentCategoryContent
+      .slice(0, showAll ? currentCategoryContent.length : 2)
+      .map((item, index) => (
+        <div key={index} className="category-item">
+          <h1>{item.title}</h1>
+          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        </div>
+      ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+  {currentCategoryContent.length > 2 && (
+    <button onClick={toggleShowAll} className="toggle-btn">
+      {showAll ? 'See Less' : 'See More'}
+    </button>
+  )}
+</div>
+
+
       </>
     </div>
   );
