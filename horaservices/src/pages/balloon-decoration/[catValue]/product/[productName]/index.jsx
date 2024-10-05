@@ -16,6 +16,9 @@ import axios from 'axios';
 import faqData from '../../../../../utils/faqData.json'
 import Tabs from '../../../../../components/Tabs';
 import addOnProductsData from '../../../../../utils/addOnProduct.json';
+import Testing from '../../../../../utils/testing';
+
+
 // Skeleton Loader Component
 const SkeletonLoader = () => {
   return (
@@ -562,7 +565,9 @@ function DecorationCatDetails() {
                 defaultTab="faq"
                 className="faqtabs"
               />
+              
             </div>
+
 
             {/* <div className="similar-products">
               <h2>Similar Products</h2>
@@ -570,9 +575,12 @@ function DecorationCatDetails() {
             </div> */}
 
           </div>
+          
         </div>
       </div>
 
+
+      <Testing />
     
 
       {isModalOpen && (

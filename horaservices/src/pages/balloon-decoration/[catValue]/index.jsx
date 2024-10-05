@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // import { useParams } from "react-router-dom";
 import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM, API_SUCCESS_CODE } from '../../../utils/apiconstants';
 import axios from 'axios';
@@ -30,6 +30,12 @@ const DecorationCatPage = () => {
   const [city, setCity] = useState('');
   const [catValue, setCatValue] = useState('');
   console.log(catValue, "catvaluesjkljfsdjfkdsl");
+
+  const [visibleItems, setVisibleItems] = useState(4); // Load 10 items initially
+const loadMoreRef = useRef(null); // Reference for tracking the last element
+const [loadingMore, setLoadingMore] = useState(false); // Track if more items are being loaded
+
+
   useEffect(() => {
     if (router.isReady) {
       const { catValue: queryCatValue, city: queryCity } = router.query;
@@ -58,6 +64,10 @@ const DecorationCatPage = () => {
   const [catalogueData, setCatalogueData] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
   //   const navigate = useNavigate();
+
+  const [page, setPage] = useState(1); // To keep track of batches
+  const [hasMore, setHasMore] = useState(true); // To stop loading when no more data
+
   const [priceFilter, setPriceFilter] = useState("all"); // Default: Show all
   const [themeFilter, setThemeFilter] = useState("all"); // Default: Show all
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
@@ -105,6 +115,33 @@ const DecorationCatPage = () => {
         .join(''); // Join parts together without spaces
     }
   }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loadingMore) {
+          setLoadingMore(true); // Set loading state to true
+          setTimeout(() => {
+            setVisibleItems((prevVisibleItems) => prevVisibleItems + 10); // Load 10 more items
+            setLoadingMore(false); // Reset loading state after 5 seconds
+          }, 3000); // Delay of 5 seconds
+        }
+      },
+      { threshold: 1.0 }
+    );
+  
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+  
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [loadingMore]);
+  
+  
 
   // UseSelector to get state from Redux
   const { subCategory: stateSubCategory, imgAlt: stateImgAlt } = useSelector((state) => state.state || {});
@@ -411,99 +448,112 @@ const exportToExcel = (data) => {
 
           </div>
         </div>
+        
+
+
         <div style={styles.decContainer} className="decContainer">
-          {loading ? ([1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
-            <div className="decimagecontainer" key={index} style={styles.imageContainer}>
-              <CardSkeleton />
+  {loading ? (
+    [1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+      <div className="decimagecontainer" key={index} style={styles.imageContainer}>
+        <CardSkeleton />
+      </div>
+    ))
+  ) : (
+    sortedData.slice(0, visibleItems).map((item, index) => (
+      <div
+        key={item._id}
+        style={{
+          ...styles.imageContainer,
+          cursor: "pointer",
+          ...(hoveredIndex === index && styles.zoomedContainer), // Apply zoom effect when hovered
+        }}
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
+        onClick={() => handleViewDetails(subCategory, catValue, item)}
+        className="decimagecontainer"
+      >
+        {/* Image and content rendering */}
+        <div style={{ position: "relative" }}>
+          <Image
+            src={`https://horaservices.com/api/uploads/${item?.featured_image}`}
+            alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`}
+            style={styles.decCatimage}
+            width={300}
+            height={300}
+          />
+          {/* Watermark */}
+          <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
+            <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
+          </div>
+          <div className="decorationdiscount">
+            ₹ {item.discountDifference.toFixed(0)} {'off'}
+          </div>
+        </div>
+        {/* Content */}
+        <div className='px-2 py-2'>
+          <p
+            style={{
+              marginHorizontal: 3,
+              textAlign: 'left',
+              fontWeight: '600',
+              fontSize: "16px",
+              marginTop: "4px",
+              color: '#9252AA',
+              lineHeight: "18px",
+              marginBottom: "0px",
+              textAlign: "left",
+            }}
+            className="pro_name"
+          >
+            {item.name}
+          </p>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
+            <div style={{ alignItems: 'left', justifyContent: 'space-between', display: "flex" }} className="pro_price">
+              <p style={{
+                fontWeight: '700',
+                fontSize: 15,
+                color: '#9252AA',
+                textAlign: "left",
+                margin: "10px 10px 7px 0",
+              }}>₹{item.price} </p>
+              <p style={{
+                color: '#444',
+                fontWeight: '700',
+                fontSize: 15,
+                textAlign: "left",
+                margin: "10px 0px 7px",
+                textDecoration: 'line-through'
+              }}>
+                ₹{Math.floor(item.discountedPrice.toFixed(2))}
+              </p>
             </div>
-          ))) :
-            (
-              (sortedData.length > 0) ? (
-                sortedData.map((item, index) => (
-                  <div
-                    key={item._id}
-                    style={{
-                      ...styles.imageContainer,
-                      cursor: "pointer",
-                      ...(hoveredIndex === index && styles.zoomedContainer) // Apply zoom effect when hovered
-                    }}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => handleViewDetails(subCategory, catValue, item)}
-                    className="decimagecontainer"
-                  >
-                    <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
-                      {/* Watermark */}
-                      <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
-                      </div>
-                      <div className="decorationdiscount">
-                      ₹ {item.discountDifference.toFixed(0)} {'off'} 
-                      </div>
-                    </div>
-                    {/* End of Watermark */}
-                    <div className='px-2 py-2'>
-                      <p
-                        style={{
-                          marginHorizontal: 3,
-                          textAlign: 'left',
-                          fontWeight: '600',
-                          fontSize: "16px",
-                          marginTop: "4px",
-                          color: '#9252AA',
+            <div className="d-flex align-items-center rating-sec">
+              <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}
+                <span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}>
+                  <FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} />
+                </span>
+              </p>
+              <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))
+  )}
+    {loadingMore && (
+    <div style={{ textAlign: 'center', padding: '20px 0' }}>
+      <span>Loading more items...</span>
+    </div>
+  )}
 
-                          lineHeight: "18px",
-                          marginBottom: "0px",
-                          textAlign: "left",
-                        }}
-                        className="pro_name"
-                      >
-                        {item.name}
-                      </p>
-                      <div style={{ display: "flex",  justifyContent: "space-between", alignItems: "top" }} className="pri_details">
-                        <div style={{ alignItems: 'left', justifyContent: 'space-between' , display:"flex" }} className="pro_price">
-                        <p  style={{
-                  
-                            fontWeight: '700',
-                            fontSize: 15,
-                            color: '#9252AA',
-                            textAlign: "left",
-                            margin: "10px 10px 7px 0",
-            
-                          }}>₹{item.price} </p>
-                          <p style={{
-                            color: '#444',
-                            fontWeight: '700',
-                            fontSize: 15,
-                            textAlign: "left",
-                            margin: "10px 0px 7px",
-                            textDecoration: 'line-through'
-                          }}
-                          >
-                             ₹{Math.floor(item.discountedPrice.toFixed(2))} 
-                          </p>
+  {/* Add this div for the IntersectionObserver to track */}
+  
+<div ref={loadMoreRef} style={{ height: "20px", marginTop: "20px" }}></div>
 
-                         
-                       </div>
-                        <div className="d-flex align-items-center rating-sec">
-                          <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
-                          <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div style={{ textAlign: "center", width: "100%", padding: "20px 0" }}>
-                  <span>Reach out to our support team for this</span>
-                  <span style={{ marginLeft: "10px" }}>
-                    <Link className="conactus" href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
-                  </span>
-                </div>
-              )
-            )
-          }
+</div>
+
+
+
           {/* <div>
           {
           filteredData.map((item, index) => (
@@ -516,8 +566,7 @@ const exportToExcel = (data) => {
           ))
           }
           </div> */}
-        </div>
-
+        
         {/* <div className="category-content">
       {currentCategoryContent.length > 0 ? (
         currentCategoryContent
@@ -559,8 +608,8 @@ const exportToExcel = (data) => {
   )}
 </div>
 
-
       </>
+      
     </div>
   );
 }

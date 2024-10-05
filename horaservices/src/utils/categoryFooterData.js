@@ -525,6 +525,50 @@ const categoryFooterData = {
           "htmlContent": `<p>Follow the steps below to book an online with us:</p><ul><li>Choose a <strong>Premium Decoration online</strong> for birthdays or any other event according to your choice.</li><li>Select the date and time for the delivery.</li><li>Fill in the required details like your address, requirements, customizations, etc.</li><li>Complete the payment process.</li></ul><p>That’s it, you’re done! All you have to do is sit back and relax while our team does the job for you!</p>`
         }
       ],
+
+      "haldi-mehendi-decoration":
+      [
+        {
+          "title": "Why Haldi ceremony is done?",
+          "htmlContent": `<p>The Haldi ceremony is a ritual that is done in many Indian weddings. Known by different names in different regions, like the ubtan in North India, halad chadavne in Maharashtra, tel ban in Jain weddings, and pellikuthuru in Telugu, pithi in Gujarat, and many others, it is a must-have ceremony in any Hindu Indian wedding. It is organized to mark the happy beginnings of the new couple. The ritual is followed as a cleansing and purifying act for the couple's body and also to safeguard them from any negativity before the wedding. It is believed to cleanse the couple and their guests of any bad luck or bad spirits that may be present during the wedding.</p>
+          <p>The ceremony is performed by an astrologer and includes prayers, worship of deities, and offerings. During the Haldi ceremony, family and friends smear a special paste of haldi on their faces and bodies. It is usually performed right before the wedding ceremonies and it is usually accompanied by the best haldi decoration, traditional music and dancing.</p>`
+        },
+        {
+          "title":"How can we decorate Haldi at home in Delhi NCR?",
+          "htmlContent": `<p>Haldi celebrations during wedding ceremonies are an essential part of Indian culture. Even when celebrating at home, you would like to have a feast of celebration that is memorable for the bride or the groom to be or your guest. Haldi decoration at home must be grand and warm. For this, you must use bright colours and patterns. This is the time to be festive! Adding flowers and impressive backgrounds can be charming too. While you are thinking of some extraordinary ideas, we at CherishX have crafted some out-of-the-box haldi function decoration that will leave everyone in awe!</p>
+          <p>To start with, you can choose a haldi decoration at home simple idea of a Mandala and Flower setup that creates a perfect vibrant ambience. You can also choose Pink and Yellow Flamingo theme decor suitable even for a haldi decoration at terrace.</p>`
+        },
+        {
+          "title": "What are the best haldi decoration ideas in Delhi NCR?",
+          "htmlContent": `<p>As the days leading up to Indian weddings approach, there are many things to think about, but one of the most significant is the decoration for the Haldi ceremony. While the tasks at hand are already daunting, thinking of stunning decor ideas can be overwhelming too. In such scenarios, CherishX brings to you smart and sparkling haldi decoration ideas that will add a unique and colourful touch to your Haldi ceremony. You can choose between traditional or modern haldi decoration ideas with the best bride-groom haldi decoration ideas.</p>
+          <p>When celebrating at a banquet or destination wedding, you can choose Peacock Haldi decor, an ideal haldi ceremony decoration. This excellent theme is a cluster of haldi background decoration and accessories that will add a glamorous touch to your wedding. If you are celebrating at home, you can choose our special Lotus Urli haldi Decor which is exclusively designed for haldi decoration at home with flowers, brass pots, and classic lamps that create the traditional feel.</p>`
+        },
+        {
+          "title": "What are some of the haldi background decorations for the groom",
+          "htmlContent": `<p>It is the most important time of their life, and the groom is the centre of attention during this special day, and it is essential to make him feel comfortable and special. One of the creative ways to make the groom feel special is by adding exclusive haldi decoration background for the ceremony. He is sure to be delighted with elegant decor and colours that he can’t find anywhere else. Whether it's a traditional theme or something more modern like the Persian theme decor, an intricate and beautiful decorative setup will set the tone for a perfect ceremony.</p>
+          <p>If you want to set the best experience at home, you can choose our extraordinary haldi decoration at home for groom. We have the Peacock or the Quirky Flamingo theme décor designed to suit your surroundings and wedding style.</p>`
+        }
+      ],
+
+      "bachelorette-decoration": 
+      [
+        {
+          "title": "Why Should I have a Bachelorette Party Theme Decorations?",
+          "htmlContent": `<p>If you are throwing a bachelorette party for your friend, or sister, you must focus on bachelorette party theme decorations. It adds to your party. Decorations create a whole different environment. This will help you to have a more happening party. Bachelorette party decorations are specially curated to celebrate the occasion of the 'bride to be’. So, you should have the decorations to enhance your party.</p>`
+        },
+        {
+          "title": "How Should I Organise Bachelorette Party Decorations?",
+          "htmlContent": `<p>Organising Bachelorette Party Decorations becomes easier with CherishX. You can simply choose your favourite decor and book with us. Our team makes sure to give you a decoration that you’ll love. You can choose among various decorations to make your bachelorette party lively and going.</p>`
+        },
+        {
+          "title": "Do You Offer Any Bachelorette Theme Party Decorations?",
+          "htmlContent": `<p>Yes, CherishX offers you several bachelorette theme party decorations that will add fun to your party. You can choose to go for Glamorous Bridal Shower ,The bride's bachelorette decor, Bachelorette Theme Backdrop, or Bachelorette Surprise. These decorations are specially curated keeping in mind the occasion. CherishX offers you these decorations to make your party more charming.</p>`
+        },
+        {
+          "title": "Why Should I Choose CherishX Services for a Bachelorette Theme Decoration?",
+          "htmlContent": `<p>We understand your emotions! We know how important the event is for you and this is why we put our all to give you the best decorations and . We arrange the event that is worth remembering for you! You can choose Bachelorette Theme Decorations to surprise the ‘bride to be’. We do our best to keep you and your loved one happy!</p>`
+        }
+      ],
       
     "balloon-bouquets-decoration":
      [
@@ -654,8 +698,6 @@ const categoryFooterData = {
                           </ol>
                           <p>That’s it, you’re done! All you have to do is surprise your loved one with this amazing gift. So, explore our website and look out for balloon bouquet ideas, surprise box gift ideas, and more. You will adore them for sure!</p>`
           }
-          
-          
       ]      
       
   };
