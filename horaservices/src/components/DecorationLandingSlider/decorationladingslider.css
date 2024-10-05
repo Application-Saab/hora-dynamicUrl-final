@@ -2,6 +2,9 @@
     position: relative;
     padding: 0;
 }
+.slider-container.dec-grid-section {
+    margin-bottom: 22px;
+}
 .slider-item {
     position: relative;
     border: 1px solid #efefef; 
@@ -95,6 +98,11 @@
 .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
     width: 24%;
 }
+.slider-container.slider-decoration-inner.decoration-item-grid a.slider-item.view-more-slide {
+  
+    border: 1px solid rgb(146, 82, 170);
+
+}
 
 .slick-prev:before, .slick-next:before{
     color: #9252AA !important;
@@ -114,6 +122,9 @@
     z-index: 1111 !important;
 }
 @media (max-width: 641px) {
+    .slider-container.dec-grid-section {
+        margin-bottom: 6px;
+    }
     .slider-image {
         height: 230px;
         margin-bottom: 8px;
@@ -124,7 +135,6 @@
         min-height: 360px;
     }
     .slider-container.slider-decoration-inner.decoration-item-grid{
-        margin-bottom: 40px !important;
         gap: 0px !important;
     }
 }
@@ -144,19 +154,18 @@
     }
     .slider-container {
         padding: 0 3px;
-        margin-top: 10px;
-        margin-bottom: 20px;
+     
     }
     .view-more-slide {
-        min-height: 240px;
+        min-height: 252px;
     }
     .slick-slide{
         margin-left: 5px;
         margin-right: 5px;
-        max-height: 165px;
+        max-height: 147px;
     }
     .slider-container.slider-decoration-inner.decoration-item-grid{
-        margin-bottom: 40px !important;
+      
         gap: 0px !important;
     }
     .slider-container.slider-decoration-inner {
@@ -180,7 +189,7 @@
         font-size: 13px;
         margin: 0;
         padding: 5px 2px 9px;
-        min-height: 30px;
+        min-height: 44px;
     }
     .slider-header button.viewbtn.btn {
         padding: 9px 9px !important;
@@ -208,20 +217,20 @@
     }
     .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {
         width: 46%;
-        margin-bottom: 20px;
+       
     }
     .view-more-slide {
-        min-height: 243px;
+        min-height: 255px
     }
     .slider-container.slider-decoration-inner.decoration-item-grid{
-        margin-bottom: 40px !important;
+       
         gap: 0px !important;
     }
 }
 
 @media (max-width: 330px) {
     .slider-container.slider-decoration-inner.decoration-item-grid{
-        margin-bottom: 40px !important;
+      
         gap: 0px !important;
     }
     .slider-container.slider-decoration-inner.decoration-item-grid a.slider-item {

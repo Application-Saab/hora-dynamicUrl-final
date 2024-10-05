@@ -6,11 +6,13 @@ import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import logo from '../../../../assets/new_logo_light.png.png';
 import { CardSkeleton } from "../../../../components/CardSkeleton";
 import { getDecorationCatOrganizationSchema } from "../../../../utils/schema";
 import '../../../../css/decoration.css';
 import { setState } from '../../../../actions/action';
 import { useDispatch } from 'react-redux';
+import DecorationCatDescriptionData from "@/utils/decorationCatDescritionData";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,6 +53,8 @@ const DecorationCatPage = () => {
   //   const navigate = useNavigate();
   const [priceFilter, setPriceFilter] = useState("all"); // Default: Show all
   const [themeFilter, setThemeFilter] = useState("all"); // Default: Show all
+  const [showAll, setShowAll] = useState(false);
+  const currentCategoryContent = DecorationCatDescriptionData[catValue] || [];
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
   const scriptTag = JSON.stringify(schemaOrg);
   const themeFilters = [
@@ -155,6 +159,10 @@ const DecorationCatPage = () => {
     // Return true if both conditions are met
     return priceCondition && themeCondition;
   });
+
+  const toggleShowAll = () => {
+    setShowAll((prev) => !prev);
+  };
   
   // Apply sorting
   const sortedData = filteredData.sort((a, b) => {
@@ -397,9 +405,11 @@ const DecorationCatPage = () => {
                   <div style={{ position: "relative" }}>
                     <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
                     {/* Watermark */}
-                    <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                      <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
-                    </div>
+                    <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}} className="hora-watermark-image"/>  
+                        </span>
+                      </div>
                     <div className="decorationdiscount">
                     ₹ {item.discountDifference.toFixed(0)} {'off'} 
                     </div>
@@ -478,6 +488,26 @@ const DecorationCatPage = () => {
         ))
         }
         </div> */}
+
+<div className="category-content">
+  {currentCategoryContent.length > 0 ? (
+    currentCategoryContent
+      .slice(0, showAll ? currentCategoryContent.length : 2)
+      .map((item, index) => (
+        <div key={index} className="category-item">
+          <h1>{item.title}</h1>
+          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        </div>
+      ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+  {currentCategoryContent.length > 2 && (
+    <button onClick={toggleShowAll} className="toggle-btn">
+      {showAll ? 'See Less' : 'See More'}
+    </button>
+  )}
+</div>
       </div>
     </>
   </div>

@@ -9,6 +9,7 @@ import { getDecorationProductOrganizationSchema } from "../../../../../../utils/
 import '../../../../../../css/decoration.css';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
+import  logo  from '../../../../../../assets/new_logo_light.png.png';
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -132,12 +133,17 @@ function DecorationCatDetails() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "flex-start", paddingTop: "10px", position: "relative" }} className="decDetails">
           <div style={{ width: "50%", textAlign: "center" }} className="decDetailsLeft">
+         
+
+
             <div style={{ width: "80%", boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", margin: "0 auto", position: "relative" }} className="decDetailsImage">
               <Image src={`https://horaservices.com/api/uploads/${product.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${product.name} ${product.price}`} style={{ width: "100%", height: "auto" }} width={300} height={300} />
-              <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
+              <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}} className="hora-watermark-image"/>  
+                        </span>
+                      </div>
               </div>
-            </div>
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>

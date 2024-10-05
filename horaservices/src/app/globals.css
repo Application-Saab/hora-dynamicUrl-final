@@ -1555,9 +1555,8 @@ h4.contact-us-heading a {
   .decDetailsRightInner {
     width: 90% !important;
 }
-.decDetails .decDetailsLeft div {
-  width: 94% !important;
-}
+
+
 }
 
 @media (max-width: 400px) {

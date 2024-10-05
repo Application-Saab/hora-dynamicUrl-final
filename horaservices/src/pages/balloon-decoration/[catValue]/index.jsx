@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import logo from '../../../assets/new_logo_light.png.png';
+import DecorationCatDescriptionData from "@/utils/decorationCatDescritionData";
 import { sendGTMEvent  } from '@next/third-parties/google';
 
 const DecorationCatPage = () => {
@@ -43,6 +45,8 @@ const DecorationCatPage = () => {
   //   const { catValue } = useParams();
   const [selCat, setSelCat] = useState("");
   const [catId, setCatId] = useState("");
+  const [showAll, setShowAll] = useState(false);
+  const currentCategoryContent = DecorationCatDescriptionData[catValue] || [];
   const [loading, setLoading] = useState(true);
   const [discountPercentage, setDiscountPercentage] = useState(0); // State for the discount percentage
   const [discountedPrice, setDiscountedPrice] = useState(0); // State for the discounted price
@@ -330,7 +334,9 @@ const getSubCatItems = async () => {
 
   
   
-
+  const toggleShowAll = () => {
+    setShowAll((prev) => !prev);
+  };
   
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
@@ -402,8 +408,10 @@ const getSubCatItems = async () => {
                     <div style={{ position: "relative" }}>
                       <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
-                      <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
+                      <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}} className="hora-watermark-image"/>  
+                        </span>
                       </div>
                       <div className="decorationdiscount">
                       ₹ {item.discountDifference.toFixed(0)} {'off'} 
@@ -471,6 +479,7 @@ const getSubCatItems = async () => {
               )
             )
           }
+          
           {/* <div>
           {
           filteredData.map((item, index) => (
@@ -484,6 +493,26 @@ const getSubCatItems = async () => {
           }
           </div> */}
         </div>
+
+        <div className="category-content">
+  {currentCategoryContent.length > 0 ? (
+    currentCategoryContent
+      .slice(0, showAll ? currentCategoryContent.length : 2)
+      .map((item, index) => (
+        <div key={index} className="category-item">
+          <h1>{item.title}</h1>
+          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        </div>
+      ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+  {currentCategoryContent.length > 2 && (
+    <button onClick={toggleShowAll} className="toggle-btn">
+      {showAll ? 'See Less' : 'See More'}
+    </button>
+  )}
+</div>
       </>
     </div>
   );

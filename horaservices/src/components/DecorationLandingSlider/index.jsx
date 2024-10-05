@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import logo from '../../assets/new_logo_light.png.png';
+
 
 const DecorationLandingSlider = ({ data, category, handleViewMore , city }) => {
   const router = useRouter();
@@ -114,6 +116,7 @@ return (
             </div>
           ) : (
             <div onClick={() => handleSliderViewMore(item.link , city)} style={{ position:"relative"}}>
+              <div style={{ position:"relative"}}>
               <Image
                 src={item.Image}
                 alt={item.title}
@@ -121,6 +124,12 @@ return (
                 width={200}
                 height={250}
               />
+                <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+                      </div>
                 <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
                       </div>

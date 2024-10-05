@@ -10,6 +10,7 @@ import { getDecorationOrganizationSchema } from '../../utils/schema';
 import { setState } from '../../actions/action';
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import logo from '../../assets/new_logo_light.png.png';
 import { useDispatch } from "react-redux";
 import '../../css/decoration.css';
 import '../../components/DecorationLandingSlider/decorationladingslider.css';
@@ -145,6 +146,7 @@ const Decoration = () => {
           rating: 4.5,
           link:"/balloon-decoration/first-night-decoration/product/First-Night-With-Rose-Decoration",
         },
+
         {
           Image: '',  // No image for this slide
           title: 'View more from First Night Decorations',
@@ -291,13 +293,6 @@ const Decoration = () => {
 
       const KidsBirthdayData = [
         {
-          Image: 'https://horaservices.com/api/uploads/attachment-1726056840221.png',
-          title: 'Metallic Blue n White Glow Balloon Decor',
-          price: '₹2722',
-          rating: 4.5,
-          link:"/balloon-decoration/kids-birthday-decoration/product/Metallic-Blue-n-White-Glow-Balloon-Decor",
-        },
-        {
           Image: 'https://horaservices.com/api/uploads/attachment-1705948416594.png',
           title: 'Minnie Mouse Theme Decoration',
           price: '₹1673',
@@ -311,63 +306,40 @@ const Decoration = () => {
           rating: 4.5,
           link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-Theme-For-Birthday-Kids",
         },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706464928126.png',
-            title: 'Mickey Ring Birthday Decoration',
-            price: '₹2915',
-            rating: 4.6,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Mickey-Ring-Birthday-Decoration",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711527333610.png',
-            title: 'Cocomelon theme With Shining Balloons',
-            price: '₹7096',
-            rating: 4.4,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-theme-With-Shining-Balloons",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711535459259.png',
-            title: 'Mermaid Theme Birthday Ring Decor',
-            price: '₹6479',
-            rating: 4.3,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-Birthday-Ring-Decor",
-          },
-         {
-            Image: 'https://horaservices.com/api/uploads/attachment-1711525915897.png',
-            title: '4th Birthday Cocomelon Theme Ring Decor',
-            price: '₹8165',
-            rating: 4.7,
-            link:"/balloon-decoration/kids-birthday-decoration/product/4th-Birthday-Cocomelon-Theme-Ring-Decor",
-          },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1726057785648.png',
-            title: 'Mermaid Sea Shell Shore Decor',
-            price: '₹2117',
-            rating: 4.4,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Sea-Shell-Shore-Decor",
-          },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1713185070655.png',
-            title: 'Mermaid Sea Shell Shore Decor',
-            price: '₹3834',
-            rating: 4.8,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-With-Birthday-Decor",
-          },
-          {
-            Image: '',  // No image for this slide
-            title: 'View more from Kids Birthday Decorations',
-            price: '',  // No price
-            rating: '',  // No rating
-            link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
-            isViewMore: true  // Flag to indicate it's a "View more" slide
-          },
-          {
-            Image: 'https://horaservices.com/api/uploads/attachment-1706521327374.png',
-            title: 'Charming Birthday Decoration',
-            price: '₹1350',
-            rating: 4.2,
-            link:"/balloon-decoration/kids-birthday-decoration/product/Charming-Birthday-Decoration",
-          },
+        // {
+        //   Image: 'https://horaservices.com/api/uploads/attachment-1706464928126.png',
+        //   title: 'Mickey Ring Birthday Decoration',
+        //   price: '₹2915',
+        //   rating: 4.6,
+        //   link:"/balloon-decoration/kids-birthday-decoration/product/Mickey-Ring-Birthday-Decoration",
+        // },
+       {
+          Image: 'https://horaservices.com/api/uploads/attachment-1711527333610.png',
+          title: 'Cocomelon theme With Shining Balloons',
+          price: '₹7096',
+          rating: 4.4,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Cocomelon-theme-With-Shining-Balloons",
+        },
+       {
+          Image: 'https://horaservices.com/api/uploads/attachment-1711535459259.png',
+          title: 'Mermaid Theme Birthday Ring Decor',
+          price: '₹6479',
+          rating: 4.3,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Theme-Birthday-Ring-Decor",
+        },
+        {
+          Image: 'https://horaservices.com/api/uploads/attachment-1726057785648.png',
+          title: 'Mermaid Sea Shell Shore Decor',
+          price: '₹2117',
+          rating: 4.4,
+          link:"/balloon-decoration/kids-birthday-decoration/product/Mermaid-Sea-Shell-Shore-Decor",
+        },
+  
+        // {
+        //   title: 'View more from Welcome Baby Decorations',
+        //   link: "/balloon-decoration/kids-birthday-decoration",  // Link to the full section
+        //   isViewMore: true  // Flag to indicate it's a "View more" slide
+        // },
         ];
       
 
@@ -408,6 +380,7 @@ const Decoration = () => {
             rating: 4.5,
             link:"/balloon-decoration/baby-shower-decoration/product/Teddy%27s-Wonderland-Pink-Decor",
           },
+          
         ];
       
         const WelcomebabyData= [
@@ -582,7 +555,15 @@ const Decoration = () => {
           return  discountDifference ; // Return both discount percentage and discounted price
         };
         
-
+        const handleSliderViewMore = (link , city) =>{
+          if(city){
+            router.push(`/${city}/${link}`); 
+          }
+          else{
+            router.push(`/${link}`);
+          }
+        
+        }
     
     return (
         <div className="decoration-city-page-sec">
@@ -622,24 +603,86 @@ const Decoration = () => {
 </div>
 <div className="page-width decorationlanding-slider">
 
-<div className="slider-container">
-  <div className="slider-header">
-  <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
-  <button 
+
+<div className="slider-container  dec-grid-section">
+    <div className="slider-header">
+    <h2  onClick={() => handleViewMore("KidsBirthday")} style={{ cursor:"pointer"}}>Kids Birthday Decoration</h2>
+    <button 
     className="viewbtn  btn btn-primary" 
     onClick={() => handleViewMore("KidsBirthday")}
     >
     View More
     </button>
     </div>
-    <div>
-    <DecorationLandingSlider data={KidsBirthdayData} category="KidsBirthday"  />
-    </div>
- 
+    <div className="slider-container slider-decoration-inner decoration-item-grid ">
+  {KidsBirthdayData.map((item, index) => {
+    // Check if the current item is the "View More" item
+    if (item.isViewMore) {
+      return (
+        <a key={index} className="view-more-slide slider-item" onClick={() => handleSliderViewMore(item.link, city)}>
+          <h3 style={{ textAlign: 'center', cursor: 'pointer' }}>{item.title}</h3>
+        </a>
+      );
+    } else {
+      // Render normal item details
+      return (
+        <a key={index} className="slider-item" href={item.link}> 
+        <div style={{ position:"relative"}}>
+        <Image 
+            src={item.Image} 
+            alt={item.title} 
+            className="slider-image"
+            width={200}
+            height={250}
+          />
+          <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+          <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+          <Image src={logo} style={{ width:"70px" , height:"80px"}} className="hora-watermark-image"/>  
+          </span>
+          </div>
+        </div>
+       
+          <div className="decorationdiscount">
+            ₹{getDiscountedDifference(item.price)} {'off'}
+          </div>
+          <div className="slider-item-details">
+            <h3>{item.title}</h3>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top" }} className='pri_details'>
+              <div style={{ alignItems: 'left', justifyContent: 'space-between', display: "flex" }} className='pro_price'>
+                <p style={{
+                  fontWeight: '700',
+                  fontSize: 15,
+                  color: '#9252AA',
+                  textAlign: "left",
+                  margin: "10px 10px 7px 0",
+                }}>
+                  {item.price}
+                </p>
+                <p style={{
+                  color: '#444',
+                  fontWeight: '700',
+                  fontSize: 15,
+                  textAlign: "left",
+                  margin: "10px 0px 7px",
+                  textDecoration: 'line-through'
+                }}>
+                  ₹{getDiscountedPrice(item.price)}
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      );
+    }
+  })}
 </div>
+
+
+
+    </div>
     
 
-<div className="slider-container ">
+<div className="slider-container dec-grid-section">
     <div className="slider-header">
     <h2  onClick={() => handleViewMore("Birthday")} style={{ cursor:"pointer"}}>Birthday Decoration</h2>
     <button 
@@ -652,6 +695,7 @@ const Decoration = () => {
     <div className="slider-container slider-decoration-inner decoration-item-grid">
     {birthdayData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}> 
+        <div style={{ position:"relative"}}>
         <Image 
         src={item.Image} 
         alt={item.title} 
@@ -659,6 +703,13 @@ const Decoration = () => {
         width={200}
         height={250}
         />
+        <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+        </div>
+       
 
 <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
@@ -709,7 +760,7 @@ const Decoration = () => {
 </div>
     </div>
 
-    <div className="slider-container">
+<div className="slider-container">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("Haldi-Mehandi")} style={{ cursor:"pointer"}}>Haldi & Mehndi Decoration</h2>
     <button 
@@ -725,7 +776,7 @@ const Decoration = () => {
  
 </div>
     
-<div className="slider-container">
+<div className="slider-container dec-grid-section">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("BabyShower")} style={{ cursor:"pointer"}}>Baby Shower</h2>
     <button 
@@ -738,13 +789,21 @@ const Decoration = () => {
   <div className="slider-container slider-decoration-inner decoration-item-grid">
     {BabyShowerData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}>
-        <Image 
+          <div style={{ position:"relative"}}>
+          <Image 
         src={item.Image} 
         alt={item.title} 
         className="slider-image"
         width={200}
         height={250}
         />
+          <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+          </div>
+       
         <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
                       </div>
@@ -807,7 +866,7 @@ const Decoration = () => {
 </div>
 
 
-<div className="slider-container">
+<div className="slider-container dec-grid-section">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("Anniversary")} style={{ cursor:"pointer"}}>Anniversary Decoration</h2>
     <button 
@@ -821,13 +880,20 @@ const Decoration = () => {
     <div className="slider-container slider-decoration-inner decoration-item-grid">
     {AnniversaryData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}>
-        <Image 
+        <div style={{ position:"relative"}}>
+          <Image 
         src={item.Image} 
         alt={item.title} 
         className="slider-image"
         width={200}
         height={250}
         />
+          <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+          </div>
         <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
                       </div>
@@ -885,7 +951,7 @@ const Decoration = () => {
     </div>
   <DecorationLandingSlider data={WelcomebabyData} category="WelcomeBaby"  />
 </div>
-<div className="slider-container">
+<div className="slider-container dec-grid-section">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("PremiumDecoration")} style={{ cursor:"pointer"}}>Premium Decors</h2>
     <button 
@@ -898,13 +964,20 @@ const Decoration = () => {
   <div className="slider-container slider-decoration-inner decoration-item-grid">
     {PremiumData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}>
-        <Image 
+         <div style={{ position:"relative"}}>
+          <Image 
         src={item.Image} 
         alt={item.title} 
         className="slider-image"
         width={200}
         height={250}
         />
+          <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+          </div>
         <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
                       </div>
@@ -963,7 +1036,7 @@ const Decoration = () => {
   <DecorationLandingSlider data={BallonBData} category="BallonBouquets"  />
 </div> */}
 
-<div className="slider-container">
+<div className="slider-container dec-grid-section">
   <div className="slider-header">
     <h2  onClick={() => handleViewMore("bachelorette")} style={{ cursor:"pointer"}}>Bachelorette Decoration</h2>
     <button 
@@ -976,13 +1049,20 @@ const Decoration = () => {
   <div className="slider-container slider-decoration-inner decoration-item-grid">
     {bacheloretteData.map((item, index) => (
         <a key={index} className="slider-item" href={item.link}>
-        <Image 
+         <div style={{ position:"relative"}}>
+          <Image 
         src={item.Image} 
         alt={item.title} 
         className="slider-image"
         width={200}
         height={250}
         />
+          <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}}/>  
+                        </span>
+                      </div>
+          </div>
          <div className="decorationdiscount">
                 ₹{getDiscountedDifference(item.price)} {'off'}
                       </div>
