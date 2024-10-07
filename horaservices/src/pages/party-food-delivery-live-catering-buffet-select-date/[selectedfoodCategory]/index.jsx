@@ -779,7 +779,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   Head Mask for waiters & chefs
                 </p>
               </div>
-              <div
+              {/* <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -798,7 +798,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                 >
                   Tandoor/Other cooking Utensils
                 </p>
-              </div>
+              </div> */}
               <div
                 style={{
                   display: "flex",
