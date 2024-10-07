@@ -310,10 +310,10 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
     }
 
     const newDishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
-    var totalPrice = selectedOption === 'liveCatering' ?  ((newDishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : newDishPrice * peopleCount;
+    var totalPrice = selectedOption === 'party-live-buffet-catering' ?  ((newDishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : newDishPrice * peopleCount;
     const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
     console.log("discountPercentage" + discountPercentage)
-    var discountedPrice = selectedOption === 'liveCatering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
+    var discountedPrice = selectedOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
 
     console.log(totalPrice+"===="+ discountedPrice)
