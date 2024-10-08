@@ -8,11 +8,10 @@ import '../app/globals.css';
 
 const PageLayout = ({ children }) => {
 
-
     document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
     });
-
+ 
   
   return (
     <div className="page-container container-fluid p-0">
