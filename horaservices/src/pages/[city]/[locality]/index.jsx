@@ -45,14 +45,10 @@ export default function Home() {
   const scriptTag = JSON.stringify(schemaOrg);
 
   useEffect(() => {
-    console.log(router.query)
-    console.log('Router is ready');
     if (router.isReady) {
-      console.log('Router is ready');
       const { city } = router.query;
       if (city) {
         setCity(city);
-        console.log(`City from query: ${city}`);
       } else {
         console.log('City is undefined');
       }
@@ -446,8 +442,6 @@ export default function Home() {
   ];
 
   const { locality } = router.query;
-
-  console.log(locality,"locality");
 
   const openSliderLink = (link, city,locality) => {
     if (link) {

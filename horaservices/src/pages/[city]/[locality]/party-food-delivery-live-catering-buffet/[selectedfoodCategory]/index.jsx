@@ -28,7 +28,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const viewBottomSheetRef = useRef(null);
   const bottomSheetRef = useRef(null);
   const router = useRouter();
-  console.log(router)
   const { selectedfoodCategory } = router.query;
   const [selectedOption, setSelectedOption] = useState('');
   // const selectedOption = router.asPath.split('/').pop();

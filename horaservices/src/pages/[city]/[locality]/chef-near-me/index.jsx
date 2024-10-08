@@ -23,8 +23,6 @@ import '../../../../app/homepage.css';
 
 import cityData from '../../../../utils/cityData';
 
-console.log("City Data:", cityData); 
-
 const ChefCitypage = () => {
     const [showButton, setShowButton] = useState(false);
     const [city, setCity] = useState("");
@@ -880,21 +878,17 @@ const ChefCitypage = () => {
       
        // Normalize city parameter
        const normalizedCity = city ? city.toLowerCase() : '';
-       console.log("Normalized City:", normalizedCity); // Log normalized city
        
        // Determine if the city parameter exists
        const hasCityPageParam = city ? true : false;
-       console.log("Has City Page Param:", hasCityPageParam); // Log if city parameter exists
      
        // State to hold the city localities list
        const [cityLocalitiesList, setCityLocalitiesList] = useState([]);
      
        // Fetch city localities when city changes
        useEffect(() => {
-         console.log("UseEffect Triggered"); // Log when useEffect is triggered
          if (normalizedCity) {
            const localities = cityData[normalizedCity]?.cityLocalitiesList || [];
-           console.log("Fetched Localities:", localities); // Log fetched localities
            setCityLocalitiesList(localities);
          }
        }, [normalizedCity]);
@@ -909,7 +903,6 @@ const ChefCitypage = () => {
          return <div>Please select a city first.</div>;
        }
      
-       console.log("City Localities List:", cityLocalitiesList); // Log final localities list
      
     
        

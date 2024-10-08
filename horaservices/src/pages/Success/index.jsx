@@ -22,56 +22,56 @@ const [mobileNumber, setMobileNumber] = useState(() => localStorage.getItem("mob
     router.push("/orderlist");
   };
 
-      // Function to send the WhatsApp message
-const sendWelcomeMessage = async (mobileNumber) => {
-  let formattedMobileNumber = mobileNumber;
+        // Function to send the WhatsApp message
+  const sendWelcomeMessage = async (mobileNumber) => {
+    let formattedMobileNumber = mobileNumber;
 
-  // Ensure the mobile number starts with '+91'
-  if (!formattedMobileNumber.startsWith('+91')) {
-      formattedMobileNumber = '+91' + formattedMobileNumber;
-  }
+    // Ensure the mobile number starts with '+91'
+    if (!formattedMobileNumber.startsWith('+91')) {
+        formattedMobileNumber = '+91' + formattedMobileNumber;
+    }
 
-  // Remove any extra spaces or special characters
-  formattedMobileNumber = formattedMobileNumber.replace(/\s+/g, '');
+    // Remove any extra spaces or special characters
+    formattedMobileNumber = formattedMobileNumber.replace(/\s+/g, '');
 
-  console.log('Sending WhatsApp message to mobile number:', formattedMobileNumber);
+    console.log('Sending WhatsApp message to mobile number:', formattedMobileNumber);
 
-  const options = {
-      method: 'POST',
-      url: 'https://public.doubletick.io/whatsapp/message/template',
-      headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-          Authorization: 'key_wZpn79uTfV' // Keep this secure in backend
-      },
-      data: {
-          messages: [
-              {
-                  content: {
-                      language: 'en',
-                      templateData: {
-                          header: {
-                              type: 'IMAGE',
-                              mediaUrl: 'https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg'
-                          },
-                          body: { placeholders: ['Hora Services'] } // Use dynamic placeholders if needed
-                      },
-                      templateName: 'order_confirmation_message__v3'
-                  },
-                  from: '+917338584828',
-                  to: formattedMobileNumber // Send to the formatted mobile number
-              }
-          ]
-      }
+    const options = {
+        method: 'POST',
+        url: 'https://public.doubletick.io/whatsapp/message/template',
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            Authorization: 'key_wZpn79uTfV' // Keep this secure in backend
+        },
+        data: {
+            messages: [
+                {
+                    content: {
+                        language: 'en',
+                        templateData: {
+                            header: {
+                                type: 'IMAGE',
+                                mediaUrl: 'https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg'
+                            },
+                            body: { placeholders: ['Hora Services'] } // Use dynamic placeholders if needed
+                        },
+                        templateName: 'order_confirmation_message__v3'
+                    },
+                    from: '+917338584828',
+                    to: formattedMobileNumber // Send to the formatted mobile number
+                }
+            ]
+        }
+    };
+
+    try {
+        const response = await axios.request(options);
+        console.log('WhatsApp message response:', response.data);
+    } catch (error) {
+        console.error('Error sending WhatsApp message:', error);
+    }
   };
-
-  try {
-      const response = await axios.request(options);
-      console.log('WhatsApp message response:', response.data);
-  } catch (error) {
-      console.error('Error sending WhatsApp message:', error);
-  }
-};
 
 
   useEffect(()=>{
