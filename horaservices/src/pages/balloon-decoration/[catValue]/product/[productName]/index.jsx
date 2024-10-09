@@ -444,6 +444,13 @@ function DecorationCatDetails() {
               </div>
              
             </div>
+            <div style={{ border:"1px solid rgb(220, 53, 69)", backgroundColor:"rgb(248, 215, 218)" , margin:"13px auto 7px" , padding:"10px 10px 11px 16px" , borderRadius:10 , width:"80%" , textAlign:"left" }} className="inclusiton-details desktop-view">
+          <p style={{ marginBottom:"0" , fontWeight:"bold" , fontSize:12}}>Note:</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Balloons color can be changed as per your choice.*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Neon lights can be changed for the event (if  included in the design).*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Age numbers and name are customizable (if included in the design).*</p>
+
+          </div>
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
@@ -474,12 +481,17 @@ function DecorationCatDetails() {
                       ₹ {Math.floor(discountInfo?.discountDifference || 0)} {'off'}
                       </div>
               </div>
+
+              {selectedAddOnProduct.length == 0 && (
+                <button style={styles.Buttonstyle} id="continueButton" className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
+              )}
               
                         
               {/* <div className="d-flex align-items-center pro-rating-sec">
               <p className="m-0 p-0 pe-3 pro-rating-sec1" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color:"#9252AA" }}>{getRandomRating()}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#FFBF00' }}><FontAwesomeIcon style={{ margin: 0 }} icon={faStar} /></span></p>
               <p className="m-0 p-0" style={{ color: '#9252AA', fontWeight: '500', fontSize: 17, margin: "0px", padding: "0 0 0 10px" }}>({getRandomNumber(20, 500)})</p>
             </div> */}
+           
             </div>
 
 
@@ -528,9 +540,16 @@ function DecorationCatDetails() {
 
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
               {getItemInclusion(product.inclusion)}
-              {selectedAddOnProduct.length == 0 && (
-                <button style={styles.Buttonstyle} id="continueButton" className="dec-continueButton" onClick={() => handleButtonClick(subCategory, product)}>Continue</button>
-              )}
+
+              <div style={{ border:"1px solid rgb(220, 53, 69)", backgroundColor:"rgb(248, 215, 218)" , margin:"13px 2px 7px" , padding:"7px 7px" , borderRadius:10 , textAlign:"left" , margin:"10px auto" , width:"100%"}} className="inclusiton-details mobile-view">
+          <p style={{ marginBottom:"0" , fontWeight:"bold" , fontSize:12}}>Note:</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Balloons color can be changed as per your choice.*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Neon lights can be changed for the event (if  included in the design).*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Age numbers and name are customizable (if included in the design).*</p>
+
+          </div>
+              
+           
             </div>
 
       <div className="card-container-cta">

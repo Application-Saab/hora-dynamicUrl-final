@@ -8,9 +8,9 @@ import '../app/globals.css';
 
 const PageLayout = ({ children }) => {
 
-    document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-    });
+    // document.addEventListener('contextmenu', function(event) {
+    //     event.preventDefault();
+    // });
  
   
   return (
