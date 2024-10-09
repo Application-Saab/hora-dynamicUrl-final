@@ -28,8 +28,8 @@ function Header() {
   const [pageTitle, setPageTitle] = useState("");
   const [isMounted, setIsMounted] = useState(false); // State to check if component has mounted
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//   const navigate = useNavigate();
   const isHomePage = routerPathname === '/';
+  const isDelhiPage = routerPathname === '/delhi';
 
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
@@ -187,7 +187,11 @@ useEffect(() => {
 
   return (
     <>
-     { routerPathname === "/" ? (
+     { routerPathname === "/" || routerPathname === "/delhi" || routerPathname === "/mumbai" || routerPathname === "/gurugram"
+    || routerPathname === "/ghaziabad" || routerPathname === "/faridabad" || routerPathname === "/noida" || routerPathname === "/bengaluru"
+    || routerPathname === "/hyderabad" || routerPathname === "/mumbai" || routerPathname === "/indore" || routerPathname === "/chennai"
+    || routerPathname === "/pune" || routerPathname === "/surat" || routerPathname === "/bhopal" || routerPathname === "/lucknow" || routerPathname === "/goa"
+     ?  (
       <header style={styles.headerContainerhome} className="home-header">
       <div className="pageWidth">
         <div style={styles.headerContainerinner} className="headerContainerinner">
@@ -236,7 +240,7 @@ useEffect(() => {
                 </>
                
                 ) : (
-                  <a style={styles.linkicon} onClick={handleLogout}>
+                  <a style={styles.linkiconLogout} onClick={handleLogout}>
                     <image src={loginIcon} />
                     <span style={{ marginLeft: "3px" }}>Logout</span>
                   </a>
@@ -247,7 +251,13 @@ useEffect(() => {
         </div>
         <div style={styles.mobileViewHeader} className='mobileViewHeader py-2'>
           <div className="mobile-container" style={{ width:"100%"}}>
-            {isHomePage && ChefCitypage ? (
+            {isHomePage  ||  routerPathname === "/" || routerPathname === "/delhi" || routerPathname === "/mumbai" || routerPathname === "/gurugram"
+    || routerPathname === "/ghaziabad" || routerPathname === "/faridabad" || routerPathname === "/noida" || routerPathname === "/bengaluru"
+    || routerPathname === "/hyderabad" || routerPathname === "/mumbai" || routerPathname === "/indore" || routerPathname === "/chennai"
+    || routerPathname === "/pune" || routerPathname === "/surat" || routerPathname === "/bhopal" || routerPathname === "/lucknow" || routerPathname === "/goa"
+     ?
+            
+            (
               <>
                <Link href="/">
                   <Image src={logo} alt="Logo" style={{ width: "50px", height: "50px", margin:"0px auto"}} />
@@ -368,7 +378,7 @@ useEffect(() => {
                   <span style={{ marginLeft: "3px" }}>Login</span>
                 </Link>
               ) : (
-                <a style={styles.linkicon} onClick={handleLogout}>
+                <a style={styles.linkiconLogout} onClick={handleLogout}>
                   <FontAwesomeIcon icon={faUser} style={styles.icon} />
                   <span style={{ marginLeft: "3px" }}>Logout</span>
                 </a>
@@ -462,6 +472,9 @@ const Drawer = ({ closeDrawer, drawerRef, handleLogout }) => {
       </Link>
       </div>
       <div style={{ padding:"0px 10px 20px 20px"}}>
+      <Link href="/orderlist" style={style.drawerLink} onClick={closeDrawer}>
+        My Order
+      </Link>
       <Link href="/balloon-decoration" style={style.drawerLink} onClick={closeDrawer}>
         Decoration
       </Link>
@@ -569,6 +582,12 @@ const styles = {
     padding: "0px",
   },
   linkicon: {
+    color: "#333",
+    textDecoration: "none",
+    fontSize: "16px",
+    fontWeight: "500",
+  },
+  linkiconLogout: {
     color: "#333",
     textDecoration: "none",
     fontSize: "16px",

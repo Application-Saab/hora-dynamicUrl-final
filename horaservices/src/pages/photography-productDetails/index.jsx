@@ -216,7 +216,7 @@ function DecorationCatDetails() {
           </div>
           <div style={{ width: "50%", paddingLeft: "20px", paddingRight: "50px" }} className="decDetailsRight">
             <div style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "10px", marginBottom: "12px", backgroundColor: "#fff" }}>
-              <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{subCategory}{' > '}{product1.name}</h2>
+              <h2 style={{ fontSize: "12px", color: "#9252AA" }}>{'Home'}{' > '}{"Enter"}{' > '}{product1.name}</h2>
               <h1 style={{ fontSize: "16px", color: "#222", fontSize: "21px", fontWeight: "#222" }}>{product1.name}</h1>
               <p className='mb-2' style={{ fontSize: "18px", color: "#9252AA", fontWeight: "600" }}> ₹ {product1.price}</p>
              {/* <div className="d-flex align-items-center pro-rating-sec">

@@ -27,8 +27,8 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const bottomSheetRef = useRef(null);
   const router = useRouter();
   console.log(router)
-  let { selectedfoodCategory } = router.query;
-  const [selectedOption, setSelectedOption] = useState(selectedfoodCategory);
+  const { selectedfoodCategory } = router.query;
+  const [selectedOption, setSelectedOption] = useState('');
   // const selectedOption = router.asPath.split('/').pop();
   const [orderType, setOrderType] = useState(2);
   const [isDishSelected, setIsDishSelected] = useState(false);
@@ -60,6 +60,12 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     button: "",
   });
 
+  useEffect(() => {
+    if (selectedfoodCategory) {
+      setSelectedOption(selectedfoodCategory);
+    }
+  }, [selectedfoodCategory]);
+
   // const navigate = useNavigate();
 
   const handleWarningClose = () => {
@@ -67,7 +73,6 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     setWarningVisibleForCuisineCount(false);
     setWarningVisibleForTotalAmount(false);
   };
-  console.log(selectedOption)
 
   // get category of cuisines
 
@@ -242,9 +247,9 @@ const FoodDeliveryCreateOrder = (currentStep) => {
   const renderDishItem = ({ item }) => (
     <div className='w-100'>
       {item.dish.length > 0 ?
-        <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "9px 19px 0px 6px" }}>
-            <h1 style={{ color: "#000", fontSize: "110%", marginBottom: "13px" }}>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
+        <>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "5px 4px 0px 0px" }}>
+            <h1 style={{ color: "#222", fontSize: "110%", marginBottom: "13px" , fontWeight:"700" }} className='cat-Name'>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
             <Button onClick={() => handleViewAll(item.mealObject._id)} style={{ color: expandedCategories.includes(item.mealObject._id) ? '#000' : '#fff', fontWeight: '400', textDecorationLine: 'none', fontSize: 12 }}
               className={`viewbtn ${expandedCategories.includes(item.mealObject._id)
                 ? "clickedviewAll"
@@ -270,13 +275,15 @@ const FoodDeliveryCreateOrder = (currentStep) => {
                     }}
                   >
                     {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
+                      <div 
+                      className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                      style={{
+                          backgroundImage: `url(${selectedImage})`,
+                          backgroundSize: 'cover, cover', // Ensures both images cover the element
+                          backgroundPosition: 'center, center' // Centers both images
+                      }}
+                      >
+                         </div>
                     ) : (
                       <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
                     )}
@@ -321,13 +328,15 @@ const FoodDeliveryCreateOrder = (currentStep) => {
                     }}
                   >
                     {selectedImage ? (
-                      <Image
-                        src={selectedImage}
-                        alt={dish.name}
-                        className={`dish-image ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}
-                        width={300}
-                        height={300}
-                      />
+                      <div 
+                      className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                      style={{
+                          backgroundImage: `url(${selectedImage})`,
+                          backgroundSize: 'cover, cover', // Ensures both images cover the element
+                          backgroundPosition: 'center, center' // Centers both images
+                      }}
+                      >
+                         </div>
                     ) : (
                       <div className={`dish-placeholder ${selectedDishes.includes(dish._id) ? 'selected' : ''}`}>Image not available</div>
                     )}
@@ -357,7 +366,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
             }
           </div>
           <div className='chef-divider' style={{ marginTop: "20px" }}></div>
-        </div>
+        </>
         : null
       }
     </div>
@@ -458,6 +467,7 @@ console.log('selectedOption',selectedOption)
   };
 
   const handleViewAll = categoryId => {
+
     setIsViewAllExpanded(!isViewAllExpanded);
 
     setExpandedCategories(prevExpanded =>
@@ -477,7 +487,7 @@ console.log('selectedOption',selectedOption)
     <div className="chef-create-order">
       <div className="order-container chef">
         <div style={{ flexDirection: 'row', backgroundColor: '#EFF0F3', boxShadow: "0px 0px 6px 0px rgba(0, 0, 0, 0.08)", display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 0" }}>
-          <Image style={{ width: "20px", height: '20px', marginRight: "10px" }} src={InfoIcon} />
+          <Image style={{ width: "20px", height: '20px', marginRight: "5px" }} src={InfoIcon} />
           <p style={{ color: '#676767', fontSize: "94%", fontWeight: '400', margin: "0" }} className='billheading'>Bill value depends upon Dish selected + Number of people</p>
         </div>
         <div className="range-bar">
@@ -529,7 +539,7 @@ console.log('selectedOption',selectedOption)
           </div>
           <div
             className="chef-divider"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "13px" }}
           ></div>
         </Row>
 

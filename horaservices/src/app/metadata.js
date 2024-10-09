@@ -26,6 +26,7 @@ export const metadata = {
     title: "Chef for Party | Balloon Decoration for Party | Food Delivery for Party | Chef Near me | Decoration at Home | Balloon Decoration Near me - Hora",
     description: "Want to book a cook for home near you? Hire skilled cooks for a day or book a chef for a party at home with Hora. Get a chef for a birthday or house party in Mumbai, Bangalore & Delhi NCR, Hora services, Horaservices",
     url: "https://horaservices.com",
+    logo: "https://horaservices.com/api/uploads/logo-icon.png",
     type: "website",
     images: [
       {

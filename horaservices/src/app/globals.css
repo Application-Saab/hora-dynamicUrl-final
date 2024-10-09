@@ -264,6 +264,7 @@ li.inclusionstyle {
 
 .tabButton {
   border: none;
+  width: 50%;
 }
 
 button.continuebtnchef.btn.btn-primary {
@@ -449,6 +450,7 @@ button.pluBtn {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  column-gap: 0.5%;
 }
 
 p.dish-name.selected {
@@ -474,11 +476,11 @@ img.dish-image.selected {
 
 
 .dish-image {
-  width: 86px;
-  height: 81px;
-  border-radius: 50%;
-  margin: -30px auto 0;
-  transition: transform 0.3s ease; /* Smooth transition effect */
+  width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: -30px auto 0;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 7);
 }
 
 .dish-image:hover {
@@ -488,12 +490,13 @@ img.dish-image.selected {
 
 .order-container .dish-name {
   color: rgb(157, 74, 147) !important;
-  font-size: 85%;
-  text-align: left;
-  padding: 18px 12px 0px;
-  font-weight: 500;
-  margin: 0;
-  min-height: 75px;
+    font-size: 97%;
+    text-align: left;
+    padding: 18px 12px 0px;
+    font-weight: 600;
+    margin: 0;
+    min-height: 68px;
+    line-height: 19px;
 }
 
 .dish-price {
@@ -506,7 +509,7 @@ img.dish-image.selected {
 
 .selected {
   font-weight: bold;
-  border: 2px solid #007bff;
+  /* border: 2px solid  rgb(157, 74, 147) ; */
 }
 
 .footSec ul,
@@ -517,13 +520,45 @@ img.dish-image.selected {
 }
 
 .non-veg-border {
-  border-bottom: 2px solid red;
+  position: relative;
+}
+.non-veg-border::before
+{
+  content: '';
+  position: absolute;
 }
 
-.veg-border {
-  border-bottom: 2px solid green;
-  /* Adjust color as needed */
+.non-veg-border::before {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* z-index: -1; */
+  WIDTH: 71%;
+  border-bottom: 4px solid red;
+  margin: 0 auto;
 }
+
+
+.veg-border {
+  position: relative;
+}
+.veg-border::before
+{
+  content: '';
+  position: absolute;
+}
+
+.veg-border::before {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* z-index: -1; */
+  WIDTH: 71%;
+  border-bottom: 4px solid green;
+  margin: 0 auto;
+}
+
+
 
 p.ordersummeryname,
 .ordersummeryprice {
@@ -533,9 +568,17 @@ p.ordersummeryname,
 
 .ordersummaryproduct {
   border: 1px solid #efefef;
-  padding: 10px;
-  width: 15%;
-  margin: 0 10px 13px 10px;
+  padding: 0 10px;
+  width: 20%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap:10px;
+}
+.ordersummaryproduct div:first-child{
+  width: 40%;
 }
 
 .ordersummaryproduct img {
@@ -611,9 +654,22 @@ button.dec-continueButton {
 }
 
 .no-orders {
-  padding: 100px 30px;
+  font-size: 20px !important;
+  padding: 0;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 350px;
 }
-
+.no-orders h4 {
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
 .left-details {
   text-align: left;
 }
@@ -627,13 +683,62 @@ main.order-list .order-container {
 .price-para {
   text-align: end !important;
 }
+h4.contact-us-heading a {
+  color: #9252aa;
+  margin: 14px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dish-placeholder {
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgb(157, 74, 147) ;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: rgb(157, 74, 147) ;
+   margin-top: -23px;
+  border-radius: 50px;
+  font-size: 12px;
+  background-color: #fff;
+  font-weight: 400;
+}
 
 /* select date chef flow */
 @media (max-width: 800px) {
+  .ordersummaryproduct div:first-child{
+    width: 90%;
+  }
+  p.totalcount {
+    margin-bottom: 0 !important;
+    font-size: 14px !important;
+    FONT-WEIGHT: 600;
+    border: 1px solid #efefef;
+    width: 32px !important;
+}
+  .dishes-selected .ingredientleftsec img {
+    max-height: 34px;
+}
   div#faqQ {
     padding: 0 20px;
   }
+  .foode-deliry-mobile .ordersummaryproduct p.ordersummeryname {
+    min-height: auto;
+  }
  
+  .no-orders {
+    width: 90%;
+  }
+  .no-orders h4 {
+    font-size: 11px;
+}
 
   .order-detail-page-decoration {
     width: 100% !important;
@@ -1034,8 +1139,21 @@ main.order-list .order-container {
 
   .pri_details {
     margin: 15px 0 0;
+    flex-direction: column;
   }
+  .pro_price {
+    justify-content: flex-start !important;
+    gap: 8px;
+    align-items: center;
+}
+.decCatPage .decimagecontainer  .pro_price p:first-child {
+  font-size: 18px !important;
+  margin-right: 2px !important;
+}
 
+.slider-item-details .pri_details {
+  margin: 0 !important;
+}
   .prod-detailsp {
     padding-left: 0px;
   }
@@ -1101,7 +1219,8 @@ main.order-list .order-container {
   }
 
   .billheading {
-    font-size: 79% !important;
+    font-size: 86% !important;
+    font-weight: 600;
   }
 
   .selectdateContainersec {
@@ -1360,8 +1479,9 @@ main.order-list .order-container {
   }
 
   .order-container .dish-name {
-    font-size: 73%;
-    min-height: 62px;
+    font-size: 77%;
+    min-height: 56px;
+    padding: 9px 14px 7px
   }
 
   .dish-item-inner {
@@ -1430,8 +1550,8 @@ main.order-list .order-container {
     }
 
     .checkoutRightImg {
-      height: auto;
-      border-radius: 10px;
+      height: auto !important;
+      
     }
 
     .decor-commemnts {
@@ -1440,14 +1560,26 @@ main.order-list .order-container {
     }
 
     .ordersummaryproduct {
-      width: 22% !important;
+      width: 47% !important;
+      gap:12px;
     }
+   
   }
+  .decDetailsRightInner {
+    width: 90% !important;
+}
+
+
 }
 
 @media (max-width: 400px) {
   .textContainerhome h2 {
     padding: 4px 8% 5px !important;
+  }
+  .cat-Name{
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    margin-bottom: 0px !important;
   }
 
   p.ordersummeryname,
@@ -1462,6 +1594,11 @@ main.order-list .order-container {
     padding: 12px 13px !important;
     border-radius: 0 !important;
   }
+
+  img.quantiy-icon {
+    width: 18px !important;
+    height: 18px !important;
+}
 
   h5.order-id-h {
     margin-bottom: 0;
@@ -1497,7 +1634,7 @@ main.order-list .order-container {
   }
 
   .dish-item-inner {
-    height: 134px;
+    height: 161px;
   }
 
   .d-flex.justify-content-between.w-100.px-3.dishPrice {
@@ -1517,9 +1654,10 @@ main.order-list .order-container {
   }
 
   .order-container .dish-name {
-    font-size: 62%;
-    min-height: 45px;
-    padding: 13px 11px 7px;
+    font-size: 87%;
+    min-height: 60px !important;
+    padding: 16px 11px 7px;
+    line-height: 15px;
   }
 
   p.subheading {
@@ -1568,9 +1706,15 @@ main.order-list .order-container {
   }
 
   .ingredientleftsec {
-    margin-right: 8% !important;
+    margin-right: 4% !important;
     width: 50% !important;
   }
+  .dishes-selected .ingredientsec{
+    padding: 6px 5px !important;
+  }
+  .dishes-selected .ingredientrightsec {
+    font-size: 10px !important;
+}
 
   .ingredientrightsecsibheading {
     font-size: 70% !important;
@@ -1607,12 +1751,12 @@ main.order-list .order-container {
   }
 
   .dish-item-inner {
-    height: 123px;
+    height: 150px;
   }
 
   .dish-image {
-    width: 70px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -1622,6 +1766,10 @@ main.order-list .order-container {
     margin-bottom: 1px;
     font-weight: 600;
   }
+  button.dec-continueButton {
+    margin: 16px auto 12px !important;
+    width: 95% !important;
+}
 
   h6.order-otp {
     font-size: 14px !important;
@@ -1634,12 +1782,13 @@ main.order-list .order-container {
   }
 
   .ingredientrightsecsibheading {
-    font-size: 100% !important;
+    font-size: 90% !important;
   }
 
 
   p.billheading {
-    font-size: 65% !important;
+    font-size: 77% !important;
+    font-weight: 500 !important
   }
 
   p.selectdateContainerheadig {
@@ -1648,7 +1797,7 @@ main.order-list .order-container {
   }
 
   .ingredientrightsec {
-    font-size: 10px !important;
+    font-size: 13px !important;
   }
 
   .tabButton {
@@ -1661,10 +1810,16 @@ main.order-list .order-container {
     font-size: 93% !important;
     padding: 0 20px !important;
   }
+  .dish-item{
+    gap:0;
+  }
 
 }
 
 @media (max-width: 321px) {
+  p.billheading {
+    font-size: 65% !important;
+  }
   .order-container .dish-name {
     font-size: 55%;
     min-height: 43px;
@@ -1672,7 +1827,11 @@ main.order-list .order-container {
   }
 
   .dish-item-inner {
-    height: 115px;
+    height: 143px;
+  }
+  .dish-image {
+    width: 70px;
+    height: 70px;
   }
 }
 

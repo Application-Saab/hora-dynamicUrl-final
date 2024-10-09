@@ -14,6 +14,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap';
 import checkImage from '../../assets/check.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Loader from '../../components/Loader'
 
 const FoodDeliveryCheckout = () => {
     //   const { selectedDishesFoodDelivery , selectedOption ,orderType, selectedDishDictionary, selectedDishPrice, totalOrderAmount , selectedDishQuantities , peopleCount} = useLocation().state || {}; // Accessing subCategory and itemName safely
@@ -38,6 +39,7 @@ const FoodDeliveryCheckout = () => {
     const [combinedDateTime, setCombinedDateTime] = useState(null);
     const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
     const [isClient, setIsClient] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     /// order.type is 2 for chef
     /// order.type is 1 for decoration
@@ -66,6 +68,12 @@ const FoodDeliveryCheckout = () => {
             console.error('Error parsing selectedDishDictionary:', error);
         }
     }
+
+    useEffect(() => {
+        setIsClient(true);
+      }, []);
+
+      
     const selectedDeliveryOption = selectedOption;
 
     const handleComment = (e) => {
@@ -328,25 +336,47 @@ const FoodDeliveryCheckout = () => {
     var discountedPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
     const calculateFinalTotal = () => {
-        let finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
-        console.log(totalPrice, discountedPrice);
-        console.log("finalTotal: " + finalTotal);
+        let finalTotal = 0; // Initialize finalTotal with 0
+    
+        // Check for the selected delivery option
         if (selectedDeliveryOption === 'party-food-delivery') {
+            {
+            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
+            ? totalPrice - parseFloat(discountedPrice)
+            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+
+            }
+
+            //finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+            console.log("Initial total after applying discount and delivery charges: " + finalTotal);
+            
             finalTotal += parseFloat(packingCost);
-            console.log("finalTotal after packing cost: " + finalTotal);
+            console.log("Total after adding packing cost: " + finalTotal);
+    
             if (includeDisposable) {
-                finalTotal += parseFloat((20 * peopleCount).toFixed(0));
-                console.log("finalTotal after disposable cost: " + finalTotal);
+                finalTotal += parseFloat((20 * peopleCount).toFixed(0)); // Convert to float to add
+                console.log("Total after adding disposable cost: " + finalTotal);
             }
         } else if (selectedDeliveryOption === 'party-live-buffet-catering') {
+            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
+            ? totalPrice - parseFloat(discountedPrice)
+            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+        
+            console.log("Initial total after applying discount: " + finalTotal);
+    
             if (includeTables) {
                 finalTotal += 1200;
-                console.log("finalTotal after table cost: " + finalTotal);
+                console.log("Total after adding table cost: " + finalTotal);
             }
         }
-        console.log("finalTotal after adjustments: " + finalTotal.toFixed(0));
-        return finalTotal.toFixed(0);
+    
+        // Ensure finalTotal is a number and rounded to the nearest whole number
+        finalTotal = parseFloat(finalTotal.toFixed(0));
+        console.log("Final total after adjustments: " + finalTotal);
+    
+        return finalTotal;
     };
+    
 
     // Function to calculate the advance payment
     const calculateAdvancePayment = () => {
@@ -426,7 +456,12 @@ const FoodDeliveryCheckout = () => {
                 </div>
                 <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}>
                     <p className='ordersummeryname'>{item.name}</p>
-
+                    {
+            selectedDeliveryOption === 'party-food-delivery' ? 
+            <div style={{ fontSize: "90%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
+            :
+            null
+          }
                 </div>
             </div>
         );
@@ -500,32 +535,562 @@ const FoodDeliveryCheckout = () => {
     };
 
     const pincodes = [
-        "560063", "560030", "560034", "560007", "560092", "560024", "560045", "560003", "560050", "562107",
-        "560064", "560047", "560026", "560086", "560002", "560070", "560073", "560053", "560085", "560043",
-        "560017", "560001", "560009", "560025", "560083", "560076", "560004", "560079", "560103", "560046",
-        "562157", "560010", "560049", "560056", "560068", "560093", "560018", "560040", "560097", "560061",
-        "562130", "560067", "560036", "560029", "560062", "560037", "560071", "562125", "560016", "560100",
-        "560005", "560065", "560019", "560021", "560022", "560013", "560087", "560008", "560051", "560102",
-        "560104", "560048", "560094", "560066", "560038", "560078", "560006", "560014", "560015", "560041",
-        "560069", "560011", "560020", "560084", "560096", "560098", "560095", "560077", "560074", "560054",
-        "560023", "560033", "560055", "560099", "560072", "560039", "560075", "560032", "560058", "560059",
-        "560080", "560027", "560012", "560042", "560028", "560052", "560091", "110001", "110002", "110003",
-        "110004", "110005", "110006", "110007", "110008", "110009", "110010", "110011", "110012", "110013",
-        "110014", "110015", "110016", "110017", "110018", "110019", "110020", "110021", "110022", "110023",
-        "110024", "110025", "110026", "110027", "110028", "110029", "110030", "110031", "110032", "110033",
-        "110034", "110035", "110036", "110037", "110038", "110039", "110040", "110041", "110042", "110043",
-        "110044", "110045", "110046", "110047", "110048", "110049", "110051", "110052", "110053", "110054",
-        "110055", "110056", "110057", "110058", "110059", "110060", "110061", "110062", "110063", "110064",
-        "110065", "110066", "110067", "110068", "110070", "110071", "110073", "110074", "110075", "110076",
-        "110078", "110081", "110082", "110083", "110084", "110085", "110086", "110087", "110088", "110091",
-        "110092", "110093", "110094", "110095", "110096", "201301", "201302", "201303", "201304", "201305",
-        "201306", "201307", "201309", "201312", "201308", "201312", "201315", "201310", "201318", "122001",
-        "122002", "122003", "122006", "122008", "122009", "122010", "122011", "122015", "122016", "122017",
-        "122018", "201009", "201001", "201002", "201003", "201004", "201005", "201006", "201007", "201008",
-        "201010", "201011", "201012", "201013", "201014", "201015", "201016", "201017", "201018", "121002",
-        "121001", "121003", "121004", "121005", "121006", "121007", "121008", "121009", "121010", "122022",
-         "560035"
-    ]
+        
+        "400097",
+        "560035",
+        "122004",
+        "122051",
+        "400104",
+        "400094",
+        "400089",
+        "201009",
+        "110043",
+        "400053",
+        "400068",
+        "400076",
+        "410210",
+        "400089",
+        "122051",
+        "400104",
+        "400067",
+        "400094",
+        "400089",
+        "201301",
+        "410026",
+        "400043",
+        "500072",
+        "400043",
+        "400075",
+        "500050",
+        "560063",
+        "560030",
+        "560034",
+        "560007",
+        "560092",
+        "560024",
+        "562106",
+        "560045",
+        "560003",
+        "560050",
+        "562107",
+        "560064",
+        "560047",
+        "560026",
+        "560086",
+        "560002",
+        "560070",
+        "560073",
+        "562149",
+        "560053",
+        "560085",
+        "560043",
+        "560017",
+        "560001",
+        "560009",
+        "560025",
+        "560083",
+        "560076",
+        "560004",
+        "560079",
+        "560103",
+        "560046",
+        "562157",
+        "560010",
+        "560049",
+        "560056",
+        "560068",
+        "560093",
+        "560018",
+        "560040",
+        "560097",
+        "560061",
+        "562130",
+        "560067",
+        "560036",
+        "560029",
+        "560062",
+        "560037",
+        "560071",
+        "562125",
+        "560016",
+        "560100",
+        "560005",
+        "560065",
+        "560019",
+        "560021",
+        "560022",
+        "560013",
+        "560087",
+        "560008",
+        "560051",
+        "560102",
+        "560104",
+        "560048",
+        "560094",
+        "560066",
+        "560038",
+        "560078",
+        "560006",
+        "560014",
+        "560015",
+        "560041",
+        "560069",
+        "560011",
+        "560020",
+        "560084",
+        "560096",
+        "560098",
+        "560095",
+        "560077",
+        "560074",
+        "560054",
+        "560023",
+        "560033",
+        "560055",
+        "560099",
+        "560072",
+        "560039",
+        "560075",
+        "560032",
+        "560058",
+        "560059",
+        "560080",
+        "560027",
+        "560012",
+        "560042",
+        "560028",
+        "560052",
+        "560091",
+        "572213",
+        "560035",
+        "110001",
+        "110002",
+        "110003",
+        "110004",
+        "110005",
+        "110006",
+        "110007",
+        "110008",
+        "110009",
+        "110010",
+        "110011",
+        "110012",
+        "110013",
+        "110014",
+        "110015",
+        "110016",
+        "110017",
+        "110018",
+        "110019",
+        "110020",
+        "110021",
+        "110022",
+        "110023",
+        "110024",
+        "110025",
+        "110026",
+        "110027",
+        "110028",
+        "110029",
+        "110030",
+        "110031",
+        "110032",
+        "110033",
+        "110034",
+        "110035",
+        "110036",
+        "110037",
+        "110038",
+        "110039",
+        "110040",
+        "110041",
+        "110042",
+        "110043",
+        "110044",
+        "110045",
+        "110046",
+        "110047",
+        "110048",
+        "110049",
+        "110051",
+        "110052",
+        "110053",
+        "110054",
+        "110055",
+        "110056",
+        "110057",
+        "110058",
+        "110059",
+        "110060",
+        "110061",
+        "110062",
+        "110063",
+        "110064",
+        "110065",
+        "110066",
+        "110067",
+        "110068",
+        "110070",
+        "110071",
+        "110073",
+        "110074",
+        "110075",
+        "110076",
+        "110078",
+        "110081",
+        "110082",
+        "110083",
+        "110084",
+        "110085",
+        "110086",
+        "110087",
+        "110088",
+        "110091",
+        "110092",
+        "110093",
+        "110094",
+        "110095",
+        "110096",
+        "122102",
+        "201302",
+        "201303",
+        "201304",
+        "201305",
+        "201306",
+        "201307",
+        "201309",
+        "201312",
+        "201308",
+        "201312",
+        "201315",
+        "201310",
+        "201318",
+        "122001",
+        "122002",
+        "122003",
+        "122004",
+        "122006",
+        "122008",
+        "122009",
+        "122010",
+        "122011",
+        "122015",
+        "122016",
+        "122017",
+        "122018",
+        "201009",
+        "201001",
+        "201002",
+        "201003",
+        "201004",
+        "201005",
+        "201006",
+        "201007",
+        "201008",
+        "201010",
+        "201011",
+        "201012",
+        "201013",
+        "201014",
+        "201015",
+        "201016",
+        "201017",
+        "201018",
+        "121002",
+        "121001",
+        "121003",
+        "121004",
+        "121005",
+        "121006",
+        "121007",
+        "121008",
+        "121009",
+        "121010",
+        "122022",
+        "500030",
+        "500004",
+        "500045",
+        "500007",
+        "500012",
+        "500015",
+        "500044",
+        "500013",
+        "501201",
+        "501301",
+        "500040",
+        "500020",
+        "500048",
+        "500058",
+        "500064",
+        "500005",
+        "500034",
+        "500027",
+        "500016",
+        "500003",
+        "500018",
+        "500080",
+        "500039",
+        "500022",
+        "500024",
+        "500081",
+        "500008",
+        "500028",
+        "500006",
+        "500060",
+        "500062",
+        "500053",
+        "500065",
+        "500029",
+        "500043",
+        "500001",
+        "500068",
+        "500052",
+        "500066",
+        "500025",
+        "500051",
+        "500035",
+        "500002",
+        "500076",
+        "500082",
+        "500031",
+        "500079",
+        "500085",
+        "500033",
+        "500077",
+        "500067",
+        "500074",
+        "500063",
+        "500017",
+        "500089",
+        "500036",
+        "500026",
+        "500095",
+        "500069",
+        "500071",
+        "500041",
+        "500023",
+        "500055",
+        "500059",
+        "500038",
+        "500046",
+        "500061",
+        "500073",
+        "502032",
+        "500070",
+        "500057",
+        "501101",
+        "502300",
+        "500049",
+        "500060",
+        "501218",
+        "501505",
+        "500070",
+        "500019",
+        "500101",
+        "501504",
+        "501815",
+        "500072",
+        "500078",
+        "500050",
+        "400065",
+        "400011",
+        "400099",
+        "400004",
+        "400053",
+        "400069",
+        "400058",
+        "400037",
+        "400005",
+        "400003",
+        "400051",
+        "400050",
+        "400090",
+        "400001",
+        "400012",
+        "400007",
+        "400028",
+        "400091",
+        "400066",
+        "400092",
+        "400013",
+        "400020",
+        "400030",
+        "400022",
+        "400093",
+        "400067",
+        "400033",
+        "400026",
+        "400014",
+        "400068",
+        "400052",
+        "400017",
+        "400010",
+        "400008",
+        "400062",
+        "400063",
+        "400034",
+        "400070",
+        "400057",
+        "400032",
+        "400056",
+        "400076",
+        "400095",
+        "400059",
+        "400060",
+        "400102",
+        "400080",
+        "400049",
+        "400002",
+        "400101",
+        "400016",
+        "400031",
+        "400064",
+        "400061",
+        "400006",
+        "400097",
+        "400103",
+        "400019",
+        "400104",
+        "400021",
+        "400023",
+        "400025",
+        "400035",
+        "400054",
+        "400029",
+        "400055",
+        "400096",
+        "400015",
+        "400027",
+        "400098",
+        "400018",
+        "410221",
+        "402301",
+        "412803",
+        "416301",
+        "400614",
+        "400702",
+        "400708",
+        "400615",
+        "203125",
+        "410206",
+        "401602",
+        "410208",
+        "410210",
+        "400612",
+        "422401",
+        "400707",
+        "400703",
+        "422605",
+        "400701",
+        "410207",
+        "400705",
+        "410218",
+        "410202",
+        "410203",
+        "400710",
+        "400709",
+        "402107",
+        "421302",
+        "400704",
+        "401102",
+        "412206",
+        "400706",
+        "413511",
+        "412203",
+        "412104",
+        "410222",
+        "441906",
+        "401405",
+        "401501",
+        "421306",
+        "421312",
+        "414604",
+        "410220",
+        "401301",
+        "421301",
+        "421601",
+        "421501",
+        "400610",
+        "401302",
+        "421102",
+        "421504",
+        "400608",
+        "401201",
+        "401202",
+        "421002",
+        "421603",
+        "401105",
+        "401101",
+        "421308",
+        "401701",
+        "421001",
+        "401503",
+        "401601",
+        "401608",
+        "401610",
+        "421402",
+        "421201",
+        "421203",
+        "401206",
+        "421403",
+        "401702",
+        "400602",
+        "401603",
+        "400606",
+        "400605",
+        "401607",
+        "421602",
+        "421401",
+        "401401",
+        "401402",
+        "421311",
+        "400603",
+        "401703",
+        "400607",
+        "400601",
+        "421503",
+        "421605",
+        "401403",
+        "421204",
+        "401104",
+        "401107",
+        "401604",
+        "401209",
+        "421505",
+        "401304",
+        "421502",
+        "421101",
+        "401404",
+        "401207",
+        "421103",
+        "401203",
+        "401609",
+        "401606",
+        "401502",
+        "401504",
+        "401506",
+        "421004",
+        "421005",
+        "401106",
+        "401204",
+        "401103",
+        "401208",
+        "421604",
+        "421305",
+        "401605",
+        "401303",
+        "401305",
+        "421202",
+        "421303",
+        "400604",
+        "410401",
+        "410201",
+        "400074",
+        "400043",
+        "400075",
+        "400072",
+        "400089",
+        ]
 
     const handleAddressChange = (e) => {
         setAddress(e.target.value);
@@ -614,6 +1179,7 @@ const FoodDeliveryCheckout = () => {
 
 
     const onContinueClick = async () => {
+        setLoading(true)
         const apiUrl = BASE_URL + PAYMENT;
         const storedUserID = await localStorage.getItem('userID');
         const phoneNumber = await localStorage.getItem('mobileNumber')
@@ -705,11 +1271,15 @@ const FoodDeliveryCheckout = () => {
             // Handle errors
             console.error('API error:', error);
         }
+        finally {
+            setLoading(false); // Hide loader
+        }
 
     }
 
     return (
         <div className="App">
+             {loading && <Loader />}
             {isClient && window.innerWidth > 800 ?
                 <div style={{ padding: "1% 2%", backgroundColor: "rgba(237, 237, 237, 0.79)" }}>
                     <div style={{ display: "flex" }} className='checoutSec my-3 gap-3'>
@@ -782,14 +1352,14 @@ const FoodDeliveryCheckout = () => {
                                 </div>
 
                                 <div style={{ paddingTop: "5px" }}>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
                                     </div>
                                     {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
                                     {discountedPrice > 0 && (
                                         <div>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center" }}>
+                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center"  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
                                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
                                                 </div>
@@ -802,7 +1372,7 @@ const FoodDeliveryCheckout = () => {
                                     )}
                                     {selectedDeliveryOption === 'party-food-delivery' && (
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "4px", margin: "0px 0 17px 0" }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "4px", margin: "0px 0 17px 0"  , borderBottom:"1px solid rgb(215, 215, 215)"  , borderTop:"1px solid rgb(215, 215, 215)"}}>
                                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                     <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                         <div style={{ width: 19, height: 19, borderWidth: 1, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -827,7 +1397,7 @@ const FoodDeliveryCheckout = () => {
                                             </div>
 
                                             <div>
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
                                                     <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
                                                         {totalPrice - discountedPrice > 4000 ? (
@@ -835,7 +1405,8 @@ const FoodDeliveryCheckout = () => {
                                                                 <p style={{ color: "#008631", fontWeight: '600', marginRight: 5 }}>FREE</p>
                                                                 <p style={{ textDecoration: "line-through", color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
                                                             </>
-                                                        ) : (
+                                                        ) :
+                                                         (
                                                             <p style={{ color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
                                                         )}
                                                     </div>
@@ -845,7 +1416,7 @@ const FoodDeliveryCheckout = () => {
                                     )}
                                     {selectedDeliveryOption === 'party-live-buffet-catering' && (
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4 }}>
+                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4   , borderBottom:"1px solid rgb(215, 215, 215)"}}>
                                                 <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                     <button onClick={() => setIncludeTables(!includeTables)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                         <div style={{ width: 19, height: 19, borderWidth: 1, borderColor: includeTables ? '#008631' : '#008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -865,7 +1436,7 @@ const FoodDeliveryCheckout = () => {
                                         </div>
                                     )}
                                     {/* Calculation for final total amount */}
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
                                     </div>
@@ -882,16 +1453,34 @@ const FoodDeliveryCheckout = () => {
                                     <p style={{ padding: 4, color: '#000', fontSize: 13, fontWeight: '700', marginBottom: 0 }}>Dishes selected</p>
                                 </div>
 
-                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' }}>
+                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' , gap:"10px" }}>
                                     {selectedDishQuantities.map((item, index) => (
                                         <RenderDishQuantity key={index} item={item} />
                                     ))}
                                 </div>
                             </div>
-                            <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                <h5 className='mt-2'>Need more info?</h5>
-                                <button onClick={contactUsRedirection} style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px" }} className=' rounded-5 ms-1 bg-white contactus-redirection'>Contact Us</button>
-                            </div>
+                            <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: " baseline",
+                justifyContent: " space-between",
+                paddingTop: 12,
+                width:"100%",
+
+              }}
+            >
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
+                Need more info?
+              </p>
+           
+                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
+           
+            </div>
+
+          </div>
                         </div>
                     </div>
                 </div>
@@ -910,30 +1499,31 @@ const FoodDeliveryCheckout = () => {
                         <div>
                             <div className="rightSeccheckout chef" style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "20px", backgroundColor: "#fff", borderRadius: "20px", width: "59%" }}>
                                 <div className='rightcheckoutsec' style={{ padding: "6px  0 0 " }}>
-
+                                    <h1 style={{ fontSize:"20px" , fontWeight:"600" , marginBottom:"8px"}}>Order Summary</h1>
                                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
-                                        <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Total Dishes</label>
+                                        <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10  , border:"1px solid #d7d7d7"}}>
+                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Total Dishes</label>
                                             <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {selectedDishesFoodDelivery && Object.keys(selectedDishesFoodDelivery).length}</p>
                                         </div>
                                         {peopleCount > 0 ?
-                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
-                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "12px", marigin: "16px 0 6px", fontWeight: 500 }}>Number of people</label>
+                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10 , border:"1px solid #d7d7d7"}}>
+                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Number of people</label>
                                                 <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}>{peopleCount}</p>
                                             </div>
                                             :
                                             null
                                         }
                                     </div>
-                                    <div className='chef-divider' style={{ marginTop: "10px", marginBottom: "10px" }}></div>
+                                   
                                     <div style={{ paddingHorizontal: 5 }}>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 11  , borderBottom:"1px solid rgb(215, 215, 215)"}}>
+                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' , marginBottom:10 }}>Item Total</p>
+                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px'  , marginBottom:10 }}>₹ {totalPrice}</p>
                                         </div>
+                                        
                                         {discountedPrice > 0 && (
-                                            <div>
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center" }}>
+                                           
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, alignItems: "center"  }}>
                                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
                                                     </div>
@@ -941,13 +1531,12 @@ const FoodDeliveryCheckout = () => {
                                                         {'-'} ₹ {discountedPrice}
                                                     </p>
                                                 </div>
-                                                {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                            </div>
+                                          
                                         )}
 
                                         {selectedDeliveryOption === 'party-food-delivery' && (
                                             <div>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "7px 4px", marginTop: 4 }}>
+                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "7px 4px", marginTop: 0 , marginBottom:10 , borderTop:" 1px solid rgb(215, 215, 215)" , borderBottom:"1px solid rgb(215, 215, 215)"}}>
                                                     <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                                                         <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                                             <div style={{ width: 19, height: 19, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
@@ -965,7 +1554,7 @@ const FoodDeliveryCheckout = () => {
                                                     </div>
                                                 </div>
                                                 {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
                                                     <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Packing Cost</p>
                                                     <div style={{ display: 'flex', color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600' }}> ₹ {packingCost}</p>
@@ -973,7 +1562,7 @@ const FoodDeliveryCheckout = () => {
                                                 </div>
 
                                                 <div>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
                                                         <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
                                                         <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
                                                             {totalPrice - discountedPrice > 4000 ? (
@@ -1012,12 +1601,12 @@ const FoodDeliveryCheckout = () => {
                                             </div>
                                         )}
 
-                                        <div className='chef-divider'></div>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                       
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 , paddingTop:8 ,  borderTop:"1px solid rgb(215, 215, 215)"}}>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
                                         </div>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
+                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 }}>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Advance Payment</p>
                                             <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateAdvancePayment()}</p>
                                         </div>
@@ -1065,26 +1654,40 @@ const FoodDeliveryCheckout = () => {
                                             {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}
                                         </div>
                                         <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }}>
-                                                {selectedDishQuantities && selectedDishQuantities.map((item, index) => (
-                                                    <div style={{ width: "48%", border: "1px solid rgb(149 142 142 / 73%)", flexDirection: "row", display: "flex", borderRadius: "10px", padding: "6px 10px", boxSizing: "border-box" }} className='dishes-checkout-page'>
-                                                        <div style={{ marginRight: 2, width: "90%" }}>
-                                                            <Image className='checkoutRightImg chef' src={`https://horaservices.com/api/uploads/${item.image}`} width={300} height={300} />
-                                                        </div>
-                                                        <div style={{ color: "rgb(146, 82, 170)", fontWeight: "500", fontSize: "12px" }}>
-                                                            <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.name}</p>
-                                                            {/* <p style={{ margin: "0 0 0 0", padding: "0" }}>{item.price}</p> */}
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
+                
+
+                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", flexFlow: "wrap" , gap:"10px" }} className='foode-deliry-mobile'>
+                                        {selectedDishQuantities.map((item, index) => (
+                                        <RenderDishQuantity key={index} item={item} />
+                                        ))}
+                                        </div>
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <div className='d-flex justify-content-center align-items-center mt-3 mb-0'>
-                                    <h5 className='fs-6 mt-2'>Need more info?</h5>
-                                    <button style={{ border: "2px solid rgb(157, 74, 147)", color: "rgb(157, 74, 147)", padding: "3px 3px", fontSize: "13px" }} className='bg-white rounded-5 ms-1 '>Contact Us</button>
-                                </div>
+                                <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: " baseline",
+                justifyContent: " space-between",
+                paddingTop: 12,
+                width:"100%",
+
+              }}
+            >
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
+                Need more info?
+              </p>
+           
+                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
+           
+            </div>
+
+          </div>
 
                                 <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
                                     background: "rgb(157, 74,147, 28%)"

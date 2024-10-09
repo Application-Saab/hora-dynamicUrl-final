@@ -57,7 +57,6 @@ const OrderDetail = () => {
       );
       const responseData = await response.json();
       setOrderDetail(responseData.data);
-      console.log(responseData)
       setLoading(false);
     } catch (error) {
       console.log("error", error);

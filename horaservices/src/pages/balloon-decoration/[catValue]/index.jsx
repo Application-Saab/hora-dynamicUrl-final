@@ -14,19 +14,43 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import logo from '../../../assets/new_logo_light.png.png';
+import DecorationCatDescriptionData from "@/utils/decorationCatDescritionData";
+import { sendGTMEvent  } from '@next/third-parties/google';
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   //   let { city } = useParams();
-  const { city, catValue } = router.query;
+  const [city, setCity] = useState('');
+  const [catValue, setCatValue] = useState('');
+  useEffect(() => {
+    if (router.isReady) {
+      const { catValue: queryCatValue, city: queryCity } = router.query;
 
+      if (queryCatValue) {
+        setCatValue(queryCatValue);
+        //alert(`catValue: ${queryCatValue}`);
+      }
+
+      if (queryCity) {
+        setCity(queryCity);
+        ///alert(`city: ${queryCity}`);
+      }
+    }
+  }, [router.isReady, router.query]);
+  const altTagCatValue = catValue.replace(/-/g, ' ');
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
   //   const { catValue } = useParams();
   const [selCat, setSelCat] = useState("");
   const [catId, setCatId] = useState("");
+  const [showAll, setShowAll] = useState(false);
+  const currentCategoryContent = DecorationCatDescriptionData[catValue] || [];
   const [loading, setLoading] = useState(true);
+  const [discountPercentage, setDiscountPercentage] = useState(0); // State for the discount percentage
+  const [discountedPrice, setDiscountedPrice] = useState(0); // State for the discounted price
+  const [discountDifference , setDiscountDifference] = useState(0)
   const [catalogueData, setCatalogueData] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
   //   const navigate = useNavigate();
@@ -35,7 +59,7 @@ const DecorationCatPage = () => {
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
   const scriptTag = JSON.stringify(schemaOrg);
   const themeFilters = [
-    { label: 'Select Design', value: 'all' },
+    { label: 'Select Theme', value: 'all' },
     { label: 'Astronaut space theme', value: 'Astronaut-space' },
     { label: 'Avengers theme', value: 'Avengers' },
     { label: 'Boss baby theme', value: 'Boss' },
@@ -45,7 +69,7 @@ const DecorationCatPage = () => {
     { label: 'Car Theme', value: 'car' },
     { label: 'Circus Theme', value: 'Circus' },
     { label: 'Dinosaur Theme', value: 'Dinosaur' },
-    { label: 'Elsa Theme', value: ' Elsa' },
+    { label: 'Elsa Theme', value: 'Elsa' },
     { label: 'Flamingo Theme', value: 'Flamingo' },
     { label: 'Jungle Theme', value: 'Jungle' },
     { label: 'Kitty Theme', value: 'Kitty' },
@@ -114,10 +138,11 @@ const DecorationCatPage = () => {
     }
   };
 
+  
   const filteredData = catalogueData.filter(item => {
     let priceCondition = true;
     let themeCondition = true;
-
+  
     // Filter by price
     if (priceFilter === "under2000") {
       priceCondition = item.price < 2000;
@@ -126,17 +151,28 @@ const DecorationCatPage = () => {
     } else if (priceFilter === "above5000") {
       priceCondition = item.price > 5000;
     }
-
+  
     // Filter by theme
     if (themeFilter !== "all") {
       const formattedThemeFilter = themeFilter.toLowerCase().split('-')[0];
       const formattedItemName = item.name.toLowerCase().split('-')[0];
       themeCondition = formattedItemName.includes(formattedThemeFilter);
     }
-
-    // Return true if either price or theme condition is met
+  
+    // Return true if both conditions are met
     return priceCondition && themeCondition;
   });
+  
+  // Apply sorting
+  const sortedData = filteredData.sort((a, b) => {
+    if (priceFilter === 'lowToHigh') {
+      return a.price - b.price;
+    } else if (priceFilter === 'highToLow') {
+      return b.price - a.price;
+    }
+    return 0; // Default sort (no sorting)
+  });
+  
 
   function addSpaces(subCategory) {
     let result = "";
@@ -159,24 +195,48 @@ const DecorationCatPage = () => {
     }
   };
 
-  const getSubCatItems = async () => {
-    try {
+  const getDiscountedPrice = (price) => {
+    let discount;
+
+    // Determine the discount percentage based on the item price
+    if (price < 3000) {
+        discount = 20; // 20% discount
+    } else if (price >= 3000 && price <= 5000) {
+        discount = 27; // 27% discount
+    } else {
+        discount = 35; // 35% discount for prices above 5000
+    }
+
+    const discountedPrice = price * (1 + discount / 100); // Calculate the discounted price
+    const discountDifference =   Math.abs(price - discountedPrice);;
+    return { discount, discountedPrice , discountDifference }; // Return both discount percentage and discounted price
+};
+
+const getSubCatItems = async () => {
+  try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
       if (response.status === API_SUCCESS_CODE) {
-        const decoratedData = response.data.data.map(item => ({
-          ...item,
-          rating: getRandomRating(),
-          userCount: getRandomNumber(20, 500)
-        }));
-        setCatalogueData(decoratedData);
+          const decoratedData = response.data.data.map(item => {
+              const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
+              return {
+                  ...item,
+                  rating: getRandomRating(),
+                  userCount: getRandomNumber(20, 500),
+                  discountPercentage: discount, // Add discount percentage
+                  discountedPrice: discountedPrice ,// Add discounted price
+                  discountDifference: discountDifference
+              };
+          });
+          setCatalogueData(decoratedData);
       }
-    } catch (error) {
+  } catch (error) {
       console.log('Error Fetching Data:', error.message);
-    } finally {
+  } finally {
       setLoading(false);
-    }
-  };
+  }
+};
+
 
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
@@ -202,39 +262,95 @@ const DecorationCatPage = () => {
     return text;
   }
 
-  
-  // Replace hyphens with spaces
-const altTagCatValue = catValue.replace(/-/g, ' ');
-
-function getAltImgPrice(price) {
-  if (price < 1000) {
-    return "Price under 1000";
-  } else if (price < 2000) {
-    return "Price under 2000";
-  } else if (price < 3000) {
-    return "Price under 3000";
-  }else if (price < 4000) {
-    return "Price under 4000";
-  } else if (price < 5000) {
-    return "Price under 5000";
-  } else {
-    return "Price above 5000";
+  const PageTitle = (e) =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "Kids' Birthday Balloon Decoration by Professionals Decorators, Starting at ₹1199"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "Birthday Balloon Decoration at Home by Professionals  Decorators, Starting at ₹1199";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "Anniversary Decorations with Balloon & Rose Petals, Starting at ₹1199"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "First Night Decorations with Balloon & Rose Petals, Starting at ₹1199"
+    }
+    else if(catValue === "baby-shower-decoration") {
+      return "Baby Shower with Latest Designs by Professionals  Decorators Starting at ₹1199"
+    }
+    else if (catValue === "/welcome-baby-decoration"){
+      return "Baby Welcome Decoration at home by Professionals  Decorators, Starting at ₹1199"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Haldi Decoration with Latest Designs starting at ₹3000"
+    }
+    else{
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
   }
-}
 
+  const getPageMetaDescription = () =>{
+    if(catValue === "kids-birthday-decoration"){
+      return "At Hora, 🎉Explore popular themes like jungle 🌴, Cocomelon 🍉, candy 🍭, unicorn 🦄, dinosaur 🦖, superhero 🦸‍♂️, princess 👑, space 🚀, pirate 🏴‍☠, under the sea 🌊, Baby Boss 👔, Barbie 💖, and cars 🚗. Explore detailed pricing and inclusions, and let our professional team bring your chosen design to life. Book your perfect party decor today! 🎈✨"
+    }
+    else if(catValue === "birthday-decoration"){
+      return "At Hora, 🎈 Explore our wide range of balloon and flower decorations for birthday parties, featuring ring, sequin, wall, and room designs. Discover pricing and inclusions for every balloon color and variety. Customise your celebration and make it unforgettable with our stunning decor. Book your perfect party setup today! 🎉🌟";
+    }
+    else if(catValue === "anniversary-decoration"){
+      return "🎉 Explore top-notch anniversary decoration designs and book directly from our website 💖. Find elegant and customizable decor options for your special event. Browse our selection to choose the perfect theme and make your anniversary memorable with seamless online booking. ✨"
+    }
+    else if(catValue === "first-night-decoration"){
+      return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
+    }
+    else if (catValue === "haldi-mehendi-decoration"){
+      return "Brighten up your Haldi ceremony with vibrant and elegant décor! 🌼✨ Explore our stunning Haldi decoration setups, featuring traditional elements, colorful floral arrangements, and custom designs to make your event unforgettable. 🌸💛"
+    }
+    else{
+     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    }
+  }
 
+   // Set themeFilter based on query parameter when component mounts or query changes
+   useEffect(() => {
+    if (router.isReady) {
+      const theme = router.query.theme || "all";
+      setThemeFilter(theme);
+    }
+  }, [router.isReady, router.query.theme]);
+
+  // Update URL whenever the themeFilter changes
+  useEffect(() => {
+    if (themeFilter !== "all") {
+      router.push(
+        {
+          pathname: router.pathname, // Current page path
+          query: { ...router.query, theme: themeFilter }, // Add or update the theme in the query
+        },
+        undefined,
+        { shallow: true } // Prevents full page reload
+      );
+    }
+  }, [themeFilter]);
+
+  
+  
+  const toggleShowAll = () => {
+    setShowAll((prev) => !prev);
+  };
+  
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
       <Head>
-        <title>Balloon and Flower Decoration @999</title>
-        <meta name="description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <title>{PageTitle(catValue)}</title>
+        <meta name="description" content={getPageMetaDescription()} />
         <meta name="keywords" content="Balloon and Flower Decoration @999" />
-        <meta property="og:title" content="Balloon and Flower Decoration by Professional Decorators" />
-        <meta property="og:description" content="Celebrate Anniversary, Birthday & other Occasions with Candlelight Dinners, Surprises & Balloon Decorations" />
+        <meta property="og:title" content={PageTitle(catValue)} />
+        <meta property="og:description" content={getPageMetaDescription()} />
         <meta property="og:image" content="https://horaservices.com/api/uploads/attachment-1706520980436.png" />
         <script type="application/ld+json">{scriptTag}</script>
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Hora Services" />
+        <link rel="icon" href="https://horaservices.com/api/uploads/logo-icon.png" type="image/x-icon" />
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}`} />
         <meta property="og:type" content="website" />
       </Head>
@@ -243,30 +359,29 @@ function getAltImgPrice(price) {
           <div style={{ marginTop: "0px" }}>
             <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0", color: '#9252AA' }}>{selCat} {'Balloon Decoration'} </h1>
             <p style={{ padding: "0px 0px 16px", margin: "0px" }} className="subheading">{trimText('Balloon Decoration and Room Decoration Services for Anniversary, Birthdays, Kids Parties, Baby Showers and more!')}</p>
-            <div style={{ marginBottom: "15px" }} className="filterdropdown d-flex flex-column flex-lg-row align-items-center justify-content-center gap-3" >
-              <div className="d-flex gap-lg-4 gap-2">
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === 'all' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('all')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'all' ? { color: "#fff" } : { color: '#9252AA' }}>All</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === 'under2000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('under2000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'under2000' ? { color: "#fff" } : { color: '#9252AA' }}>Under ₹ 2000</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tag" style={priceFilter === '2000to5000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('2000to5000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === '2000to5000' ? { color: "#fff" } : { color: '#9252AA' }}>₹ 2000 - ₹ 5000</p>
-                </div>
-                <div className="py-1 rounded-5 d-flex justify-content-center align-itmes-center filter-tags" style={priceFilter === 'above5000' ? { backgroundColor: '#9252AA', cursor: 'pointer' } : { backgroundColor: '#D9D9D9', cursor: 'pointer' }} onClick={() => setPriceFilter('above5000')}>
-                  <p className="m-0 p-0 fw-bold filter-price-tag" style={priceFilter === 'above5000' ? { color: "#fff" } : { color: '#9252AA' }}>Above ₹ 5000</p>
-                </div>
-              </div>
+            <div className="filterdropdown d-flex flex-row flex-lg-row align-items-center justify-content-center gap-3">
+  <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}
+    style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+    <option value="all">Sort By: Price</option>
+    <option value="lowToHigh">Price: Low to High</option>
+    <option value="highToLow">Price: High to Low</option>
+    <option value="under2000">Under ₹ 2000</option>
+    <option value="2000to5000">₹ 2000 - ₹ 5000</option>
+    <option value="above5000">Above ₹ 5000</option>
+   
+  </select>
 
-              {/* Theme filter */}
-              {selCat === "Kids Birthday" ? <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
-                style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
-                {themeFilters.map((filter) => (
-                  <option key={filter.value} value={filter.value}>{filter.label}</option>
-                ))}
-              </select> : null}
-            </div>
+  {/* Theme filter */}
+  {selCat === "Kids Birthday" ? (
+    <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
+      style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+      {themeFilters.map((filter) => (
+        <option key={filter.value} value={filter.value}>{filter.label}</option>
+      ))}
+    </select>
+  ) : null}
+</div>
+
           </div>
         </div>
         <div style={styles.decContainer} className="decContainer">
@@ -276,8 +391,8 @@ function getAltImgPrice(price) {
             </div>
           ))) :
             (
-              (filteredData.length > 0) ? (
-                filteredData.map((item, index) => (
+              (sortedData.length > 0) ? (
+                sortedData.map((item, index) => (
                   <div
                     key={item._id}
                     style={{
@@ -291,11 +406,15 @@ function getAltImgPrice(price) {
                     className="decimagecontainer"
                   >
                     <div style={{ position: "relative" }}>
-                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} 
-                      alt={`balloon decoration ${altTagCatValue} ${item.name} ${getAltImgPrice(item.price)}`} style={styles.decCatimage} width={300} height={300} />
+                      <Image src={`https://horaservices.com/api/uploads/${item?.featured_image}`} alt={`balloon decoration ${altTagCatValue} ${item.name} ${item.price}`} style={styles.decCatimage} width={300} height={300} />
                       {/* Watermark */}
-                      <div style={{ position: "absolute", bottom: 20, right: 20, borderRadius: "50%", padding: 10 }}>
-                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
+                      <div style={{ position: "absolute", bottom: 3, right: 3, borderRadius: "50%", padding: 10 }}>
+                        <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>
+                        <Image src={logo} style={{ width:"70px" , height:"80px"}} className="hora-watermark-image"/>  
+                        </span>
+                      </div>
+                      <div className="decorationdiscount">
+                      ₹ {item.discountDifference.toFixed(0)} {'off'} 
                       </div>
                     </div>
                     {/* End of Watermark */}
@@ -317,18 +436,31 @@ function getAltImgPrice(price) {
                       >
                         {item.name}
                       </p>
-                      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
-                        <div style={{ flexDirection: 'row', alignItems: 'left', justifyContent: 'space-between' }} className="pro_price">
-                          <p style={{
-                            color: '#9252AA',
+                      <div style={{ display: "flex",  justifyContent: "space-between", alignItems: "top" }} className="pri_details">
+                        <div style={{ alignItems: 'left', justifyContent: 'space-between' , display:"flex" }} className="pro_price">
+                        <p  style={{
+                  
                             fontWeight: '700',
-                            fontSize: 17,
+                            fontSize: 15,
+                            color: '#9252AA',
+                            textAlign: "left",
+                            margin: "10px 10px 7px 0",
+            
+                          }}>₹{item.price} </p>
+                          <p style={{
+                            color: '#444',
+                            fontWeight: '700',
+                            fontSize: 15,
                             textAlign: "left",
                             margin: "10px 0px 7px",
+                            textDecoration: 'line-through'
                           }}
-                            className="pro_price"
-                          > ₹ {item.price}</p>
-                        </div>
+                          >
+                             ₹{Math.floor(item.discountedPrice.toFixed(2))} 
+                          </p>
+
+                         
+                       </div>
                         <div className="d-flex align-items-center rating-sec">
                           <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
@@ -341,29 +473,46 @@ function getAltImgPrice(price) {
                 <div style={{ textAlign: "center", width: "100%", padding: "20px 0" }}>
                   <span>Reach out to our support team for this</span>
                   <span style={{ marginLeft: "10px" }}>
-                    <Link className="conactus" href="https://wa.me/+918982321487/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
+                    <Link className="conactus" href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">Click here</Link>
                   </span>
                 </div>
               )
             )
           }
-          <div>
-            {/* <div>
-                      {
-                         filteredData.map((item, index) => (
-                         
-                          <url>
-                            <loc>
-                            {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name}`}
-                            </loc>
-                            <priority>1.00</priority>
-                        </url>
-                         )
-                      )}
-                   
-                    </div> */}
-          </div>
+          
+          {/* <div>
+          {
+          filteredData.map((item, index) => (
+          <url key={index}>
+          <loc>
+          {`https://horaservices.com/balloon-decoration/${catValue}/product/${item.name.replace(/ /g, "-")}`}
+          </loc>
+          <priority>1.00</priority>
+          </url>
+          ))
+          }
+          </div> */}
         </div>
+
+        <div className="category-content">
+  {currentCategoryContent.length > 0 ? (
+    currentCategoryContent
+      .slice(0, showAll ? currentCategoryContent.length : 2)
+      .map((item, index) => (
+        <div key={index} className="category-item">
+          <h1>{item.title}</h1>
+          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        </div>
+      ))
+  ) : (
+    <p className="no-content-message">No content available for this category.</p>
+  )}
+  {currentCategoryContent.length > 2 && (
+    <button onClick={toggleShowAll} className="toggle-btn">
+      {showAll ? 'See Less' : 'See More'}
+    </button>
+  )}
+</div>
       </>
     </div>
   );
@@ -372,10 +521,11 @@ function getAltImgPrice(price) {
 const styles = {
   decContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     // alignItems: 'center',
     display: "inline-flex",
     flexWrap: "wrap",
+    padding:"1% 1% 0"
   },
   decCatimage: {
     width: "100%",
@@ -390,10 +540,9 @@ const styles = {
     marginBottom: 40,
     boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
     borderRadius: "5px",
-    overflow: "hidden", // Ensure the image stays within the container
     transition: "transform 0.3s ease-in-out", // Smooth transition effect for zoom
     margin: "10px 12px 20px",
-    padding: "6px 5px 10px",
+    padding: "4px 4px 10px",
   },
   zoomedContainer: {
     transform: "scale(1.1)", // Scale the container by 10% on hover

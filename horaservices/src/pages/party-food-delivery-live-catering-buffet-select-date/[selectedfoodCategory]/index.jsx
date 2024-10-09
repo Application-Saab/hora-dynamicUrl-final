@@ -66,6 +66,258 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const data = selectedDishDictionary;
   const [dishPrice, setDishPrice] = useState(selectedDishPrice);
 
+  const selectedMealList = Object.values(data).map(dish => {
+    return {
+        name: dish.name,
+        image: dish.image,
+        price: Number(dish.cuisineArray[0]),
+        id: dish._id,
+        mealId: dish.mealId
+    };
+});
+const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
+    function calculateDiscountPercentage(peopleCount, dishCount ) {
+        console.log(peopleCount + "===3333====" +  dishCount)
+        if (dishCount <= 5) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 0;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 0;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 3.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 3.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 7.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 7.0;
+            } else {
+                return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
+            }
+        } else if (dishCount == 6) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 15;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 15;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 18.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 18.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 22.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 22.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 25;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 25;
+            } else {
+                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 7) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 15;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 15;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 18.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 18.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 22.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 22.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 25;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 25;
+            } else {
+                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 8) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 25;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 25;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 28;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 28.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 28.5;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 32.5;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 32.5;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 35.0;
+            } else {
+                return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 9) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 30;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 30;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 33.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 33.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 37;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 37;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 40;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 40;
+            } else {
+                return 40; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 10) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 35;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 35;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 38.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 38.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 42.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 42.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 45.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 45.0;
+            } else {
+                return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 11) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 40;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 40;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 43.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 43.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 47.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 47.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 50.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 50.0;
+            } else {
+                return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 12) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 50;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 50.0;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 53.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 53.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 57.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 57.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 60.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 60.0;
+            } else {
+                return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 13) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 53;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 53.0;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 56.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 56.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 60.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 60.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 63.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 63.0;
+            } else {
+                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 14) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 53;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 53.0;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 56.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 56.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 60.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 60.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 63.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 63.0;
+            } else {
+                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else if (dishCount == 15) {
+            if (peopleCount >= 0 && peopleCount <= 10) {
+                return 55;
+            } else if (peopleCount >= 11 && peopleCount <= 19) {
+                return 55.0;
+            } else if (peopleCount >= 20 && peopleCount <= 29) {
+                return 58.5;
+            } else if (peopleCount >= 30 && peopleCount <= 39) {
+                return 58.5;
+            } else if (peopleCount >= 40 && peopleCount <= 49) {
+                return 62.0;
+            } else if (peopleCount >= 50 && peopleCount <= 59) {
+                return 62.0;
+            } else if (peopleCount >= 60 && peopleCount <= 69) {
+                return 65.0;
+            } else if (peopleCount >= 70 && peopleCount <= 99) {
+                return 65.0;
+            } else {
+                return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
+            }
+        }
+        else {
+
+        }
+    }
+
+    const newDishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
+    var totalPrice = selectedOption === 'party-live-buffet-catering' ?  ((newDishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : newDishPrice * peopleCount;
+    const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
+    console.log("discountPercentage" + discountPercentage)
+    var discountedPrice = selectedOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
+
+
+    console.log(totalPrice+"===="+ discountedPrice)
+
   // Container for the whole component
   const MainContainer = styled.div`
     display: flex;
@@ -174,7 +426,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   //different
 
   const Container = styled.div`
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: row; // Align items horizontally
@@ -183,8 +435,9 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     width: 100%; // Ensure it takes up the full width of the parent
     white-space: nowrap; // Prevent labels from wrapping to the next line
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       padding: 5px; // Reduce padding on smaller screens
+       display: flex;
     }
   `;
 
@@ -268,7 +521,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
 
   const contactUsRedirection = () => {
     window.open(
-      "whatsapp://send?phone=+917338584828&text=Hello%20I%20have%20some%20queries%20for%20food%20delivey%20and%20live%20Catering%20service"
+      "https://wa.me/917338584828?text=Hello%20I%20have%20some%20queries%20for%20food%20delivery%20and%20live%20catering%20service"
     );
   };
   const onContinueClick = () => {
@@ -526,7 +779,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   Head Mask for waiters & chefs
                 </p>
               </div>
-              <div
+              {/* <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -545,7 +798,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                 >
                   Tandoor/Other cooking Utensils
                 </p>
-              </div>
+              </div> */}
               <div
                 style={{
                   display: "flex",
@@ -727,13 +980,15 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
 
     quantity = Math.round(quantity);
     let unit = item.unit;
-
     if (quantity >= 1000) {
       quantity = quantity / 1000;
       if (unit === 'Gram') {
         unit = 'KG';
       } else if (unit === 'ml') {
         unit = 'L';
+      }
+      else if (unit === 'Peices') {
+        unit = 'PCS';
       }
     }
 
@@ -744,11 +999,17 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
         </div>
         <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
           <div style={{ fontSize: "80%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
-          {/* <div style={{ fontSize: "140%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div> */}
+          {
+            selectedOption === 'party-food-delivery' ? 
+            <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
+            :
+            null
+          }
         </div>
       </div>
     );
   };
+
 
   const RightTabContent = ({ selected_dish_quantities }) => {
     if (!selected_dish_quantities) {
@@ -783,6 +1044,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
               justifyContent: "flex-start",
               alignItems: "center",
             }}
+            className="dishes-selected"
           >
             {Object.keys(selected_dish_quantities).length > 0 ? (
               Object.keys(selected_dish_quantities).map((key, index) => (
@@ -805,7 +1067,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
             marginTop: 0,
             borderRadius: 10,
             backgroundColor: "#F9E9FF",
-            padding: "10px 13px",
+            padding: "10px 0px 10px 8px",
           }}
         >
           <Image src={InfoIcon} alt="Info" style={{ height: 13, width: 13 }} />
@@ -821,6 +1083,21 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
             Complementary: Green Salad, Mint Chutney, and Achar
           </p>
         </div>
+
+        <div>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: "#9252AA",
+                      fontWeight: "400",
+                      padding: "10px 5px 0",
+                    }}
+                  >
+                    Dish quantities vary based on guest count and selections.
+                    Over 5 dishes: 550-700g per person. Under 5 dishes: 100g per
+                    person per dish
+                  </div>
+                </div>
       </div>
     );
   };
@@ -865,7 +1142,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
         </p>
       </div>
 
-      <Container>
+      <Container className="range-bar">
         <Step active={true.toString()}>
           <Image src={SelectDishes} alt="Select Dishes" style={isMobile ? styles.mobileDish : styles.webDish} />
           <Label active={true.toString()}>Select Dishes</Label>
@@ -900,7 +1177,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
             style={{
               backgroundColor: "#fff",
               borderRadius: "10px",
-              padding: "10px",
+              padding: "9px 20px 15px",
             }}
             className="peoplecontsec"
           >
@@ -933,6 +1210,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   >
                     How many people you are hosting?
                   </p>
+                  <div style={{ display:"flex" , justifyContent:"center" , alignItems:"center"}}>
                   <button
                     onClick={decreasePeopleCount}
                     style={{ backgroundColor: "transparent", border: "none" }}
@@ -941,6 +1219,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                       src={MinusIcon}
                       style={{ height: 25, width: 25, marginLeft: 5 }}
                       alt="minus icon"
+                       className="quantiy-icon"
                     />
                   </button>
                   <p
@@ -948,7 +1227,8 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                       marginLeft: 5,
                       lineHeight: "23px",
                       fontSize: 18,
-                      marginTop: "15px",
+                      marginTop: "0",
+                      marginBottom:"0",
                       width: 22,
                       textAlign: "center",
                       color: "black",
@@ -965,8 +1245,10 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                       src={PlusIcon}
                       style={{ height: 25, width: 25, marginLeft: 5 }}
                       alt="plus icon"
+                      className="quantiy-icon"
                     />
                   </button>
+                  </div>
                 </div>
               </div>
 
@@ -993,50 +1275,37 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* <div
+
+              <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+            <div
               style={{
-                alignItems: "center",
-                flexDirection: "row",
-                marginTop: "10px",
-                borderRadius: 10,
-                backgroundColor: "#F9E9FF",
-                padding: "10px",
                 display: "flex",
-              }}
-              className="personsectionprice"
-            >
-              <Image
-                src={InfoIcon}
-                style={{ height: 16, width: 16 }}
-                alt="info icon"
-              />
-              <p
-                style={{
-                  color: "#9252AA",
-                  fontWeight: "700",
-                  marginLeft: 5,
-                  fontSize: "90%",
-                  marginBottom: "0",
-                }}
-              >
-                ₹ 49/person would be added to bill value in addition to dish
-                price
-              </p>
-            </div> */}
+                flexDirection: "row",
+                alignItems: " baseline",
+                justifyContent: " space-between",
+                paddingTop: 12,
+                width:"100%",
 
-            <div>
-              <div
-                style={{
-                  flex: 1,
-                  marginTop: 16,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              ></div>
+              }}
+            >
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
+                Need more info?
+              </p>
+           
+                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
+           
             </div>
+
           </div>
+            </div>
+
+      
+          </div>
+
+
+       
           <div
             style={{
               flexDirection: "row",
@@ -1046,7 +1315,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
           >
             <button
               style={{
-                backgroundColor: activeTab === "left" ? "#D9D9D9" : "white",
+                backgroundColor: activeTab === "left" ? "white" : "#D9D9D9",
                 borderTopRightRadius: 10,
                 borderTopLeftRadius: 15,
                 padding: "5px 60px",
@@ -1065,7 +1334,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
             </button>
             <button
               style={{
-                backgroundColor: activeTab === "right" ? "#D9D9D9" : "white",
+                backgroundColor: activeTab === "right" ? "white" : "#D9D9D9",
                 borderTopRightRadius: 10,
                 borderTopLeftRadius: 15,
                 padding: "5px 60px",
@@ -1078,87 +1347,13 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   activeTab === "right" ? styles.activeTab : styles.inactiveTab
                 }
               >
-                Dish Selected
+                Dishes Selected
               </p>
             </button>
             {renderTabContent(selectedDishQuantities)}
           </div>
 
-          <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingTop: 12,
-              }}
-            >
-              <p style={{ fontSize: 14, fontWeight: 500, color: "#333" }}>
-                Need more info?
-              </p>
-              <button
-                onClick={contactUsRedirection}
-                style={{
-                  marginLeft: 5,
-                  backgroundColor: "#E8E8E8",
-                  borderRadius: 18,
-                  borderWidth: 1,
-                  borderColor: "#9252AA",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: 96,
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#9252AA",
-                    fontSize: 13,
-                    fontWeight: "500",
-                  }}
-                >
-                  Contact Us
-                </div>
-              </button>
-            </div>
-
-            <div>
-              <div
-                style={{
-                  padding: 7,
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  borderRadius: 10,
-                  paddingRight: 11,
-                  marginTop: 15,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "rgba(211, 75, 233, 0.10)",
-                  borderColor: "#E6E6E6",
-                  borderWidth: 1,
-                }}
-              >
-                <div></div>
-                <div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: "#9252AA",
-                      fontWeight: "400",
-                      marginLeft: 4,
-                    }}
-                  >
-                    Dish quantities vary based on guest count and selections.
-                    Over 5 dishes: 550-700g per person. Under 5 dishes: 100g per
-                    person per dish
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+       
         </div>
       </div>
       <Row>
@@ -1198,7 +1393,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
                   color: isDishSelected ? "white" : "#343333",
                 }}
               >
-                {selectedCount} Items | ₹ {dishPrice * peopleCount}
+                {selectedCount} Items | ₹ {totalPrice - discountedPrice}
               </div>
             </Button>
           </div>

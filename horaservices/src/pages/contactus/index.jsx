@@ -62,7 +62,7 @@ const ContactUs = () => {
             >
               Call & Whatsapp
             </h2>
-            <a href="tel:+918982321487" style={{ color: "#444" }}>
+            <a href="tel:+917338584828" style={{ color: "#444" }}>
               +917338584828
             </a>
           </div>
@@ -107,7 +107,7 @@ const ContactUs = () => {
                 fontWeight: "500",
                 fontSize: "1.25rem",
                 marginTop: "10px",
-                padding: "50px",
+                padding: "30px",
               }}
             >
               We Provide Services In These Cities
@@ -117,302 +117,145 @@ const ContactUs = () => {
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
                 }}
               >
-                <div
-        onClick={() => handleRedirect('Mumbai')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={mumbai} alt="Mumbai" />
-        <h4 className="contact-us-heading">Mumbai</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Delhi')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={delhi} alt="Delhi" />
-        <h4 className="contact-us-heading">Delhi</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Bangalore')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={banglore} alt="Bangalore" />
-        <h4 className="contact-us-heading">Bangalore</h4>
-      </div>
+                <div className="contact-us-section-div">
+                  <Image className="contact-us-img" src={mumbai} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/mumbai">Mumbai</a></h4>
+                </div>
+                <div className="contact-us-section-div">
+                  <Image className="contact-us-img" src={delhi} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/delhi">Delhi</a></h4>
+                </div>
+
+                <div className="contact-us-section-div">
+                  <Image className="contact-us-img" src={banglore} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/bengaluru">Bengaluru</a></h4>
+                </div>
               </div>
               <div
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
                 }}
               >
-                {/* <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={pune} alt="image" />
-                  <h4 className="contact-us-heading">Pune</h4>
+                 <div className="contact-us-section-div">
+                  <Image className="contact-us-img" src={banglore} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/bangalore">Bangalore</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={noida} alt="image" />
-                  <h4 className="contact-us-heading">Noida</h4>
+                  <h4 className="contact-us-heading"><a href="/noida">Noida</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={ghaziabad} alt="image" />
-                  <h4 className="contact-us-heading">Gaziabad</h4>
-                </div> */}
-                 <div
-        onClick={() => handleRedirect('Pune')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={pune} alt="Pune" />
-        <h4 className="contact-us-heading">Pune</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Noida')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={noida} alt="Noida" />
-        <h4 className="contact-us-heading">Noida</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Ghaziabad')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={ghaziabad} alt="Ghaziabad" />
-        <h4 className="contact-us-heading">Ghaziabad</h4>
-      </div>
+                  <h4 className="contact-us-heading"><a href="/ghaziabad">Gaziabad</a></h4>
+                </div>
               </div>
               <div
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
                 }}
               >
                 {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={gurugram} alt="image" />
-                  <h4 className="contact-us-heading">Gurugram</h4>
+                  <h4 className="contact-us-heading"><a href="/gurugram">Gurugram</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={faridabad} alt="image" />
-                  <h4 className="contact-us-heading">Faridabad</h4>
+                  <h4 className="contact-us-heading"><a href="/faridabad">Faridabad</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={hydrabad} alt="image" />
-                  <h4 className="contact-us-heading">Hydrabad</h4>
-                </div> */}
-
-<div
-        onClick={() => handleRedirect('Gurugram')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={gurugram} alt="Gurugram" />
-        <h4 className="contact-us-heading">Gurugram</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Faridabad')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={faridabad} alt="Faridabad" />
-        <h4 className="contact-us-heading">Faridabad</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Hyderabad')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={hydrabad} alt="Hyderabad" />
-        <h4 className="contact-us-heading">Hyderabad</h4>
-      </div>
-
+                  <h4 className="contact-us-heading">< a href="/hyderabad">Hydrabad</a></h4>
+                </div>
               </div>
               <div
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
                 }}
               >
                 {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={chennai} alt="image" />
-                  <h4 className="contact-us-heading">Chennai</h4>
-                </div>
-                <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={jaipur} alt="image" />
-                  <h4 className="contact-us-heading">Jaipur</h4>
-                </div>
-                <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={ahmdabad} alt="image" />
-                  <h4 className="contact-us-heading">Ahmdabad</h4>
-                </div> */}
-
-<div
-        onClick={() => handleRedirect('Chennai')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={chennai} alt="Chennai" />
-        <h4 className="contact-us-heading">Chennai</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Jaipur')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={jaipur} alt="Jaipur" />
-        <h4 className="contact-us-heading">Jaipur</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Ahmedabad')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={ahmdabad} alt="Ahmedabad" />
-        <h4 className="contact-us-heading">Ahmedabad</h4>
-      </div>
-              </div>
-              <div
-                className="contact-us-img-section-1"
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  marginBottom: "30px",
-                }}
-              >
-                {/* <div className="contact-us-section-div">
-                  <Image className="contact-us-img" src={chandigarh} alt="image" />
-                  <h4 className="contact-us-heading">Chandigarh</h4>
+                  <h4 className="contact-us-heading"><a href="/chennai">Chennai</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={kolkata} alt="image" />
-                  <h4 className="contact-us-heading">Kolkata</h4>
+                  <h4 className="contact-us-heading"><a href="/kolkata">Kolkata</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={lakhnow} alt="image" />
-                  <h4 className="contact-us-heading">Locknow</h4>
-                </div> */}
-                <div
-        onClick={() => handleRedirect('Chandigarh')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={chandigarh} alt="Chandigarh" />
-        <h4 className="contact-us-heading">Chandigarh</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Kolkata')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={kolkata} alt="Kolkata" />
-        <h4 className="contact-us-heading">Kolkata</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Lucknow')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={lakhnow} alt="Lucknow" />
-        <h4 className="contact-us-heading">Lucknow</h4>
-      </div>
+                  <h4 className="contact-us-heading"><a href="/lucknow">Lucknow</a></h4>
+                </div>
               </div>
               <div
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
+                  gap: "10px",
                 }}
               >
                 {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={kanpur} alt="image" />
-                  <h4 className="contact-us-heading">Kanpur</h4>
+                  <h4 className="contact-us-heading"><a href="/kanpur">Kanpur</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={indore} alt="image" />
-                  <h4 className="contact-us-heading">Indore</h4>
+                  <h4 className="contact-us-heading"><a href="/indore">Indore</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={surat} alt="image" />
-                  <h4 className="contact-us-heading">Surat</h4>
-                </div> */}
-                 <div
-        onClick={() => handleRedirect('Kanpur')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={kanpur} alt="Kanpur" />
-        <h4 className="contact-us-heading">Kanpur</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Indore')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={indore} alt="Indore" />
-        <h4 className="contact-us-heading">Indore</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Surat')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={surat} alt="Surat" />
-        <h4 className="contact-us-heading">Surat</h4>
-      </div>
+                  <h4 className="contact-us-heading"><a href="/surat">Surat</a></h4>
+                </div>
               </div>
               <div
                 className="contact-us-img-section-1"
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-start",
                   alignItems: "center",
                   marginBottom: "30px",
+                  gap: "10px",
+                  gap: "10px",
                 }}
               >
                 {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={bhopal} alt="image" />
-                  <h4 className="contact-us-heading">Bhopal</h4>
+                  <h4 className="contact-us-heading"><a href="/bhopal">Bhopal</a></h4>
                 </div>
                 <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={goa}  alt="image"/>
-                  <h4 className="contact-us-heading">Goa</h4>
-                </div> */}
-                 <div
-        onClick={() => handleRedirect('Bhopal')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={bhopal} alt="Bhopal" />
-        <h4 className="contact-us-heading">Bhopal</h4>
-      </div>
-      <div
-        onClick={() => handleRedirect('Goa')}
-        className="contact-us-section-div"
-        style={{ cursor: 'pointer' }}
-      >
-        <Image className="contact-us-img" src={goa} alt="Goa" />
-        <h4 className="contact-us-heading">Goa</h4>
-      </div>
+                  <h4 className="contact-us-heading"><a href="/goa">Goa</a></h4>
+                </div>
+                <div className="contact-us-section-div">
+                  <Image className="contact-us-img" src={pune} alt="image" />
+                  <h4 className="contact-us-heading"><a href="/pune">Pune</a></h4>
+                </div>
+              </div>
+              <div className="our-address">
+                <h1 style={{ fontSize:"10px" , textAlign:"center"}}>Our Registered Address: B27/295, Bhopal, 462030</h1>
               </div>
             </div>
           </div>

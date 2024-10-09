@@ -28,6 +28,9 @@ const Login = () => {
     const city = router.query.city || null;
     const orderType = router.query.orderType || null;
     const product = router.query.product || null;
+    const selectedAddOnProduct = router.query.selectedAddOnProduct || null;
+    const itemQuantities = router.query.itemQuantities || null;
+    const totalAmount = router.query.totalAmount || null;
     const selectedDishDictionary = router.query.selectedDishDictionary || null;
     const selectedDishPrice = router.query.selectedDishPrice || null;
     const selectedDishes = router.query.selectedDishes || null;
@@ -44,7 +47,6 @@ const Login = () => {
     const { time, isTimeUp, resetTimer } = useTimer(25);
     const [showPopup, setShowPopup] = useState(false); // State for controlling popup visibility
     const [popupMessage, setPopupMessage] = useState({}); // State for popup message
-    console.log(router)
     const handleLogout = () => {
         localStorage.setItem("isLoggedIn", "false");
         localStorage.clear();
@@ -125,6 +127,57 @@ const Login = () => {
         console.log('Show popup state changed:', showPopup);
     }, [popupMessage, showPopup]);
 
+    // Function to send the WhatsApp message
+const sendWelcomeMessage = async (mobileNumber) => {
+    let formattedMobileNumber = mobileNumber;
+
+    // Ensure the mobile number starts with '+91'
+    if (!formattedMobileNumber.startsWith('+91')) {
+        formattedMobileNumber = '+91' + formattedMobileNumber;
+    }
+
+    // Remove any extra spaces or special characters
+    formattedMobileNumber = formattedMobileNumber.replace(/\s+/g, '');
+
+    console.log('Sending WhatsApp message to mobile number:', formattedMobileNumber);
+
+    const options = {
+        method: 'POST',
+        url: 'https://public.doubletick.io/whatsapp/message/template',
+        headers: {
+            accept: 'application/json',
+            'content-type': 'application/json',
+            Authorization: 'key_wZpn79uTfV' // Keep this secure in backend
+        },
+        data: {
+            messages: [
+                {
+                    content: {
+                        language: 'en',
+                        templateData: {
+                            header: {
+                                type: 'IMAGE',
+                                mediaUrl: 'https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg'
+                            },
+                            body: { placeholders: ['Hora Services'] } // Use dynamic placeholders if needed
+                        },
+                        templateName: 'happy_to_help_v2'
+                    },
+                    from: '+917338584828',
+                    to: formattedMobileNumber // Send to the formatted mobile number
+                }
+            ]
+        }
+    };
+
+    try {
+        const response = await axios.request(options);
+        console.log('WhatsApp message response:', response.data);
+    } catch (error) {
+        console.error('Error sending WhatsApp message:', error);
+    }
+};
+
     const validateOtp = async (enteredOtp) => {
         try {
             if (enteredOtp === fetchedOtp.toString()) {
@@ -147,8 +200,7 @@ const Login = () => {
                     localStorage.setItem("mobileNumber", mobileNumber);
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('userID', response.data.data._id);
-                    console.log("token", response.data.token);
-                    console.log("userid",response.data.data._id );
+                    sendWelcomeMessage(mobileNumber);
                     if (previousPage) {
                         if (previousPage.includes("/book-chef-cook-for-party")) {
                             router.push({
@@ -166,7 +218,7 @@ const Login = () => {
                         } else if (previousPage.includes(`/balloon-decoration/${catValue}/product`)) {
                             router.push({
                                 pathname: '/checkout',
-                                query: { subCategory, product, orderType }
+                                query: { subCategory, product, totalAmount , orderType, catValue , selectedAddOnProduct, itemQuantities  }
                             });
                         }
                         else if (previousPage.includes('/party-food-delivery-live-catering-buffet-select-date')) {
