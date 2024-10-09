@@ -19,11 +19,19 @@ import chandigarh from "../../assets/Chandigarh.png";
 import kolkata from "../../assets/kolkata.png";
 import lakhnow from "../../assets/Locknow.png";
 import kanpur from "../../assets/Kanpur.png";
-import surat from "../../assets/Kanpur.png";
+import surat from "../../assets/surat.png";
 import goa from "../../assets/Goa.png";
 import Image from "next/image";
+import { useRouter } from 'next/router';  
 
 const ContactUs = () => {
+
+  const router = useRouter();
+
+  const handleRedirect = (city) => {
+    router.push(`/${city}`);
+  };
+  
   return (
     <main>
       <div className="aboutUsContainer" style={styles.aboutUsContainer}>
@@ -162,7 +170,7 @@ const ContactUs = () => {
                   gap: "10px",
                 }}
               >
-                <div className="contact-us-section-div">
+                {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={gurugram} alt="image" />
                   <h4 className="contact-us-heading"><a href="/gurugram">Gurugram</a></h4>
                 </div>
@@ -185,7 +193,7 @@ const ContactUs = () => {
                   gap: "10px",
                 }}
               >
-                <div className="contact-us-section-div">
+                {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={chennai} alt="image" />
                   <h4 className="contact-us-heading"><a href="/chennai">Chennai</a></h4>
                 </div>
@@ -209,7 +217,7 @@ const ContactUs = () => {
                   gap: "10px",
                 }}
               >
-                <div className="contact-us-section-div">
+                {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={kanpur} alt="image" />
                   <h4 className="contact-us-heading"><a href="/kanpur">Kanpur</a></h4>
                 </div>
@@ -233,7 +241,7 @@ const ContactUs = () => {
                   gap: "10px",
                 }}
               >
-                <div className="contact-us-section-div">
+                {/* <div className="contact-us-section-div">
                   <Image className="contact-us-img" src={bhopal} alt="image" />
                   <h4 className="contact-us-heading"><a href="/bhopal">Bhopal</a></h4>
                 </div>

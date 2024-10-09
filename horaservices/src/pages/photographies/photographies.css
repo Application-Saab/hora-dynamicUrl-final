@@ -1,0 +1,70 @@
+/* Decoration Container */
+.decContainerSec.decPage {
+  display: flex;                /* Use flexbox for layout */
+  justify-content: center;      /* Center the items */
+  gap: 20px;                    /* Space between items */
+  padding: 8px;                 /* Padding around the container */
+}
+
+.imageContainer {
+  flex: 0 1 45%;                /* Use 45% width for each product to fit two side by side */
+  max-width: 300px;             /* Max width to prevent overflow */
+  margin-bottom: 20px;          /* Spacing below each item */
+}
+
+/* Card styling */
+.product-card {
+  display: flex;
+  flex-direction: column;       /* Stack the image and text vertically */
+  align-items: center;          /* Center align the items */
+  text-align: center;           /* Center the text */
+  background-color: white;      /* White background for card view */
+  padding: 16px;                /* Add padding inside the card */
+  border-radius: 8px;           /* Rounded corners for card view */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card effect */
+  transition: transform 0.3s ease; /* Add smooth hover effect */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);  /* Slight lift on hover */
+}
+
+.decCatimage {
+  border-radius: 5px;           /* Rounding corners of images */
+  height: 200px;                /* Maintain aspect ratio */
+  object-fit: cover;            /* Ensure image fits the container */
+}
+
+.product-name {
+  font-size: 16px;              /* Adjust product name size */
+  font-weight: bold;            /* Make product name bold */
+  margin-top: 10px;             /* Space between image and name */
+}
+
+.product-price {
+  font-size: 14px;              /* Adjust price size */
+  color: #333;                  /* Set price text color */
+  margin-top: 5px;              /* Space between name and price */
+}
+
+.discount {
+  color: red;                   /* Set discount text color */
+}
+
+.original-price {
+  text-decoration: line-through; /* Strikethrough for original price */
+  color: #999;                   /* Lighter color for original price */
+}
+
+/* Responsive Styles */
+@media (max-width: 800px) {
+  .imageContainer {
+    flex: 0 1 100%;            /* Stack items vertically on smaller screens */
+    max-width: none;           /* No max width restriction */
+  }
+}
+
+.view-more {
+  color: #007bff;               /* Link color */
+  text-decoration: underline;    /* Underline for links */
+}

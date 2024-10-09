@@ -854,7 +854,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 if (cityHtmlIndex !== -1) {
                     const baseURL = currentURL.slice(0, cityHtmlIndex + 9); // +9 to include "city.html"
-                    console.log("baseURL" + baseURL)
+                    
                     // Redirect to the base URL without the query parameters
                     window.location.href = baseURL;
 
@@ -866,7 +866,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectedLocality) {
         selectedLocality = selectedLocality.replace(/-/g, ' ');
         var selectedLocalityData = cityData[selectedCity].cityLocalitiesList.find((localityData) => localityData.name === selectedLocality);
-        console.log("selectedLocalityData" + selectedLocalityData)
+        
     }
 
     if (selectedLocalityData) {

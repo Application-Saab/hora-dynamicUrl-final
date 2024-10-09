@@ -448,6 +448,10 @@ const openSliderLink = (link , title) => {
 };
 
 
+const handleNavigation = () => {
+  router.push('/photographies'); // Navigates to /photographies
+};
+
 
 return (
 <>

@@ -467,6 +467,14 @@ img.dish-image.selected {
   border: none !important;
 }
 
+/* .dish-image {
+  width: 86px;
+  height: 81px;
+  border-radius: 50%;
+  margin: -30px auto 0;
+} */
+
+
 .dish-image {
   width: 90px;
     height: 90px;
@@ -474,6 +482,11 @@ img.dish-image.selected {
     margin: -30px auto 0;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 7);
 }
+
+.dish-image:hover {
+  transform: scale(1.2); /* Zooms the image to 120% of its original size */
+}
+
 
 .order-container .dish-name {
   color: rgb(157, 74, 147) !important;

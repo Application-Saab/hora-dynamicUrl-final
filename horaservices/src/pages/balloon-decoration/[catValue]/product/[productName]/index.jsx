@@ -42,6 +42,7 @@ const SkeletonLoader = () => {
   );
 };
 
+
 function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
