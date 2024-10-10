@@ -119,7 +119,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons"
 import axios from 'axios';
 // import { useParams } from "react-router-dom";
 import { BASE_URL, GET_DECORATION_CAT_ID, GET_DECORATION_CAT_ITEM } from '../../../utils/apiconstants';
-import BirthdayImage from '../../../assets/Birthday_dec_cat.jpeg';
+import BirthdayImage from '../../../../../assets/Birthday_dec_cat.jpeg';
 import FirstnightImage from '../../../assets/first_night_cat_dec.jpeg'
 import AnniversaryImage from '../../../assets/aniversary_Cat_Dec.jpeg'
 import KidsbirthdayImage from '../../../assets/kids_birthday_decoration.jpeg'

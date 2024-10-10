@@ -41,12 +41,16 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [city, setCity] = useState(null);
 
-  const photographyUrl = () =>{
-    window.open(
-      'https://api.whatsapp.com/send?phone=+917338584828&text=I%20wanted%20to%20know%20about%2C%20photography',
-      '_blank'
-    );
-  }
+  console.log(city, "city123");
+
+  const photographyUrl = () => {
+    if (city) {
+      router.push(`/${city}/photographies`); // Navigate only if city is defined
+    } else {
+      console.error("City is not defined");
+    }
+  };
+
   const schemaOrg = getHomeOrganizationSchema();
   const scriptTag = JSON.stringify(schemaOrg);
 
