@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Plus } from 'lucide-react';
+import { MessageCircle, Plus , ArrowDown , ArrowUp} from 'lucide-react';
 import buynowImage from '../../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../../assets/service.png';
@@ -48,8 +48,9 @@ const SkeletonLoader = () => {
 function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
   const [city, setCity] = useState("");
+  const [isArrowDown, setIsArrowDown] = useState(true);
   const [orderType, setOrderType] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [selectedAddOnProduct, setSelectedAddOnProduct] = useState([]);
   const [itemQuantities, setItemQuantities] = useState({});
   const [totalAmount, setTotalAmount] = useState();
@@ -146,9 +147,9 @@ function DecorationCatDetails() {
 
 
   const showAddOnmodal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(prevState => !prevState);
+    setIsArrowDown(!isArrowDown);
   };
-
   const updateTotalAmount = () => {
     let newTotalAmount = Number(product.price);
     selectedAddOnProduct.forEach(item => {
@@ -216,7 +217,8 @@ function DecorationCatDetails() {
   const handleContinue = () => {
     setIsModalOpen(false);
   }
-
+  
+  
   const handleButtonClick = (subCategory, product) => {
     if (buttonClickCount === 0) {
       showAddOnmodal(subCategory, product);
@@ -578,15 +580,64 @@ function DecorationCatDetails() {
     </div>
    
     <div className="button-group-cta">
-      <button onClick={handleWhatsApp} className="button-cta whatsapp-cta">
-        <MessageCircle className="icon-cta" />
-        Whatsapp
-      </button>           
       <button onClick={showAddOnmodal} className="button-cta call-cta">
-        <Plus className="icon-cta" />
-        Decor Upgrade's
-      </button>
-    </div>
+          
+              
+      {isArrowDown ? (
+        <ArrowDown className="icon-cta down-icon" />
+      ) : (
+        <ArrowUp className="icon-cta up-icon" />
+      )}
+          Decor Upgrade's
+        </button>
+        <button onClick={handleWhatsApp} className="button-cta whatsapp-cta">
+          <MessageCircle className="icon-cta" />
+          Whatsapp
+        </button>           
+      
+      
+      </div>
+      <div className="addon-sec">
+             {isModalOpen && (
+             <div className="modal-overlay11" onClick={() => setIsModalOpen(false)} style={{ maxHeight:"500px" , overflowY:"scroll"}}>
+          <div className="modal-content`11" onClick={(e) => e.stopPropagation()} style={{ marginTop:"10px"}}>
+            {/* <button className="modal-close11" onClick={() => setIsModalOpen(false)}>×</button> */}
+            <div className="modal-top-box11">
+              <h2 style={{ fontSize:16 , fontWeight:600}} className="select-heading-sec">Please select here to add in your decoration</h2>
+            </div>
+            <div className="modal-middle-box 11">
+              <div className="modal-card-container">
+                {addOnProductsData.addOnProducts.map((item, index) => (
+                  <div key={index} className="modal-card">
+                    <img style={{ width: "120px", height: "120px" }} src={item.image} alt={item.title} className="model-image" />
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+
+                    <div className="price-container">
+                      <span className="price">₹ {item.price}</span>
+                      {itemQuantities[item.title] ? (
+                        <div>
+                          <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
+                          <span>{itemQuantities[item.title]}</span>
+                          <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
+                        </div>
+                      ) : (
+                        <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="modal-bottom-box">
+
+              <p>Total: ₹ {calculateTotalPrice(Number(product.price))}</p>
+              <button className="book-now-button" onClick={handleContinue}>Continue</button>
+            </div>
+          </div>
+        </div>
+       )} 
+        </div>
   </div>
 
 
@@ -610,45 +661,7 @@ function DecorationCatDetails() {
 
   
 
-    {isModalOpen && (
-      <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
-          <div className="modal-top-box">
-            <h2>Select Customizations</h2>
-          </div>
-          <div className="modal-middle-box">
-            <div className="modal-card-container">
-              {addOnProductsData.addOnProducts.map((item, index) => (
-                <div key={index} className="modal-card">
-                  <img style={{ width: "150px", height: "150px" }} src={item.image} alt={item.title} className="model-image" />
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-
-                  <div className="price-container">
-                    <span className="price">₹ {item.price}</span>
-                    {itemQuantities[item.title] ? (
-                      <div>
-                        <button onClick={() => handleRemoveFromCart(item)} className="quantity-button">-</button>
-                        <span>{itemQuantities[item.title]}</span>
-                        <button onClick={() => handleAddToCart(item)} className="quantity-button">+</button>
-                      </div>
-                    ) : (
-                      <button onClick={() => handleAddToCart(item)} className="add-button">Add</button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="modal-bottom-box">
-
-            <p>Total: ₹ {calculateTotalPrice(Number(product.price))}</p>
-            <button className="book-now-button" onClick={handleContinue}>Continue</button>
-          </div>
-        </div>
-      </div>
-    )}
+   
   </div>
   );
 };

@@ -52,6 +52,7 @@ const Decoration = () => {
     let { city } = useParams();
     const hasCityPageParam = city ? true : false;
 
+
     const openCatItems = (item) => {
      // sendGTMEvent('event', 'titleClicked', { value: `/balloon-decoration/${item.catValue}` });
         dispatch(setState(item.subCategory, item.imgAlt));

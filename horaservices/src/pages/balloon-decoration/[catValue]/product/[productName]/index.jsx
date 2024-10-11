@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { useParams } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Plus } from 'lucide-react';
+import { MessageCircle, Plus , ArrowDown , ArrowUp} from 'lucide-react';
 import buynowImage from '../../../../../assets/experts.png';
 import buynowImage1 from '../../../../../assets/secured.png';
 import buynowImage2 from '../../../../../assets/service.png';
@@ -45,7 +45,7 @@ const SkeletonLoader = () => {
 function DecorationCatDetails() {
   const [selCat, setSelCat] = useState("");
   const [orderType, setOrderType] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [selectedAddOnProduct, setSelectedAddOnProduct] = useState([]);
   const [itemQuantities, setItemQuantities] = useState({});
   const [totalAmount, setTotalAmount] = useState();
@@ -58,6 +58,7 @@ function DecorationCatDetails() {
   const [catValue, setCatValue] = useState('');
   const altTagCatValue = catValue.replace(/-/g, ' ');
   const [discountInfo, setDiscountInfo] = useState(null);
+  const [isArrowDown, setIsArrowDown] = useState(true);
   const [loading, setLoading] = useState(true); // Add a loading state
   // Use useEffect to handle router query
   useEffect(() => {
@@ -69,6 +70,7 @@ function DecorationCatDetails() {
       setCatValue(urlCatValue || '');
     }
   }, [router.isReady, router.query]);
+
 
 
   const handleWhatsApp = () => {
@@ -138,7 +140,8 @@ function DecorationCatDetails() {
   const [isClient, setIsClient] = useState(false);
 
   const showAddOnmodal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(prevState => !prevState);
+    setIsArrowDown(!isArrowDown);
   };
 
   const updateTotalAmount = () => {
@@ -446,9 +449,9 @@ function DecorationCatDetails() {
             </div>
             <div style={{ border:"1px solid rgb(220, 53, 69)", backgroundColor:"rgb(248, 215, 218)" , margin:"13px auto 7px" , padding:"10px 10px 11px 16px" , borderRadius:10 , width:"80%" , textAlign:"left" }} className="inclusiton-details desktop-view">
           <p style={{ marginBottom:"0" , fontWeight:"bold" , fontSize:12}}>Note:</p>
-          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Balloons color can be changed as per your choice.*</p>
-          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Neon lights can be changed for the event (if  included in the design).*</p>
-          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:13 , color:"#444" , fontWeight:700}}>*Age numbers and name are customizable (if included in the design).*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Balloons color can be changed as per your choice.*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Neon lights can be changed for the event (if  included in the design).*</p>
+          <p style={{ margin:"4px 0 0 0" , padding:0 , fontWeight:"700" , fontSize:12 , color:"#444" , fontWeight:700}}>*Age numbers and name are customizable (if included in the design).*</p>
 
           </div>
           </div>
@@ -568,50 +571,35 @@ function DecorationCatDetails() {
       </div>
      
       <div className="button-group-cta">
+      <button onClick={showAddOnmodal} className="button-cta call-cta">
+          
+      {isArrowDown ? (
+        <ArrowDown className="icon-cta down-icon" />
+      ) : (
+        <ArrowUp className="icon-cta up-icon" />
+      )}
+          Decor Upgrade's
+        </button>
         <button onClick={handleWhatsApp} className="button-cta whatsapp-cta">
           <MessageCircle className="icon-cta" />
           Whatsapp
         </button>           
-        <button onClick={showAddOnmodal} className="button-cta call-cta">
-          <Plus className="icon-cta" />
-          Decor Upgrade's
-        </button>
+      
+      
       </div>
-    </div>
-
-
-
-            <div className="tab-section-details-productpage">
-              <Tabs
-                tabs={tabs}
-                defaultTab="faq"
-                className="faqtabs"
-              />
+      <div className="addon-sec">
+             {isModalOpen && (
+             <div className="modal-overlay11" onClick={() => setIsModalOpen(false)} style={{ maxHeight:"500px" , overflowY:"scroll"}}>
+          <div className="modal-content`11" onClick={(e) => e.stopPropagation()} style={{ marginTop:"10px"}}>
+            {/* <button className="modal-close11" onClick={() => setIsModalOpen(false)}>×</button> */}
+            <div className="modal-top-box11">
+              <h2 style={{ fontSize:16 , fontWeight:600}} className="select-heading-sec">Please select here to add in your decoration</h2>
             </div>
-
-            {/* <div className="similar-products">
-              <h2>Similar Products</h2>
-              {getSimilarProducts(product)}
-            </div> */}
-
-          </div>
-        </div>
-      </div>
-
-    
-
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setIsModalOpen(false)}>×</button>
-            <div className="modal-top-box">
-              <h2>Select Customizations</h2>
-            </div>
-            <div className="modal-middle-box">
+            <div className="modal-middle-box 11">
               <div className="modal-card-container">
                 {addOnProductsData.addOnProducts.map((item, index) => (
                   <div key={index} className="modal-card">
-                    <img style={{ width: "150px", height: "150px" }} src={item.image} alt={item.title} className="model-image" />
+                    <img style={{ width: "120px", height: "120px" }} src={item.image} alt={item.title} className="model-image" />
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
 
@@ -638,7 +626,32 @@ function DecorationCatDetails() {
             </div>
           </div>
         </div>
-      )}
+       )} 
+        </div>
+    </div>
+
+
+
+            <div className="tab-section-details-productpage">
+              <Tabs
+                tabs={tabs}
+                defaultTab="faq"
+                className="faqtabs"
+              />
+            </div>
+
+            {/* <div className="similar-products">
+              <h2>Similar Products</h2>
+              {getSimilarProducts(product)}
+            </div> */}
+
+          </div>
+        </div>
+      </div>
+
+    
+
+   
     </div>
   );
 };

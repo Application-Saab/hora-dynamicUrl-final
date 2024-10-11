@@ -259,21 +259,17 @@ const Orderlist = () => {
                       <strong style={{ color: "#9252AA" }}>
                         Balance Amount
                         {order?.type === 2 || order?.type === 3 || order?.type === 4 || order?.type === 5 ? (
-                          <p className="mb-0 price-para">
-
-                            {'₹' +
-                              '' +
-                              Math.round(
-                                (order?.payable_amount * 4) / 5,
-                              )}
-                          </p>
+                        <p className="mb-0 price-para">
+                        {'₹' + Math.round((order?.payable_amount * 4) / 5)}
+                        </p>
+                        ) : order?.type === 6 || order?.type === 7 ? (
+                        <p className="mb-0 price-para">
+                        {'₹' + Math.round(order?.payable_amount * 0.35)}
+                        </p>
                         ) : (
-                          <p className="mb-0 price-para">
-
-                            {'₹' +
-                              '' +
-                              Math.round(order?.payable_amount * 0.7)}
-                          </p>
+                        <p className="mb-0 price-para">
+                        {'₹' + Math.round(order?.payable_amount * 0.65)}
+                        </p>
                         )}
 
                       </strong>

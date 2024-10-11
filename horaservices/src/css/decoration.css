@@ -61,8 +61,18 @@
     color: #000;
     font-family: "Poppins", sans-serif;
 }
+.button-group-cta {
+  padding-bottom: 7px !important;
+  }
 /* new css */
 @media (max-width:800px){
+  .select-heading-sec{
+    margin-top: 16px;
+  }
+  .header-section-cta {
+    margin-bottom: 5px !important;
+}
+
     .decContainerSec.decPage .imageContainer {
         width: 24%;
        margin-bottom: 4px;
@@ -454,7 +464,7 @@ ul.decoration-addons {
 .modal-card h3 {
   font-size: 14px;
   color: #222;
-  min-height: 67px;
+  /* min-height: 67px; */
   padding:10px 0 0;
   margin:0;
 }

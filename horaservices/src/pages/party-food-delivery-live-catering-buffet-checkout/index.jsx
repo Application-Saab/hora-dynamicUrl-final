@@ -446,7 +446,7 @@ const FoodDeliveryCheckout = () => {
         }
         return (
             <div className='ordersummaryproduct'>
-                <div>
+                <div className='ordersummary-sec1'>
                     <Image
                         src={`https://horaservices.com/api/uploads/${item.image}`}
                         alt={item.name}
@@ -454,7 +454,7 @@ const FoodDeliveryCheckout = () => {
                         width={300} height={300}
                     />
                 </div>
-                <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}>
+                <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }} className='ordersummary-sec2'>
                     <p className='ordersummeryname'>{item.name}</p>
                     {
             selectedDeliveryOption === 'party-food-delivery' ? 
@@ -1466,7 +1466,7 @@ const FoodDeliveryCheckout = () => {
                 flexDirection: "row",
                 alignItems: " baseline",
                 justifyContent: " space-between",
-                paddingTop: 12,
+                padding: "12px 12px 0px 12px",
                 width:"100%",
 
               }}

@@ -569,7 +569,7 @@ p.ordersummeryname,
 }
 
 .ordersummaryproduct img {
-  height: auto;
+  height: auto !important;
 }
 
 
@@ -1538,6 +1538,7 @@ h4.contact-us-heading a {
 
     .checkoutRightImg {
       height: auto !important;
+      border-radius: 13px;
       
     }
 
@@ -1548,7 +1549,8 @@ h4.contact-us-heading a {
 
     .ordersummaryproduct {
       width: 47% !important;
-      gap:12px;
+            gap: 9px;
+            justify-content: flex-start;
     }
    
   }
@@ -1560,6 +1562,9 @@ h4.contact-us-heading a {
 }
 
 @media (max-width: 400px) {
+  .ordersummaryproduct div:first-child{
+    width: 50% !important;
+  }
   .textContainerhome h2 {
     padding: 4px 8% 5px !important;
   }
@@ -1700,7 +1705,10 @@ h4.contact-us-heading a {
     padding: 6px 5px !important;
   }
   .dishes-selected .ingredientrightsec {
-    font-size: 10px !important;
+    font-size: 19px;
+}
+.ordersummaryproduct div:first-child{
+  max-width: 50%;
 }
 
   .ingredientrightsecsibheading {
@@ -1718,6 +1726,9 @@ h4.contact-us-heading a {
   .order-header-right {
     padding-left: 0 !important;
   }
+  .dishes-selected .ingredientrightsec {
+    font-size: 12px !important;
+}
 
   .order-header-left {
     padding: 12px 8px !important;
