@@ -15,6 +15,7 @@ import Celebrate3Image from '../../../assets/house-party.png';
 import Celebrate4Image from '../../../assets/wedding-event.png';
 import Celebrate5Image from '../../../assets/gathering.png';
 import Celebrate6Image from '../../../assets/kids-event.png';
+import liveCateringImage from '../../../assets/live-buffet-service.png'
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -887,12 +888,7 @@ const ChefCitypage = () => {
                                 <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Hire Chef</h2>
                             </Link>
                         </div>
-                        <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
-                            <Link href="/" style={{ textDecoration: "none" }}>
-                                <Image src={bannerReturnGiftImage} alt="Return Gift Near me" style={{ height: "auto" }} />
-                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Gift & Party Supplies</h2>
-                            </Link>
-                        </div>
+                      
                         <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
                             <Link href="/" style={{ textDecoration: "none" }}>
                                 <Image src={bannerEntertainmentImage} alt="Entertainment Near me" style={{ height: "auto" }} />
@@ -903,6 +899,12 @@ const ChefCitypage = () => {
                             <Link href="/" style={{ textDecoration: "none" }}>
                                 <Image src={bannerFoodDeliveryImage} alt="Food Delivery Near me" style={{ height: "auto" }} />
                                 <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Food Delivery</h2>
+                            </Link>
+                        </div>
+                        <div style={styles.bannerDecorationImage} className="bannerDecorationImage">
+                            <Link href="/" style={{ textDecoration: "none" }}>
+                                <Image src={liveCateringImage} alt="Live Catering" style={{ height: "85%" }} />
+                                <h2 style={{ fontSize: "18px", fontWeight: "normal", color: "#fff", textAlign: "center" }}>Live Catering</h2>
                             </Link>
                         </div>
                     </div>

@@ -64,11 +64,23 @@
 .button-group-cta {
   padding-bottom: 7px !important;
   }
+  .deco-city li.city-link a {
+    color: #000 !important;
+    font-size: 10px;
+}
+.localities-box.decration {
+  margin: 0 0 30px 0;
+  width: 100%;
+
+}
 /* new css */
 @media (max-width:800px){
   .select-heading-sec{
     margin-top: 16px;
   }
+  .faq-container {
+    padding: 6px 13px 0;
+}
   .header-section-cta {
     margin-bottom: 5px !important;
 }

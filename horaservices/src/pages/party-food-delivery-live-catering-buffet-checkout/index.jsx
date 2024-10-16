@@ -41,14 +41,14 @@ const FoodDeliveryCheckout = () => {
     const [isClient, setIsClient] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    /// order.type is 2 for chef
-    /// order.type is 1 for decoration
-    /// order.type is 3 for waiter
-    /// order type 4  bar tender
-    /// order type 5 cleaner
-    /// order type 6 Single Plate Meal
-    /// order type 7 Live Buffer
-    /// order type 8 Bulk Catering.
+// order.type is 2 for chef
+// order.type is 1 for decoration
+// order.type is 3 for waiter
+// order type 4 bar tender
+// order type 5 cleaner
+// order type 6 Food Delivery
+// order type 7 Live Catering
+
     let {
         selectedDishesFoodDelivery,
         selectedOption,
