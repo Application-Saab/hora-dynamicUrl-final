@@ -832,7 +832,7 @@ const Checkout = () => {
 
     const requestData2 = {
       user_id: storedUserID,
-      price: Math.round(totalAmount * 0.3),
+      price: Math.round(totalAmount * 0.35),
       phone: phoneNumber,
       name: '',
       merchantTransactionId: merchantTransactionId
