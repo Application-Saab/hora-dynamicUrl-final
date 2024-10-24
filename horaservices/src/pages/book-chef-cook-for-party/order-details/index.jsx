@@ -614,7 +614,7 @@ const SelectDate = ({ history, currentStep }) => {
                                 </button>
                             </div>
                         </div>
-                        <div className="range-container">
+                        {/* <div className="range-container">
                             <div className="range-wrapper">
                                 <input
                                     type="range"
@@ -637,7 +637,7 @@ const SelectDate = ({ history, currentStep }) => {
                                     <div className="count-display">{peopleCount}</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='personsectionprice'>
                             <Image src={info} className="info-icon" alt="info icon" />
                             <p className="info-text">₹ 49/person would be added to bill value in addition to dish price</p>
