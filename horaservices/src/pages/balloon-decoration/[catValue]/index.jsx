@@ -253,41 +253,96 @@ const [loadingMore, setLoadingMore] = useState(false); // Track if more items ar
     return { discount, discountedPrice , discountDifference }; // Return both discount percentage and discounted price
 };
 
+// const getSubCatItems = async () => {
+//   try {
+//       setLoading(true);
+//       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+//       console.log(response, "catvalueresponse");
+//       if (response.status === API_SUCCESS_CODE) {
+//           const decoratedData = response.data.data.map(item => {
+//               const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
+//               return {
+//                   ...item,
+//                   rating: getRandomRating(),
+//                   userCount: getRandomNumber(20, 500),
+//                   discountPercentage: discount, // Add discount percentage
+//                   discountedPrice: discountedPrice ,// Add discounted price
+//                   discountDifference: discountDifference,
+//                   inclusion: item.inclusion.join(', '), // Join the inclusion array into a single string
+//                   catValue: catValue // Add catValue to each item
+//               };
+//           });
+//           setCatalogueData(decoratedData);
+
+//            // Call the function to export data to Excel
+//            exportToExcel(decoratedData);
+//       }
+//   } catch (error) {
+//       console.log('Error Fetching Data:', error.message);
+//   } finally {
+//       setLoading(false);
+//   }
+// };
+
+
+// // Function to export data to Excel
+// const exportToExcel = (data) => {
+//   // Create a new workbook and a new worksheet
+//   const ws = XLSX.utils.json_to_sheet(data);
+//   const wb = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(wb, ws, 'Catalogue Data');
+
+//   // Generate the Excel file and prompt user to download
+//   XLSX.writeFile(wb, 'catalogue_data.xlsx');
+// };
+
+
 const getSubCatItems = async () => {
   try {
-      setLoading(true);
-      const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
-      console.log(response, "catvalueresponse");
-      if (response.status === API_SUCCESS_CODE) {
-          const decoratedData = response.data.data.map(item => {
-              const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
-              return {
-                  ...item,
-                  rating: getRandomRating(),
-                  userCount: getRandomNumber(20, 500),
-                  discountPercentage: discount, // Add discount percentage
-                  discountedPrice: discountedPrice ,// Add discounted price
-                  discountDifference: discountDifference,
-                  inclusion: item.inclusion.join(', '), // Join the inclusion array into a single string
-                  catValue: catValue // Add catValue to each item
-              };
-          });
-          setCatalogueData(decoratedData);
+    setLoading(true);
+    const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+    console.log(response, "catvalueresponse");
 
-           // Call the function to export data to Excel
-          //  exportToExcel(decoratedData);
-      }
+    if (response.status === API_SUCCESS_CODE) {
+      const decoratedData = response.data.data.map(item => {
+        const { discount, discountedPrice, discountDifference } = getDiscountedPrice(item.price);
+        const productUrl = `https://horaservices.com/balloon-decoration/birthday-decoration/product/${item.name || item.id}`;
+
+        return {
+          ...item,
+          featured_image: `https://horaservices.com/api/uploads/${item.featured_image}`, // Prepend the URLv
+          price: `${item.price} INR`, // Add INR to the pric
+          productUrl: productUrl,
+          rating: getRandomRating(),
+          userCount: getRandomNumber(20, 500),
+          discountPercentage: discount,
+          discountedPrice: discountedPrice,
+          discountDifference: discountDifference,
+        };
+      });
+
+      // Filter out unwanted properties
+      const filteredData = decoratedData.map(({ 
+        ratings, attributes, short_link, caption, badge, type,
+        is_wishlisted, tag, status, createdAt, updatedAt, __v,
+        discount, rating, userCount, discountPercentage, 
+        discountedPrice, discountDifference, ...rest 
+      }) => rest);
+
+      setCatalogueData(filteredData);
+
+      // Export filtered data to Excel
+      exportToExcel(filteredData);
+    }
   } catch (error) {
-      console.log('Error Fetching Data:', error.message);
+    console.log('Error Fetching Data:', error.message);
   } finally {
-      setLoading(false);
+    setLoading(false);
   }
 };
 
-
 // Function to export data to Excel
 const exportToExcel = (data) => {
-  // Create a new workbook and a new worksheet
   const ws = XLSX.utils.json_to_sheet(data);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Catalogue Data');
@@ -295,6 +350,61 @@ const exportToExcel = (data) => {
   // Generate the Excel file and prompt user to download
   XLSX.writeFile(wb, 'catalogue_data.xlsx');
 };
+
+
+
+
+
+
+// const getSubCatItems = async () => {
+//   try {
+//     setLoading(true);
+//     const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+//     console.log(response, "catvalueresponse");
+
+//     if (response.status === API_SUCCESS_CODE) {
+//       const decoratedData = response.data.data.map(item => {
+//         const { discount, discountedPrice, discountDifference } = getDiscountedPrice(item.price); // Destructure the return value
+        
+//         // Construct the product URL dynamically using product name or ID if available
+//         const productUrl = `https://horaservices.com/balloon-decoration/kids-birthday-decoration/product/${item.name || item.id}`;
+        
+//         return {
+//           ...item,
+//           // rating: getRandomRating(),
+//           // userCount: getRandomNumber(20, 500),
+//           // discountPercentage: discount, // Add discount percentage
+//           // discountedPrice: discountedPrice, // Add discounted price
+//           // discountDifference: discountDifference,
+//           // inclusion: item.inclusion.join(', '), // Join the inclusion array into a single string
+//           // catValue: catValue, // Add catValue to each item
+//           productUrl: productUrl // Add the URL as a new column
+//         };
+//       });
+//       setCatalogueData(decoratedData);
+
+//       // Call the function to export data to Excel
+//       exportToExcel(decoratedData);
+//     }
+//   } catch (error) {
+//     console.log('Error Fetching Data:', error.message);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
+// // Function to export data to Excel
+// const exportToExcel = (data) => {
+//   // Create a new workbook and a new worksheet
+//   const ws = XLSX.utils.json_to_sheet(data);
+//   const wb = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(wb, ws, 'Catalogue Data');
+
+//   // Generate the Excel file and prompt user to download
+//   XLSX.writeFile(wb, 'catalogue_data.xlsx');
+// };
+
+
 
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");

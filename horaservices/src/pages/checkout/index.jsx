@@ -755,6 +755,7 @@ const Checkout = () => {
       const url = BASE_URL + SAVE_LOCATION_ENDPOINT;
       // Retrieve userID from localStorage
       let userId = localStorage.getItem("userID");
+      console.log(userId, "useridsdf");
       if (!userId) {
         console.error('Error retrieving userID');
         return;
@@ -767,7 +768,9 @@ const Checkout = () => {
         city: city,
         userId: userId
       };
+      console.log(address2, "address263");
       const token = localStorage.getItem('token');
+      console.log(token, "token123");
       const response = await axios.post(url, requestData, {
         headers: {
           'Content-Type': 'application/json',
@@ -814,7 +817,10 @@ const Checkout = () => {
         "items": [product._id],
         "decoration_comments": getFinalComment(),
         "status": 0
+      
       }
+
+      console.log(requestData, "requestData");
 
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
@@ -1209,7 +1215,7 @@ export const CustomDatePicker = ({ handleDateChange, selectedDate, showDatePicke
           style={{ cursor: 'pointer', padding: 0, background: 'none', border: 'none' }}        >
           <span style={{ fontSize: '12px' }} className='m-0 p-0 '>{selectedDate ? selectedDate.toLocaleDateString() : 'Select Date'}</span>
         </Dropdown.Toggle>
-
+          
         <Dropdown.Menu
           show={showDatePicker}
           className="p-2"

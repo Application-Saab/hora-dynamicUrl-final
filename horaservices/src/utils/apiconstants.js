@@ -23,8 +23,3 @@ export const GET_DECORATION_CAT_ID = "/api/meals/idByTag?tag="
 export const GET_DECORATION_CAT_ITEM = "/api/Decoration/searchByTag/"
 export const GET_DECORATION_DETAILS = "/api/order/order_details_decoration"
 export const GET_DECORATION_BY_NAME = "/api/Decoration/searchByName/"
-
-
-
-
-
