@@ -24,9 +24,13 @@ const DecorationCatPage = () => {
   //   let { city } = useParams();
   const [city, setCity] = useState('');
   const [catValue, setCatValue] = useState('');
+  // alert(catValue, "catvalue");
+
   useEffect(() => {
     if (router.isReady) {
       const { catValue: queryCatValue, city: queryCity } = router.query;
+
+      console.log(catValue, "cata");
 
       if (queryCatValue) {
         setCatValue(queryCatValue);
@@ -39,6 +43,7 @@ const DecorationCatPage = () => {
       }
     }
   }, [router.isReady, router.query]);
+
   const altTagCatValue = catValue.replace(/-/g, ' ');
   const [orderType, setOrderType] = useState(1);
   const hasCityPageParam = city ? true : false;
@@ -55,6 +60,7 @@ const DecorationCatPage = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
   //   const navigate = useNavigate();
   const [priceFilter, setPriceFilter] = useState("all"); // Default: Show all
+  const [searchTerm, setSearchTerm] = useState('');
   const [themeFilter, setThemeFilter] = useState("all"); // Default: Show all
   const schemaOrg = getDecorationCatOrganizationSchema(catValue);
   const scriptTag = JSON.stringify(schemaOrg);
@@ -87,14 +93,29 @@ const DecorationCatPage = () => {
     { label: 'Sport Football theme', value: 'Football' },
     { label: 'Unicorn Theme', value: 'Unicorn' },
   ];
+  
   function getSubCategory(catValue) {
+    console.log(catValue, "cat1");
     if (!catValue) return ''; // Handle cases where catValue is null or undefined
 
     if (catValue === 'birthday-decoration') {
       return 'Birthday';
     } else if (catValue === 'anniversary-decoration') {
       return 'Anniversary';
-    } else {
+    } else if (catValue === 'haldi-mehendi-decoration') {
+      return 'Haldi-Mehandi';
+    } else if (catValue === 'first-night-decoration') {
+      return 'FirstNight';
+    } else if (catValue === 'baby-shower-decoration') {
+      return 'BabyShower';
+    } else if (catValue === 'welcome-baby-decoration') {
+      return 'WelcomeBaby';
+    } else if (catValue === 'premium-decoration') {
+      return 'PremiumDecoration';
+    } else if (catValue === 'bachelorette-decoration') {
+      return 'bachelorette';
+    }
+    else {
       const parts = catValue.split('-'); // Split by hyphens
       return parts.slice(0, 2) // Take only the first two parts
         .map(part => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()) // Capitalize each part
@@ -104,8 +125,15 @@ const DecorationCatPage = () => {
 
   // UseSelector to get state from Redux
   const { subCategory: stateSubCategory, imgAlt: stateImgAlt } = useSelector((state) => state.state || {});
+  
+  // console.log(subCategory, "subcategory6");
   // Determine the value for subCategory and imgAlt
   const subCategory = stateSubCategory || getSubCategory(catValue);
+  console.log(catValue, "cat2");
+  console.log(subCategory, "subCategory1");
+  console.log(stateSubCategory, "statesubcategory");
+  // console.log(getSubCategory(catValue),"catvalue");
+  
   const imgAlt = stateImgAlt || 'default alt text'; // Replace with a default alt text if needed
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -142,6 +170,7 @@ const DecorationCatPage = () => {
   const filteredData = catalogueData.filter(item => {
     let priceCondition = true;
     let themeCondition = true;
+    let searchCondition = true;
   
     // Filter by price
     if (priceFilter === "under2000") {
@@ -159,8 +188,12 @@ const DecorationCatPage = () => {
       themeCondition = formattedItemName.includes(formattedThemeFilter);
     }
   
-    // Return true if both conditions are met
-    return priceCondition && themeCondition;
+    // Filter by search term
+  if (searchTerm) {
+    searchCondition = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+
+  return priceCondition && themeCondition && searchCondition;
   });
   
   // Apply sorting
@@ -175,6 +208,7 @@ const DecorationCatPage = () => {
   
 
   function addSpaces(subCategory) {
+    console.log(subCategory, "subcategory5");
     let result = "";
     for (let i = 0; i < subCategory.length; i++) {
       if (i !== 0 && subCategory[i] === subCategory[i].toUpperCase()) {
@@ -186,6 +220,7 @@ const DecorationCatPage = () => {
   }
 
   const getSubCatId = async (subCategory) => {
+    console.log(subCategory,"subcategory4");
     try {
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ID + subCategory);
       const categoryId = response.data.data?._id;
@@ -216,6 +251,7 @@ const getSubCatItems = async () => {
   try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
+      console.log(response, "response111");
       if (response.status === API_SUCCESS_CODE) {
           const decoratedData = response.data.data.map(item => {
               const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
@@ -241,6 +277,7 @@ const getSubCatItems = async () => {
   const handleViewDetails = (subCategory, catValue, product) => {
     const productName = product.name.replace(/ /g, "-");
     dispatch(setState(subCategory, orderType, catValue, product));
+    console.log(subCategory,"subcategor3");
     if (hasCityPageParam) {
       router.push(`/${city}/balloon-decoration/${catValue}/product/${productName}`);
     }
@@ -360,6 +397,7 @@ const getSubCatItems = async () => {
             <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0", color: '#9252AA' }}>{selCat} {'Balloon Decoration'} </h1>
             <p style={{ padding: "0px 0px 16px", margin: "0px" }} className="subheading">{trimText('Balloon Decoration and Room Decoration Services for Anniversary, Birthdays, Kids Parties, Baby Showers and more!')}</p>
             <div className="filterdropdown d-flex flex-row flex-lg-row align-items-center justify-content-center gap-3">
+  
   <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}
     style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
     <option value="all">Sort By: Price</option>
@@ -370,6 +408,15 @@ const getSubCatItems = async () => {
     <option value="above5000">Above ₹ 5000</option>
    
   </select>
+   {/* Search Box */}
+   {/* <input
+      type="text"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search by name"
+      style={{ marginLeft: '10px', padding: '7px 10px', borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", fontSize: "16px" }}
+    /> */}
+
 
   {/* Theme filter */}
   {selCat === "Kids Birthday" ? (
@@ -380,6 +427,24 @@ const getSubCatItems = async () => {
       ))}
     </select>
   ) : null}
+</div>
+
+ {/* <input
+      type="text"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search by name"
+      style={{ marginLeft: '10px', padding: '7px 10px', borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", fontSize: "16px" }}
+    /> */}
+
+<div className="center-container">
+  <input
+    type="text"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    placeholder="Search Product Name"
+    className="input-product-search"
+  />
 </div>
 
           </div>

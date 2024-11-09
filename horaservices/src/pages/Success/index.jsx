@@ -1,13 +1,15 @@
-import React, { useEffect , useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/success.css";
 import confirmOrder from "../../assets/confirmOrder.png";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import axios from 'axios';
+import axios from "axios";
 
 const Success = () => {
-const router = useRouter();
-const [mobileNumber, setMobileNumber] = useState(() => localStorage.getItem("mobileNumber") || '');
+  const router = useRouter();
+  const [mobileNumber, setMobileNumber] = useState(
+    () => localStorage.getItem("mobileNumber") || ""
+  );
   const contactUsRedirection = async () => {
     try {
       window.open(
@@ -22,61 +24,77 @@ const [mobileNumber, setMobileNumber] = useState(() => localStorage.getItem("mob
     router.push("/orderlist");
   };
 
-      // Function to send the WhatsApp message
-const sendWelcomeMessage = async (mobileNumber) => {
-  let formattedMobileNumber = mobileNumber;
+  // Function to send the WhatsApp message
+  const sendWelcomeMessage = async (mobileNumber) => {
+    let formattedMobileNumber = mobileNumber;
 
-  // Ensure the mobile number starts with '+91'
-  if (!formattedMobileNumber.startsWith('+91')) {
-      formattedMobileNumber = '+91' + formattedMobileNumber;
-  }
+    // Ensure the mobile number starts with '+91'
+    if (!formattedMobileNumber.startsWith("+91")) {
+      formattedMobileNumber = "+91" + formattedMobileNumber;
+    }
 
-  // Remove any extra spaces or special characters
-  formattedMobileNumber = formattedMobileNumber.replace(/\s+/g, '');
+    // Remove any extra spaces or special characters
+    formattedMobileNumber = formattedMobileNumber.replace(/\s+/g, "");
 
-  console.log('Sending WhatsApp message to mobile number:', formattedMobileNumber);
+    console.log(
+      "Sending WhatsApp message to mobile number:",
+      formattedMobileNumber
+    );
 
-  const options = {
-      method: 'POST',
-      url: 'https://public.doubletick.io/whatsapp/message/template',
+    const options = {
+      method: "POST",
+      url: "https://public.doubletick.io/whatsapp/message/template",
       headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-          Authorization: 'key_wZpn79uTfV' // Keep this secure in backend
+        accept: "application/json",
+        "content-type": "application/json",
+        Authorization: "key_wZpn79uTfV", 
       },
       data: {
-          messages: [
-              {
-                  content: {
-                      language: 'en',
-                      templateData: {
-                          header: {
-                              type: 'IMAGE',
-                              mediaUrl: 'https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg'
-                          },
-                          body: { placeholders: ['Hora Services'] } // Use dynamic placeholders if needed
-                      },
-                      templateName: 'order_confirmation_message__v3'
-                  },
-                  from: '+917338584828',
-                  to: formattedMobileNumber // Send to the formatted mobile number
-              }
-          ]
-      }
+        messages: [
+          {
+            content: {
+              language: "en",
+              templateData: {
+                header: {
+                  type: "IMAGE",
+                  mediaUrl:
+                    "https://quickscale-template-media.s3.ap-south-1.amazonaws.com/org_FGdNfMoTi9/2a2f1b0c-63e0-4c3e-a0fb-7ba269f23014.jpeg",
+                },
+                body: { placeholders: ["Hora Services"] }, 
+              },
+              templateName: "order_confirmation_message__v3",
+            },
+            from: "+917338584828",
+            to: formattedMobileNumber, 
+          },
+        ],
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log("WhatsApp message response:", response.data);
+      localStorage.setItem("lastMessageSentTime", Date.now());
+    } catch (error) {
+      console.error("Error sending WhatsApp message:", error);
+    }
   };
 
-  try {
-      const response = await axios.request(options);
-      console.log('WhatsApp message response:', response.data);
-  } catch (error) {
-      console.error('Error sending WhatsApp message:', error);
-  }
-};
+  // useEffect(() => {
+  //   sendWelcomeMessage(mobileNumber);
+  // }, []);
 
 
-  useEffect(()=>{
-    sendWelcomeMessage(mobileNumber);
-  },[]);
+  useEffect(() => {
+    const lastSentTime = localStorage.getItem("lastMessageSentTime");
+    const currentTime = Date.now();
+    const FIVE_MINUTES = 5 * 60 * 1000;
+  
+    if (!lastSentTime || currentTime - lastSentTime > FIVE_MINUTES) {
+      sendWelcomeMessage(mobileNumber);
+    }
+  }, [mobileNumber]);
+
 
   return (
     <div className="confirm-order">
@@ -91,13 +109,15 @@ const sendWelcomeMessage = async (mobileNumber) => {
       <div className="confirm-order-details">
         <h2>Your order is confirmed!</h2>
         <p>
-          Our Executor will contact 5 hours before the scheduled time. Have a great
-          feast!
+          Our Executor will contact 5 hours before the scheduled time. Have a
+          great feast!
         </p>
         {/* <Link to="/" className="track-order">
           Track Order
         </Link> */}
-        <div className="need-help" onClick={contactUsRedirection}>Need help? Call us.</div>
+        <div className="need-help" onClick={contactUsRedirection}>
+          Need help? Call us.
+        </div>
         <button className="continue-button" onClick={handleContinue}>
           Continue
         </button>
