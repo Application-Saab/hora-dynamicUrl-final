@@ -16,31 +16,19 @@
     padding: 10px;
     background-color: #fff; /* Add a background color to make the gap visible */
 }
-.button-whatspp-decoration-cta {
-    border: 1px solid green;
-    color: green;
-    width: 90%;
-    margin: 0 auto;
-    padding: 7px 0;
-    border-radius: 12px;
-}
 a.view-more-slide.slider-item img {
     height: 199px;
 }
-button.button-sec{
-    border: none;
-    color: green;
-    width: 100%;
-    background: no-repeat;
-    font-weight: 500;
-    font-size: 14px;
-}
+
 .view-more-slide {
   cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 380px;
+}
+.view-more-chatwith-us {
+    width: 100%;
 }
 .view-more-slide h3 {
     font-size: 18px !important;

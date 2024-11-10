@@ -709,6 +709,63 @@ margin-top: 10px;
     display: none;
     }
 
+.button-whatspp-decoration-cta{
+    background-color: #25d366;
+    padding: 21px 0;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 4px;
+    border-radius: 9px;
+    box-shadow: 5px 6px 6px 7px #efefef;
+    }
+
+
+  a.view-more-slide.slider-item p {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 auto;
+    padding: 0 15px;
+    text-align: center;
+}
+
+    .button-whatspp-decoration-cta button{
+      background-color: #fff;
+      color: #25d366;
+      border: 1px solid #25d366
+
+  
+    }
+
+.button-chatus-decoration-cta{
+      background-color: rgb(166 115 185);
+    text-align: center;
+    padding: 51px 0;
+    color: #fff;
+    border-radius: 12px;
+    }
+
+    .button-chatus-decoration-cta button{
+      background-color: #fff;
+      color: rgb(166 115 185);
+      border:1px solid rgb(166 115 185);
+   
+      }
+      button.button-sec {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 86%;
+    margin: 4px auto;
+    padding: 4px 0;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  
+}
+button.button-sec svg{
+  margin-right: 2px;
+}
+
+
 @media (max-width:800px){
   .desktop-view{
   display: none;

@@ -122,7 +122,7 @@ const Decoration = () => {
       //   link:"/balloon-decoration/birthday-decoration/product/Purple-Pink-n-Gold-Shimmer-Decor",
       // },
       {
-        Image: 'https://horaservices.com/api/uploads/wahtsapp-decoration-redirection.jpeg',
+        Image: '',
         title: '',
         price: '',
         rating: '',
@@ -605,19 +605,31 @@ const Decoration = () => {
         <a 
         key={index} 
         className="view-more-slide slider-item" 
-        onClick={() => openWahtsappRedirection(item.title)}
+        // onClick={() => openWahtsappRedirection(item.title)}
         >
-        <Image 
-          src={item.Image} 
-          alt={item.title} 
-          className="slider-image" 
-          width={200} 
-          height={250} 
-        />
-        <div class="button-whatspp-decoration-cta">
-          <button class="button-sec"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta">
+        <div className="view-more-chatwith-us">
+          <div class="button-whatspp-decoration-cta">
+          <p>Customize ?? </p>
+          <div >
+          <button class="button-sec" onClick={() => openWahtsappRedirection(item.title)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta">
           <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>Chat with Us</button>
           </div>
+          </div>
+         
+          <div class="button-chatus-decoration-cta">
+          <p >800 Plus design</p>
+          <div >
+          <button className="button-sec" onClick={() => handleViewMore(viewLink)}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style={{ fill: 'rgb(166, 115, 185)' }}>
+    <path d="M3 12c0-.55.45-1 1-1h16c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1zM3 7c0-.55.45-1 1-1h16c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1zM3 17c0-.55.45-1 1-1h16c.55 0 1 .45 1 1s-.45 1-1 1H4c-.55 0-1-.45-1-1z"/>
+  </svg>
+  View More
+</button>
+          </div>
+          </div>
+         
+        </div>
+      
         </a>
         );
         } else {
@@ -659,6 +671,8 @@ const Decoration = () => {
         })}
 
           </div>
+
+       
         </div>
         );
         
@@ -682,8 +696,9 @@ const Decoration = () => {
     height={300}
     />
     </a>
-
     </div>
+
+      
     ))}
 </div>
 <div className="page-width decorationlanding-slider">

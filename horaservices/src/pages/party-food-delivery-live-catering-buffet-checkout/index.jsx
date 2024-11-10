@@ -594,7 +594,6 @@ const FoodDeliveryCheckout = () => {
         "560079",
         "560103",
         "560046",
-        "562157",
         "560010",
         "560049",
         "560056",
@@ -1285,7 +1284,6 @@ const FoodDeliveryCheckout = () => {
                     <div style={{ display: "flex" }} className='checoutSec my-3 gap-3'>
                         <div style={{ width: "40%", boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px", backgroundColor: "rgb(255, 255, 255)", borderRadius: "20px" }} className='leftSeccheckout'>
                             <h2 style={{ fontSize: "22px", fontWeight: "400", color: "#222", borderBottom: "1px solid #f0f0f0", margin: "0 0 8px 0", lineHeight: "35px" }}>Booking Details</h2>
-                            <div className='border border-danger p-1 px-3 rounded bg-danger-subtle text-black text-center' style={{ color: '#000', fontSize: 12, fontWeight: '500', textAlign: 'left', color: "#9252AA" }}>The decorator requires approximately 40-90 minutes to fulfill the service</div>
                             <div style={{ display: 'flex', margin: "8px 0px 10px", flexDirection: "row" }} className='row align-items-between justify-content-between   align-items-lg-center justify-content-lg-between'>
                                 <CustomDatePicker handleDateChange={handleDateChange} setSelectedDate={setSelectedDate} selectedDate={selectedDate} showDatePicker={showDatePicker} setShowDatePicker={setShowDatePicker} combinedDateTimeError={combinedDateTimeError} selectedDateError={selectedDateError} />
                                 <CustomTimePicker handleTimeSlotChange={handleTimeSlotChange} generateTimeSlots={generateTimeSlots} selectedTimeSlot={selectedTimeSlot} combinedDateTimeError={combinedDateTimeError} selectedTimeSlotError={selectedTimeSlotError} />
