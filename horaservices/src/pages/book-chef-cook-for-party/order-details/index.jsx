@@ -614,6 +614,31 @@ const SelectDate = ({ history, currentStep }) => {
                                 </button>
                             </div>
                         </div>
+
+
+                        <div className="range-container">
+                <div className="range-wrapper">
+                  <input
+                    type="range"
+                    min={minPeopleCount}
+                    max={maxPeopleCount}
+                    step={step}
+                    value={peopleCount}
+                    id="customRange3"
+                    onChange={handleRangeChange}
+                    className="range-input"
+                    style={{
+                      "--range-color": "rgb(146, 82, 170)", // Custom color variable
+                      "--range-track-height": "6px", // Custom track height
+                      "--range-thumb-size": "14px", // Custom thumb (handle) size
+                      "--range-thumb-transform": "translateY(-30%)", // Vertically center the thumb
+                    }}
+                  />
+                  <div>
+                    <div className="count-display">{peopleCount}</div>
+                  </div>
+                </div>
+              </div>
                         {/* <div className="range-container">
                             <div className="range-wrapper">
                                 <input

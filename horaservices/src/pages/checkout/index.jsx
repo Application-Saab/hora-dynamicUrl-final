@@ -823,6 +823,7 @@ const Checkout = () => {
         },
       });
       merchantTransactionId = response.data.data._id
+     console.log(merchantTransactionId, "merchantTransactionId");
       //}
     } catch (error) {
       console.log('Error Confirming Order:', error.message);
@@ -836,6 +837,7 @@ const Checkout = () => {
       name: '',
       merchantTransactionId: merchantTransactionId
     };
+    console.log(requestData2, "re2"); 
     try {
       if (city && pinCode && address && selectedTimeSlot && selectedDate) {
         if (combinedDateTimeError) {

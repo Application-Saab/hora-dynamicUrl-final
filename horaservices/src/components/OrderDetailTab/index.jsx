@@ -21,6 +21,7 @@ const OrderDetailTab = ({
   orderType,
   decorationItems,
   decorationComments,
+  addOn
 }) => {
   const router = useRouter();
   const [tab, setTab] = useState("Menu");
@@ -215,7 +216,15 @@ const OrderDetailTab = ({
                   <h6 className="product-inclusion">
                     {getItemInclusion(product?.inclusion)}
                   </h6>
-                </div>
+                  <p className="comments-header">AddOn:</p>
+                {addOn.map((item, index) => (
+                      <li key={index}>
+                        <strong>{item.name}</strong>: ${item.price}
+                      </li>
+                    ))}
+                </div> 
+               
+                
               </div>
             );
           })}

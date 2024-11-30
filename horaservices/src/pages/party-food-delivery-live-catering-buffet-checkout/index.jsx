@@ -395,6 +395,8 @@ const FoodDeliveryCheckout = () => {
 
         let quantity = item.quantity * peopleCount;
 
+        console.log(quantity, "quantity", itemCount, mainCourseItemCount, appetizerItemCount, breadItemCount);
+
         if ((item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) || (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) || (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1)) {
             if (itemCount <= 5) {
                 quantity = quantity
@@ -1209,6 +1211,7 @@ const FoodDeliveryCheckout = () => {
                 "items": Object.keys(selectedDishesFoodDelivery),
                 "status": 0
             }
+            console.log(requestData, "requestData");
 
             const token = await localStorage.getItem('token');
 
@@ -1451,12 +1454,21 @@ const FoodDeliveryCheckout = () => {
                                 <div style={{ marginHorizontal: 16, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
                                     <p style={{ padding: 4, color: '#000', fontSize: 13, fontWeight: '700', marginBottom: 0 }}>Dishes selected</p>
                                 </div>
-
+{/* 
                                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' , gap:"10px" }}>
                                     {selectedDishQuantities.map((item, index) => (
                                         <RenderDishQuantity key={index} item={item} />
+                                      
                                     ))}
-                                </div>
+                                    
+                                </div> */}
+                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', gap: '10px' }}>
+  {selectedDishQuantities.map((item, index) => {
+    console.log(`Rendering item at index ${index}:`, item); 
+    return <RenderDishQuantity key={index} item={item} />;
+  })}
+</div>
+
                             </div>
                             <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
             <div

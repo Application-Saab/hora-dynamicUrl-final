@@ -89,6 +89,9 @@ const FoodDeliveryCreateOrder = (currentStep) => {
             'Content-Type': 'application/json',
           },
         });
+
+        console.log(response, "respsone type: 'cuisine'");
+
         if (response.status == API_SUCCESS_CODE) {
           const names = response.data.data.configuration.map(({ _id, name }) => [
             _id,
@@ -248,6 +251,9 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     <div className='w-100'>
       {item.dish.length > 0 ?
         <>
+        
+      {console.log(item.dish,"item dish")}
+      
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top", margin: "5px 4px 0px 0px" }}>
             <h1 style={{ color: "#222", fontSize: "110%", marginBottom: "13px" , fontWeight:"700" }} className='cat-Name'>{item.mealObject.name}{"  "}{"(" + item.dish.length + ")"}</h1>
             <Button onClick={() => handleViewAll(item.mealObject._id)} style={{ color: expandedCategories.includes(item.mealObject._id) ? '#000' : '#fff', fontWeight: '400', textDecorationLine: 'none', fontSize: 12 }}
@@ -550,6 +556,7 @@ console.log('selectedOption',selectedOption)
                 {mealList.map((meal) => (
                   <div className='w-100'>
                     <ListGroupItem key={meal._id} className="dish-item">
+                    {console.log(meal,"sdfdsfdsfdsfdsfsd")}
                       {renderDishItem({ item: meal })}
                     </ListGroupItem>
                   </div>

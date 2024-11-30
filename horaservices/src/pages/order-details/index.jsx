@@ -24,6 +24,7 @@ const OrderDetail = () => {
   const [orderDetail, setOrderDetail] = useState([]);
   const [decorationItems, setDecorationItems] = useState([]);
   const [decorationComments, setDecorationComments] = useState("");
+  const [addOn, setAddOn] = useState("");
   const [hospitalityServiceCount, setHospitalityServiceCount] = useState();
   const [hospitalityServiceTotalAmount, setHospitalityServiceTotalAmount] =
     useState();
@@ -70,10 +71,12 @@ const OrderDetail = () => {
         BASE_URL + GET_DECORATION_DETAILS + "/" + orderId
       );
       const responseData = await response.json();
-
+    
       setOrderDetail(responseData?.data?._doc);
       setDecorationItems(responseData?.data?.items[0]?.decoration);
       setDecorationComments(responseData?.data?._doc.decoration_comments);
+      setAddOn(responseData?.data?._doc.add_on);
+      
       setLoading(false);
     } catch (error) {
       console.log("fetchDecorationOrderDetails error", error);
@@ -127,6 +130,7 @@ const OrderDetail = () => {
             orderType={orderType}
             decorationItems={decorationItems}
             decorationComments={decorationComments}
+            addOn={addOn}
           />
         </div>
       </div>

@@ -254,6 +254,7 @@ const CreateOrder = ({ history, currentStep }) => {
                 cuisineId: selectedCuisines,
                 is_dish: is_dish,
             };
+            console.log(requestData, "requestdatafood");
             const response = await axios.post(url, requestData, {
                 headers: {
                     "Content-Type": "application/json",
