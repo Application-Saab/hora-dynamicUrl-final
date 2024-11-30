@@ -258,6 +258,15 @@ const Orderlist = () => {
                     <div>
                       <strong style={{ color: "#9252AA" }}>
                         Balance Amount
+                        <p style={{textAlign: "end" , margin: 0}}>
+                          {" "}
+                          ₹{order?.balance_amount}
+                        </p>
+                      </strong>
+                    </div>
+                    {/* <div>
+                      <strong style={{ color: "#9252AA" }}>
+                        Balance Amount
                         {order?.type === 2 || order?.type === 3 || order?.type === 4 || order?.type === 5 ? (
                         <p className="mb-0 price-para">
                         {'₹' + Math.round((order?.payable_amount * 4) / 5)}
@@ -273,7 +282,7 @@ const Orderlist = () => {
                         )}
 
                       </strong>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <hr className="m-0" />

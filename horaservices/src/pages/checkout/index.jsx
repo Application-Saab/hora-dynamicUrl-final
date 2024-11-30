@@ -815,6 +815,8 @@ const Checkout = () => {
         "status": 0
       }
 
+      console.log(requestData, "requestiondate");
+
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
         headers: {
