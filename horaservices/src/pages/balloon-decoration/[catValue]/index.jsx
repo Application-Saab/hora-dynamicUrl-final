@@ -14,10 +14,9 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { sendGTMEvent  } from '@next/third-parties/google';
+import { sendGTMEvent } from '@next/third-parties/google';
 // In your main component file
 import categoryFooterData from '../../../utils/categoryFooterData';
-
 
 const DecorationCatPage = () => {
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ const DecorationCatPage = () => {
   const [loading, setLoading] = useState(true);
   const [discountPercentage, setDiscountPercentage] = useState(0); // State for the discount percentage
   const [discountedPrice, setDiscountedPrice] = useState(0); // State for the discounted price
-  const [discountDifference , setDiscountDifference] = useState(0)
+  const [discountDifference, setDiscountDifference] = useState(0)
   const [catalogueData, setCatalogueData] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null); // State to track hovered container index
   //   const navigate = useNavigate();
@@ -137,11 +136,11 @@ const DecorationCatPage = () => {
     }
   };
 
-  
+
   const filteredData = catalogueData.filter(item => {
     let priceCondition = true;
     let themeCondition = true;
-  
+
     // Filter by price
     if (priceFilter === "under2000") {
       priceCondition = item.price < 2000;
@@ -150,18 +149,18 @@ const DecorationCatPage = () => {
     } else if (priceFilter === "above5000") {
       priceCondition = item.price > 5000;
     }
-  
+
     // Filter by theme
     if (themeFilter !== "all") {
       const formattedThemeFilter = themeFilter.toLowerCase().split('-')[0];
       const formattedItemName = item.name.toLowerCase().split('-')[0];
       themeCondition = formattedItemName.includes(formattedThemeFilter);
     }
-  
+
     // Return true if both conditions are met
     return priceCondition && themeCondition;
   });
-  
+
   // Apply sorting
   const sortedData = filteredData.sort((a, b) => {
     if (priceFilter === 'lowToHigh') {
@@ -171,7 +170,7 @@ const DecorationCatPage = () => {
     }
     return 0; // Default sort (no sorting)
   });
-  
+
 
   function addSpaces(subCategory) {
     let result = "";
@@ -199,42 +198,42 @@ const DecorationCatPage = () => {
 
     // Determine the discount percentage based on the item price
     if (price < 3000) {
-        discount = 20; // 20% discount
+      discount = 20; // 20% discount
     } else if (price >= 3000 && price <= 5000) {
-        discount = 27; // 27% discount
+      discount = 27; // 27% discount
     } else {
-        discount = 35; // 35% discount for prices above 5000
+      discount = 35; // 35% discount for prices above 5000
     }
 
     const discountedPrice = price * (1 + discount / 100); // Calculate the discounted price
-    const discountDifference =   Math.abs(price - discountedPrice);;
-    return { discount, discountedPrice , discountDifference }; // Return both discount percentage and discounted price
-};
+    const discountDifference = Math.abs(price - discountedPrice);;
+    return { discount, discountedPrice, discountDifference }; // Return both discount percentage and discounted price
+  };
 
-const getSubCatItems = async () => {
-  try {
+  const getSubCatItems = async () => {
+    try {
       setLoading(true);
       const response = await axios.get(BASE_URL + GET_DECORATION_CAT_ITEM + catId);
       if (response.status === API_SUCCESS_CODE) {
-          const decoratedData = response.data.data.map(item => {
-              const { discount, discountedPrice , discountDifference} = getDiscountedPrice(item.price); // Destructure the return value
-              return {
-                  ...item,
-                  rating: getRandomRating(),
-                  userCount: getRandomNumber(20, 500),
-                  discountPercentage: discount, // Add discount percentage
-                  discountedPrice: discountedPrice ,// Add discounted price
-                  discountDifference: discountDifference
-              };
-          });
-          setCatalogueData(decoratedData);
+        const decoratedData = response.data.data.map(item => {
+          const { discount, discountedPrice, discountDifference } = getDiscountedPrice(item.price); // Destructure the return value
+          return {
+            ...item,
+            rating: getRandomRating(),
+            userCount: getRandomNumber(20, 500),
+            discountPercentage: discount, // Add discount percentage
+            discountedPrice: discountedPrice,// Add discounted price
+            discountDifference: discountDifference
+          };
+        });
+        setCatalogueData(decoratedData);
       }
-  } catch (error) {
+    } catch (error) {
       console.log('Error Fetching Data:', error.message);
-  } finally {
+    } finally {
       setLoading(false);
-  }
-};
+    }
+  };
 
 
   const handleViewDetails = (subCategory, catValue, product) => {
@@ -261,56 +260,56 @@ const getSubCatItems = async () => {
     return text;
   }
 
-  const PageTitle = (e) =>{
-    if(catValue === "kids-birthday-decoration"){
+  const PageTitle = (e) => {
+    if (catValue === "kids-birthday-decoration") {
       return "Kids' Birthday Balloon Decoration by Professionals Decorators, Starting at ₹1199"
     }
-    else if(catValue === "birthday-decoration"){
+    else if (catValue === "birthday-decoration") {
       return "Birthday Balloon Decoration at Home by Professionals  Decorators, Starting at ₹1199";
     }
-    else if(catValue === "anniversary-decoration"){
+    else if (catValue === "anniversary-decoration") {
       return "Anniversary Decorations with Balloon & Rose Petals, Starting at ₹1199"
     }
-    else if(catValue === "first-night-decoration"){
+    else if (catValue === "first-night-decoration") {
       return "First Night Decorations with Balloon & Rose Petals, Starting at ₹1199"
     }
-    else if(catValue === "baby-shower-decoration") {
+    else if (catValue === "baby-shower-decoration") {
       return "Baby Shower with Latest Designs by Professionals  Decorators Starting at ₹1199"
     }
-    else if (catValue === "/welcome-baby-decoration"){
+    else if (catValue === "/welcome-baby-decoration") {
       return "Baby Welcome Decoration at home by Professionals  Decorators, Starting at ₹1199"
     }
-    else if (catValue === "haldi-mehendi-decoration"){
+    else if (catValue === "haldi-mehendi-decoration") {
       return "Haldi Decoration with Latest Designs starting at ₹3000"
     }
-    else{
-     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    else {
+      return ("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
     }
   }
 
-  const getPageMetaDescription = () =>{
-    if(catValue === "kids-birthday-decoration"){
+  const getPageMetaDescription = () => {
+    if (catValue === "kids-birthday-decoration") {
       return "At Hora, 🎉Explore popular themes like jungle 🌴, Cocomelon 🍉, candy 🍭, unicorn 🦄, dinosaur 🦖, superhero 🦸‍♂️, princess 👑, space 🚀, pirate 🏴‍☠, under the sea 🌊, Baby Boss 👔, Barbie 💖, and cars 🚗. Explore detailed pricing and inclusions, and let our professional team bring your chosen design to life. Book your perfect party decor today! 🎈✨"
     }
-    else if(catValue === "birthday-decoration"){
+    else if (catValue === "birthday-decoration") {
       return "At Hora, 🎈 Explore our wide range of balloon and flower decorations for birthday parties, featuring ring, sequin, wall, and room designs. Discover pricing and inclusions for every balloon color and variety. Customise your celebration and make it unforgettable with our stunning decor. Book your perfect party setup today! 🎉🌟";
     }
-    else if(catValue === "anniversary-decoration"){
+    else if (catValue === "anniversary-decoration") {
       return "🎉 Explore top-notch anniversary decoration designs and book directly from our website 💖. Find elegant and customizable decor options for your special event. Browse our selection to choose the perfect theme and make your anniversary memorable with seamless online booking. ✨"
     }
-    else if(catValue === "first-night-decoration"){
+    else if (catValue === "first-night-decoration") {
       return "🌟 Explore our selection of elegant decoration designs for your first night event 💖. Choose from a variety of styles and themes, and book your perfect decor directly through our website. Make your special night unforgettable with seamless online booking and beautiful, personalised decorations. ✨"
     }
-    else if (catValue === "haldi-mehendi-decoration"){
+    else if (catValue === "haldi-mehendi-decoration") {
       return "Brighten up your Haldi ceremony with vibrant and elegant décor! 🌼✨ Explore our stunning Haldi decoration setups, featuring traditional elements, colorful floral arrangements, and custom designs to make your event unforgettable. 🌸💛"
     }
-    else{
-     return("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
+    else {
+      return ("Professional Balloon & Flower Decorations for Birthdays, Parties, & Weddings – Starting at ₹1199")
     }
   }
 
-   // Set themeFilter based on query parameter when component mounts or query changes
-   useEffect(() => {
+  // Set themeFilter based on query parameter when component mounts or query changes
+  useEffect(() => {
     if (router.isReady) {
       const theme = router.query.theme || "all";
       setThemeFilter(theme);
@@ -333,15 +332,31 @@ const getSubCatItems = async () => {
 
   const [showAll, setShowAll] = useState(false); // State to track if all items should be shown
 
- // Toggle function to show/hide more items
- const toggleShowAll = () => {
-  setShowAll((prev) => !prev);
-};
+  // Toggle function to show/hide more items
+  const toggleShowAll = () => {
+    setShowAll((prev) => !prev);
+  };
 
 
-   // const currentCategoryContent = birthdayCatDescription[catValue];
-   const currentCategoryContent = categoryFooterData[catValue] || []; // Get content based on catValue
-  
+  // const currentCategoryContent = birthdayCatDescription[catValue];
+  const currentCategoryContent = categoryFooterData[catValue] || []; // Get content based on catValue
+
+  //  banner image json
+  const decCat = [
+    { id: '2', image: "", name: 'Birthday', subCategory: "Birthday", catValue: "birthday-decoration", imgAlt: "A Gorgeous Candy Birthday Decoration Surprise!" },
+    { id: '3', image: "", name: 'First Night', subCategory: "FirstNight", catValue: "first-night-decoration", imgAlt: "Add extra happiness quotient to your wedding night with our exclusive décor package" },
+    { id: '4', image: "", name: 'Anniversary', subCategory: "Anniversary", catValue: "anniversary-decoration", imgAlt: "Immerse yourself in a world of romance with our mesmerizing anniversary decorations." },
+    { id: '5', image: "/assets/kid-birthday-banner.webp", name: 'Kids Birthday', subCategory: "KidsBirthday", catValue: "kids-birthday-decoration", imgAlt: "Flutter into a world of whimsy with our exclusive Whimsical Flutter-themed Welcome Baby Decorations." },
+    { id: '6', image: "/assets/baby-shower-banner.webp", name: 'Baby Shower', subCategory: "BabyShower", catValue: "baby-shower-decoration", imgAlt: "Celebrate the transformation into motherhood with Our Gilded Baby Shower Decorations." },
+    { id: '7', image: "", name: 'Welcome Baby', subCategory: "WelcomeBaby", catValue: "welcome-baby-decoration", imgAlt: "A Pastel Theme Oh Baby Decor for your Baby Shower Celebrations!" },
+    { id: '8', image: "	", name: 'premium Decoration', subCategory: "PremiumDecoration", catValue: "premium-decoration", imgAlt: "Birthday party decoration ideas for adults" },
+    { id: '9', image: "", name: 'Ballon Bouquets', subCategory: "BallonBouquets", catValue: "balloon-bouquets-decoration", imgAlt: "Balloon Bouquet" },
+    { id: '10', image: "", name: "Haldi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Haldi Event" },
+    { id: '11', image: "", name: "Mehendi Event", subCategory: "Haldi-Mehandi", catValue: "haldi-mehendi-decoration", imgAlt: "Mehendi Event" },
+    { id: '11', image: "", name: "Bachelorette Decoration", subCategory: "bachelorette", catValue: "bachelorette-decoration", imgAlt: "Bachelorette" },
+    { id: '11', image: "", name: "proposal decorations", subCategory: "Proposal-Decoration", catValue: "Proposal-Decorations", imgAlt: "proposal decorations" },
+
+  ];
 
   return (
     <div style={{ backgroundColor: "#EDEDED" }} className="decCatPage">
@@ -359,33 +374,55 @@ const getSubCatItems = async () => {
         <meta property="og:url" content={`https://horaservices.com/balloon-decoration/${catValue}`} />
         <meta property="og:type" content="website" />
       </Head>
+
       <>
+
         <div style={{ textAlign: "center", justifyContent: "center", alignItems: "center" }}>
           <div style={{ marginTop: "0px" }}>
             <h1 style={{ fontSize: "16px", color: "#000", padding: "14px 0 0", color: '#9252AA' }}>{selCat} {'Balloon Decoration'} </h1>
             <p style={{ padding: "0px 0px 16px", margin: "0px" }} className="subheading">{trimText('Balloon Decoration and Room Decoration Services for Anniversary, Birthdays, Kids Parties, Baby Showers and more!')}</p>
-            <div className="filterdropdown d-flex flex-row flex-lg-row align-items-center justify-content-center gap-3">
-  <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}
-    style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
-    <option value="all">Sort By: Price</option>
-    <option value="lowToHigh">Price: Low to High</option>
-    <option value="highToLow">Price: High to Low</option>
-    <option value="under2000">Under ₹ 2000</option>
-    <option value="2000to5000">₹ 2000 - ₹ 5000</option>
-    <option value="above5000">Above ₹ 5000</option>
-   
-  </select>
+            {/* hero banner image code */}
+            <div className={`${catValue} herobanner`} style={{ paddingBottom: '20px' }}>
+              {decCat
+                .filter((cat) => cat.catValue === catValue) // Filter for matching catValue
+                .map((cat) =>
+                  cat.image ? ( // Check if imageUrl is available
+                    <img
+                      key={cat.id} // Ensure each child has a unique key
+                      src={cat.image} //' // Use the image URL from the object
+                      alt={`${catValue} herobanner`}
+                      width='100%'
+                      height='auto'
+                    />
+                  ) : null // Return null if no image is available
+                )}
+            </div>
 
-  {/* Theme filter */}
-  {selCat === "Kids Birthday" ? (
-    <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
-      style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
-      {themeFilters.map((filter) => (
-        <option key={filter.value} value={filter.value}>{filter.label}</option>
-      ))}
-    </select>
-  ) : null}
-</div>
+            <div className="filterdropdown d-flex flex-row flex-lg-row align-items-center justify-content-center gap-3">
+
+
+
+              <select value={priceFilter} onChange={(e) => setPriceFilter(e.target.value)}
+                style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+                <option value="all">Sort By: Price</option>
+                <option value="lowToHigh">Price: Low to High</option>
+                <option value="highToLow">Price: High to Low</option>
+                <option value="under2000">Under ₹ 2000</option>
+                <option value="2000to5000">₹ 2000 - ₹ 5000</option>
+                <option value="above5000">Above ₹ 5000</option>
+
+              </select>
+
+              {/* Theme filter */}
+              {selCat === "Kids Birthday" ? (
+                <select value={themeFilter} onChange={(e) => setThemeFilter(e.target.value)}
+                  style={{ fontSize: "16px", color: 'rgb(157, 74, 147)', padding: "7px 10px", borderWidth: 1, borderColor: "rgb(157, 74, 147)", borderRadius: "5px", marginLeft: "5px" }}>
+                  {themeFilters.map((filter) => (
+                    <option key={filter.value} value={filter.value}>{filter.label}</option>
+                  ))}
+                </select>
+              ) : null}
+            </div>
 
           </div>
         </div>
@@ -417,7 +454,7 @@ const getSubCatItems = async () => {
                         <span style={{ color: "rgba(157, 74, 147, 0.6)", fontWeight: "600" }}>Hora</span>
                       </div>
                       <div className="decorationdiscount">
-                      ₹ {item.discountDifference.toFixed(0)} {'off'} 
+                        ₹ {item.discountDifference.toFixed(0)} {'off'}
                       </div>
                     </div>
                     {/* End of Watermark */}
@@ -439,16 +476,16 @@ const getSubCatItems = async () => {
                       >
                         {item.name}
                       </p>
-                      <div style={{ display: "flex",  justifyContent: "space-between", alignItems: "top" }} className="pri_details">
-                        <div style={{ alignItems: 'left', justifyContent: 'space-between' , display:"flex" }} className="pro_price">
-                        <p  style={{
-                  
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "top" }} className="pri_details">
+                        <div style={{ alignItems: 'left', justifyContent: 'space-between', display: "flex" }} className="pro_price">
+                          <p style={{
+
                             fontWeight: '700',
                             fontSize: 15,
                             color: '#9252AA',
                             textAlign: "left",
                             margin: "10px 10px 7px 0",
-            
+
                           }}>₹{item.price} </p>
                           <p style={{
                             color: '#444',
@@ -459,11 +496,11 @@ const getSubCatItems = async () => {
                             textDecoration: 'line-through'
                           }}
                           >
-                             ₹{Math.floor(item.discountedPrice.toFixed(2))} 
+                            ₹{Math.floor(item.discountedPrice.toFixed(2))}
                           </p>
 
-                         
-                       </div>
+
+                        </div>
                         <div className="d-flex align-items-center rating-sec">
                           <p className="m-0 p-0" style={{ fontWeight: '500', fontSize: 17, margin: "0px", color: '#9252AA' }}>{item.rating}<span className='px-1 m-0 py-0 img-fluid' style={{ color: '#ffc107' }}><FontAwesomeIcon style={{ margin: 0, height: "14px" }} icon={faStar} /></span></p>
                           <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 17, margin: "0px", padding: "0 0 0 2px" }}>({item.userCount})</p>
@@ -517,25 +554,25 @@ const getSubCatItems = async () => {
     </div> */}
 
 
-<div className="category-content">
-  {currentCategoryContent.length > 0 ? (
-    currentCategoryContent
-      .slice(0, showAll ? currentCategoryContent.length : 2)
-      .map((item, index) => (
-        <div key={index} className="category-item">
-          <h1>{item.title}</h1>
-          <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+        <div className="category-content">
+          {currentCategoryContent.length > 0 ? (
+            currentCategoryContent
+              .slice(0, showAll ? currentCategoryContent.length : 2)
+              .map((item, index) => (
+                <div key={index} className="category-item">
+                  <h1>{item.title}</h1>
+                  <div className="item-content" dangerouslySetInnerHTML={{ __html: item.htmlContent }} />
+                </div>
+              ))
+          ) : (
+            <p className="no-content-message">No content available for this category.</p>
+          )}
+          {currentCategoryContent.length > 2 && (
+            <button onClick={toggleShowAll} className="toggle-btn">
+              {showAll ? 'See Less' : 'See More'}
+            </button>
+          )}
         </div>
-      ))
-  ) : (
-    <p className="no-content-message">No content available for this category.</p>
-  )}
-  {currentCategoryContent.length > 2 && (
-    <button onClick={toggleShowAll} className="toggle-btn">
-      {showAll ? 'See Less' : 'See More'}
-    </button>
-  )}
-</div>
 
 
       </>
@@ -550,7 +587,7 @@ const styles = {
     // alignItems: 'center',
     display: "inline-flex",
     flexWrap: "wrap",
-    padding:"1% 1% 0"
+    padding: "1% 1% 0"
   },
   decCatimage: {
     width: "100%",
