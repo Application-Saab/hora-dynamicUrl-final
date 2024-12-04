@@ -28,7 +28,7 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [peopleCount, setPeopleCount] = useState(10);
+  const [peopleCount, setPeopleCount] = useState(25);
   const [activeTab, setActiveTab] = useState("right");
   const [showAll, setShowAll] = useState(false);
   const [burnerCount, setBurnerCount] = useState(0);
@@ -501,10 +501,10 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
   };
 
   const decreasePeopleCount = () => {
-    if (peopleCount > 10) {
+    if (peopleCount > 25) {
       setPeopleCount(peopleCount - 1);
     } else {
-      alert("Minimum guest count should be 10");
+      alert("Minimum guest count should be 25");
     }
   };
 
