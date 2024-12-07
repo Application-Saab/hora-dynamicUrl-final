@@ -117,6 +117,8 @@ export default function Home() {
       checkPaymentStatus(transactionId);
     }
   }, [router]);
+  
+  
   const settings = {
     infinite: true,
     speed: 500,
