@@ -640,6 +640,9 @@
 
 // export default FoodDeliveryCreateOrder;
 
+
+// second
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -762,6 +765,60 @@ const FoodDelivery = () => {
     },
   ];
 
+  const [isVegOnly, setIsVegOnly] = useState(false);
+  
+
+  const menuItems2 = [
+    {
+      id: 1,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+    {
+      id: 2,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+    {
+      id: 3,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+    {
+      id: 4,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+    {
+      id: 5,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+    {
+      id: 6,
+      title: "ASIAN PARTY 1",
+      description: "3 Starters + 5 Mains + 1 Dessert",
+      price: "₹ 3,599/-",
+      details: "(For 10 Guests)",
+      imgSrc: require("../../../assets/fooddelivery/sliderimage.jpg"),
+    },
+  ];
+
   const steps = [
     {
       icon: percentIcon,
@@ -869,6 +926,14 @@ const FoodDelivery = () => {
     ],
   };
 
+
+  
+  const handleToggle = () => {
+    setIsVegOnly(!isVegOnly);
+  };
+
+  const filteredMenuItems = isVegOnly ? menuItems2 : menuItems;
+
   return (
     <>
       <div className="catering-container">
@@ -933,9 +998,9 @@ const FoodDelivery = () => {
         </div>
 
         <div className="veg-filter">
-          <span className="veg-text">Veg Only</span>
+          <span className="veg-text">Veg Only1</span>
           <label className="switch">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={handleToggle} />
             <span className="slider round"></span>
           </label>
           <Image
@@ -947,29 +1012,30 @@ const FoodDelivery = () => {
           />
         </div>
 
-        <div className="menu-grid">
-          {menuItems.map((item) => (
-            <div key={item.id} className="menu-card">
-              <h3 className="menu-title">{item.title}</h3>
-              <p className="menu-description">{item.description}</p>
-              <div class="price-banner">
-                <span class="price">{item.price}</span>
-              </div>
-              <p className="menu-details">{item.details}</p>
-              <Image
-                src={item.imgSrc}
-                alt={item.title}
-                className="menu-image"
-                width={10}
-                height={10}
-              />
-              <div className="menu-actions">
-                <button className="customize-button">Customize</button>
-                <button className="book-now-button">Book Now</button>
-              </div>
+      <div className="menu-grid">
+        {filteredMenuItems.map((item) => (
+          <div key={item.id} className="menu-card">
+            <h3 className="menu-title">{item.title}</h3>
+            <p className="menu-description">{item.description}</p>
+            <div className="price-banner">
+              <span className="price">{item.price}</span>
             </div>
-          ))}
-        </div>
+            <p className="menu-details">{item.details}</p>
+            <Image
+              src={item.imgSrc}
+              alt={item.title}
+              className="menu-image"
+              width={10}
+              height={10}
+            />
+            <div className="menu-actions">
+              <button className="customize-button">Customize</button>
+              <button className="book-now-button">Book Now</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
 
         <div class="view-more-container">
           <span class="line"></span>
