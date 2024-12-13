@@ -2506,6 +2506,13 @@ h4.contact-us-heading a {
   word-wrap: break-word;
 }
 
+.product-add-ons ul {
+  display: flex;
+  list-style: revert-layer;
+  padding: 0 0 0 20px;
+}
+
+
 .comment-container {
   display: flex;
   flex-direction: column;

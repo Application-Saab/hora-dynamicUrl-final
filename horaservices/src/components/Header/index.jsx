@@ -241,7 +241,7 @@ useEffect(() => {
                
                 ) : (
                   <a style={styles.linkiconLogout} onClick={handleLogout}>
-                    <image src={loginIcon} />
+                    <Image src={loginIcon} alt="logoIcom"/>
                     <span style={{ marginLeft: "3px" }}>Logout</span>
                   </a>
                 ))}

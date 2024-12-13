@@ -207,6 +207,7 @@ const CreateOrder = ({ history, currentStep }) => {
                 updatedSelectedDishes.push(dish._id);
             }
             setSelectedDishes(updatedSelectedDishes);
+
             setSelectedCount(updatedSelectedDishes.length);
             if (isSelected) {
                 const updatedPrice = selectedDishPrice - parseInt(dish.dish_rate, 10);
@@ -281,6 +282,31 @@ const CreateOrder = ({ history, currentStep }) => {
             setSelectedDishPrice(0);
         }
     }, [selectedCuisines, isNonVegSelected]);
+    // sessionStorage.setItem("selectedDishes",JSON.stringify(selectedDishes));
+// fixed session price issue ============aarti
+    useEffect(() => {
+        const storedDishes = JSON.parse(sessionStorage.getItem("selectedDishes"));
+    
+        // If there are dishes stored, parse them; otherwise, use an empty array
+        setSelectedDishes(storedDishes ? storedDishes : []);
+        setSelectedCount(sessionStorage.getItem("selectedCount") || 0);
+        setIsDishSelected(sessionStorage.getItem("isDishSelected") || false);
+        setMealList(JSON.parse(sessionStorage.getItem("mealList")) || []);
+        setSelectedDishPrice(parseInt(sessionStorage.getItem("selectedDishPrice")) || 0);
+        setSelectedDishDictionary(sessionStorage.getItem("selectedDishDictionary") || {})
+        
+    }, []);
+// fixed session price issue ============aarti
+    useEffect(() => {
+        sessionStorage.setItem("selectedDishes", JSON.stringify(selectedDishes));
+        sessionStorage.setItem("isDishSelected", isDishSelected);
+        sessionStorage.setItem("mealList", JSON.stringify(mealList));
+        sessionStorage.setItem("selectedDishPrice", selectedDishPrice);
+        sessionStorage.setItem("selectedDishDictionary", selectedDishDictionary);
+        sessionStorage.setItem("selectedCount", selectedCount);
+
+    }, [selectedDishes]);
+
 
     const renderDishItem = ({ item }) => (
         <div className="w-100">
@@ -386,11 +412,12 @@ const CreateOrder = ({ history, currentStep }) => {
                                             </span>
                                             <Button
                                                 className="pluBtn"
-                                                onClick={() =>
+                                                onClick={() => {
                                                     handleIncreaseQuantity(
                                                         dish,
                                                         selectedDishes.includes(dish._id)
-                                                    )
+                                                    );
+                                                }
                                                 }
                                             >
                                                 <Image

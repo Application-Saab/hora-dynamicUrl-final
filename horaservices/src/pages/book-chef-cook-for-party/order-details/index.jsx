@@ -62,7 +62,8 @@ const SelectDate = ({ history, currentStep }) => {
     }
 
     const data = selectedDishDictionary;
-    const [dishPrice, setDishPrice] = useState(selectedDishPrice);
+    // fixed by aarti
+    const [dishPrice, setDishPrice] = useState(Number(selectedDishPrice) + 49);
 
     // Container for the whole component
     const MainContainer = styled.div`
@@ -260,8 +261,15 @@ const SelectDate = ({ history, currentStep }) => {
         // console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         setPeopleCount(value);
-        setDishPrice(value * 49); // Assuming 49 is the unit price
+        // fixed price issue ============aarti
+        setDishPrice(Number(selectedDishPrice )+ (value * 49)); // Assuming 49 is the unit price
     };
+    // fixed session price issue ============aarti
+    useEffect(() => {
+        const price = JSON.parse(sessionStorage.getItem("selectedDishPrice"));
+        setDishPrice(Number(price ) + 49)
+        
+    }, []);
 
     const handleWarningClose = () => {
         setWarningVisibleForTotalAmount(false);
@@ -614,7 +622,7 @@ const SelectDate = ({ history, currentStep }) => {
                                 </button>
                             </div>
                         </div>
-                        {/* <div className="range-container">
+                         <div className="range-container aarti">
                             <div className="range-wrapper">
                                 <input
                                     type="range"
@@ -637,7 +645,7 @@ const SelectDate = ({ history, currentStep }) => {
                                     <div className="count-display">{peopleCount}</div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div> 
                         <div className='personsectionprice'>
                             <Image src={info} className="info-icon" alt="info icon" />
                             <p className="info-text">₹ 49/person would be added to bill value in addition to dish price</p>
@@ -725,7 +733,8 @@ const SelectDate = ({ history, currentStep }) => {
                                     color: isDishSelected ? 'white' : '#343333',
                                 }}
                             >
-                                {selectedCount} Items | ₹ {dishPrice}
+                                {/* by aarti */}
+                               {selectedCount} {selectedCount > 1 ? "Items ": "Item "}| ₹ {isNaN(dishPrice) ? "0" : dishPrice }
                             </div>
                         </Button>
                     </div>
