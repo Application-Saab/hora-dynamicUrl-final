@@ -21,28 +21,22 @@ const OrderDetailTab = ({
   orderType,
   decorationItems,
   decorationComments,
+  addOn,
 }) => {
   const router = useRouter();
   const [tab, setTab] = useState("Menu");
   const [orderStatus, setOrderStatus] = useState(orderDetail?.order_status);
   
-
   const getItemInclusion = (inclusion) => {
-    if (!inclusion || !inclusion.length) return "";
-
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(inclusion[0], "text/html");
-    const items = doc.body.childNodes;
-
-    let result = "";
-
-    items.forEach((item, index) => {
-      if (item.nodeName === "DIV" || item.nodeName === "BR") {
-        result += `${index + 1}: ${item.textContent.trim()}\n`;
-      }
-    });
-
-    return result.trim();
+    if (!inclusion || inclusion.length === 0)
+      return "No inclusion details available";
+  
+    return inclusion
+      .join("") 
+      .replace(/<\/?(div|span)>/g, "") 
+      .replace(/&#10;/g, "\n") 
+      .replace(/\s*-\s*/g, "\n- ")
+      .trim(); 
   };
 
   const cancelOrder = async () => {
@@ -215,6 +209,22 @@ const OrderDetailTab = ({
                   <h6 className="product-inclusion">
                     {getItemInclusion(product?.inclusion)}
                   </h6>
+                 
+                  {
+                  addOn.length > 0 ? (
+                  <>
+                  <p className="comments-header">AddOn:</p>
+                  <ul>
+                  {addOn.map((item, index) => (
+                  <li key={index}>
+                  <strong>{item.name ? item.name : "NA"}</strong>: ₹{item.price ? item.price : "NA"}
+                  </li>
+                  ))}
+                  </ul>
+                  </>
+                  ) : null
+                  }
+                  
                 </div>
               </div>
             );

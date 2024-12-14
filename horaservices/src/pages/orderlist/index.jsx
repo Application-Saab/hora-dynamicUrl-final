@@ -256,7 +256,7 @@ const Orderlist = () => {
                       </strong>
                     </div>
                     <div>
-                      <strong style={{ color: "#9252AA" }}>
+                      {/* <strong style={{ color: "#9252AA" }}>
                         Balance Amount
                         {order?.type === 2 || order?.type === 3 || order?.type === 4 || order?.type === 5 ? (
                         <p className="mb-0 price-para">
@@ -272,6 +272,13 @@ const Orderlist = () => {
                         </p>
                         )}
 
+                      </strong> */}
+                      <strong style={{ color: "#9252AA" }}>
+                        Balance Amount
+                        <p style={{textAlign: "end" , margin: 0}}>
+                          {" "}
+                          ₹{order?.balance_amount}
+                        </p>
                       </strong>
                     </div>
                   </div>

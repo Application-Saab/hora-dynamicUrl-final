@@ -69,7 +69,6 @@ const Checkout = () => {
     let addOnProductsText = "";
 
     if (selectedAddOnProduct.length > 0) {
-      addOnProductsText = " and I have added these add-on products: " +
         selectedAddOnProduct.map(item => `${item.title}: ₹${item.price}`).join(" ");
     }
 
@@ -790,13 +789,18 @@ const Checkout = () => {
     const storedUserID = await localStorage.getItem('userID');
     const phoneNumber = await localStorage.getItem('mobileNumber')
     let merchantTransactionId;
+    console.log('selectedAddOnProduct' , selectedAddOnProduct , phoneNumber);
     try {
       const addressID = await saveAddress();
       const storedUserID = await localStorage.getItem('userID');
+      const advanceAmount = Math.round(totalAmount * 0.35);
+      const balanceAmount = totalAmount - advanceAmount;
       const url = BASE_URL + CONFIRM_ORDER_ENDPOINT;
       const requestData = {
         "toId": "",
+        "add_on": selectedAddOnProduct,
         "order_time": selectedTimeSlot,
+        "online_phone_no": phoneNumber,
         "no_of_people": 0,
         "type": 1,
         "fromId": storedUserID,
@@ -809,12 +813,15 @@ const Checkout = () => {
         "orderApplianceIds": [],
         "payable_amount": totalAmount,
         "is_gst": "0",
+        "advance_amount": advanceAmount,
+        "balance_amount": balanceAmount,
+        "order_taken_by": "Booked Online",
         "order_type": true,
         "items": [product._id],
         "decoration_comments": getFinalComment(),
         "status": 0
       }
-
+console.log("redData" , requestData);
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
         headers: {
