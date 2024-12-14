@@ -800,7 +800,7 @@ const Checkout = () => {
         "toId": "",
         "add_on": selectedAddOnProduct,
         "order_time": selectedTimeSlot,
-        "online_phone_no": phoneNumber,
+        "phone_no": phoneNumber,
         "no_of_people": 0,
         "type": 1,
         "fromId": storedUserID,
