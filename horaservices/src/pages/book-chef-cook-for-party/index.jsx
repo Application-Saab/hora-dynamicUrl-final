@@ -18,6 +18,7 @@ import warningImage from "../../assets/Group.png";
 import SkeletonLoader from "../../utils/chefSkeleton";
 import '../../css/Toggle.css';
 import '../../css/chefOrder.css';
+import './order-details/bookChef.css'
 import SelectDishes from "../../assets/selectDish.png";
 import SelectDateTime from "../../assets/event.png";
 import SelectConfirmOrder from "../../assets/confirm_order.png";
@@ -36,7 +37,7 @@ const CreateOrder = ({ history, currentStep }) => {
     const bottomSheetRef = useRef(null);
     const [orderType, setOrderType] = useState(2);
     const [isDishSelected, setIsDishSelected] = useState(false);
-    const [selected, setSelected] = useState("veg");
+    const [selectedType, setSelectedType] = useState(Number(1));
     const [cuisines, setCuisines] = useState([]);
     const [selectedCuisines, setSelectedCuisines] = useState([]);
     const [expandedCategories, setExpandedCategories] = useState([]);
@@ -51,28 +52,22 @@ const CreateOrder = ({ history, currentStep }) => {
     const [selectedDishDictionary, setSelectedDishDictionary] = useState({});
     const [isNonVegSelected, setIsNonVegSelected] = useState(false);
     const [isVegSelected, setIsVegSelected] = useState(true);
+    const [filterItem, setFilterItem] = useState('');
+    const [filteredItems, setFilteredItems] = useState([])
     const [isPopupVisible, setPopupVisible] = useState(false);
     const [loading, setLoading] = useState(true);
     const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
     const [isWarningVisibleForDishCount, setWarningVisibleForDishCount] = useState(false);
     const [isWarningVisibleForCuisineCount, setWarningVisibleForCuisineCount] = useState(false);
     const [isViewAllExpanded, setIsViewAllExpanded] = useState(false);
+    const maxItems = isMobile ? 3 : 7;
     const [popupMessage, setPopupMessage] = useState({
         img: "",
         title: "",
         body: "",
         button: "",
     });
-    // Handler for 'Only Veg' toggle switch
-    const handleVegSwitch = () => {
-        if (isNonVegSelected) return; // Prevent switching if 'Non-Veg' is selected
-        setIsVegSelected(prev => !prev); // Toggle 'Only Veg' state
-    };
 
-    // Handler for 'Non-Veg' toggle switch
-    const handleNonVegSwitch = () => {
-        setIsNonVegSelected(prev => !prev); // Toggle 'Non-Veg' state
-    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -90,32 +85,21 @@ const CreateOrder = ({ history, currentStep }) => {
             }
         };
     }, []);
-    const maxItems = isMobile ? 3 : 7;
+   
+    const filteredMealItem = (itemSearch) => {
+        const searchValue = itemSearch.toLowerCase(); // Convert input to lowercase for case-insensitive matching
+        const matches = searchValue === ''
+            ? []
+            : mealList.flatMap(meal =>
+                meal.dish.filter(dishItem =>
+                    dishItem.name.toLowerCase().includes(searchValue)
+                )
+            );
 
-    // Filter the cuisines based on selected state
-    const filteredCuisines = cuisines.filter(cuisine => {
-        if (isVegSelected && !isNonVegSelected) {
-            return cuisine.type !== 'veg'; // Show only non-veg items if 'Only Veg' is selected
-        } else if (!isVegSelected && isNonVegSelected) {
-            return cuisine.type !== 'non-veg'; // Show only veg items if 'Non-Veg' is selected
-        } else if (isVegSelected && isNonVegSelected) {
-            return true; // Show all items if both are selected
-        }
-        return false; // Show nothing if neither are selected
-    });
+        setFilteredItems(matches); // Update state with the full array of matches
+    };
 
-    // Filter the meal list based on selected state
-    const filteredMealList = mealList.filter(meal => {
-        if (isVegSelected && !isNonVegSelected) {
-            return meal.type !== 'veg'; // Show only non-veg items if 'Only Veg' is selected
-        } else if (!isVegSelected && isNonVegSelected) {
-            return meal.type !== 'non-veg'; // Show only veg items if 'Non-Veg' is selected
-        } else if (isVegSelected && isNonVegSelected) {
-            return true; // Show all items if both are selected
-        }
-        return false; // Show nothing if neither are selected
-    });
-
+    // console.log(filteredMealItem)  
     const router = useRouter();
 
     const handleWarningClose = () => {
@@ -124,7 +108,7 @@ const CreateOrder = ({ history, currentStep }) => {
         setWarningVisibleForTotalAmount(false);
     };
 
-    // get category of cuisines
+    // get category of cuisines==========================================
     useEffect(() => {
         const fetchCuisineData = async () => {
             try {
@@ -184,7 +168,7 @@ const CreateOrder = ({ history, currentStep }) => {
             </div>
         );
     };
-
+    // console.log(selectedDishes)
     const handleIncreaseQuantity = (dish, isSelected) => {
         if (selectedDishes.length >= 0 && !isSelected) {
             //setIsButtonVisible(true);
@@ -250,7 +234,9 @@ const CreateOrder = ({ history, currentStep }) => {
         try {
             setLoading(true);
             const url = BASE_URL + GET_MEAL_DISH_ENDPOINT;
-            const is_dish = isNonVegSelected ? 0 : 1;
+
+            const is_dish = selectedType;
+
             const requestData = {
                 cuisineId: selectedCuisines,
                 is_dish: is_dish,
@@ -281,12 +267,11 @@ const CreateOrder = ({ history, currentStep }) => {
             setSelectedCount(0);
             setSelectedDishPrice(0);
         }
-    }, [selectedCuisines, isNonVegSelected]);
-    // sessionStorage.setItem("selectedDishes",JSON.stringify(selectedDishes));
-// fixed session price issue ============aarti
+    }, [selectedCuisines, selectedType]);
+    // fixed session price issue ============aarti
     useEffect(() => {
         const storedDishes = JSON.parse(sessionStorage.getItem("selectedDishes"));
-    
+
         // If there are dishes stored, parse them; otherwise, use an empty array
         setSelectedDishes(storedDishes ? storedDishes : []);
         setSelectedCount(sessionStorage.getItem("selectedCount") || 0);
@@ -294,9 +279,9 @@ const CreateOrder = ({ history, currentStep }) => {
         setMealList(JSON.parse(sessionStorage.getItem("mealList")) || []);
         setSelectedDishPrice(parseInt(sessionStorage.getItem("selectedDishPrice")) || 0);
         setSelectedDishDictionary(sessionStorage.getItem("selectedDishDictionary") || {})
-        
+
     }, []);
-// fixed session price issue ============aarti
+    // fixed session price issue ============aarti
     useEffect(() => {
         sessionStorage.setItem("selectedDishes", JSON.stringify(selectedDishes));
         sessionStorage.setItem("isDishSelected", isDishSelected);
@@ -342,7 +327,10 @@ const CreateOrder = ({ history, currentStep }) => {
                                 : ""
                                 }`}
                         >
-                            View All
+                            {`${expandedCategories.includes(item.mealObject._id)
+                                ? "Show less"
+                                : "View All"
+                                }`}
                         </Button>
                     </div>
                     <div className="dish-item 12">
@@ -373,18 +361,18 @@ const CreateOrder = ({ history, currentStep }) => {
                                         }}
                                     >
                                         {selectedImage ? (
-                                            <div 
-                                            className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
-                                            style={{
-                                                backgroundImage: `url(${selectedImage})`,
-                                                backgroundSize: 'cover, cover', // Ensures both images cover the element
-                                                backgroundPosition: 'center, center' // Centers both images
-                                            }}
+                                            <div
+                                                className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                                                style={{
+                                                    backgroundImage: `url(${selectedImage})`,
+                                                    backgroundSize: 'cover, cover', // Ensures both images cover the element
+                                                    backgroundPosition: 'center, center' // Centers both images
+                                                }}
                                             >
-                                           
+
                                             </div>
-                                           
-                                            
+
+
                                         ) : (
                                             <div
                                                 className={`dish-placeholder ${selectedDishes.includes(dish._id) ? "selected" : ""
@@ -464,15 +452,15 @@ const CreateOrder = ({ history, currentStep }) => {
                                         }}
                                     >
                                         {selectedImage ? (
-                                             <div 
-                                             className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
-                                             style={{
-                                                 backgroundImage: `url(${selectedImage})`,
-                                                 backgroundSize: 'cover, cover', // Ensures both images cover the element
-                                                 backgroundPosition: 'center, center' // Centers both images
-                                             }}
-                                             >
-                                                </div>
+                                            <div
+                                                className={`dish-image ${selectedDishes.includes(dish._id) ? "selected" : ""}`}
+                                                style={{
+                                                    backgroundImage: `url(${selectedImage})`,
+                                                    backgroundSize: 'cover, cover', // Ensures both images cover the element
+                                                    backgroundPosition: 'center, center' // Centers both images
+                                                }}
+                                            >
+                                            </div>
                                         ) : (
                                             <div
                                                 className={`dish-placeholder ${selectedDishes.includes(dish._id) ? "selected" : ""
@@ -539,79 +527,19 @@ const CreateOrder = ({ history, currentStep }) => {
                 orderType,
                 selectedDishDictionary: JSON.stringify(selectedDishDictionary),
                 selectedDishPrice,
-                selectedDishes:JSON.stringify(selectedDishes),
+                selectedDishes: JSON.stringify(selectedDishes),
                 isDishSelected,
                 selectedCount,
             }
         });
     };
 
-    const closeBottomSheet = () => {
-        setDishDetail(null);
-        bottomSheetRef.current.close();
-    };
 
-    const addDishAndCloseBottomSheet = () => {
-        closeBottomSheet();
-    };
-
-    const RenderBottomSheetContent = () => (
-        <div className="bottom-sheet-content">
-            <Image
-                src={`https://horaservices.com/api/uploads/${dishDetail.image}`}
-                alt={dishDetail.name}
-                className="bottom-sheet-image"
-            />
-            <h5 className="bottom-sheet-title">{dishDetail.name}</h5>
-            <hr />
-            <p className="bottom-sheet-description">{dishDetail.description}</p>
-            <div className="bottom-sheet-info">
-                <div className="info-item">
-                    <strong>Per Plate Qty:</strong>{" "}
-                    {dishDetail.per_plate_qty.qty
-                        ? `${dishDetail.per_plate_qty.qty} ${dishDetail.per_plate_qty.unit}`
-                        : "NA"}
-                </div>
-                <div className="info-item">
-                    <strong>Price Per Plate:</strong>{" "}
-                    {dishDetail.dish_rate ? `₹ ${dishDetail.dish_rate}` : "NA"}
-                </div>
-                <div className="info-item">
-                    <strong>Price:</strong>{" "}
-                    {dishDetail.price ? `₹ ${dishDetail.price}` : "NA"}
-                </div>
-            </div>
-            <Button variant="primary" onClick={addDishAndCloseBottomSheet}>
-                Add Dish
-            </Button>
-        </div>
-    );
-
-    const openBottomSheet = (dish, ref) => {
-        setDishDetail(dish);
-        ref.current.open();
-    };
-
-    const closeViewAllSheet = () => {
-        setIsViewAllSheetOpen(false);
-    };
-
-    const openViewAllSheet = (dish, ref) => {
-        setDishDetail(dish);
-        setIsViewAllSheetOpen(true);
-    };
 
     const handleSwitchChange = (value) => {
-        setSelected(value);
-        if (value === "veg") {
-            setIsVegSelected(true);
-            setIsNonVegSelected(false);
-        } else {
-            setIsVegSelected(false);
-            setIsNonVegSelected(true);
-        }
+        setSelectedType(value);
+     
     };
-
     const handleViewAll = (categoryId) => {
         setIsViewAllExpanded(!isViewAllExpanded);
 
@@ -639,21 +567,21 @@ const CreateOrder = ({ history, currentStep }) => {
                 </div>
                 <div className="range-bar">
                     <Step active className="step1">
-                        <Image src={SelectDishes} alt="Select Dishes" style={styles.dish} />
+                        <Image src={SelectDishes} alt="Select Dishes" className="dish" />
                         <Label active>Select Dishes</Label>
                     </Step>
                     <div className="sep-image">
                         <Image src={separator} alt="separator" />
                     </div>
                     <Step className="step2">
-                        <Image src={SelectDateTime} alt="Select Date & Time" style={styles.dish} />
+                        <Image src={SelectDateTime} alt="Select Date & Time" className="dish" />
                         <Label>Select Date & Time</Label>
                     </Step>
                     <div className="sep-image">
                         <Image src={separator} alt="separator" />
                     </div>
                     <Step className="step3">
-                        <Image src={SelectConfirmOrder} alt="Confirm Order" style={styles.dish} />
+                        <Image src={SelectConfirmOrder} alt="Confirm Order" className="dish" />
                         <Label>Select Confirm Order</Label>
                     </Step>
                 </div>
@@ -663,8 +591,8 @@ const CreateOrder = ({ history, currentStep }) => {
                     <div style={{ display: "flex", margin: "5px 0 0" }}>
                         <div style={{ marginRight: "10px" }}>
                             <Button
-                                variant={selected === "veg" ? "success" : "outline-success"}
-                                onClick={() => handleSwitchChange("veg")}
+                                variant={selectedType === Number(1) ? "success" : "outline-success"}
+                                onClick={() => handleSwitchChange(Number(1))}
                                 className="cuisinebtn"
                             >
                                 Only Veg
@@ -673,14 +601,96 @@ const CreateOrder = ({ history, currentStep }) => {
                         <div>
                             <Button
                                 variant={
-                                    selected === "non-veg" ? "danger" : "outline-danger"
+                                    selectedType === Number(0) ? "danger" : "outline-danger"
                                 }
-                                onClick={() => handleSwitchChange("non-veg")}
+                                onClick={() => handleSwitchChange(Number(0))}
                                 className="cuisinebtn"
                             >
                                 Non-Veg
                             </Button>
                         </div>
+                        <div className="mealsearch-box">
+                            <input className='mealSearch' type="text" value={filterItem} onChange={(e) => {
+                                setFilterItem(e.target.value)
+                                filteredMealItem(e.target.value)
+                            }} />
+                            {
+                                filteredItems.length > 0 ?
+                                    <div className='predictive dropdown MealSearch' hidden={filteredItems.length === 0 || filteredItems.length == ''}>
+                                        {filteredItems?.map((item, index) => (<>
+
+                                            <div
+                                                key={index}
+                                                className={`dish-item-inner ${item.is_dish === 1 ? "veg-border" : "non-veg-border"
+                                                    }`}
+                                                style={{
+                                                    backgroundImage: `url(${selectedDishes.includes(item._id)
+                                                        ? RectanglePurple.src
+                                                        : RectangleWhite.src
+                                                        })`,
+                                                }}
+                                            >
+
+                                                <div
+                                                    className={`dish-image ${item.image ? "selected" : ""}`}
+                                                    style={{
+                                                        backgroundImage: `url(https://horaservices.com/api/uploads/${item.image})`,
+                                                        backgroundSize: 'cover, cover', // Ensures both images cover the element
+                                                        backgroundPosition: 'center, center' // Centers both images
+                                                    }}
+                                                >
+                                                </div>
+
+                                                <p
+                                                    className={`dish-name ${selectedDishes.includes(item._id) ? "selected" : ""
+                                                        }`}
+                                                >
+                                                    {isDishSelected &&
+                                                        item?.special_appliance_id.length > 0 &&
+                                                        selectedDishes.includes(item._id)
+                                                        ? item.special_appliance_id[0].name
+                                                        : item.name}
+                                                </p>
+                                                <div className="d-flex justify-content-between w-100 px-3 dishPrice">
+                                                    <span
+                                                        className={`dish-price ${selectedDishes.includes(item._id) ? "selected" : ""
+                                                            }`}
+                                                    >
+                                                        ₹ {item.dish_rate}
+                                                    </span>
+                                                    <Button
+                                                        className="pluBtn"
+                                                        onClick={() =>
+                                                            handleIncreaseQuantity(
+                                                                item,
+                                                                selectedDishes.includes(item._id)
+                                                            )
+                                                        }
+                                                    >
+                                                        <Image
+                                                            src={
+                                                                selectedDishes.includes(item._id)
+                                                                    ? MinusIcon
+                                                                    : PlusIcon
+                                                            }
+                                                            alt="icon"
+                                                            style={{ width: 21, height: 21 }}
+                                                        />
+                                                    </Button>
+                                                </div>
+                                                <div
+                                                    className={`dish-indicator ${item.is_dish === 1 ? "veg" : "non-veg"
+                                                        }`}
+                                                ></div>
+                                            </div>
+
+                                        </>))}
+                                    </div>
+                                    : null
+                            }
+
+                        </div>
+
                     </div>
                     <div className="chef-divider" style={{ marginTop: "10px" }}></div>
                     <div style={{ margin: "10px 0 0 0" }}>
@@ -711,6 +721,7 @@ const CreateOrder = ({ history, currentStep }) => {
                                 {mealList.map((meal) => (
                                     <div className='w-100'>
                                         <ListGroupItem key={meal._id} className="dish-item">
+
                                             {renderDishItem({ item: meal })}
                                         </ListGroupItem>
                                     </div>
@@ -771,23 +782,6 @@ const CreateOrder = ({ history, currentStep }) => {
     )
 }
 
-const styles = {
-    imageContainer: {
-        position: "relative",
-        width: "270px",
-        backgroundColor: "#fff",
-        marginBottom: 40,
-        boxShadow: "0 6px 16px 0 rgba(0,0,0,.14)",
-        borderRadius: "5px",
-        overflow: "hidden",
-        transition: "transform 0.3s ease-in-out",
-        margin: "10px 12px 20px",
-        padding: "6px 5px 10px",
-    },
-    dish: {
-        width: "32px",
-        height: "32px",
-    },
-};
+
 
 export default CreateOrder;
