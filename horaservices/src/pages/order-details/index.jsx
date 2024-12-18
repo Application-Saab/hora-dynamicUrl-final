@@ -24,12 +24,13 @@ const OrderDetail = () => {
   const [orderDetail, setOrderDetail] = useState([]);
   const [decorationItems, setDecorationItems] = useState([]);
   const [decorationComments, setDecorationComments] = useState("");
-  const [addOn, setAddOn] = useState("");
+  const [addOn , setAddOn] = useState('');
   const [hospitalityServiceCount, setHospitalityServiceCount] = useState();
   const [hospitalityServiceTotalAmount, setHospitalityServiceTotalAmount] =
     useState();
 
   orderType = parseInt(orderType);
+  console.log(orderType, "ordertype");
 
   useEffect(() => {
     if (
@@ -57,7 +58,9 @@ const OrderDetail = () => {
         BASE_URL + ORDER_DETAILS_ENDPOINT + "/v1/" + apiOrderId
       );
       const responseData = await response.json();
+      console.log(responseData,"responosedata");
       setOrderDetail(responseData.data);
+      setAddOn(responseData.data.add_on);
       setLoading(false);
     } catch (error) {
       console.log("error", error);
@@ -75,6 +78,7 @@ const OrderDetail = () => {
       setOrderDetail(responseData?.data?._doc);
       setDecorationItems(responseData?.data?.items[0]?.decoration);
       setDecorationComments(responseData?.data?._doc.decoration_comments);
+      console.log("111" , responseData?.data?._doc.add_on);
       setAddOn(responseData?.data?._doc.add_on);
       setLoading(false);
     } catch (error) {

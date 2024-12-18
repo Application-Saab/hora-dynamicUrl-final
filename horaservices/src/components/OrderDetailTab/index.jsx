@@ -26,24 +26,20 @@ const OrderDetailTab = ({
   const router = useRouter();
   const [tab, setTab] = useState("Menu");
   const [orderStatus, setOrderStatus] = useState(orderDetail?.order_status);
-  
+
+  console.log(addOn, "addon");
+  console.log(orderStatus, "ordeawrrsta");
 
   const getItemInclusion = (inclusion) => {
-    if (!inclusion || !inclusion.length) return "";
+    if (!inclusion || inclusion.length === 0)
+      return "No inclusion details available";
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(inclusion[0], "text/html");
-    const items = doc.body.childNodes;
-
-    let result = "";
-
-    items.forEach((item, index) => {
-      if (item.nodeName === "DIV" || item.nodeName === "BR") {
-        result += `${index + 1}: ${item.textContent.trim()}\n`;
-      }
-    });
-
-    return result.trim();
+    return inclusion
+      .join("")
+      .replace(/<\/?(div|span)>/g, "")
+      .replace(/&#10;/g, "\n")
+      .replace(/\s*-\s*/g, "\n- ")
+      .trim();
   };
 
   const cancelOrder = async () => {
@@ -128,7 +124,10 @@ const OrderDetailTab = ({
             <OrderDetailsMenu orderDetail={orderDetail} orderType={orderType} />
           )}
           {tab === "Appliances" && (
-           <OrderDetailsAppliances orderDetail={orderDetail} orderType={orderType}/>
+            <OrderDetailsAppliances
+              orderDetail={orderDetail}
+              orderType={orderType}
+            />
           )}
           {tab === "Ingredients" && (
             <OrderDetailsIngre
@@ -195,8 +194,26 @@ const OrderDetailTab = ({
             </ul>
           </div>
         </>
+      ) : orderType === 8 ? (
+        <div className="decoration-container">
+          <h3>Inclusions</h3>
+          {addOn && addOn.length > 0 ? (
+            <ol>
+              {addOn[0].split("</div><div>").map((item, index) => (
+                <li
+                  key={index}
+                  dangerouslySetInnerHTML={{
+                    __html: item.replace("<div>", "").replace("</div>", ""),
+                  }}
+                />
+              ))}
+            </ol>
+          ) : (
+            <p>No additional details available</p>
+          )}
+        </div>
       ) : orderType === 1 ? (
-        <div  className="decoration-container">
+        <div className="decoration-container">
           {decorationItems?.map((product, index) => {
             return (
               <div key={product?.id} className="product-container">
@@ -207,7 +224,7 @@ const OrderDetailTab = ({
                     className="product-image"
                     height={300}
                     width={300}
-                    style={{height:"auto", width:"auto"}}
+                    style={{ height: "auto", width: "auto" }}
                   />
                 </div>
                 <div className="product-info">
@@ -216,18 +233,25 @@ const OrderDetailTab = ({
                   <h6 className="product-inclusion">
                     {getItemInclusion(product?.inclusion)}
                   </h6>
-                  <p className="comments-header">AddOn:</p>
-                {addOn.map((item, index) => (
-                      <li key={index}>
-                        <strong>{item.name}</strong>: ₹{item.price}
-                      </li>
-                    ))}
+
+                  {addOn.length > 0 ? (
+                    <>
+                      <p className="comments-header">AddOn:</p>
+                      <ul>
+                        {addOn.map((item, index) => (
+                          <li key={index}>
+                            <strong>{item.name ? item.name : "NA"}</strong>: ₹
+                            {item.price ? item.price : "NA"}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
                 </div>
-                
               </div>
             );
           })}
-            {decorationComments && (
+          {decorationComments && (
             <div className="comment-container">
               <p className="comments-header">Additional Comments:</p>
               <p className="comments-text">{decorationComments}</p>

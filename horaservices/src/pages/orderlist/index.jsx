@@ -107,6 +107,9 @@ const Orderlist = () => {
     if (orderTypeValue === 7) {
       return "Live Catering";
     }
+    if (orderTypeValue === 8) {
+      return "Photography";
+    }
   };
 
   const formatDate = (dateString) => {
@@ -256,7 +259,7 @@ const Orderlist = () => {
                       </strong>
                     </div>
                     <div>
-                      <strong style={{ color: "#9252AA" }}>
+                      {/* <strong style={{ color: "#9252AA" }}>
                         Balance Amount
                         <p style={{textAlign: "end" , margin: 0}}>
                           {" "}
@@ -281,8 +284,15 @@ const Orderlist = () => {
                         </p>
                         )}
 
+                      </strong> */}
+                      <strong style={{ color: "#9252AA" }}>
+                        Balance Amount
+                        <p style={{textAlign: "end" , margin: 0}}>
+                          {" "}
+                          ₹{order?.balance_amount}
+                        </p>
                       </strong>
-                    </div> */}
+                    </div> 
                   </div>
                 </div>
                 <hr className="m-0" />

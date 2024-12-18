@@ -1479,6 +1479,15 @@ const FoodDeliveryCheckout = () => {
             </div>
 
           </div>
+
+          <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
+                                    background: "rgb(157, 74,147, 28%)"
+                                }}>
+                                      <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation Policy</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is not assigned to the kitchen: You are eligible for a 100% refund of the advance payment.</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is cancelled more than 24 hours before the scheduled delivery: You will receive a 50% refund of the advance payment.</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is cancelled within 24 hours of the scheduled delivery: The full advance amount will be non-refundable, and 100% of the payment is required.</p>
+ </div>
                         </div>
                     </div>
                 </div>
@@ -1690,9 +1699,11 @@ const FoodDeliveryCheckout = () => {
                                 <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
                                     background: "rgb(157, 74,147, 28%)"
                                 }}>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation and order change policy</p>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation Policy</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is not assigned to the kitchen: You are eligible for a 100% refund of the advance payment.</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is cancelled more than 24 hours before the scheduled delivery: You will receive a 50% refund of the advance payment.</p>
+                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>If the order is cancelled within 24 hours of the scheduled delivery: The full advance amount will be non-refundable, and 100% of the payment is required.</p>
+
                                 </div>
                             </div>
 
