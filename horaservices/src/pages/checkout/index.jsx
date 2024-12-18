@@ -815,7 +815,9 @@ const Checkout = () => {
         "status": 0
       }
 
+
       console.log(requestData, "requestiondate");
+      alert(`Request Data: ${JSON.stringify(requestData, null, 2)}`);
 
       const token = await localStorage.getItem('token');
       const response = await axios.post(url, requestData, {
@@ -825,6 +827,8 @@ const Checkout = () => {
         },
       });
       merchantTransactionId = response.data.data._id
+      alert(merchantTransactionId, "response_id");
+      console.log(merchantTransactionId, "merchanttransationid");
       //}
     } catch (error) {
       console.log('Error Confirming Order:', error.message);
@@ -838,6 +842,10 @@ const Checkout = () => {
       name: '',
       merchantTransactionId: merchantTransactionId
     };
+
+    alert(`Request Data: ${JSON.stringify(requestData2, null, 2)}`);
+    console.log(requestData2, "requestdata2");
+
     try {
       if (city && pinCode && address && selectedTimeSlot && selectedDate) {
         if (combinedDateTimeError) {

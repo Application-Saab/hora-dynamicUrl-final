@@ -7,8 +7,7 @@
   background: transparent
     linear-gradient(180deg, #ffffff 0%, #97538c 0%, #cd7071 100%) 0% 0%
     no-repeat padding-box;
-  height: 11%;
-  margin-bottom: -228px;
+  height: 9%;
   }
 
 .services-icons {
@@ -86,14 +85,14 @@
   opacity: 1;
 }
 
-.slick-slide {
+/* .slick-slide {
   margin: 0 10px;
   margin-left: 10px;
 }
 
 .slick-list {
   margin: 0 -10px;
-}
+} */
 
 h2 {
   font-weight: bold;
@@ -107,11 +106,12 @@ h2 {
 }
 
 .carousel-container {
-  width: 750px;
+  width: 350px;
   height: 180px;
-  margin-left: 328px;
+  /* margin-left: 328px; */
   margin-top: -39px;
   margin-bottom: 10px;
+  margin-left: 80px;
 }
 
 .carousel-item {
@@ -122,8 +122,8 @@ h2 {
 }
 
 .carousel-image {
-  width: 240px;
-  height: 172px;
+  width: 260px;
+  height: 240px;
   border-radius: 10px;
   margin-bottom: 5px;
 }
@@ -152,6 +152,7 @@ h2 {
   color: #96528d;
   opacity: 1;
   background-color: white;
+  margin-top: 60px;
 }
 
 .title {
@@ -210,12 +211,12 @@ h2 {
 
 .slick-dots {
   position: absolute;
-  left: -300px;
-  top: 103%;
+  left: -170px;
   transform: translateY(-50%);
   margin: 0;
   padding: 0;
   list-style: none;
+  top: 178%;
 }
 
 .slick-dots li {
@@ -257,7 +258,7 @@ h2 {
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 20px;
-  margin-top: 32px;
+  margin-top: 60px;
   margin-left: 194px;
 }
 
@@ -319,7 +320,7 @@ input:checked + .slider:before {
   height: 16px;
   margin-left: 8px;
 }
-
+/* 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -333,7 +334,7 @@ input:checked + .slider:before {
   padding: 5px;
   transition: transform 0.2s;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  height: 63%;
+  height: 66%;
   margin-bottom: -17px;
 }
 
@@ -341,8 +342,33 @@ input:checked + .slider:before {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  width: 70px;
-  height: 64px;
+  width: 222px;
+  height: 161px;
+  object-fit: cover;
+} */
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.menu-card {
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  height: 66%;
+  margin-bottom: -10px;
+}
+
+.menu-image {
+  width: 240px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
 }
 
 .menu-actions {
@@ -484,7 +510,7 @@ input:checked + .slider:before {
   color: white;
   font-family: Arial, sans-serif;
   width: 112%;
-  margin-top: 25px;
+  margin-top: 50px;
 }
 
 .how-it-works-title {
@@ -615,6 +641,7 @@ input:checked + .slider:before {
 .carousel-container_review {
   width: 100%;
   /* margin: 0 auto; */
+  object-fit: cover;
   margin-top: 20px;
 }
 
@@ -624,7 +651,7 @@ input:checked + .slider:before {
   padding: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: left;
-  margin-left: -60px;
+  /* margin-left: -60px; */
 }
 
 .review-header_review {
