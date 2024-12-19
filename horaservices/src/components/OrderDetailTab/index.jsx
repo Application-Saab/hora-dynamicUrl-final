@@ -196,22 +196,18 @@ const OrderDetailTab = ({
         </>
       ) : orderType === 8 ? (
         <div className="decoration-container">
-          <h3>Inclusions</h3>
-          {addOn && addOn.length > 0 ? (
-            <ol>
-              {addOn[0].split("</div><div>").map((item, index) => (
-                <li
-                  key={index}
-                  dangerouslySetInnerHTML={{
-                    __html: item.replace("<div>", "").replace("</div>", ""),
-                  }}
-                />
-              ))}
-            </ol>
-          ) : (
-            <p>No additional details available</p>
-          )}
-        </div>
+        <h3>Inclusions</h3>
+        {addOn && addOn.length > 0 ? (
+          <ol>
+            {addOn.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ol>
+        ) : (
+          <p>No additional details available</p>
+        )}
+      </div>
+      
       ) : orderType === 1 ? (
         <div className="decoration-container">
           {decorationItems?.map((product, index) => {
