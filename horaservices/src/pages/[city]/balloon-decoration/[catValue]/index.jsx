@@ -104,7 +104,7 @@ const DecorationCatPage = () => {
   // UseSelector to get state from Redux
   const { subCategory: stateSubCategory, imgAlt: stateImgAlt } = useSelector((state) => state.state || {});
   // Determine the value for subCategory and imgAlt
-  const subCategory = stateSubCategory || getSubCategory(catValue);
+  const subCategory = getSubCategory(catValue) || stateSubCategory  ;
   const imgAlt = stateImgAlt || 'default alt text'; // Replace with a default alt text if needed
   const getRandomNumber = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;

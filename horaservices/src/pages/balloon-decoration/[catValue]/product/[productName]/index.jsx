@@ -212,11 +212,13 @@ function DecorationCatDetails() {
   }
 
   const handleButtonClick = (subCategory, product) => {
-    if (buttonClickCount === 0) {
-      showAddOnmodal(subCategory, product);
-    } else {
+    //if (buttonClickCount === 0) {
+     // showAddOnmodal(subCategory, product);
+    // console.log("continue clicked");
+   // } else 
+   // {
       handleCheckout(subCategory, product);
-    }
+   // }
     setButtonClickCount(buttonClickCount + 1);
   };
   const handleAddOnClick = (subCategory, product) => {

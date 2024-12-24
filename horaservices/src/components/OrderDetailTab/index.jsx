@@ -39,10 +39,20 @@ const OrderDetailTab = ({
       .trim(); 
   };
 
+  const handleCancelOrder = async () => {
+    const confirmCancel = window.confirm("Do you want to cancel the order?");
+  
+    if (confirmCancel) {
+      await cancelOrder();
+    } else {
+      console.log("Order cancellation aborted.");
+    }
+  };
+  
   const cancelOrder = async () => {
     try {
       const token = await localStorage.getItem("token");
-
+  
       const response = await fetch(BASE_URL + ORDER_CANCEL, {
         method: "POST",
         headers: {
@@ -53,17 +63,20 @@ const OrderDetailTab = ({
           _id: orderDetail?._id,
           Authorisation: token,
         }),
-      }); // Replace with your API endpoint for updating user profile
-
-      // Handle success response
-
-      alert("Order cancelled successfully");
-      router.push("/orderlist");
+      });
+  
+      if (response.ok) {
+        // Handle success response
+        alert("Order cancelled successfully");
+        router.push("/orderlist");
+      } else {
+        // Handle error response
+        alert("Failed to cancel the order. Please try again.");
+      }
     } catch (error) {
       console.log("cancelOrder error", error);
     }
   };
-
   const contactUsRedirection = async () => {
     try {
       window.open(
@@ -243,7 +256,7 @@ const OrderDetailTab = ({
       </div> */}
 
       {orderStatus === 0 || orderStatus === 1 || orderStatus === 2 ? (
-        <div className="rate-us-footer" onClick={cancelOrder}>
+        <div className="rate-us-footer" onClick={handleCancelOrder}>
           <button className="rate-us-button">Cancel Order</button>
         </div>
       ) : null}

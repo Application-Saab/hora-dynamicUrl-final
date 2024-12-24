@@ -234,16 +234,19 @@ const Orderlist = () => {
                       />{" "}
                       <span>{order.order_time}</span>
                     </div>
-                    <div>
-                      {/* <FaUsers color="#9252AA" size={20}/>{" "} */}
+                      {
+                      order?.type == 1 ? "" :
+                      <div>
+
                       <Image
-                        className="contact-us-img"
-                        src={people}
-                        height={20}
-                        width={20}
+                      className="contact-us-img"
+                      src={people}
+                      height={20}
+                      width={20}
                       />{" "}
                       <span>{order?.no_of_people} People</span>
-                    </div>
+                      </div>
+                      }
                   </div>
                   <div className="right-details">
                     <div>

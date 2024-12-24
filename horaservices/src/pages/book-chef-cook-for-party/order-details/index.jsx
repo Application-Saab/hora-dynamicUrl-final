@@ -62,7 +62,8 @@ const SelectDate = ({ history, currentStep }) => {
     }
 
     const data = selectedDishDictionary;
-    const [dishPrice, setDishPrice] = useState(selectedDishPrice);
+    //const [dishPrice, setDishPrice] = useState(selectedDishPrice);
+    const [dishPrice, setDishPrice] = useState(Number(selectedDishPrice) + 49);
 
     // Container for the whole component
     const MainContainer = styled.div`
@@ -256,12 +257,28 @@ const SelectDate = ({ history, currentStep }) => {
             setDishPrice(dishPrice - 49)
         }
     }
+    // old handelRange
+    // const handleRangeChange = (e) => {
+    //     // console.log(e.target.value)
+    //     const value = parseInt(e.target.value, 10);
+    //     setPeopleCount(value);
+    //     setDishPrice(value * 49); // Assuming 49 is the unit price
+    // };
+
+    // New HadelRangeChanges
     const handleRangeChange = (e) => {
         // console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         setPeopleCount(value);
-        setDishPrice(value * 49); // Assuming 49 is the unit price
+       
+        setDishPrice(Number(selectedDishPrice )+ (value * 49)); // Assuming 49 is the unit price
     };
+    
+    useEffect(() => {
+        const price = JSON.parse(sessionStorage.getItem("selectedDishPrice"));
+        setDishPrice(Number(price ) + 49)
+        
+    }, []);
 
     const handleWarningClose = () => {
         setWarningVisibleForTotalAmount(false);
@@ -638,6 +655,31 @@ const SelectDate = ({ history, currentStep }) => {
                                 </div>
                             </div>
                         </div> */}
+                        {/* New range Container */}
+                         <div className="range-container aarti">
+                            <div className="range-wrapper">
+                                <input
+                                    type="range"
+                                    min={minPeopleCount}
+                                    max={maxPeopleCount}
+                                    step={step}
+                                    value={peopleCount}
+                                    id="customRange3"
+                                    onChange={handleRangeChange}
+                                    className="range-input"
+                                    style={{
+                                        // CSS styles inline for the range input
+                                        '--range-color': 'rgb(146, 82, 170)',  // Custom color variable
+                                        '--range-track-height': '6px',         // Custom track height
+                                        '--range-thumb-size': '14px',         // Custom thumb (handle) size
+                                        '--range-thumb-transform': 'translateY(-30%)'  // Vertically center the thumb
+                                    }}
+                                />
+                                <div>
+                                    <div className="count-display">{peopleCount}</div>
+                                </div>
+                            </div>
+                        </div>
                         <div className='personsectionprice'>
                             <Image src={info} className="info-icon" alt="info icon" />
                             <p className="info-text">₹ 49/person would be added to bill value in addition to dish price</p>
@@ -725,7 +767,9 @@ const SelectDate = ({ history, currentStep }) => {
                                     color: isDishSelected ? 'white' : '#343333',
                                 }}
                             >
-                                {selectedCount} Items | ₹ {dishPrice}
+                                {/* {selectedCount} Items | ₹ {dishPrice} */}
+                                {/* New Price */}
+                                {selectedCount} {selectedCount > 1 ? "Items ": "Item "}| ₹ {isNaN(dishPrice) ? "0" : dishPrice }
                             </div>
                         </Button>
                     </div>
