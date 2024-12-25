@@ -62,8 +62,8 @@ const SelectDate = ({ history, currentStep }) => {
     }
 
     const data = selectedDishDictionary;
-    //const [dishPrice, setDishPrice] = useState(selectedDishPrice);
-    const [dishPrice, setDishPrice] = useState(Number(selectedDishPrice) + 49);
+    const [dishPrice, setDishPrice] = useState(selectedDishPrice);
+    //const [dishPrice, setDishPrice] = useState(Number(selectedDishPrice) + 49);
 
     // Container for the whole component
     const MainContainer = styled.div`
@@ -258,27 +258,22 @@ const SelectDate = ({ history, currentStep }) => {
         }
     }
     // old handelRange
-    // const handleRangeChange = (e) => {
-    //     // console.log(e.target.value)
-    //     const value = parseInt(e.target.value, 10);
-    //     setPeopleCount(value);
-    //     setDishPrice(value * 49); // Assuming 49 is the unit price
-    // };
-
-    // New HadelRangeChanges
     const handleRangeChange = (e) => {
         // console.log(e.target.value)
         const value = parseInt(e.target.value, 10);
         setPeopleCount(value);
-       
-        setDishPrice(Number(selectedDishPrice )+ (value * 49)); // Assuming 49 is the unit price
+        setDishPrice(value * 49); // Assuming 49 is the unit price
     };
+
+    // New HadelRangeChanges
+    // const handleRangeChange = (e) => {
+    //     // console.log(e.target.value)
+    //     const value = parseInt(e.target.value, 10);
+    //     setPeopleCount(value);
+    //     setDishPrice(Number(selectedDishPrice )+ (value * 49)); // Assuming 49 is the unit price
+    // };
     
-    useEffect(() => {
-        const price = JSON.parse(sessionStorage.getItem("selectedDishPrice"));
-        setDishPrice(Number(price ) + 49)
-        
-    }, []);
+   
 
     const handleWarningClose = () => {
         setWarningVisibleForTotalAmount(false);
@@ -767,9 +762,8 @@ const SelectDate = ({ history, currentStep }) => {
                                     color: isDishSelected ? 'white' : '#343333',
                                 }}
                             >
-                                {/* {selectedCount} Items | ₹ {dishPrice} */}
+                                {selectedCount} Items | ₹ {dishPrice}
                                 {/* New Price */}
-                                {selectedCount} {selectedCount > 1 ? "Items ": "Item "}| ₹ {isNaN(dishPrice) ? "0" : dishPrice }
                             </div>
                         </Button>
                     </div>

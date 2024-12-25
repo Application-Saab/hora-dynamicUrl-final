@@ -28,7 +28,6 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
-  const [peopleCount, setPeopleCount] = useState(25);
   const [activeTab, setActiveTab] = useState("right");
   const [showAll, setShowAll] = useState(false);
   const [burnerCount, setBurnerCount] = useState(0);
@@ -53,6 +52,10 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     selectedCount,
     selectedDishQuantities,
   } = router.query;
+
+  const [peopleCount, setPeopleCount] = useState(
+    selectedOption === 'party-live-buffet-catering' ? 20 : 10
+  );
 
   if (selectedDishDictionary) {
     try {
@@ -492,7 +495,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
     button: "",
   });
 
-  const minPeopleCount = 25;
+  const minPeopleCount = selectedOption === 'party-live-buffet-catering' ? 20 : 10;
   const maxPeopleCount = 100;
   const step = 5;
 

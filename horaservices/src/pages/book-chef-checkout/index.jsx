@@ -54,6 +54,8 @@ const ChefCheckout = () => {
         selectedDishes
     } = router.query;
 
+    console.log('11' ,  selectedDishDictionary);
+
     if (selectedDishDictionary) {
         try {
             selectedDishDictionary = JSON.parse(selectedDishDictionary);

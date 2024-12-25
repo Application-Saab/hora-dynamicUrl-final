@@ -284,94 +284,7 @@ const CreateOrder = ({ history, currentStep }) => {
         }
     }, [selectedCuisines, isNonVegSelected]);
 
-     // New Code
-
-     useEffect(() => {
-
-
-
-        const storedDishes = JSON.parse(sessionStorage.getItem("selectedDishes"));
-
-
-
     
-
-
-
-        // If there are dishes stored, parse them; otherwise, use an empty array
-
-
-
-        setSelectedDishes(storedDishes ? storedDishes : []);
-
-
-
-        setSelectedCount(sessionStorage.getItem("selectedCount") || 0);
-
-
-
-        setIsDishSelected(sessionStorage.getItem("isDishSelected") || false);
-
-
-
-        setMealList(JSON.parse(sessionStorage.getItem("mealList")) || []);
-
-
-
-        setSelectedDishPrice(parseInt(sessionStorage.getItem("selectedDishPrice")) || 0);
-
-
-
-        setSelectedDishDictionary(sessionStorage.getItem("selectedDishDictionary") || {})
-
-
-
-        
-
-
-
-    }, []);
-
-
-
-// fixed session price issue ============aarti
-
-
-
-    useEffect(() => {
-
-
-
-        sessionStorage.setItem("selectedDishes", JSON.stringify(selectedDishes));
-
-
-
-        sessionStorage.setItem("isDishSelected", isDishSelected);
-
-
-
-        sessionStorage.setItem("mealList", JSON.stringify(mealList));
-
-
-
-        sessionStorage.setItem("selectedDishPrice", selectedDishPrice);
-
-
-
-        sessionStorage.setItem("selectedDishDictionary", selectedDishDictionary);
-
-
-
-        sessionStorage.setItem("selectedCount", selectedCount);
-
-
-
-
-
-
-
-    }, [selectedDishes]);
-
 
     const renderDishItem = ({ item }) => (
         <div className="w-100">
@@ -473,7 +386,13 @@ const CreateOrder = ({ history, currentStep }) => {
                                             </span>
                                             <Button
                                                 className="pluBtn"
-                                                onClick={() => {handleIncreaseQuantity(dish,selectedDishes.includes(dish._id));}}>
+                                                onClick={() =>
+                                                    handleIncreaseQuantity(
+                                                        dish,
+                                                        selectedDishes.includes(dish._id)
+                                                    )
+                                                }
+                                            >
                                             
                                                 <Image
                                                     src={
@@ -590,7 +509,7 @@ const CreateOrder = ({ history, currentStep }) => {
             query: {
                 orderType,
                 selectedDishDictionary: JSON.stringify(selectedDishDictionary),
-                selectedDishPrice,
+                selectedDishPrice:Number(selectedDishPrice) + 49,
                 selectedDishes: JSON.stringify(selectedDishes),
                 isDishSelected,
                 selectedCount,
