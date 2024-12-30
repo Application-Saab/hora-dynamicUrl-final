@@ -257,13 +257,13 @@ const SelectDate = ({ history, currentStep }) => {
             setDishPrice(dishPrice - 49)
         }
     }
-    // old handelRange
-    const handleRangeChange = (e) => {
-        // console.log(e.target.value)
-        const value = parseInt(e.target.value, 10);
-        setPeopleCount(value);
-        setDishPrice(value * 49); // Assuming 49 is the unit price
-    };
+    // // old handelRange
+    // const handleRangeChange = (e) => {
+    //     // console.log(e.target.value)
+    //     const value = parseInt(e.target.value, 10);
+    //     setPeopleCount(value);
+    //     setDishPrice(value * 49); // Assuming 49 is the unit price
+    // };
 
     // New HadelRangeChanges
     // const handleRangeChange = (e) => {
@@ -651,7 +651,7 @@ const SelectDate = ({ history, currentStep }) => {
                             </div>
                         </div> */}
                         {/* New range Container */}
-                         <div className="range-container aarti">
+                         {/* <div className="range-container aarti">
                             <div className="range-wrapper">
                                 <input
                                     type="range"
@@ -674,7 +674,7 @@ const SelectDate = ({ history, currentStep }) => {
                                     <div className="count-display">{peopleCount}</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='personsectionprice'>
                             <Image src={info} className="info-icon" alt="info icon" />
                             <p className="info-text">₹ 49/person would be added to bill value in addition to dish price</p>

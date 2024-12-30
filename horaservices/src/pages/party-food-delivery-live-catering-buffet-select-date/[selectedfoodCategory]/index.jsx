@@ -78,248 +78,92 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
         mealId: dish.mealId
     };
 });
-const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
-    function calculateDiscountPercentage(peopleCount, dishCount ) {
-        console.log(peopleCount + "===3333====" +  dishCount)
-        if (dishCount <= 5) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 0;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 3.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 3.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 7.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 7.0;
-            } else {
-                return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
-            }
-        } else if (dishCount == 6) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 7) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 8) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 25;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 25;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 28;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 28.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 28.5;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 32.5;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 32.5;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 35.0;
-            } else {
-                return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 9) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 30;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 30;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 33.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 33.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 37;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 37;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 40;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 40;
-            } else {
-                return 40; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 10) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 35;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 35;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 38.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 38.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 42.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 42.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 45.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 45.0;
-            } else {
-                return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 11) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 40;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 40;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 43.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 43.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 47.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 47.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 50.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 50.0;
-            } else {
-                return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 12) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 50;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 50.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 53.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 53.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 57.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 57.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 60.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 60.0;
-            } else {
-                return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 13) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 14) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 15) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 55;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 55.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 58.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 58.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 62.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 62.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 65.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 65.0;
-            } else {
-                return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else {
 
-        }
+const dishObject = selectedMealList.filter(x =>
+  x.name !== "Tawa Rotis" &&
+  x.name !== "Rumali Rotis"
+)
+
+
+const dishCount = dishObject.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
+console.log(dishCount)
+    function calculateDiscountPercentage(peopleCount) {
+      console.log(peopleCount)
+      if (peopleCount <= 39){
+        return 1
+      }
+      else if (peopleCount >= 40 && peopleCount <= 59){
+        return 0.93
+      }
+      else if (peopleCount >= 60){
+        return 0.9
+      }
     }
 
-    const newDishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
-    var totalPrice = selectedOption === 'party-live-buffet-catering' ?  ((newDishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : newDishPrice * peopleCount;
-    const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
-    console.log("discountPercentage" + discountPercentage)
-    var discountedPrice = selectedOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
+    function calculateDiscountPercentageQuantity(dishCount){
+      if (dishCount == 4)
+        return 1.15
+      else if (dishCount == 5)
+        return 1
+      else if (dishCount == 6 || dishCount == 7)
+        return 0.85
+      else if (dishCount == 8)
+        return 0.75
+      else if (dishCount == 9 || dishCount == 10)
+        return 0.65
+      else if (dishCount == 11)
+        return 0.6
+      else if (dishCount == 12 || dishCount == 13)
+        return 0.5
+      else if (dishCount == 14)
+        return 0.47
+      else if (dishCount == 15)
+        return 0.45
+      else 
+        return 1
+    }
 
 
-    console.log(totalPrice+"===="+ discountedPrice)
+    const validMealIds = [
+      "63f1b6b7ed240f7a09f7e2de",
+      "63f1b39a4082ee76673a0a9f",
+      "63edc4757e1b370928b149b3"
+    ];
+
+
+
+
+    console.log(selectedMealList)
+    
+    
+    const discountPercentagePrice = calculateDiscountPercentage(peopleCount);
+    
+    const discountPercentageQuantity = calculateDiscountPercentageQuantity(dishCount)
+
+    var newTotalPrice = 0
+    var totalPrice = 0
+    selectedMealList.forEach((dish) => {
+      console.log(dish)
+      if (
+        dish.name !== "Tawa Rotis" &&
+        dish.name !== "Rumali Rotis" &&
+        dish.mealId.some((id) => validMealIds.includes(id))
+      ) {
+        
+         newTotalPrice += dish.price * peopleCount * discountPercentageQuantity
+      }
+      else {
+        newTotalPrice += dish.price * peopleCount
+      }
+      totalPrice = totalPrice + dish.price * peopleCount
+    });
+
+    console.log(newTotalPrice)
+    console.log(totalPrice)
+    newTotalPrice = newTotalPrice * discountPercentagePrice
+
+
+    var discountedPrice = selectedOption === 'party-live-buffet-catering' ?  ((newTotalPrice) * 1.1 + 6500).toFixed(0) : newTotalPrice.toFixed(0);
 
   // Container for the whole component
   const MainContainer = styled.div`
@@ -504,10 +348,10 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
   };
 
   const decreasePeopleCount = () => {
-    if (peopleCount > 25) {
+    if (peopleCount > 10) {
       setPeopleCount(peopleCount - 1);
     } else {
-      alert("Minimum guest count should be 25");
+      alert("Minimum guest count should be 10");
     }
   };
 
@@ -530,8 +374,8 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
   const onContinueClick = () => {
     const totalOrderAmount =
       selectedOption === "party-live-buffet-catering"
-        ? (dishPrice * peopleCount * 1.1 + 6500).toFixed(0)
-        : dishPrice * peopleCount;
+        ? (discountedPrice * 1.1 + 6500).toFixed(0)
+        : discountedPrice;
 
     if (totalOrderAmount < 3000) {
       // alert("Please select minimum order amount: 3000rps");
@@ -945,25 +789,33 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
   };
 
   const RenderDishQuantity = ({ item }) => {
-    const itemCount = Object.values(data).filter(x =>
+
+    console.log(item)
+    const dishObject = Object.values(data).filter(x =>
+      x._id !== "641540d58c62c01319fcccae" &&
+      x._id !== "641540da8c62c01319fccef8"
+    )
+
+    const itemCount = dishObject.filter(x =>
       x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
       x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
       x.mealId[0] === "63edc4757e1b370928b149b3"
     ).length;
 
-    const mainCourseItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de").length;
-    const appetizerItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b39a4082ee76673a0a9f").length;
-    const breadItemCount = Object.values(data).filter(x => x.mealId[0] === "63edc4757e1b370928b149b3").length;
+    const mainCourseItemCount = dishObject.filter(x => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de").length;
+    const appetizerItemCount = dishObject.filter(x => x.mealId[0] === "63f1b39a4082ee76673a0a9f").length;
+    const breadItemCount = dishObject.filter(x => x.mealId[0] === "63edc4757e1b370928b149b3").length;
 
     let quantity = item.quantity * peopleCount;
 
-    if (item.id && (
-      (item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
-      (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
-      (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1))
+    
+    if (item.name !== "Tawa Rotis" && item.name !== "Rumali Rotis" && item.id && (
+      (item.id[0] === "63f1b6b7ed240f7a09f7e2de") ||
+      (item.id[0] === "63f1b39a4082ee76673a0a9f") ||
+      (item.id[0] === "63edc4757e1b370928b149b3"))
     ) {
-      if (itemCount <= 5) {
-        quantity = quantity;
+      if (itemCount == 4) {
+        quantity = quantity * (1 + 0.15);
       } else if (itemCount === 6 || itemCount === 7) {
         quantity = quantity * (1 - 0.15);
       } else if (itemCount === 8) {
@@ -1396,7 +1248,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   color: isDishSelected ? "white" : "#343333",
                 }}
               >
-                {selectedCount} Items | ₹ {totalPrice - discountedPrice}
+                {selectedCount} Items | ₹ {discountedPrice}
               </div>
             </Button>
           </div>

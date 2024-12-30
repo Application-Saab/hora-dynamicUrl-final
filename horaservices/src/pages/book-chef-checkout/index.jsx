@@ -54,7 +54,6 @@ const ChefCheckout = () => {
         selectedDishes
     } = router.query;
 
-    console.log('11' ,  selectedDishDictionary);
 
     if (selectedDishDictionary) {
         try {
@@ -296,9 +295,12 @@ const ChefCheckout = () => {
         try {
             const addressID = await saveAddress();
             const storedUserID = await localStorage.getItem('userID');
+            const advanceAmount = Math.round(totalPrice / 5);
+            const balanceAmount = totalPrice - advanceAmount;
             const url = BASE_URL + CONFIRM_ORDER_ENDPOINT;
             const requestData = {
                 "toId": "",
+                "phone_no": phoneNumber,
                 "order_time": selectedTimeSlot,
                 "no_of_people": peopleCount,
                 "type": 2,
@@ -312,10 +314,14 @@ const ChefCheckout = () => {
                 "orderApplianceIds": [],
                 "payable_amount": totalPrice,
                 "is_gst": "0",
+                "advance_amount": advanceAmount,
+                "balance_amount": balanceAmount,
+                "order_taken_by": "Booked Online",
                 "order_type": true,
                 "items": selectedDishes,
                 "status": 0
             }
+            alert(JSON.stringify(requestData));
             const token = await localStorage.getItem('token');
             const response = await axios.post(url, requestData, {
                 headers: {
@@ -383,7 +389,7 @@ const ChefCheckout = () => {
     useEffect(() => {
         setIsClient(true);
     }, [])
-    console.log('selectedDishDictionary', selectedDishDictionary)
+
 
     return (
         <div className="App">
