@@ -1,1776 +1,3079 @@
 // import { useLocation } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 // import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import TimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
-import axios from 'axios';
-import { BASE_URL, GET_ADDRESS_LIST, CONFIRM_ORDER_ENDPOINT, SAVE_LOCATION_ENDPOINT } from '../../utils/apiconstants';
-import { PAYMENT, PAYMENT_STATUS, API_SUCCESS_CODE } from '../../utils/apiconstants';
-import { Button, Card, Form } from 'react-bootstrap';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import checkImage from '../../assets/check.png';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import Loader from '../../components/Loader'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+import axios from "axios";
+import {
+  BASE_URL,
+  GET_ADDRESS_LIST,
+  CONFIRM_ORDER_ENDPOINT,
+  SAVE_LOCATION_ENDPOINT,
+} from "../../utils/apiconstants";
+import {
+  PAYMENT,
+  PAYMENT_STATUS,
+  API_SUCCESS_CODE,
+} from "../../utils/apiconstants";
+import { Button, Card, Form } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import checkImage from "../../assets/check.png";
+import { useRouter } from "next/router";
+import Image from "next/image";
+import Loader from "../../components/Loader";
 
 const FoodDeliveryCheckout = () => {
-    //   const { selectedDishesFoodDelivery , selectedOption ,orderType, selectedDishDictionary, selectedDishPrice, totalOrderAmount , selectedDishQuantities , peopleCount} = useLocation().state || {}; // Accessing subCategory and itemName safely
-    const [comment, setComment] = useState('');
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedDateError, setSelectedDateError] = useState(false);
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-    const [selectedTimeSlotError, setSelectedTimeSlotError] = useState(false);
-    const [address, setAddress] = useState('');
-    const [addressError, setAddressError] = useState(false);
-    const [pinCode, setPinCode] = useState('');
-    const [pinCodeError, setPinCodeError] = useState(false);
-    const [picodeReqError, setPicodeReqError] = useState(false);
-    const [city, setCity] = useState('');
-    const [cityError, setCityError] = useState(false);
-    const router = useRouter();
-    const [showDatePicker, setShowDatePicker] = useState(false);
-    const [deliveryCharges, setDeliveryCharges] = useState(250);
-    const [packingCost, setpackingCost] = useState(200);
-    const [includeDisposable, setIncludeDisposable] = useState(true); // State for checkbox
-    const [includeTables, setIncludeTables] = useState(true);
-    const [combinedDateTime, setCombinedDateTime] = useState(null);
-    const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
-    const [isClient, setIsClient] = useState(false);
-    const [loading, setLoading] = useState(false);
+  //   const { selectedDishesFoodDelivery , selectedOption ,orderType, selectedDishDictionary, selectedDishPrice, totalOrderAmount , selectedDishQuantities , peopleCount} = useLocation().state || {}; // Accessing subCategory and itemName safely
+  const [comment, setComment] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDateError, setSelectedDateError] = useState(false);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlotError, setSelectedTimeSlotError] = useState(false);
+  const [address, setAddress] = useState("");
+  const [addressError, setAddressError] = useState(false);
+  const [pinCode, setPinCode] = useState("");
+  const [pinCodeError, setPinCodeError] = useState(false);
+  const [picodeReqError, setPicodeReqError] = useState(false);
+  const [city, setCity] = useState("");
+  const [cityError, setCityError] = useState(false);
+  const router = useRouter();
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [deliveryCharges, setDeliveryCharges] = useState(250);
+  const [packingCost, setpackingCost] = useState(200);
+  const [includeDisposable, setIncludeDisposable] = useState(true); // State for checkbox
+  const [includeTables, setIncludeTables] = useState(true);
+  const [combinedDateTime, setCombinedDateTime] = useState(null);
+  const [combinedDateTimeError, setCombinedDateTimeError] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-// order.type is 2 for chef
-// order.type is 1 for decoration
-// order.type is 3 for waiter
-// order type 4 bar tender
-// order type 5 cleaner
-// order type 6 Food Delivery
-// order type 7 Live Catering
+  // order.type is 2 for chef
+  // order.type is 1 for decoration
+  // order.type is 3 for waiter
+  // order type 4 bar tender
+  // order type 5 cleaner
+  // order type 6 Food Delivery
+  // order type 7 Live Catering
 
-    let {
-        selectedDishesFoodDelivery,
-        selectedOption,
-        orderType,
-        selectedDishDictionary,
-        selectedDishPrice,
-        totalOrderAmount,
-        selectedDishQuantities,
-        peopleCount
-    } = router.query;
+  let {
+    selectedDishesFoodDelivery,
+    selectedOption,
+    orderType,
+    selectedDishDictionary,
+    selectedDishPrice,
+    totalOrderAmount,
+    selectedDishQuantities,
+    peopleCount,
+  } = router.query;
 
-    if (selectedDishesFoodDelivery) {
-        try {
-            selectedDishesFoodDelivery = JSON.parse(selectedDishesFoodDelivery);
-            selectedDishQuantities = JSON.parse(selectedDishQuantities);
-        } catch (error) {
-            console.error('Error parsing selectedDishDictionary:', error);
-        }
+  console.log(selectedDishQuantities,"dfsdfdsfdf");
+
+  if (selectedDishesFoodDelivery) {
+    try {
+      selectedDishesFoodDelivery = JSON.parse(selectedDishesFoodDelivery);
+      selectedDishQuantities = JSON.parse(selectedDishQuantities);
+      console.log(selectedDishQuantities,"dfsdfdsfdf");
+    } catch (error) {
+      console.error("Error parsing selectedDishDictionary:", error);
     }
+  }
 
-    useEffect(() => {
-        setIsClient(true);
-      }, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-      
-    const selectedDeliveryOption = selectedOption;
+  const selectedDeliveryOption = selectedOption;
 
-    const handleComment = (e) => {
-        setComment(e.target.value);
-    };
+  const handleComment = (e) => {
+    setComment(e.target.value);
+  };
 
-    // console.log("selectedDishesFoodDelivery", selectedDishesFoodDelivery)
+  // console.log("selectedDishesFoodDelivery", selectedDishesFoodDelivery)
 
-    const selectedMealList = selectedDishesFoodDelivery
-        ? Object.values(selectedDishesFoodDelivery).map(dish => {
-            return {
-                name: dish.name,
-                image: dish.image,
-                price: Number(dish.cuisineArray[0]),
-                id: dish._id,
-                mealId: dish.mealId
-            };
-        })
-        : [];
-
-    const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
-    function calculateDiscountPercentage(peopleCount, dishCount) {
-        if (dishCount <= 5) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 0;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 3.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 3.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 7.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 7.0;
-            } else {
-                return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
-            }
-        } else if (dishCount == 6) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 7) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 8) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 25;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 25;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 28;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 28.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 28.5;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 32.5;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 32.5;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 35.0;
-            } else {
-                return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 9) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 30;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 30;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 33.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 33.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 37;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 37;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 40;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 40;
-            } else {
-                return 40; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 10) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 35;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 35;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 38.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 38.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 42.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 42.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 45.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 45.0;
-            } else {
-                return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 11) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 40;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 40;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 43.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 43.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 47.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 47.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 50.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 50.0;
-            } else {
-                return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 12) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 50;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 50.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 53.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 53.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 57.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 57.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 60.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 60.0;
-            } else {
-                return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 13) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 14) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 15) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 55;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 55.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 58.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 58.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 62.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 62.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 65.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 65.0;
-            } else {
-                return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else {
-
-        }
-    }
-
-    // Assuming selectedMealList, peopleCount, and dishCount are defined earlier
-    const dishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
-    // console.log("dishPrice" + dishPrice)
-    var totalPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((dishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : dishPrice * peopleCount;
-    const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
-    // console.log("discountPercentage" + discountPercentage)
-    var discountedPrice = selectedDeliveryOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
-
-    const calculateFinalTotal = () => {
-        let finalTotal = 0; // Initialize finalTotal with 0
-    
-        // Check for the selected delivery option
-        if (selectedDeliveryOption === 'party-food-delivery') {
-            {
-            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
-            ? totalPrice - parseFloat(discountedPrice)
-            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
-
-            }
-
-            //finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
-            console.log("Initial total after applying discount and delivery charges: " + finalTotal);
-            
-            finalTotal += parseFloat(packingCost);
-            console.log("Total after adding packing cost: " + finalTotal);
-    
-            if (includeDisposable) {
-                finalTotal += parseFloat((20 * peopleCount).toFixed(0)); // Convert to float to add
-                console.log("Total after adding disposable cost: " + finalTotal);
-            }
-        } else if (selectedDeliveryOption === 'party-live-buffet-catering') {
-            finalTotal = totalPrice - parseFloat(discountedPrice) > 4000
-            ? totalPrice - parseFloat(discountedPrice)
-            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
-        
-            console.log("Initial total after applying discount: " + finalTotal);
-    
-            if (includeTables) {
-                finalTotal += 1200;
-                console.log("Total after adding table cost: " + finalTotal);
-            }
-        }
-    
-        // Ensure finalTotal is a number and rounded to the nearest whole number
-        finalTotal = parseFloat(finalTotal.toFixed(0));
-        console.log("Final total after adjustments: " + finalTotal);
-    
-        return finalTotal;
-    };
-    
-
-    // Function to calculate the advance payment
-    const calculateAdvancePayment = () => {
-        return Math.round(calculateFinalTotal() * 0.65);
-    };
-
-    // useEffect(() => {
-    //     Object.values(selectedDishData).map((item) => cat.push(item.cuisineId[0]));
-    // }, []);
-
-    const RenderDishQuantity = ({ item }) => {
-        const itemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b6b7ed240f7a09f7e2de" || meal.id[0] === "63f1b39a4082ee76673a0a9f" || meal.id[0] === "63edc4757e1b370928b149b3").length
-        const mainCourseItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b6b7ed240f7a09f7e2de").length
-        const appetizerItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63f1b39a4082ee76673a0a9f").length
-        const breadItemCount = selectedDishQuantities.filter(meal => meal.id[0] === "63edc4757e1b370928b149b3").length
-
-        let quantity = item.quantity * peopleCount;
-
-        if ((item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) || (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) || (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1)) {
-            if (itemCount <= 5) {
-                quantity = quantity
-            }
-            else if (itemCount == 6) {
-                quantity = quantity * (1 - 0.15)
-            }
-            else if (itemCount == 7) {
-                console.log("quantity before" + quantity)
-                quantity = quantity * (1 - 0.15)
-                console.log("quantity after" + quantity)
-            }
-            else if (itemCount == 8) {
-                quantity = quantity * (1 - 0.25)
-            }
-            else if (itemCount == 8) {
-                quantity = quantity * (1 - 0.30)
-            }
-            else if (itemCount == 9) {
-                quantity = quantity * (1 - 0.35)
-            }
-            else if (itemCount == 10) {
-                quantity = quantity * (1 - 0.35)
-            }
-            else if (itemCount == 11) {
-                quantity = quantity * (1 - 0.40)
-            }
-            else if (itemCount == 11) {
-                quantity = quantity * (1 - 0.40)
-            }
-            else if (itemCount == 12) {
-                quantity = quantity * (1 - 0.50)
-            }
-            else if (itemCount == 13) {
-                quantity = quantity * (1 - 0.53)
-            }
-            else if (itemCount == 15) {
-                quantity = quantity * (1 - 0.55)
-            }
-        }
-        quantity = Math.round(quantity)
-        let unit = item.unit;
-        if (quantity >= 1000) {
-            quantity = quantity / 1000;
-            if (unit === 'Gram')
-                unit = 'KG'
-            else if (unit === 'ml')
-                unit = 'L'
-        }
-        return (
-            <div className='ordersummaryproduct'>
-                <div className='ordersummary-sec1'>
-                    <Image
-                        src={`https://horaservices.com/api/uploads/${item.image}`}
-                        alt={item.name}
-                        className='checkoutRightImg chef'
-                        width={300} height={300}
-                    />
-                </div>
-                <div style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }} className='ordersummary-sec2'>
-                    <p className='ordersummeryname'>{item.name}</p>
-                    {
-            selectedDeliveryOption === 'party-food-delivery' ? 
-            <div style={{ fontSize: "90%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
-            :
-            null
-          }
-                </div>
-            </div>
-        );
-    };
-
-    const handleDateChange = (date) => {
-        console.log(`Date selected: ${date}`);
-        setSelectedDate(date);
-        setSelectedDateError(false);
-        combineDateTime(date, selectedTimeSlot); // Pass the current selected time slot
-    };
-
-    const handleTimeSlotChange = (event) => {
-        const timeSlot = event.target.value;
-        console.log(`Time slot selected: ${timeSlot}`);
-        setSelectedTimeSlot(timeSlot);
-        setSelectedDateError(false);
-        combineDateTime(selectedDate, timeSlot); // Pass the current selected date
-    };
-
-    const combineDateTime = (date, timeSlot) => {
-        console.log(`Combining Date: ${date} with Time Slot: ${timeSlot}`);
-        if (date && timeSlot) {
-            const [startHour, period] = timeSlot.split('-')[0].trim().split(' ');
-            let hour = parseInt(startHour.split(':')[0], 10);
-            if (period === 'PM' && hour !== 12) {
-                hour += 12;
-            } else if (period === 'AM' && hour === 12) {
-                hour = 0;
-            }
-
-            const combinedDate = new Date(date);
-            console.log(`Initial Combined Date: ${combinedDate}`);
-            combinedDate.setHours(hour);
-            combinedDate.setMinutes(0);
-            combinedDate.setSeconds(0);
-            combinedDate.setMilliseconds(0);
-            console.log(`Final Combined Date: ${combinedDate}`);
-            setCombinedDateTime(combinedDate);
-            validateDateTime(combinedDate);
-        }
-    };
-
-    const validateDateTime = (combinedDate) => {
-        const now = new Date();
-        console.log(`Combined Date for Validation: ${combinedDate}`);
-        const timeDifference = combinedDate - now;
-        console.log(`Time Difference: ${timeDifference} ms`);
-        // Check if the combined date and time are at least 24 hours in the future
-        if (timeDifference < 24 * 60 * 60 * 1000) { // 24 hours in milliseconds
-            console.log("The selected date and time are less than 24 hours from now.");
-            setCombinedDateTimeError(true);
-        } else {
-            console.log("The selected date and time are valid.");
-            setCombinedDateTimeError(false);
-        }
-    };
-
-    const generateTimeSlots = () => {
-        const startTime = 7; // Starting hour
-        const endTime = 22; // Ending hour
-        const interval = orderType == 2 ? 1 : 3; // Interval in hours
-
-        const timeSlots = [];
-        for (let hour = startTime; hour < endTime; hour += interval) {
-            const startTimeFormatted = hour < 10 ? `0${hour}:00 AM` : `${hour % 12 || 12}:00 ${hour < 12 ? 'AM' : 'PM'}`;
-            const endTimeFormatted = hour + interval < 10 ? `0${hour + interval}:00 AM` : `${(hour + interval) % 12 || 12}:00 ${hour + interval < 12 ? 'AM' : 'PM'}`;
-            timeSlots.push(`${startTimeFormatted} - ${endTimeFormatted}`);
-        }
-        return timeSlots;
-    };
-
-    const pincodes = [
-        
-        "400097",
-        "560035",
-        "122004",
-        "122051",
-        "400104",
-        "400094",
-        "400089",
-        "201009",
-        "110043",
-        "400053",
-        "400068",
-        "400076",
-        "410210",
-        "400089",
-        "122051",
-        "400104",
-        "400067",
-        "400094",
-        "400089",
-        "201301",
-        "410026",
-        "400043",
-        "500072",
-        "400043",
-        "400075",
-        "500050",
-        "560063",
-        "560030",
-        "560034",
-        "560007",
-        "560092",
-        "560024",
-        "562106",
-        "560045",
-        "560003",
-        "560050",
-        "562107",
-        "560064",
-        "560047",
-        "560026",
-        "560086",
-        "560002",
-        "560070",
-        "560073",
-        "562149",
-        "560053",
-        "560085",
-        "560043",
-        "560017",
-        "560001",
-        "560009",
-        "560025",
-        "560083",
-        "560076",
-        "560004",
-        "560079",
-        "560103",
-        "560046",
-        "560010",
-        "560049",
-        "560056",
-        "560068",
-        "560093",
-        "560018",
-        "560040",
-        "560097",
-        "560061",
-        "562130",
-        "560067",
-        "560036",
-        "560029",
-        "560062",
-        "560037",
-        "560071",
-        "562125",
-        "560016",
-        "560100",
-        "560005",
-        "560065",
-        "560019",
-        "560021",
-        "560022",
-        "560013",
-        "560087",
-        "560008",
-        "560051",
-        "560102",
-        "560104",
-        "560048",
-        "560094",
-        "560066",
-        "560038",
-        "560078",
-        "560006",
-        "560014",
-        "560015",
-        "560041",
-        "560069",
-        "560011",
-        "560020",
-        "560084",
-        "560096",
-        "560098",
-        "560095",
-        "560077",
-        "560074",
-        "560054",
-        "560023",
-        "560033",
-        "560055",
-        "560099",
-        "560072",
-        "560039",
-        "560075",
-        "560032",
-        "560058",
-        "560059",
-        "560080",
-        "560027",
-        "560012",
-        "560042",
-        "560028",
-        "560052",
-        "560091",
-        "572213",
-        "560035",
-        "110001",
-        "110002",
-        "110003",
-        "110004",
-        "110005",
-        "110006",
-        "110007",
-        "110008",
-        "110009",
-        "110010",
-        "110011",
-        "110012",
-        "110013",
-        "110014",
-        "110015",
-        "110016",
-        "110017",
-        "110018",
-        "110019",
-        "110020",
-        "110021",
-        "110022",
-        "110023",
-        "110024",
-        "110025",
-        "110026",
-        "110027",
-        "110028",
-        "110029",
-        "110030",
-        "110031",
-        "110032",
-        "110033",
-        "110034",
-        "110035",
-        "110036",
-        "110037",
-        "110038",
-        "110039",
-        "110040",
-        "110041",
-        "110042",
-        "110043",
-        "110044",
-        "110045",
-        "110046",
-        "110047",
-        "110048",
-        "110049",
-        "110051",
-        "110052",
-        "110053",
-        "110054",
-        "110055",
-        "110056",
-        "110057",
-        "110058",
-        "110059",
-        "110060",
-        "110061",
-        "110062",
-        "110063",
-        "110064",
-        "110065",
-        "110066",
-        "110067",
-        "110068",
-        "110070",
-        "110071",
-        "110073",
-        "110074",
-        "110075",
-        "110076",
-        "110078",
-        "110081",
-        "110082",
-        "110083",
-        "110084",
-        "110085",
-        "110086",
-        "110087",
-        "110088",
-        "110091",
-        "110092",
-        "110093",
-        "110094",
-        "110095",
-        "110096",
-        "122102",
-        "201302",
-        "201303",
-        "201304",
-        "201305",
-        "201306",
-        "201307",
-        "201309",
-        "201312",
-        "201308",
-        "201312",
-        "201315",
-        "201310",
-        "201318",
-        "122001",
-        "122002",
-        "122003",
-        "122004",
-        "122006",
-        "122008",
-        "122009",
-        "122010",
-        "122011",
-        "122015",
-        "122016",
-        "122017",
-        "122018",
-        "201009",
-        "201001",
-        "201002",
-        "201003",
-        "201004",
-        "201005",
-        "201006",
-        "201007",
-        "201008",
-        "201010",
-        "201011",
-        "201012",
-        "201013",
-        "201014",
-        "201015",
-        "201016",
-        "201017",
-        "201018",
-        "121002",
-        "121001",
-        "121003",
-        "121004",
-        "121005",
-        "121006",
-        "121007",
-        "121008",
-        "121009",
-        "121010",
-        "122022",
-        "500030",
-        "500004",
-        "500045",
-        "500007",
-        "500012",
-        "500015",
-        "500044",
-        "500013",
-        "501201",
-        "501301",
-        "500040",
-        "500020",
-        "500048",
-        "500058",
-        "500064",
-        "500005",
-        "500034",
-        "500027",
-        "500016",
-        "500003",
-        "500018",
-        "500080",
-        "500039",
-        "500022",
-        "500024",
-        "500081",
-        "500008",
-        "500028",
-        "500006",
-        "500060",
-        "500062",
-        "500053",
-        "500065",
-        "500029",
-        "500043",
-        "500001",
-        "500068",
-        "500052",
-        "500066",
-        "500025",
-        "500051",
-        "500035",
-        "500002",
-        "500076",
-        "500082",
-        "500031",
-        "500079",
-        "500085",
-        "500033",
-        "500077",
-        "500067",
-        "500074",
-        "500063",
-        "500017",
-        "500089",
-        "500036",
-        "500026",
-        "500095",
-        "500069",
-        "500071",
-        "500041",
-        "500023",
-        "500055",
-        "500059",
-        "500038",
-        "500046",
-        "500061",
-        "500073",
-        "502032",
-        "500070",
-        "500057",
-        "501101",
-        "502300",
-        "500049",
-        "500060",
-        "501218",
-        "501505",
-        "500070",
-        "500019",
-        "500101",
-        "501504",
-        "501815",
-        "500072",
-        "500078",
-        "500050",
-        "400065",
-        "400011",
-        "400099",
-        "400004",
-        "400053",
-        "400069",
-        "400058",
-        "400037",
-        "400005",
-        "400003",
-        "400051",
-        "400050",
-        "400090",
-        "400001",
-        "400012",
-        "400007",
-        "400028",
-        "400091",
-        "400066",
-        "400092",
-        "400013",
-        "400020",
-        "400030",
-        "400022",
-        "400093",
-        "400067",
-        "400033",
-        "400026",
-        "400014",
-        "400068",
-        "400052",
-        "400017",
-        "400010",
-        "400008",
-        "400062",
-        "400063",
-        "400034",
-        "400070",
-        "400057",
-        "400032",
-        "400056",
-        "400076",
-        "400095",
-        "400059",
-        "400060",
-        "400102",
-        "400080",
-        "400049",
-        "400002",
-        "400101",
-        "400016",
-        "400031",
-        "400064",
-        "400061",
-        "400006",
-        "400097",
-        "400103",
-        "400019",
-        "400104",
-        "400021",
-        "400023",
-        "400025",
-        "400035",
-        "400054",
-        "400029",
-        "400055",
-        "400096",
-        "400015",
-        "400027",
-        "400098",
-        "400018",
-        "410221",
-        "402301",
-        "412803",
-        "416301",
-        "400614",
-        "400702",
-        "400708",
-        "400615",
-        "203125",
-        "410206",
-        "401602",
-        "410208",
-        "410210",
-        "400612",
-        "422401",
-        "400707",
-        "400703",
-        "422605",
-        "400701",
-        "410207",
-        "400705",
-        "410218",
-        "410202",
-        "410203",
-        "400710",
-        "400709",
-        "402107",
-        "421302",
-        "400704",
-        "401102",
-        "412206",
-        "400706",
-        "413511",
-        "412203",
-        "412104",
-        "410222",
-        "441906",
-        "401405",
-        "401501",
-        "421306",
-        "421312",
-        "414604",
-        "410220",
-        "401301",
-        "421301",
-        "421601",
-        "421501",
-        "400610",
-        "401302",
-        "421102",
-        "421504",
-        "400608",
-        "401201",
-        "401202",
-        "421002",
-        "421603",
-        "401105",
-        "401101",
-        "421308",
-        "401701",
-        "421001",
-        "401503",
-        "401601",
-        "401608",
-        "401610",
-        "421402",
-        "421201",
-        "421203",
-        "401206",
-        "421403",
-        "401702",
-        "400602",
-        "401603",
-        "400606",
-        "400605",
-        "401607",
-        "421602",
-        "421401",
-        "401401",
-        "401402",
-        "421311",
-        "400603",
-        "401703",
-        "400607",
-        "400601",
-        "421503",
-        "421605",
-        "401403",
-        "421204",
-        "401104",
-        "401107",
-        "401604",
-        "401209",
-        "421505",
-        "401304",
-        "421502",
-        "421101",
-        "401404",
-        "401207",
-        "421103",
-        "401203",
-        "401609",
-        "401606",
-        "401502",
-        "401504",
-        "401506",
-        "421004",
-        "421005",
-        "401106",
-        "401204",
-        "401103",
-        "401208",
-        "421604",
-        "421305",
-        "401605",
-        "401303",
-        "401305",
-        "421202",
-        "421303",
-        "400604",
-        "410401",
-        "410201",
-        "400074",
-        "400043",
-        "400075",
-        "400072",
-        "400089",
-        ]
-
-    const handleAddressChange = (e) => {
-        setAddress(e.target.value);
-        if (e.target.value) {
-            setAddressError(false)
-        } else {
-            setAddressError(true)
-        }
-    };
-
-    const handlePinCodeChange = (e) => {
-        if (e.target.value) {
-            setPicodeReqError(false)
-        } else {
-            setPicodeReqError(true)
-        }
-        setPinCode(e.target.value);
-        if (((e.target.value).length) == 6) {
-            const validpin = pincodes.some((validPin) => validPin === e.target.value)
-            if (!validpin) {
-                setPinCodeError(true)
-            } else {
-                setPinCodeError(false)
-            }
-        } else {
-            setPinCodeError(true)
-        }
-    };
-
-    const handleCityChange = (e) => {
-        setCity(e.target.value);
-        if (e.target.value) {
-            setCityError(false)
-        } else {
-            setCityError(true)
-        }
-    };
-
-    function getRandomNumber(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-
-    const contactUsRedirection = () => {
-        window.open('https://wa.me/917338584828?text=Hello%20I%20have%20some%20queries%20for%20food%20delivery%20and%20live%20Catering%20service', '_blank');
-    };
-
-    const saveAddress = async () => {
-        try {
-            const url = BASE_URL + SAVE_LOCATION_ENDPOINT;
-
-            // Retrieve userID from localStorage
-            let userId = localStorage.getItem("userID");
-
-            if (!userId) {
-                console.error('Error retrieving userID');
-                return;
-            }
-
-            const address2 = address + pinCode;
-            const requestData = {
-                address1: address2,
-                address2: address2,
-                locality: city,
-                city: city,
-                userId: userId
-            };
-
-            const token = localStorage.getItem('token');
-
-            const response = await axios.post(url, requestData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
-                },
-            });
-
-            if (response.status === API_SUCCESS_CODE) {
-                // Handle navigation in React (e.g., using React Router)
-                console.log("Address saved successfully");
-                return response.data.data._id
-            }
-        } catch (error) {
-            console.log('Error  Data:', error.message);
-        }
-    };
-
-
-    const onContinueClick = async () => {
-        setLoading(true)
-        const apiUrl = BASE_URL + PAYMENT;
-        const storedUserID = await localStorage.getItem('userID');
-        const phoneNumber = await localStorage.getItem('mobileNumber')
-        let merchantTransactionId;
-        const advance = calculateAdvancePayment();
-        const total = calculateFinalTotal();
-        console.log(selectedTimeSlot);
-        try {
-            const addressID = await saveAddress();
-            const storedUserID = await localStorage.getItem('userID');
-            const url = BASE_URL + CONFIRM_ORDER_ENDPOINT;
-            const requestData = {
-                "toId": "",
-                "order_time": selectedTimeSlot,
-                "no_of_people": peopleCount,
-                "type": 6,
-                "fromId": storedUserID,
-                "is_discount": "0",
-                "addressId": addressID,
-                "order_date": selectedDate.toDateString(),
-                "no_of_burner": includeDisposable,
-                "order_locality": city,
-                "total_amount": total,
-                "orderApplianceIds": [],
-                "payable_amount": total,
-                "is_gst": "0",
-                "order_type": true,
-                "items": Object.keys(selectedDishesFoodDelivery),
-                "status": 0
-            }
-
-            const token = await localStorage.getItem('token');
-
-            const response = await axios.post(url, requestData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
-                },
-            });
-
-            merchantTransactionId = response.data.data._id
-            //}
-        } catch (error) {
-            console.log('Error Confirming Order:', error.message);
-        }
-
-        const requestData2 = {
-            user_id: storedUserID,
-            price: advance,
-            phone: phoneNumber,
-            name: '',
-            merchantTransactionId: merchantTransactionId
+  const selectedMealList = selectedDishesFoodDelivery
+    ? Object.values(selectedDishesFoodDelivery).map((dish) => {
+        return {
+          name: dish.name,
+          image: dish.image,
+          price: Number(dish.cuisineArray[0]),
+          id: dish._id,
+          mealId: dish.mealId,
         };
-        try {
-            if (city && pinCode && address && selectedTimeSlot && selectedDate) {
-                if (combinedDateTimeError) {
-                    alert("The selected date and time must be at least 24 hours from now.");
-                    return;
-                }
-                const response2 = await axios.post(apiUrl, requestData2, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+      })
+    : [];
 
+  const dishCount = selectedMealList.filter(
+    (x) =>
+      x.mealId == "63f1b6b7ed240f7a09f7e2de" ||
+      x.mealId == "63f1b39a4082ee76673a0a9f" ||
+      x.mealId == "63edc4757e1b370928b149b3"
+  ).length;
 
-                window.location.href = response2.data
+  function calculateDiscountPercentage(peopleCount, dishCount) {
+    if (dishCount <= 5) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 0;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 3.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 3.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 7.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 7.0;
+      } else {
+        return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
+      }
+    } else if (dishCount == 6) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 15;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 15;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 18.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 18.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 22.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 22.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 25;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 25;
+      } else {
+        return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 7) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 15;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 15;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 18.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 18.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 22.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 22.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 25;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 25;
+      } else {
+        return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 8) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 25;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 25;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 28;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 28.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 28.5;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 32.5;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 32.5;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 35.0;
+      } else {
+        return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 9) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 30;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 30;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 33.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 33.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 37;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 37;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 40;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 40;
+      } else {
+        return 40; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 10) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 35;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 35;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 38.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 38.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 42.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 42.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 45.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 45.0;
+      } else {
+        return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 11) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 40;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 40;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 43.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 43.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 47.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 47.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 50.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 50.0;
+      } else {
+        return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 12) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 50;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 50.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 53.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 53.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 57.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 57.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 60.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 60.0;
+      } else {
+        return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 13) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 53;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 53.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 56.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 56.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 60.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 60.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 63.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 63.0;
+      } else {
+        return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 14) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 53;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 53.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 56.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 56.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 60.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 60.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 63.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 63.0;
+      } else {
+        return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 15) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 55;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 55.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 58.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 58.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 62.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 62.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 65.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 65.0;
+      } else {
+        return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else {
+    }
+  }
 
-            } else {
-                if (!city) {
-                    setCityError(true)
-                }
-                if (!pinCode) {
-                    setPicodeReqError(true)
-                    setPinCodeError(true)
-                }
-                if (!address) {
-                    setAddressError(true)
-                }
-                if (!selectedTimeSlot) {
-                    setSelectedTimeSlotError(true)
-                }
-                if (!selectedDate) {
-                    setSelectedDateError(true)
-                }
-            }
+  // Assuming selectedMealList, peopleCount, and dishCount are defined earlier
+  const dishPrice = selectedMealList.reduce(
+    (total, dish) => total + dish.price,
+    0
+  );
+  // console.log("dishPrice" + dishPrice)
+  var totalPrice =
+    selectedDeliveryOption === "party-live-buffet-catering"
+      ? (dishPrice * peopleCount * 1.1 + 6500).toFixed(0)
+      : dishPrice * peopleCount;
+  const discountPercentage = calculateDiscountPercentage(
+    peopleCount,
+    dishCount
+  );
+  console.log("discountPercentage   " + discountPercentage);
+  console.log(totalPrice,"totalprice");
+  var discountedPrice =
+    selectedDeliveryOption === "party-live-buffet-catering"
+      ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0)
+      : (totalPrice * (discountPercentage / 100)).toFixed(0);
+      console.log("discountedPrice  " + discountedPrice);
+  const calculateFinalTotal = () => {
+    let finalTotal = 0; // Initialize finalTotal with 0
 
-        } catch (error) {
-            // Handle errors
-            console.error('API error:', error);
-        }
-        finally {
-            setLoading(false); // Hide loader
-        }
+    // Check for the selected delivery option
+    if (selectedDeliveryOption === "party-food-delivery") {
+      {
+        finalTotal =
+          totalPrice - parseFloat(discountedPrice) > 4000
+            ? totalPrice - parseFloat(discountedPrice)
+            : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+      }
 
+      //finalTotal = totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+      console.log(
+        "Initial total after applying discount and delivery charges: " +
+          finalTotal
+      );
+
+      finalTotal += parseFloat(packingCost);
+      console.log("Total after adding packing cost: " + finalTotal);
+
+      if (includeDisposable) {
+        finalTotal += parseFloat((20 * peopleCount).toFixed(0)); // Convert to float to add
+        console.log("Total after adding disposable cost: " + finalTotal);
+      }
+    } else if (selectedDeliveryOption === "party-live-buffet-catering") {
+      finalTotal =
+        totalPrice - parseFloat(discountedPrice) > 4000
+          ? totalPrice - parseFloat(discountedPrice)
+          : totalPrice - parseFloat(discountedPrice) + deliveryCharges;
+
+      console.log("Initial total after applying discount: " + finalTotal);
+
+      if (includeTables) {
+        finalTotal += 1200;
+        console.log("Total after adding table cost: " + finalTotal);
+      }
     }
 
+    // Ensure finalTotal is a number and rounded to the nearest whole number
+    finalTotal = parseFloat(finalTotal.toFixed(0));
+    console.log("Final total after adjustments: " + finalTotal);
+
+    return finalTotal;
+  };
+
+  // Function to calculate the advance payment
+  const calculateAdvancePayment = () => {
+    return Math.round(calculateFinalTotal() * 0.65);
+  };
+
+  // useEffect(() => {
+  //     Object.values(selectedDishData).map((item) => cat.push(item.cuisineId[0]));
+  // }, []);
+
+  const RenderDishQuantity = ({ item }) => {
+    const itemCount = selectedDishQuantities.filter(
+      (meal) =>
+        meal.id[0] === "63f1b6b7ed240f7a09f7e2de" ||
+        meal.id[0] === "63f1b39a4082ee76673a0a9f" ||
+        meal.id[0] === "63edc4757e1b370928b149b3"
+    ).length;
+    console.log(itemCount, "itemcount");
+    const mainCourseItemCount = selectedDishQuantities.filter(
+      (meal) => meal.id[0] === "63f1b6b7ed240f7a09f7e2de"
+    ).length;
+    const appetizerItemCount = selectedDishQuantities.filter(
+      (meal) => meal.id[0] === "63f1b39a4082ee76673a0a9f"
+    ).length;
+    const breadItemCount = selectedDishQuantities.filter(
+      (meal) => meal.id[0] === "63edc4757e1b370928b149b3"
+    ).length;
+
+    let quantity = item.quantity * peopleCount;
+    console.log(quantity, "quantutyt");
+    console.log(item.quantity, "itemquanity");
+    console.log(peopleCount, "peoplecount");
+
+    if (
+      (item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
+      (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
+      (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1)
+    ) {
+      if (itemCount <= 5) {
+        quantity = quantity;
+      } else if (itemCount == 6) {
+        quantity = quantity * (1 - 0.15);
+      } else if (itemCount == 7) {
+        console.log("quantity before" + quantity);
+        quantity = quantity * (1 - 0.15);
+        console.log("quantity after" + quantity);
+      } else if (itemCount == 8) {
+        quantity = quantity * (1 - 0.25);
+      } else if (itemCount == 8) {
+        quantity = quantity * (1 - 0.3);
+      } else if (itemCount == 9) {
+        quantity = quantity * (1 - 0.35);
+      } else if (itemCount == 10) {
+        quantity = quantity * (1 - 0.35);
+      } else if (itemCount == 11) {
+        quantity = quantity * (1 - 0.4);
+      } else if (itemCount == 11) {
+        quantity = quantity * (1 - 0.4);
+      } else if (itemCount == 12) {
+        quantity = quantity * (1 - 0.5);
+      } else if (itemCount == 13) {
+        quantity = quantity * (1 - 0.53);
+      } else if (itemCount == 15) {
+        quantity = quantity * (1 - 0.55);
+      }
+    }
+    quantity = Math.round(quantity);
+    let unit = item.unit;
+    if (quantity >= 1000) {
+      quantity = quantity / 1000;
+      if (unit === "Gram") unit = "KG";
+      else if (unit === "ml") unit = "L";
+    }
     return (
-        <div className="App">
-             {loading && <Loader />}
-            {isClient && window.innerWidth > 800 ?
-                <div style={{ padding: "1% 2%", backgroundColor: "rgba(237, 237, 237, 0.79)" }}>
-                    <div style={{ display: "flex" }} className='checoutSec my-3 gap-3'>
-                        <div style={{ width: "40%", boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px", backgroundColor: "rgb(255, 255, 255)", borderRadius: "20px" }} className='leftSeccheckout'>
-                            <h2 style={{ fontSize: "22px", fontWeight: "400", color: "#222", borderBottom: "1px solid #f0f0f0", margin: "0 0 8px 0", lineHeight: "35px" }}>Booking Details</h2>
-                            <div style={{ display: 'flex', margin: "8px 0px 10px", flexDirection: "row" }} className='row align-items-between justify-content-between   align-items-lg-center justify-content-lg-between'>
-                                <CustomDatePicker handleDateChange={handleDateChange} setSelectedDate={setSelectedDate} selectedDate={selectedDate} showDatePicker={showDatePicker} setShowDatePicker={setShowDatePicker} combinedDateTimeError={combinedDateTimeError} selectedDateError={selectedDateError} />
-                                <CustomTimePicker handleTimeSlotChange={handleTimeSlotChange} generateTimeSlots={generateTimeSlots} selectedTimeSlot={selectedTimeSlot} combinedDateTimeError={combinedDateTimeError} selectedTimeSlotError={selectedTimeSlotError} />
-                            </div>
-                            {combinedDateTimeError && <p className="text-danger" style={{ fontSize: '12px', margin: "5px 0 0 0" }}>The selected date and time must be at least 24 hours from now.</p>}
-
-                            <div className='checkoutInputType border-1 rounded-4  ' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
-                                <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                <textarea className='rounded border border-1 p-1 bg-white text-black'
-                                    value={comment}
-                                    onChange={handleComment}
-                                    rows={4}
-                                    placeholder="Enter your comment."
-                                />
-                            </div>
-                            <div>
-                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                    <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
-                                    <textarea
-                                        type="text"
-                                        className='rounded border border-1 p-1 bg-white text-black'
-                                        value={address}
-                                        onChange={handleAddressChange}
-                                        rows={4}
-                                        placeholder="Enter your Address."
-                                    />
-                                    {addressError && <p className={`p-0 m-0 ${addressError ? "text-danger" : ""}`}>This field is required!</p>}
-                                </div>
-                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                    <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
-                                    <input
-                                        type="text" className='bg-white text-black rounded border border-1 p-1'
-                                        value={pinCode}
-                                        onChange={handlePinCodeChange}
-                                    />
-                                    {pinCode && <p className={`p-0 m-0 ${pinCodeError ? "text-danger" : "text-success"}`}>{`Service ${pinCodeError ? 'not' : ''} available in your area!`}</p>}
-                                </div>
-                                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                    <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                    <select value={city} className='bg-white text-black rounded border border-1 p-1' onChange={handleCityChange}>
-                                        <option value="">Select City</option>
-                                        <option value="Bangalore">Bangalore</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Mumbai">Mumbai</option>
-                                        {/* Add more cities as needed */}
-                                    </select>
-                                    {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}
-                                </div>
-                            </div>
-                            <button onClick={onContinueClick} className="blue-btn chkeoutBottun">Confirm Order</button>
-                        </div>
-                        <div className="rightSecfooddelivery" style={{ boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px", padding: "20px", width: "59%", borderRadius: "20px", backgroundColor: "rgb(255, 255, 255)" }}>
-                            <h3 style={{ fontSize: "22px", fontWeight: "400", color: "#222", borderBottom: "1px solid #f0f0f0", margin: "0 0 11px 0", lineHeight: "35px" }}>Order Summary</h3>
-                            <div className='righysercchefinner'>
-                                <div style={{ display: "flex", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                    <div style={{ marginHorizontal: 16, flexDirection: 'column', width: 120, borderRadius: 6, border: "1px solid #E6E6E6", padding: 5 }}>
-                                        <p style={{ color: '#A3A3A3', fontSize: 9, fontWeight: '400', margin: 0 }}>Total Dishes</p>
-                                        <p style={{ color: '#9252AA', fontSize: 13, fontWeight: '600', margin: 0 }}>{Object.keys(selectedDishesFoodDelivery).length}</p>
-                                    </div>
-                                    <div style={{ marginHorizontal: 16, flexDirection: 'column', width: 120, borderRadius: 6, border: "1px solid #E6E6E6", padding: 5 }}>
-                                        <p style={{ color: '#A3A3A3', fontSize: 9, fontWeight: '400', margin: 0 }}>No. of People</p>
-                                        <p style={{ color: '#9252AA', fontSize: 13, fontWeight: '600', margin: 0 }}>{peopleCount}</p>
-                                    </div>
-                                </div>
-
-                                <div style={{ paddingTop: "5px" }}>
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Total</p>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {totalPrice}</p>
-                                    </div>
-                                    {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                    {discountedPrice > 0 && (
-                                        <div>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3, alignItems: "center"  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
-                                                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
-                                                    <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
-                                                </div>
-                                                <p style={{ color: "#008631", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
-                                                    {'-'} ₹ {discountedPrice}
-                                                </p>
-                                            </div>
-                                            {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                        </div>
-                                    )}
-                                    {selectedDeliveryOption === 'party-food-delivery' && (
-                                        <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "4px", margin: "0px 0 17px 0"  , borderBottom:"1px solid rgb(215, 215, 215)"  , borderTop:"1px solid rgb(215, 215, 215)"}}>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                                                    <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
-                                                        <div style={{ width: 19, height: 19, borderWidth: 1, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                            {includeDisposable && <Image src={checkImage} alt="Info" width={13} height={13} />}
-                                                        </div>
-                                                    </button>
-                                                    <div>
-                                                        <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 13, lineHeight: '20px', marginBottom: 0 }}>Disposable plates + water bottle:₹ 20/Person</p>
-                                                    </div>
-                                                </div>
-
-                                                <div>
-                                                    <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 14, marginBottom: 0 }}>₹ {includeDisposable ? 20 * peopleCount : 0}</p>
-                                                </div>
-                                            </div>
-                                            {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
-                                                <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Packing Cost</p>
-                                                <div style={{ display: 'flex', color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
-                                                    <p style={{ color: "#9252AA", fontWeight: '600' }}> ₹ {packingCost}</p>
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  , borderBottom:"1px solid rgb(215, 215, 215)" }}>
-                                                    <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
-                                                    <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
-                                                        {totalPrice - discountedPrice > 4000 ? (
-                                                            <>
-                                                                <p style={{ color: "#008631", fontWeight: '600', marginRight: 5 }}>FREE</p>
-                                                                <p style={{ textDecoration: "line-through", color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
-                                                            </>
-                                                        ) :
-                                                         (
-                                                            <p style={{ color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {selectedDeliveryOption === 'party-live-buffet-catering' && (
-                                        <div>
-                                            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', paddingHorizontal: 5, paddingVertical: 4, marginTop: 4   , borderBottom:"1px solid rgb(215, 215, 215)"}}>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                                                    <button onClick={() => setIncludeTables(!includeTables)} style={{ background: 'none', border: 'none', padding: 0 }}>
-                                                        <div style={{ width: 19, height: 19, borderWidth: 1, borderColor: includeTables ? '#008631' : '#008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                            {includeDisposable && <Image src={checkImage} alt="Info" height={13} width={13} />}
-                                                        </div>
-                                                    </button>
-                                                    <div>
-                                                        <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 13, lineHeight: '20px' }}>3-4 Serving Tables with Cloth:</p>
-                                                    </div>
-                                                </div>
-
-                                                <div>
-                                                    <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 14 }}>₹ {includeTables ? 1200 : 0}</p>
-                                                </div>
-                                            </div>
-                                            {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                        </div>
-                                    )}
-                                    {/* Calculation for final total amount */}
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3  }}>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
-                                    </div>
-
-                                    {/* Calculation for advance payment */}
-                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3 }}>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Advance Payment</p>
-                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateAdvancePayment()}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', marginTop: 7, borderTop: "1px solid #efefef" }}>
-                                <div style={{ marginHorizontal: 16, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 5 }}>
-                                    <p style={{ padding: 4, color: '#000', fontSize: 13, fontWeight: '700', marginBottom: 0 }}>Dishes selected</p>
-                                </div>
-
-                                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%' , gap:"10px" }}>
-                                    {selectedDishQuantities.map((item, index) => (
-                                        <RenderDishQuantity key={index} item={item} />
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+      <div className="ordersummaryproduct">
+        <div className="ordersummary-sec1">
+          <Image
+            src={`https://horaservices.com/api/uploads/${item.image}`}
+            alt={item.name}
+            className="checkoutRightImg chef"
+            width={300}
+            height={300}
+          />
+        </div>
+        <div
+          style={{ color: "rgb(146, 82, 170)", fontWeight: "600" }}
+          className="ordersummary-sec2"
+        >
+          <p className="ordersummeryname">{item.name}</p>
+          {selectedDeliveryOption === "party-food-delivery" ? (
             <div
               style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: " baseline",
-                justifyContent: " space-between",
-                padding: "12px 12px 0px 12px",
-                width:"100%",
+                fontSize: "90%",
+                fontWeight: "700",
+                color: "#9252AA",
+                textTransform: "uppercase",
+              }}
+              className="ingredientrightsecsibheading"
+            >
+              {quantity + " " + unit}
+            </div>
+          ) : null}
+        </div>
+      </div>
+    );
+  };
 
+  const handleDateChange = (date) => {
+    console.log(`Date selected: ${date}`);
+    setSelectedDate(date);
+    setSelectedDateError(false);
+    combineDateTime(date, selectedTimeSlot); // Pass the current selected time slot
+  };
+
+  const handleTimeSlotChange = (event) => {
+    const timeSlot = event.target.value;
+    console.log(`Time slot selected: ${timeSlot}`);
+    setSelectedTimeSlot(timeSlot);
+    setSelectedDateError(false);
+    combineDateTime(selectedDate, timeSlot); // Pass the current selected date
+  };
+
+  const combineDateTime = (date, timeSlot) => {
+    console.log(`Combining Date: ${date} with Time Slot: ${timeSlot}`);
+    if (date && timeSlot) {
+      const [startHour, period] = timeSlot.split("-")[0].trim().split(" ");
+      let hour = parseInt(startHour.split(":")[0], 10);
+      if (period === "PM" && hour !== 12) {
+        hour += 12;
+      } else if (period === "AM" && hour === 12) {
+        hour = 0;
+      }
+
+      const combinedDate = new Date(date);
+      console.log(`Initial Combined Date: ${combinedDate}`);
+      combinedDate.setHours(hour);
+      combinedDate.setMinutes(0);
+      combinedDate.setSeconds(0);
+      combinedDate.setMilliseconds(0);
+      console.log(`Final Combined Date: ${combinedDate}`);
+      setCombinedDateTime(combinedDate);
+      validateDateTime(combinedDate);
+    }
+  };
+
+  const validateDateTime = (combinedDate) => {
+    const now = new Date();
+    console.log(`Combined Date for Validation: ${combinedDate}`);
+    const timeDifference = combinedDate - now;
+    console.log(`Time Difference: ${timeDifference} ms`);
+    // Check if the combined date and time are at least 24 hours in the future
+    if (timeDifference < 24 * 60 * 60 * 1000) {
+      // 24 hours in milliseconds
+      console.log(
+        "The selected date and time are less than 24 hours from now."
+      );
+      setCombinedDateTimeError(true);
+    } else {
+      console.log("The selected date and time are valid.");
+      setCombinedDateTimeError(false);
+    }
+  };
+
+  const generateTimeSlots = () => {
+    const startTime = 7; // Starting hour
+    const endTime = 22; // Ending hour
+    const interval = orderType == 2 ? 1 : 3; // Interval in hours
+
+    const timeSlots = [];
+    for (let hour = startTime; hour < endTime; hour += interval) {
+      const startTimeFormatted =
+        hour < 10
+          ? `0${hour}:00 AM`
+          : `${hour % 12 || 12}:00 ${hour < 12 ? "AM" : "PM"}`;
+      const endTimeFormatted =
+        hour + interval < 10
+          ? `0${hour + interval}:00 AM`
+          : `${(hour + interval) % 12 || 12}:00 ${
+              hour + interval < 12 ? "AM" : "PM"
+            }`;
+      timeSlots.push(`${startTimeFormatted} - ${endTimeFormatted}`);
+    }
+    return timeSlots;
+  };
+
+  const pincodes = [
+    "400097",
+    "560035",
+    "122004",
+    "122051",
+    "400104",
+    "400094",
+    "400089",
+    "201009",
+    "110043",
+    "400053",
+    "400068",
+    "400076",
+    "410210",
+    "400089",
+    "122051",
+    "400104",
+    "400067",
+    "400094",
+    "400089",
+    "201301",
+    "410026",
+    "400043",
+    "500072",
+    "400043",
+    "400075",
+    "500050",
+    "560063",
+    "560030",
+    "560034",
+    "560007",
+    "560092",
+    "560024",
+    "562106",
+    "560045",
+    "560003",
+    "560050",
+    "562107",
+    "560064",
+    "560047",
+    "560026",
+    "560086",
+    "560002",
+    "560070",
+    "560073",
+    "562149",
+    "560053",
+    "560085",
+    "560043",
+    "560017",
+    "560001",
+    "560009",
+    "560025",
+    "560083",
+    "560076",
+    "560004",
+    "560079",
+    "560103",
+    "560046",
+    "560010",
+    "560049",
+    "560056",
+    "560068",
+    "560093",
+    "560018",
+    "560040",
+    "560097",
+    "560061",
+    "562130",
+    "560067",
+    "560036",
+    "560029",
+    "560062",
+    "560037",
+    "560071",
+    "562125",
+    "560016",
+    "560100",
+    "560005",
+    "560065",
+    "560019",
+    "560021",
+    "560022",
+    "560013",
+    "560087",
+    "560008",
+    "560051",
+    "560102",
+    "560104",
+    "560048",
+    "560094",
+    "560066",
+    "560038",
+    "560078",
+    "560006",
+    "560014",
+    "560015",
+    "560041",
+    "560069",
+    "560011",
+    "560020",
+    "560084",
+    "560096",
+    "560098",
+    "560095",
+    "560077",
+    "560074",
+    "560054",
+    "560023",
+    "560033",
+    "560055",
+    "560099",
+    "560072",
+    "560039",
+    "560075",
+    "560032",
+    "560058",
+    "560059",
+    "560080",
+    "560027",
+    "560012",
+    "560042",
+    "560028",
+    "560052",
+    "560091",
+    "572213",
+    "560035",
+    "110001",
+    "110002",
+    "110003",
+    "110004",
+    "110005",
+    "110006",
+    "110007",
+    "110008",
+    "110009",
+    "110010",
+    "110011",
+    "110012",
+    "110013",
+    "110014",
+    "110015",
+    "110016",
+    "110017",
+    "110018",
+    "110019",
+    "110020",
+    "110021",
+    "110022",
+    "110023",
+    "110024",
+    "110025",
+    "110026",
+    "110027",
+    "110028",
+    "110029",
+    "110030",
+    "110031",
+    "110032",
+    "110033",
+    "110034",
+    "110035",
+    "110036",
+    "110037",
+    "110038",
+    "110039",
+    "110040",
+    "110041",
+    "110042",
+    "110043",
+    "110044",
+    "110045",
+    "110046",
+    "110047",
+    "110048",
+    "110049",
+    "110051",
+    "110052",
+    "110053",
+    "110054",
+    "110055",
+    "110056",
+    "110057",
+    "110058",
+    "110059",
+    "110060",
+    "110061",
+    "110062",
+    "110063",
+    "110064",
+    "110065",
+    "110066",
+    "110067",
+    "110068",
+    "110070",
+    "110071",
+    "110073",
+    "110074",
+    "110075",
+    "110076",
+    "110078",
+    "110081",
+    "110082",
+    "110083",
+    "110084",
+    "110085",
+    "110086",
+    "110087",
+    "110088",
+    "110091",
+    "110092",
+    "110093",
+    "110094",
+    "110095",
+    "110096",
+    "122102",
+    "201302",
+    "201303",
+    "201304",
+    "201305",
+    "201306",
+    "201307",
+    "201309",
+    "201312",
+    "201308",
+    "201312",
+    "201315",
+    "201310",
+    "201318",
+    "122001",
+    "122002",
+    "122003",
+    "122004",
+    "122006",
+    "122008",
+    "122009",
+    "122010",
+    "122011",
+    "122015",
+    "122016",
+    "122017",
+    "122018",
+    "201009",
+    "201001",
+    "201002",
+    "201003",
+    "201004",
+    "201005",
+    "201006",
+    "201007",
+    "201008",
+    "201010",
+    "201011",
+    "201012",
+    "201013",
+    "201014",
+    "201015",
+    "201016",
+    "201017",
+    "201018",
+    "121002",
+    "121001",
+    "121003",
+    "121004",
+    "121005",
+    "121006",
+    "121007",
+    "121008",
+    "121009",
+    "121010",
+    "122022",
+    "500030",
+    "500004",
+    "500045",
+    "500007",
+    "500012",
+    "500015",
+    "500044",
+    "500013",
+    "501201",
+    "501301",
+    "500040",
+    "500020",
+    "500048",
+    "500058",
+    "500064",
+    "500005",
+    "500034",
+    "500027",
+    "500016",
+    "500003",
+    "500018",
+    "500080",
+    "500039",
+    "500022",
+    "500024",
+    "500081",
+    "500008",
+    "500028",
+    "500006",
+    "500060",
+    "500062",
+    "500053",
+    "500065",
+    "500029",
+    "500043",
+    "500001",
+    "500068",
+    "500052",
+    "500066",
+    "500025",
+    "500051",
+    "500035",
+    "500002",
+    "500076",
+    "500082",
+    "500031",
+    "500079",
+    "500085",
+    "500033",
+    "500077",
+    "500067",
+    "500074",
+    "500063",
+    "500017",
+    "500089",
+    "500036",
+    "500026",
+    "500095",
+    "500069",
+    "500071",
+    "500041",
+    "500023",
+    "500055",
+    "500059",
+    "500038",
+    "500046",
+    "500061",
+    "500073",
+    "502032",
+    "500070",
+    "500057",
+    "501101",
+    "502300",
+    "500049",
+    "500060",
+    "501218",
+    "501505",
+    "500070",
+    "500019",
+    "500101",
+    "501504",
+    "501815",
+    "500072",
+    "500078",
+    "500050",
+    "400065",
+    "400011",
+    "400099",
+    "400004",
+    "400053",
+    "400069",
+    "400058",
+    "400037",
+    "400005",
+    "400003",
+    "400051",
+    "400050",
+    "400090",
+    "400001",
+    "400012",
+    "400007",
+    "400028",
+    "400091",
+    "400066",
+    "400092",
+    "400013",
+    "400020",
+    "400030",
+    "400022",
+    "400093",
+    "400067",
+    "400033",
+    "400026",
+    "400014",
+    "400068",
+    "400052",
+    "400017",
+    "400010",
+    "400008",
+    "400062",
+    "400063",
+    "400034",
+    "400070",
+    "400057",
+    "400032",
+    "400056",
+    "400076",
+    "400095",
+    "400059",
+    "400060",
+    "400102",
+    "400080",
+    "400049",
+    "400002",
+    "400101",
+    "400016",
+    "400031",
+    "400064",
+    "400061",
+    "400006",
+    "400097",
+    "400103",
+    "400019",
+    "400104",
+    "400021",
+    "400023",
+    "400025",
+    "400035",
+    "400054",
+    "400029",
+    "400055",
+    "400096",
+    "400015",
+    "400027",
+    "400098",
+    "400018",
+    "410221",
+    "402301",
+    "412803",
+    "416301",
+    "400614",
+    "400702",
+    "400708",
+    "400615",
+    "203125",
+    "410206",
+    "401602",
+    "410208",
+    "410210",
+    "400612",
+    "422401",
+    "400707",
+    "400703",
+    "422605",
+    "400701",
+    "410207",
+    "400705",
+    "410218",
+    "410202",
+    "410203",
+    "400710",
+    "400709",
+    "402107",
+    "421302",
+    "400704",
+    "401102",
+    "412206",
+    "400706",
+    "413511",
+    "412203",
+    "412104",
+    "410222",
+    "441906",
+    "401405",
+    "401501",
+    "421306",
+    "421312",
+    "414604",
+    "410220",
+    "401301",
+    "421301",
+    "421601",
+    "421501",
+    "400610",
+    "401302",
+    "421102",
+    "421504",
+    "400608",
+    "401201",
+    "401202",
+    "421002",
+    "421603",
+    "401105",
+    "401101",
+    "421308",
+    "401701",
+    "421001",
+    "401503",
+    "401601",
+    "401608",
+    "401610",
+    "421402",
+    "421201",
+    "421203",
+    "401206",
+    "421403",
+    "401702",
+    "400602",
+    "401603",
+    "400606",
+    "400605",
+    "401607",
+    "421602",
+    "421401",
+    "401401",
+    "401402",
+    "421311",
+    "400603",
+    "401703",
+    "400607",
+    "400601",
+    "421503",
+    "421605",
+    "401403",
+    "421204",
+    "401104",
+    "401107",
+    "401604",
+    "401209",
+    "421505",
+    "401304",
+    "421502",
+    "421101",
+    "401404",
+    "401207",
+    "421103",
+    "401203",
+    "401609",
+    "401606",
+    "401502",
+    "401504",
+    "401506",
+    "421004",
+    "421005",
+    "401106",
+    "401204",
+    "401103",
+    "401208",
+    "421604",
+    "421305",
+    "401605",
+    "401303",
+    "401305",
+    "421202",
+    "421303",
+    "400604",
+    "410401",
+    "410201",
+    "400074",
+    "400043",
+    "400075",
+    "400072",
+    "400089",
+  ];
+
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+    if (e.target.value) {
+      setAddressError(false);
+    } else {
+      setAddressError(true);
+    }
+  };
+
+  const handlePinCodeChange = (e) => {
+    if (e.target.value) {
+      setPicodeReqError(false);
+    } else {
+      setPicodeReqError(true);
+    }
+    setPinCode(e.target.value);
+    if (e.target.value.length == 6) {
+      const validpin = pincodes.some((validPin) => validPin === e.target.value);
+      if (!validpin) {
+        setPinCodeError(true);
+      } else {
+        setPinCodeError(false);
+      }
+    } else {
+      setPinCodeError(true);
+    }
+  };
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+    if (e.target.value) {
+      setCityError(false);
+    } else {
+      setCityError(true);
+    }
+  };
+
+  function getRandomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  const contactUsRedirection = () => {
+    window.open(
+      "https://wa.me/917338584828?text=Hello%20I%20have%20some%20queries%20for%20food%20delivery%20and%20live%20Catering%20service",
+      "_blank"
+    );
+  };
+
+  const saveAddress = async () => {
+    try {
+      const url = BASE_URL + SAVE_LOCATION_ENDPOINT;
+
+      // Retrieve userID from localStorage
+      let userId = localStorage.getItem("userID");
+
+      if (!userId) {
+        console.error("Error retrieving userID");
+        return;
+      }
+
+      const address2 = address + pinCode;
+      const requestData = {
+        address1: address2,
+        address2: address2,
+        locality: city,
+        city: city,
+        userId: userId,
+      };
+
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(url, requestData, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      });
+
+      if (response.status === API_SUCCESS_CODE) {
+        // Handle navigation in React (e.g., using React Router)
+        console.log("Address saved successfully");
+        return response.data.data._id;
+      }
+    } catch (error) {
+      console.log("Error  Data:", error.message);
+    }
+  };
+
+  const onContinueClick = async () => {
+    setLoading(true);
+    const apiUrl = BASE_URL + PAYMENT;
+    const storedUserID = await localStorage.getItem("userID");
+    const phoneNumber = await localStorage.getItem("mobileNumber");
+    let merchantTransactionId;
+    const advance = calculateAdvancePayment();
+    const total = calculateFinalTotal();
+    console.log(selectedTimeSlot);
+    try {
+      const addressID = await saveAddress();
+      const storedUserID = await localStorage.getItem("userID");
+      const url = BASE_URL + CONFIRM_ORDER_ENDPOINT;
+      const requestData = {
+        toId: "",
+        order_time: selectedTimeSlot,
+        no_of_people: peopleCount,
+        type: 6,
+        fromId: storedUserID,
+        is_discount: "0",
+        addressId: addressID,
+        order_date: selectedDate.toDateString(),
+        no_of_burner: includeDisposable,
+        order_locality: city,
+        total_amount: total,
+        orderApplianceIds: [],
+        payable_amount: total,
+        is_gst: "0",
+        order_type: true,
+        items: Object.keys(selectedDishesFoodDelivery),
+        status: 0,
+      };
+
+      const token = await localStorage.getItem("token");
+
+      const response = await axios.post(url, requestData, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      });
+
+      merchantTransactionId = response.data.data._id;
+      //}
+    } catch (error) {
+      console.log("Error Confirming Order:", error.message);
+    }
+
+    const requestData2 = {
+      user_id: storedUserID,
+      price: advance,
+      phone: phoneNumber,
+      name: "",
+      merchantTransactionId: merchantTransactionId,
+    };
+    try {
+      if (city && pinCode && address && selectedTimeSlot && selectedDate) {
+        if (combinedDateTimeError) {
+          alert(
+            "The selected date and time must be at least 24 hours from now."
+          );
+          return;
+        }
+        const response2 = await axios.post(apiUrl, requestData2, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        window.location.href = response2.data;
+      } else {
+        if (!city) {
+          setCityError(true);
+        }
+        if (!pinCode) {
+          setPicodeReqError(true);
+          setPinCodeError(true);
+        }
+        if (!address) {
+          setAddressError(true);
+        }
+        if (!selectedTimeSlot) {
+          setSelectedTimeSlotError(true);
+        }
+        if (!selectedDate) {
+          setSelectedDateError(true);
+        }
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("API error:", error);
+    } finally {
+      setLoading(false); // Hide loader
+    }
+  };
+
+  return (
+    <div className="App">
+      {loading && <Loader />}
+      {isClient && window.innerWidth > 800 ? (
+        <div
+          style={{
+            padding: "1% 2%",
+            backgroundColor: "rgba(237, 237, 237, 0.79)",
+          }}
+        >
+          <div style={{ display: "flex" }} className="checoutSec my-3 gap-3">
+            <div
+              style={{
+                width: "40%",
+                boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px",
+                backgroundColor: "rgb(255, 255, 255)",
+                borderRadius: "20px",
+              }}
+              className="leftSeccheckout"
+            >
+              <h2
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "400",
+                  color: "#222",
+                  borderBottom: "1px solid #f0f0f0",
+                  margin: "0 0 8px 0",
+                  lineHeight: "35px",
+                }}
+              >
+                Booking Details
+              </h2>
+              <div
+                style={{
+                  display: "flex",
+                  margin: "8px 0px 10px",
+                  flexDirection: "row",
+                }}
+                className="row align-items-between justify-content-between   align-items-lg-center justify-content-lg-between"
+              >
+                <CustomDatePicker
+                  handleDateChange={handleDateChange}
+                  setSelectedDate={setSelectedDate}
+                  selectedDate={selectedDate}
+                  showDatePicker={showDatePicker}
+                  setShowDatePicker={setShowDatePicker}
+                  combinedDateTimeError={combinedDateTimeError}
+                  selectedDateError={selectedDateError}
+                />
+                <CustomTimePicker
+                  handleTimeSlotChange={handleTimeSlotChange}
+                  generateTimeSlots={generateTimeSlots}
+                  selectedTimeSlot={selectedTimeSlot}
+                  combinedDateTimeError={combinedDateTimeError}
+                  selectedTimeSlotError={selectedTimeSlotError}
+                />
+              </div>
+              {combinedDateTimeError && (
+                <p
+                  className="text-danger"
+                  style={{ fontSize: "12px", margin: "5px 0 0 0" }}
+                >
+                  The selected date and time must be at least 24 hours from now.
+                </p>
+              )}
+
+              <div
+                className="checkoutInputType border-1 rounded-4  "
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <h4
+                  style={{
+                    color: "rgb(146, 82, 170)",
+                    fontSize: "14px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  Share your comments (if any)
+                </h4>
+                <textarea
+                  className="rounded border border-1 p-1 bg-white text-black"
+                  value={comment}
+                  onChange={handleComment}
+                  rows={4}
+                  placeholder="Enter your comment."
+                />
+              </div>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                  className="checkoutInputType"
+                >
+                  <label
+                    style={{
+                      color: "rgb(146, 82, 170)",
+                      fontSize: "14px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Address:
+                  </label>
+                  <textarea
+                    type="text"
+                    className="rounded border border-1 p-1 bg-white text-black"
+                    value={address}
+                    onChange={handleAddressChange}
+                    rows={4}
+                    placeholder="Enter your Address."
+                  />
+                  {addressError && (
+                    <p
+                      className={`p-0 m-0 ${addressError ? "text-danger" : ""}`}
+                    >
+                      This field is required!
+                    </p>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                  className="checkoutInputType"
+                >
+                  <label
+                    style={{
+                      color: "rgb(146, 82, 170)",
+                      fontSize: "14px",
+                      marigin: "16px 0 6px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Pin Code:
+                  </label>
+                  <input
+                    type="text"
+                    className="bg-white text-black rounded border border-1 p-1"
+                    value={pinCode}
+                    onChange={handlePinCodeChange}
+                  />
+                  {pinCode && (
+                    <p
+                      className={`p-0 m-0 ${
+                        pinCodeError ? "text-danger" : "text-success"
+                      }`}
+                    >{`Service ${
+                      pinCodeError ? "not" : ""
+                    } available in your area!`}</p>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                  className="checkoutInputType"
+                >
+                  <label
+                    style={{
+                      color: "rgb(146, 82, 170)",
+                      fontSize: "14px",
+                      marigin: "16px 0 6px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    City:
+                  </label>
+                  <select
+                    value={city}
+                    className="bg-white text-black rounded border border-1 p-1"
+                    onChange={handleCityChange}
+                  >
+                    <option value="">Select City</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    {/* Add more cities as needed */}
+                  </select>
+                  {cityError && (
+                    <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>
+                      This field is required!
+                    </p>
+                  )}
+                </div>
+              </div>
+              <button
+                onClick={onContinueClick}
+                className="blue-btn chkeoutBottun"
+              >
+                Confirm Order
+              </button>
+            </div>
+            <div
+              className="rightSecfooddelivery"
+              style={{
+                boxShadow: "rgba(0, 0, 0, 0.18) 0px 1px 8px",
+                padding: "20px",
+                width: "59%",
+                borderRadius: "20px",
+                backgroundColor: "rgb(255, 255, 255)",
               }}
             >
-              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
-                Need more info?
-              </p>
-           
-                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
-           
-            </div>
-
-          </div>
-                        </div>
-                    </div>
+              <h3
+                style={{
+                  fontSize: "22px",
+                  fontWeight: "400",
+                  color: "#222",
+                  borderBottom: "1px solid #f0f0f0",
+                  margin: "0 0 11px 0",
+                  lineHeight: "35px",
+                }}
+              >
+                Order Summary
+              </h3>
+              <div className="righysercchefinner">
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      marginHorizontal: 16,
+                      flexDirection: "column",
+                      width: 120,
+                      borderRadius: 6,
+                      border: "1px solid #E6E6E6",
+                      padding: 5,
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#A3A3A3",
+                        fontSize: 9,
+                        fontWeight: "400",
+                        margin: 0,
+                      }}
+                    >
+                      Total Dishes
+                    </p>
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontSize: 13,
+                        fontWeight: "600",
+                        margin: 0,
+                      }}
+                    >
+                      {Object.keys(selectedDishesFoodDelivery).length}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      marginHorizontal: 16,
+                      flexDirection: "column",
+                      width: 120,
+                      borderRadius: 6,
+                      border: "1px solid #E6E6E6",
+                      padding: 5,
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#A3A3A3",
+                        fontSize: 9,
+                        fontWeight: "400",
+                        margin: 0,
+                      }}
+                    >
+                      No. of People
+                    </p>
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontSize: 13,
+                        fontWeight: "600",
+                        margin: 0,
+                      }}
+                    >
+                      {peopleCount}
+                    </p>
+                  </div>
                 </div>
-                :
-                <div style={{ padding: "1% 2%", backgroundColor: "#edededc9" }} className='checkoutmobileview'>
-                    <div className='checoutSec my-3 gap-3'>
-                        <div className='border border-danger p-1 px-1 rounded bg-danger-subtle text-black text-center' style={{ color: '#000', fontSize: 12, fontWeight: '500', textAlign: 'left', color: "#9252AA" }}>
-                            Bill value depends upon Dish selected + Number of people
+
+                <div style={{ paddingTop: "5px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 3,
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      Item Total
+                    </p>
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      ₹ {totalPrice}
+                    </p>
+                  </div>
+                  {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                  {discountedPrice > 0 && (
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          marginTop: 3,
+                          alignItems: "center",
+                          borderBottom: "1px solid rgb(215, 215, 215)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            Item Discount:
+                          </p>
                         </div>
-                        <div style={{ display: 'flex', margin: "8px 0px 10px", flexDirection: "row" }} className='row align-items-between justify-content-between   align-items-lg-center justify-content-lg-between'>
-                            <CustomDatePicker handleDateChange={handleDateChange} setSelectedDate={setSelectedDate} selectedDate={selectedDate} showDatePicker={showDatePicker} setShowDatePicker={setShowDatePicker} combinedDateTimeError={combinedDateTimeError} selectedDateError={selectedDateError} />
-                            <CustomTimePicker handleTimeSlotChange={handleTimeSlotChange} generateTimeSlots={generateTimeSlots} selectedTimeSlot={selectedTimeSlot} combinedDateTimeError={combinedDateTimeError} selectedTimeSlotError={selectedTimeSlotError} />
+                        <p
+                          style={{
+                            color: "#008631",
+                            fontWeight: "600",
+                            fontSize: 14,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          {"-"} ₹ {discountedPrice}
+                        </p>
+                      </div>
+                      {/* <img style={{ width: 290, height: 1, marginTop: 5, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                    </div>
+                  )}
+                  {selectedDeliveryOption === "party-food-delivery" && (
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          backgroundColor: includeDisposable
+                            ? "#efefef"
+                            : "#fff",
+                          padding: "4px",
+                          margin: "0px 0 17px 0",
+                          borderBottom: "1px solid rgb(215, 215, 215)",
+                          borderTop: "1px solid rgb(215, 215, 215)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
+                          <button
+                            onClick={() =>
+                              setIncludeDisposable(!includeDisposable)
+                            }
+                            style={{
+                              background: "none",
+                              border: "none",
+                              padding: 0,
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: 19,
+                                height: 19,
+                                borderWidth: 1,
+                                border: includeDisposable
+                                  ? "1px solid #008631"
+                                  : "1px solid #008631",
+                                borderRadius: 3,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginRight: 4,
+                                display: "flex",
+                              }}
+                            >
+                              {includeDisposable && (
+                                <Image
+                                  src={checkImage}
+                                  alt="Info"
+                                  width={13}
+                                  height={13}
+                                />
+                              )}
+                            </div>
+                          </button>
+                          <div>
+                            <p
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 13,
+                                lineHeight: "20px",
+                                marginBottom: 0,
+                              }}
+                            >
+                              Disposable plates + water bottle:₹ 20/Person
+                            </p>
+                          </div>
                         </div>
-                        {combinedDateTimeError && <p className="text-danger" style={{ fontSize: '12px', margin: "5px 0 0 0" }}>The selected date and time must be at least 24 hours from now.</p>}
 
                         <div>
-                            <div className="rightSeccheckout chef" style={{ boxShadow: "0 1px 8px rgba(0,0,0,.18)", padding: "20px", backgroundColor: "#fff", borderRadius: "20px", width: "59%" }}>
-                                <div className='rightcheckoutsec' style={{ padding: "6px  0 0 " }}>
-                                    <h1 style={{ fontSize:"20px" , fontWeight:"600" , marginBottom:"8px"}}>Order Summary</h1>
-                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
-                                        <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10  , border:"1px solid #d7d7d7"}}>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Total Dishes</label>
-                                            <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}> {selectedDishesFoodDelivery && Object.keys(selectedDishesFoodDelivery).length}</p>
-                                        </div>
-                                        {peopleCount > 0 ?
-                                            <div style={{ display: "flex", justifyContent: "space-between", flexDirection: "column" , padding: "2px 7px"  , borderRadius:10 , border:"1px solid #d7d7d7"}}>
-                                                <label style={{ color: "rgb(146, 82, 170)", fontSize: "13px", marigin: "16px 0 6px", fontWeight: 600 }}>Number of people</label>
-                                                <p style={{ margin: 0, windth: "100%", color: "rgb(146, 82, 170)", fontSize: "12px", fontWeight: 200 }}>{peopleCount}</p>
-                                            </div>
-                                            :
-                                            null
-                                        }
-                                    </div>
-                                   
-                                    <div style={{ paddingHorizontal: 5 }}>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 11  , borderBottom:"1px solid rgb(215, 215, 215)"}}>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' , marginBottom:10 }}>Item Total</p>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px'  , marginBottom:10 }}>₹ {totalPrice}</p>
-                                        </div>
-                                        
-                                        {discountedPrice > 0 && (
-                                           
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, alignItems: "center"  }}>
-                                                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: "center", flexDirection: 'row' }}>
-                                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Item Discount:</p>
-                                                    </div>
-                                                    <p style={{ color: "#008631", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
-                                                        {'-'} ₹ {discountedPrice}
-                                                    </p>
-                                                </div>
-                                          
-                                        )}
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              marginBottom: 0,
+                            }}
+                          >
+                            ₹ {includeDisposable ? 20 * peopleCount : 0}
+                          </p>
+                        </div>
+                      </div>
+                      {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          marginTop: 3,
+                        }}
+                      >
+                        <p
+                          style={{
+                            color: "#9252AA",
+                            fontWeight: "600",
+                            fontSize: 14,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Packing Cost
+                        </p>
+                        <div
+                          style={{
+                            display: "flex",
+                            color: "#9252AA",
+                            fontWeight: "600",
+                            fontSize: 14,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          <p style={{ color: "#9252AA", fontWeight: "600" }}>
+                            {" "}
+                            ₹ {packingCost}
+                          </p>
+                        </div>
+                      </div>
 
-                                        {selectedDeliveryOption === 'party-food-delivery' && (
-                                            <div>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeDisposable ? '#efefef' : '#fff', padding: "7px 4px", marginTop: 0 , marginBottom:10 , borderTop:" 1px solid rgb(215, 215, 215)" , borderBottom:"1px solid rgb(215, 215, 215)"}}>
-                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                                                        <button onClick={() => setIncludeDisposable(!includeDisposable)} style={{ background: 'none', border: 'none', padding: 0 }}>
-                                                            <div style={{ width: 19, height: 19, border: includeDisposable ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                                {includeDisposable && <Image src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
-                                                            </div>
-                                                        </button>
-                                                        <div>
-                                                            <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 13, lineHeight: '20px', marginBottom: 0 }}>Disposable plates + water bottle:</p>
-                                                            <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 13, lineHeight: '20px', marginBottom: 0 }}> ₹ 20/Person</p>
-                                                        </div>
-                                                    </div>
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            marginTop: 3,
+                            borderBottom: "1px solid rgb(215, 215, 215)",
+                          }}
+                        >
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            Delivery Charges
+                          </p>
+                          <div
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                              display: "flex",
+                              flexDirection: "row",
+                            }}
+                          >
+                            {totalPrice - discountedPrice > 4000 ? (
+                              <>
+                                <p
+                                  style={{
+                                    color: "#008631",
+                                    fontWeight: "600",
+                                    marginRight: 5,
+                                  }}
+                                >
+                                  FREE
+                                </p>
+                                <p
+                                  style={{
+                                    textDecoration: "line-through",
+                                    color: "#9252AA",
+                                    fontWeight: "600",
+                                  }}
+                                >
+                                  ₹ {deliveryCharges}
+                                </p>
+                              </>
+                            ) : (
+                              <p
+                                style={{ color: "#9252AA", fontWeight: "600" }}
+                              >
+                                ₹ {deliveryCharges}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {selectedDeliveryOption === "party-live-buffet-catering" && (
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          backgroundColor: includeTables ? "#efefef" : "#fff",
+                          paddingHorizontal: 5,
+                          paddingVertical: 4,
+                          marginTop: 4,
+                          borderBottom: "1px solid rgb(215, 215, 215)",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                          }}
+                        >
+                          <button
+                            onClick={() => setIncludeTables(!includeTables)}
+                            style={{
+                              background: "none",
+                              border: "none",
+                              padding: 0,
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: 19,
+                                height: 19,
+                                borderWidth: 1,
+                                borderColor: includeTables
+                                  ? "#008631"
+                                  : "#008631",
+                                borderRadius: 3,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginRight: 4,
+                                display: "flex",
+                              }}
+                            >
+                              {includeDisposable && (
+                                <Image
+                                  src={checkImage}
+                                  alt="Info"
+                                  height={13}
+                                  width={13}
+                                />
+                              )}
+                            </div>
+                          </button>
+                          <div>
+                            <p
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 13,
+                                lineHeight: "20px",
+                              }}
+                            >
+                              3-4 Serving Tables with Cloth:
+                            </p>
+                          </div>
+                        </div>
 
-                                                    <div>
-                                                        <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 14 }}>₹ {includeDisposable ? 20 * peopleCount : 0}</p>
-                                                    </div>
-                                                </div>
-                                                {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
-                                                    <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Packing Cost</p>
-                                                    <div style={{ display: 'flex', color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>
-                                                        <p style={{ color: "#9252AA", fontWeight: '600' }}> ₹ {packingCost}</p>
-                                                    </div>
-                                                </div>
+                        <div>
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                            }}
+                          >
+                            ₹ {includeTables ? 1200 : 0}
+                          </p>
+                        </div>
+                      </div>
+                      {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                    </div>
+                  )}
+                  {/* Calculation for final total amount */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 3,
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      Final Amount
+                    </p>
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      ₹ {calculateFinalTotal()}
+                    </p>
+                  </div>
 
-                                                <div>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 3   }}>
-                                                        <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Delivery Charges</p>
-                                                        <div style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px', display: 'flex', flexDirection: "row" }}>
-                                                            {totalPrice - discountedPrice > 4000 ? (
-                                                                <>
-                                                                    <p style={{ color: "#008631", fontWeight: '600', marginRight: 5 }}>FREE</p>
-                                                                    <p style={{ textDecoration: "line-through", color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
-                                                                </>
-                                                            ) : (
-                                                                <p style={{ color: "#9252AA", fontWeight: '600' }}>₹ {deliveryCharges}</p>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
+                  {/* Calculation for advance payment */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      marginTop: 3,
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      Advance Payment
+                    </p>
+                    <p
+                      style={{
+                        color: "#9252AA",
+                        fontWeight: "600",
+                        fontSize: 14,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      ₹ {calculateAdvancePayment()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  marginTop: 7,
+                  borderTop: "1px solid #efefef",
+                }}
+              >
+                <div
+                  style={{
+                    marginHorizontal: 16,
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginTop: 5,
+                  }}
+                >
+                  <p
+                    style={{
+                      padding: 4,
+                      color: "#000",
+                      fontSize: 13,
+                      fontWeight: "700",
+                      marginBottom: 0,
+                    }}
+                  >
+                    Dishes selected
+                  </p>
+                </div>
 
-                                        {selectedDeliveryOption === 'party-live-buffet-catering' && (
-                                            <div>
-                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: includeTables ? '#efefef' : '#fff', padding: "10px 4px", marginTop: 0, marginBottom: 8 }}>
-                                                    <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                                                        <button onClick={() => setIncludeTables(!includeTables)} style={{ background: 'none', border: 'none', padding: 0 }}>
-                                                            <div style={{ width: 19, height: 19, borderWidth: 1, border: includeTables ? '1px solid #008631' : '1px solid #008631', borderRadius: 3, alignItems: 'center', justifyContent: 'center', marginRight: 4, display: 'flex' }}>
-                                                                {includeTables && <Image src={checkImage} alt="Info" style={{ height: 13, width: 13 }} />}
-                                                            </div>
-                                                        </button>
-                                                        <div>
-                                                            <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 13, marginBottom: 0 }}>3-4 Serving Tables with Cloth:</p>
-                                                        </div>
-                                                    </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    width: "100%",
+                    gap: "10px",
+                  }}
+                >
+                  {selectedDishQuantities.map((item, index) => (
+                    <RenderDishQuantity key={index} item={item} />
+                  ))}
+                </div>
+              </div>
+              <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: " baseline",
+                    justifyContent: " space-between",
+                    padding: "12px 12px 0px 12px",
+                    width: "100%",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "#222",
+                      marginBottom: 0,
+                    }}
+                  >
+                    Need more info?
+                  </p>
 
-                                                    <div>
-                                                        <p style={{ color: '#9252AA', fontWeight: '600', fontSize: 14, marginBottom: 0 }}>₹ {includeTables ? 1200 : 0}</p>
-                                                    </div>
-                                                </div>
-                                                {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
-                                            </div>
-                                        )}
-
-                                       
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 , paddingTop:8 ,  borderTop:"1px solid rgb(215, 215, 215)"}}>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Final Amount</p>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateFinalTotal()}</p>
-                                        </div>
-                                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 0 }}>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>Advance Payment</p>
-                                            <p style={{ color: "#9252AA", fontWeight: '600', fontSize: 14, lineHeight: '20px' }}>₹ {calculateAdvancePayment()}</p>
-                                        </div>
-                                        <div className='chef-divider'></div>
-
-                                        <div className='checkoutInputType border-1 rounded-4  my-3' style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
-                                            <h4 style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marginBottom: "4px" }}>Share your comments (if any)</h4>
-                                            <textarea className='bg-white text-black rounded border border-1 p-1 decor-commemnts'
-                                                value={comment}
-                                                onChange={handleComment}
-                                                rows={4}
-                                                placeholder="Enter your comments"
-                                            />
-                                        </div>
-                                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", fontWeight: "600" }}>Address:</label>
-                                            <textarea
-                                                type="text"
-                                                className='bg-white text-black rounded border border-1 p-1'
-                                                value={address}
-                                                onChange={handleAddressChange}
-                                                rows={4}
-                                                placeholder="Enter your Address."
-                                            />
-                                            {addressError && <p className={`p-0 m-0 ${addressError ? "text-danger" : ""}`}>This field is required!</p>}
-                                        </div>
-                                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>Pin Code:</label>
-                                            <input
-                                                type="text" className='bg-white text-black rounded border border-1 p-1'
-                                                value={pinCode}
-                                                onChange={handlePinCodeChange}
-                                            />
-                                            {pinCode && <p className={`p-0 m-0 ${pinCodeError ? "text-danger" : "text-success"}`}>{`Service ${pinCodeError ? 'not' : ''} available in your area!`}</p>}
-                                        </div>
-                                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }} className='checkoutInputType'>
-                                            <label style={{ color: "rgb(146, 82, 170)", fontSize: "14px", marigin: "16px 0 6px", fontWeight: 600 }}>City:</label>
-                                            <select value={city} className='bg-white text-black rounded border border-1 p-1' onChange={handleCityChange}>
-                                                <option value="">Select City</option>
-                                                <option value="Bangalore">Bangalore</option>
-                                                <option value="Delhi">Delhi NCR</option>
-                                                <option value="Mumbai">Mumbai</option>
-                                                {/* Add more cities as needed */}
-                                            </select>
-                                            {cityError && <p className={`p-0 m-0 ${cityError ? "text-danger" : ""}`}>This field is required!</p>}
-                                        </div>
-                                        <div>
-                
-
-                                        <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", flexFlow: "wrap" , gap:"10px" }} className='foode-deliry-mobile'>
-                                        {selectedDishQuantities.map((item, index) => (
-                                        <RenderDishQuantity key={index} item={item} />
-                                        ))}
-                                        </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+                  <button
+                    className="button-cta whatsapp-cta"
+                    onClick={contactUsRedirection}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-message-circle icon-cta"
+                    >
+                      <path
+                        d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+                        className="whatsapp-iconimg"
+                      ></path>
+                    </svg>
+                    Whatsapp
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div
+          style={{ padding: "1% 2%", backgroundColor: "#edededc9" }}
+          className="checkoutmobileview"
+        >
+          <div className="checoutSec my-3 gap-3">
+            <div
+              className="border border-danger p-1 px-1 rounded bg-danger-subtle text-black text-center"
+              style={{
+                color: "#000",
+                fontSize: 12,
+                fontWeight: "500",
+                textAlign: "left",
+                color: "#9252AA",
+              }}
+            >
+              Bill value depends upon Dish selected + Number of people
+            </div>
             <div
               style={{
                 display: "flex",
+                margin: "8px 0px 10px",
                 flexDirection: "row",
-                alignItems: " baseline",
-                justifyContent: " space-between",
-                paddingTop: 12,
-                width:"100%",
-
               }}
+              className="row align-items-between justify-content-between   align-items-lg-center justify-content-lg-between"
             >
-              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
-                Need more info?
-              </p>
-           
-                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
-           
+              <CustomDatePicker
+                handleDateChange={handleDateChange}
+                setSelectedDate={setSelectedDate}
+                selectedDate={selectedDate}
+                showDatePicker={showDatePicker}
+                setShowDatePicker={setShowDatePicker}
+                combinedDateTimeError={combinedDateTimeError}
+                selectedDateError={selectedDateError}
+              />
+              <CustomTimePicker
+                handleTimeSlotChange={handleTimeSlotChange}
+                generateTimeSlots={generateTimeSlots}
+                selectedTimeSlot={selectedTimeSlot}
+                combinedDateTimeError={combinedDateTimeError}
+                selectedTimeSlotError={selectedTimeSlotError}
+              />
             </div>
+            {combinedDateTimeError && (
+              <p
+                className="text-danger"
+                style={{ fontSize: "12px", margin: "5px 0 0 0" }}
+              >
+                The selected date and time must be at least 24 hours from now.
+              </p>
+            )}
 
-          </div>
-
-                                <div className='px-1 py-3 border rounded my-2 cancellatiop-policy' style={{
-                                    background: "rgb(157, 74,147, 28%)"
-                                }}>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className=' text-center m-1'>Cancellation and order change policy</p>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>Till the order is not assign to the service provider , 100% of the amount will be refunded, othewise 50%of the advance will be deducted as a cancellation charges to componsate the service provider. </p>
-                                    <p style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }} className='m-1'>The order cannot be edited after paying the advance customers can cancel the order and replace it with a new order with the required changes.</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div style={{
-                                    position: "fixed",
-                                    bottom: 0,
-                                    left: 0,
-                                    width: "100%",
-                                    backgroundColor: "#fff",
-                                    borderTop: "1px solid #efefef",
-                                    backgroundColor: "#EDEDED"
-                                }}
-                                >
-                                    <button onClick={onContinueClick} className="blue-btn chkeoutBottun">Confirm Order</button>
-                                </div>
-                            </div>
-                        </div>
+            <div>
+              <div
+                className="rightSeccheckout chef"
+                style={{
+                  boxShadow: "0 1px 8px rgba(0,0,0,.18)",
+                  padding: "20px",
+                  backgroundColor: "#fff",
+                  borderRadius: "20px",
+                  width: "59%",
+                }}
+              >
+                <div
+                  className="rightcheckoutsec"
+                  style={{ padding: "6px  0 0 " }}
+                >
+                  <h1
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "600",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Order Summary
+                  </h1>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        flexDirection: "column",
+                        padding: "2px 7px",
+                        borderRadius: 10,
+                        border: "1px solid #d7d7d7",
+                      }}
+                    >
+                      <label
+                        style={{
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "13px",
+                          marigin: "16px 0 6px",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Total Dishes
+                      </label>
+                      <p
+                        style={{
+                          margin: 0,
+                          windth: "100%",
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "12px",
+                          fontWeight: 200,
+                        }}
+                      >
+                        {" "}
+                        {selectedDishesFoodDelivery &&
+                          Object.keys(selectedDishesFoodDelivery).length}
+                      </p>
                     </div>
+                    {peopleCount > 0 ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          flexDirection: "column",
+                          padding: "2px 7px",
+                          borderRadius: 10,
+                          border: "1px solid #d7d7d7",
+                        }}
+                      >
+                        <label
+                          style={{
+                            color: "rgb(146, 82, 170)",
+                            fontSize: "13px",
+                            marigin: "16px 0 6px",
+                            fontWeight: 600,
+                          }}
+                        >
+                          Number of people
+                        </label>
+                        <p
+                          style={{
+                            margin: 0,
+                            windth: "100%",
+                            color: "rgb(146, 82, 170)",
+                            fontSize: "12px",
+                            fontWeight: 200,
+                          }}
+                        >
+                          {peopleCount}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  <div style={{ paddingHorizontal: 5 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginTop: 11,
+                        borderBottom: "1px solid rgb(215, 215, 215)",
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                          marginBottom: 10,
+                        }}
+                      >
+                        Item Total
+                      </p>
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                          marginBottom: 10,
+                        }}
+                      >
+                        ₹ {totalPrice}
+                      </p>
+                    </div>
+
+                    {discountedPrice > 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          marginTop: 5,
+                          alignItems: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            Item Discount:
+                          </p>
+                        </div>
+                        <p
+                          style={{
+                            color: "#008631",
+                            fontWeight: "600",
+                            fontSize: 14,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          {"-"} ₹ {discountedPrice}
+                        </p>
+                      </div>
+                    )}
+
+                    {selectedDeliveryOption === "party-food-delivery" && (
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            backgroundColor: includeDisposable
+                              ? "#efefef"
+                              : "#fff",
+                            padding: "7px 4px",
+                            marginTop: 0,
+                            marginBottom: 10,
+                            borderTop: " 1px solid rgb(215, 215, 215)",
+                            borderBottom: "1px solid rgb(215, 215, 215)",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <button
+                              onClick={() =>
+                                setIncludeDisposable(!includeDisposable)
+                              }
+                              style={{
+                                background: "none",
+                                border: "none",
+                                padding: 0,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: 19,
+                                  height: 19,
+                                  border: includeDisposable
+                                    ? "1px solid #008631"
+                                    : "1px solid #008631",
+                                  borderRadius: 3,
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  marginRight: 4,
+                                  display: "flex",
+                                }}
+                              >
+                                {includeDisposable && (
+                                  <Image
+                                    src={checkImage}
+                                    alt="Info"
+                                    style={{ height: 13, width: 13 }}
+                                  />
+                                )}
+                              </div>
+                            </button>
+                            <div>
+                              <p
+                                style={{
+                                  color: "#9252AA",
+                                  fontWeight: "600",
+                                  fontSize: 13,
+                                  lineHeight: "20px",
+                                  marginBottom: 0,
+                                }}
+                              >
+                                Disposable plates + water bottle:
+                              </p>
+                              <p
+                                style={{
+                                  color: "#9252AA",
+                                  fontWeight: "600",
+                                  fontSize: 13,
+                                  lineHeight: "20px",
+                                  marginBottom: 0,
+                                }}
+                              >
+                                {" "}
+                                ₹ 20/Person
+                              </p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 14,
+                              }}
+                            >
+                              ₹ {includeDisposable ? 20 * peopleCount : 0}
+                            </p>
+                          </div>
+                        </div>
+                        {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            marginTop: 3,
+                          }}
+                        >
+                          <p
+                            style={{
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            Packing Cost
+                          </p>
+                          <div
+                            style={{
+                              display: "flex",
+                              color: "#9252AA",
+                              fontWeight: "600",
+                              fontSize: 14,
+                              lineHeight: "20px",
+                            }}
+                          >
+                            <p style={{ color: "#9252AA", fontWeight: "600" }}>
+                              {" "}
+                              ₹ {packingCost}
+                            </p>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              marginTop: 3,
+                            }}
+                          >
+                            <p
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 14,
+                                lineHeight: "20px",
+                              }}
+                            >
+                              Delivery Charges
+                            </p>
+                            <div
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 14,
+                                lineHeight: "20px",
+                                display: "flex",
+                                flexDirection: "row",
+                              }}
+                            >
+                              {totalPrice - discountedPrice > 4000 ? (
+                                <>
+                                  <p
+                                    style={{
+                                      color: "#008631",
+                                      fontWeight: "600",
+                                      marginRight: 5,
+                                    }}
+                                  >
+                                    FREE
+                                  </p>
+                                  <p
+                                    style={{
+                                      textDecoration: "line-through",
+                                      color: "#9252AA",
+                                      fontWeight: "600",
+                                    }}
+                                  >
+                                    ₹ {deliveryCharges}
+                                  </p>
+                                </>
+                              ) : (
+                                <p
+                                  style={{
+                                    color: "#9252AA",
+                                    fontWeight: "600",
+                                  }}
+                                >
+                                  ₹ {deliveryCharges}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedDeliveryOption ===
+                      "party-live-buffet-catering" && (
+                      <div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            backgroundColor: includeTables ? "#efefef" : "#fff",
+                            padding: "10px 4px",
+                            marginTop: 0,
+                            marginBottom: 8,
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <button
+                              onClick={() => setIncludeTables(!includeTables)}
+                              style={{
+                                background: "none",
+                                border: "none",
+                                padding: 0,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: 19,
+                                  height: 19,
+                                  borderWidth: 1,
+                                  border: includeTables
+                                    ? "1px solid #008631"
+                                    : "1px solid #008631",
+                                  borderRadius: 3,
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  marginRight: 4,
+                                  display: "flex",
+                                }}
+                              >
+                                {includeTables && (
+                                  <Image
+                                    src={checkImage}
+                                    alt="Info"
+                                    style={{ height: 13, width: 13 }}
+                                  />
+                                )}
+                              </div>
+                            </button>
+                            <div>
+                              <p
+                                style={{
+                                  color: "#9252AA",
+                                  fontWeight: "600",
+                                  fontSize: 13,
+                                  marginBottom: 0,
+                                }}
+                              >
+                                3-4 Serving Tables with Cloth:
+                              </p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p
+                              style={{
+                                color: "#9252AA",
+                                fontWeight: "600",
+                                fontSize: 14,
+                                marginBottom: 0,
+                              }}
+                            >
+                              ₹ {includeTables ? 1200 : 0}
+                            </p>
+                          </div>
+                        </div>
+                        {/* <img style={{ width: 290, height: 1, marginTop: 10, marginBottom: 5 }} src="../../assets/Rectangleline.png" alt="line" /> */}
+                      </div>
+                    )}
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginTop: 0,
+                        paddingTop: 8,
+                        borderTop: "1px solid rgb(215, 215, 215)",
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                        }}
+                      >
+                        Final Amount
+                      </p>
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                        }}
+                      >
+                        ₹ {calculateFinalTotal()}
+                      </p>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginTop: 0,
+                      }}
+                    >
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                        }}
+                      >
+                        Advance Payment
+                      </p>
+                      <p
+                        style={{
+                          color: "#9252AA",
+                          fontWeight: "600",
+                          fontSize: 14,
+                          lineHeight: "20px",
+                        }}
+                      >
+                        ₹ {calculateAdvancePayment()}
+                      </p>
+                    </div>
+                    <div className="chef-divider"></div>
+
+                    <div
+                      className="checkoutInputType border-1 rounded-4  my-3"
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                      }}
+                    >
+                      <h4
+                        style={{
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "14px",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        Share your comments (if any)
+                      </h4>
+                      <textarea
+                        className="bg-white text-black rounded border border-1 p-1 decor-commemnts"
+                        value={comment}
+                        onChange={handleComment}
+                        rows={4}
+                        placeholder="Enter your comments"
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                      }}
+                      className="checkoutInputType"
+                    >
+                      <label
+                        style={{
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        Address:
+                      </label>
+                      <textarea
+                        type="text"
+                        className="bg-white text-black rounded border border-1 p-1"
+                        value={address}
+                        onChange={handleAddressChange}
+                        rows={4}
+                        placeholder="Enter your Address."
+                      />
+                      {addressError && (
+                        <p
+                          className={`p-0 m-0 ${
+                            addressError ? "text-danger" : ""
+                          }`}
+                        >
+                          This field is required!
+                        </p>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                      }}
+                      className="checkoutInputType"
+                    >
+                      <label
+                        style={{
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "14px",
+                          marigin: "16px 0 6px",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Pin Code:
+                      </label>
+                      <input
+                        type="text"
+                        className="bg-white text-black rounded border border-1 p-1"
+                        value={pinCode}
+                        onChange={handlePinCodeChange}
+                      />
+                      {pinCode && (
+                        <p
+                          className={`p-0 m-0 ${
+                            pinCodeError ? "text-danger" : "text-success"
+                          }`}
+                        >{`Service ${
+                          pinCodeError ? "not" : ""
+                        } available in your area!`}</p>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                      }}
+                      className="checkoutInputType"
+                    >
+                      <label
+                        style={{
+                          color: "rgb(146, 82, 170)",
+                          fontSize: "14px",
+                          marigin: "16px 0 6px",
+                          fontWeight: 600,
+                        }}
+                      >
+                        City:
+                      </label>
+                      <select
+                        value={city}
+                        className="bg-white text-black rounded border border-1 p-1"
+                        onChange={handleCityChange}
+                      >
+                        <option value="">Select City</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Delhi">Delhi NCR</option>
+                        <option value="Mumbai">Mumbai</option>
+                        {/* Add more cities as needed */}
+                      </select>
+                      {cityError && (
+                        <p
+                          className={`p-0 m-0 ${
+                            cityError ? "text-danger" : ""
+                          }`}
+                        >
+                          This field is required!
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "flex-start",
+                          flexFlow: "wrap",
+                          gap: "10px",
+                        }}
+                        className="foode-deliry-mobile"
+                      >
+                        {selectedDishQuantities.map((item, index) => (
+                          <RenderDishQuantity key={index} item={item} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            }
+                <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: " baseline",
+                      justifyContent: " space-between",
+                      paddingTop: 12,
+                      width: "100%",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 600,
+                        color: "#222",
+                        marginBottom: 0,
+                      }}
+                    >
+                      Need more info?
+                    </p>
+
+                    <button
+                      className="button-cta whatsapp-cta"
+                      onClick={contactUsRedirection}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-message-circle icon-cta"
+                      >
+                        <path
+                          d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+                          className="whatsapp-iconimg"
+                        ></path>
+                      </svg>
+                      Whatsapp
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  className="px-1 py-3 border rounded my-2 cancellatiop-policy"
+                  style={{
+                    background: "rgb(157, 74,147, 28%)",
+                  }}
+                >
+                  <p
+                    style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }}
+                    className=" text-center m-1"
+                  >
+                    Cancellation and order change policy
+                  </p>
+                  <p
+                    style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }}
+                    className="m-1"
+                  >
+                    Till the order is not assign to the service provider , 100%
+                    of the amount will be refunded, othewise 50%of the advance
+                    will be deducted as a cancellation charges to componsate the
+                    service provider.{" "}
+                  </p>
+                  <p
+                    style={{ fontSize: "13px", color: "rgb(157, 74, 147)" }}
+                    className="m-1"
+                  >
+                    The order cannot be edited after paying the advance
+                    customers can cancel the order and replace it with a new
+                    order with the required changes.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div
+                  style={{
+                    position: "fixed",
+                    bottom: 0,
+                    left: 0,
+                    width: "100%",
+                    backgroundColor: "#fff",
+                    borderTop: "1px solid #efefef",
+                    backgroundColor: "#EDEDED",
+                  }}
+                >
+                  <button
+                    onClick={onContinueClick}
+                    className="blue-btn chkeoutBottun"
+                  >
+                    Confirm Order
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default FoodDeliveryCheckout;
 
-export const CustomDatePicker = ({ handleDateChange, selectedDate, showDatePicker, setShowDatePicker, selectedDateError, combinedDateTimeError }) => {
+export const CustomDatePicker = ({
+  handleDateChange,
+  selectedDate,
+  showDatePicker,
+  setShowDatePicker,
+  selectedDateError,
+  combinedDateTimeError,
+}) => {
+  const toggleDatePicker = () => {
+    setShowDatePicker((prev) => !prev);
+  };
 
-    const toggleDatePicker = () => {
-        setShowDatePicker((prev) => !prev);
-    };
+  return (
+    <div
+      className={`timepkerSec  d-flex flex-column border border-1 rounded-4 p-2  ${
+        combinedDateTimeError ? "border-danger" : ""
+      } `}
+    >
+      <p
+        style={{
+          marginBottom: "4px",
+          color: "rgb(146, 82, 170)",
+          fontSize: "12px",
+        }}
+        className="p-0 m-0"
+      >
+        Select Date
+      </p>
+      <Dropdown
+        show={showDatePicker}
+        onToggle={toggleDatePicker}
+        className="border-none p-0"
+      >
+        <Dropdown.Toggle
+          variant="outline-secondary"
+          className={`w-100 m-0 p-0 d-flex justify-content-between align-items-center text-black ${
+            selectedDateError ? "border-danger" : ""
+          }`}
+          style={{
+            cursor: "pointer",
+            padding: 0,
+            background: "none",
+            border: "none",
+          }}
+        >
+          <span style={{ fontSize: "12px" }} className="m-0 p-0 ">
+            {selectedDate ? selectedDate.toLocaleDateString() : "Select Date"}
+          </span>
+        </Dropdown.Toggle>
 
-    return (
-        <div className={`timepkerSec  d-flex flex-column border border-1 rounded-4 p-2  ${combinedDateTimeError ? 'border-danger' : ''} `}>
-            <p style={{ marginBottom: "4px", color: "rgb(146, 82, 170)", fontSize: "12px" }} className='p-0 m-0'>Select Date</p>
-            <Dropdown show={showDatePicker} onToggle={toggleDatePicker} className='border-none p-0'>
-                <Dropdown.Toggle
-                    variant="outline-secondary"
-                    className={`w-100 m-0 p-0 d-flex justify-content-between align-items-center text-black ${selectedDateError ? 'border-danger' : ''}`}
-                    style={{ cursor: 'pointer', padding: 0, background: 'none', border: 'none' }}        >
-                    <span style={{ fontSize: '12px' }} className='m-0 p-0 '>{selectedDate ? selectedDate.toLocaleDateString() : 'Select Date'}</span>
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu
-                    show={showDatePicker}
-                    className="p-2"
-                    style={{ minWidth: 'auto' }}
-                >
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateChange}
-                        minDate={new Date()}
-                        inline // Use inline to show the calendar
-                    />
-                </Dropdown.Menu>
-            </Dropdown>
-        </div>
-    );
+        <Dropdown.Menu
+          show={showDatePicker}
+          className="p-2"
+          style={{ minWidth: "auto" }}
+        >
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            minDate={new Date()}
+            inline // Use inline to show the calendar
+          />
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
+  );
 };
 
-export const CustomTimePicker = ({ selectedTimeSlot, handleTimeSlotChange, generateTimeSlots, selectedTimeSlotError, combinedDateTimeError }) => {
-    return (
-        <div className={`timepkerSec d-flex flex-column border border-1 ${combinedDateTimeError ? 'border-danger' : ''}  ${selectedTimeSlotError ? 'border-danger' : ""} rounded-4 p-2`}>
-            <p style={{ marginBottom: "4px", color: "rgb(146, 82, 170)", fontSize: "12px" }} className='p-0 m-0'>Select Time</p>
-            <Form.Control
-                as="select"
-                value={selectedTimeSlot}
-                onChange={handleTimeSlotChange}
-                style={{ fontSize: "14px", width: "auto", cursor: 'pointer', padding: 0, background: 'none', border: 'none' }}
-            >
-                <option value="">Select a time slot</option>
-                {generateTimeSlots().map((timeSlot, index) => (
-                    <option key={index} value={timeSlot}>
-                        {timeSlot}
-                    </option>
-                ))}
-            </Form.Control>
-        </div>
-    )
-}
+export const CustomTimePicker = ({
+  selectedTimeSlot,
+  handleTimeSlotChange,
+  generateTimeSlots,
+  selectedTimeSlotError,
+  combinedDateTimeError,
+}) => {
+  return (
+    <div
+      className={`timepkerSec d-flex flex-column border border-1 ${
+        combinedDateTimeError ? "border-danger" : ""
+      }  ${selectedTimeSlotError ? "border-danger" : ""} rounded-4 p-2`}
+    >
+      <p
+        style={{
+          marginBottom: "4px",
+          color: "rgb(146, 82, 170)",
+          fontSize: "12px",
+        }}
+        className="p-0 m-0"
+      >
+        Select Time
+      </p>
+      <Form.Control
+        as="select"
+        value={selectedTimeSlot}
+        onChange={handleTimeSlotChange}
+        style={{
+          fontSize: "14px",
+          width: "auto",
+          cursor: "pointer",
+          padding: 0,
+          background: "none",
+          border: "none",
+        }}
+      >
+        <option value="">Select a time slot</option>
+        {generateTimeSlots().map((timeSlot, index) => (
+          <option key={index} value={timeSlot}>
+            {timeSlot}
+          </option>
+        ))}
+      </Form.Control>
+    </div>
+  );
+};

@@ -41,7 +41,8 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [showCookingTime, setShowCookingTime] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTab, setSelectedTab] = useState("Appliances");
-  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
+  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
+    useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   let {
@@ -59,264 +60,273 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       selectedDishDictionary = JSON.parse(selectedDishDictionary);
       selectedDishQuantities = JSON.parse(selectedDishQuantities);
     } catch (error) {
-      console.error('Error parsing selectedDishDictionary:', error);
+      console.error("Error parsing selectedDishDictionary:", error);
     }
   } // Accessing subCategory and itemName safely
   // selectedDishQuantities = Array.isArray(selectedDishQuantities) ? selectedDishQuantities : [];
   const data = selectedDishDictionary;
   const [dishPrice, setDishPrice] = useState(selectedDishPrice);
 
-  const selectedMealList = Object.values(data).map(dish => {
+  const selectedMealList = Object.values(data).map((dish) => {
     return {
-        name: dish.name,
-        image: dish.image,
-        price: Number(dish.cuisineArray[0]),
-        id: dish._id,
-        mealId: dish.mealId
+      name: dish.name,
+      image: dish.image,
+      price: Number(dish.cuisineArray[0]),
+      id: dish._id,
+      mealId: dish.mealId,
     };
-});
-const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
-    function calculateDiscountPercentage(peopleCount, dishCount ) {
-        console.log(peopleCount + "===3333====" +  dishCount)
-        if (dishCount <= 5) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 0;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 3.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 3.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 7.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 7.0;
-            } else {
-                return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
-            }
-        } else if (dishCount == 6) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 7) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 15;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 15;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 18.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 18.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 22.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 22.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 25;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 25;
-            } else {
-                return 25; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 8) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 25;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 25;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 28;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 28.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 28.5;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 32.5;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 32.5;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 35.0;
-            } else {
-                return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 9) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 30;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 30;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 33.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 33.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 37;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 37;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 40;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 40;
-            } else {
-                return 40; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 10) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 35;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 35;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 38.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 38.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 42.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 42.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 45.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 45.0;
-            } else {
-                return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 11) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 40;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 40;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 43.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 43.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 47.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 47.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 50.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 50.0;
-            } else {
-                return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 12) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 50;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 50.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 53.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 53.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 57.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 57.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 60.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 60.0;
-            } else {
-                return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 13) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 14) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 53;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 53.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 56.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 56.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 60.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 60.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 63.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 63.0;
-            } else {
-                return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else if (dishCount == 15) {
-            if (peopleCount >= 0 && peopleCount <= 10) {
-                return 55;
-            } else if (peopleCount >= 11 && peopleCount <= 19) {
-                return 55.0;
-            } else if (peopleCount >= 20 && peopleCount <= 29) {
-                return 58.5;
-            } else if (peopleCount >= 30 && peopleCount <= 39) {
-                return 58.5;
-            } else if (peopleCount >= 40 && peopleCount <= 49) {
-                return 62.0;
-            } else if (peopleCount >= 50 && peopleCount <= 59) {
-                return 62.0;
-            } else if (peopleCount >= 60 && peopleCount <= 69) {
-                return 65.0;
-            } else if (peopleCount >= 70 && peopleCount <= 99) {
-                return 65.0;
-            } else {
-                return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
-            }
-        }
-        else {
-
-        }
+  });
+  const dishCount = selectedMealList.filter(
+    (x) =>
+      x.mealId == "63f1b6b7ed240f7a09f7e2de" ||
+      x.mealId == "63f1b39a4082ee76673a0a9f" ||
+      x.mealId == "63edc4757e1b370928b149b3"
+  ).length;
+  function calculateDiscountPercentage(peopleCount, dishCount) {
+    console.log(peopleCount + "===3333====" + dishCount);
+    if (dishCount <= 5) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 0;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 3.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 3.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 7.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 7.0;
+      } else {
+        return 10.0; // For 60-150 people, use the same discount percentage as 50-59 people
+      }
+    } else if (dishCount == 6) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 15;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 15;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 18.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 18.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 22.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 22.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 25;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 25;
+      } else {
+        return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 7) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 15;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 15;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 18.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 18.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 22.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 22.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 25;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 25;
+      } else {
+        return 25; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 8) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 25;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 25;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 28;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 28.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 28.5;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 32.5;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 32.5;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 35.0;
+      } else {
+        return 35.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 9) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 30;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 30;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 33.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 33.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 37;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 37;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 40;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 40;
+      } else {
+        return 40; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 10) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 35;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 35;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 38.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 38.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 42.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 42.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 45.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 45.0;
+      } else {
+        return 45.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 11) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 40;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 40;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 43.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 43.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 47.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 47.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 50.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 50.0;
+      } else {
+        return 50.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 12) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 50;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 50.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 53.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 53.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 57.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 57.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 60.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 60.0;
+      } else {
+        return 60.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 13) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 53;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 53.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 56.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 56.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 60.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 60.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 63.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 63.0;
+      } else {
+        return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 14) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 53;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 53.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 56.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 56.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 60.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 60.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 63.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 63.0;
+      } else {
+        return 63.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else if (dishCount == 15) {
+      if (peopleCount >= 0 && peopleCount <= 10) {
+        return 55;
+      } else if (peopleCount >= 11 && peopleCount <= 19) {
+        return 55.0;
+      } else if (peopleCount >= 20 && peopleCount <= 29) {
+        return 58.5;
+      } else if (peopleCount >= 30 && peopleCount <= 39) {
+        return 58.5;
+      } else if (peopleCount >= 40 && peopleCount <= 49) {
+        return 62.0;
+      } else if (peopleCount >= 50 && peopleCount <= 59) {
+        return 62.0;
+      } else if (peopleCount >= 60 && peopleCount <= 69) {
+        return 65.0;
+      } else if (peopleCount >= 70 && peopleCount <= 99) {
+        return 65.0;
+      } else {
+        return 65.0; // For 100-150 people, use the same discount percentage as 70-99 people
+      }
+    } else {
     }
+  }
 
-    const newDishPrice = selectedMealList.reduce((total, dish) => total + dish.price, 0);
-    var totalPrice = selectedOption === 'party-live-buffet-catering' ?  ((newDishPrice * peopleCount) * 1.1 + 6500).toFixed(0) : newDishPrice * peopleCount;
-    const discountPercentage = calculateDiscountPercentage(peopleCount, dishCount);
-    console.log("discountPercentage" + discountPercentage)
-    var discountedPrice = selectedOption === 'party-live-buffet-catering' ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0) : (totalPrice * (discountPercentage / 100)).toFixed(0);
+  const newDishPrice = selectedMealList.reduce(
+    (total, dish) => total + dish.price,
+    0
+  );
+  var totalPrice =
+    
+   === "party-live-buffet-catering"
+      ? (newDishPrice * peopleCount * 1.1 + 6500).toFixed(0)
+      : newDishPrice * peopleCount;
+  console.log(totalPrice, "totalprice");
+  console.log(newDishPrice, "newdishprice");
+  const discountPercentage = calculateDiscountPercentage(
+    peopleCount,
+    dishCount
+  );
+  console.log("discountPercentage" + discountPercentage);
+  var discountedPrice =
+    
+   === "party-live-buffet-catering"
+      ? ((totalPrice - 6500) * (discountPercentage / 100)).toFixed(0)
+      : (totalPrice * (discountPercentage / 100)).toFixed(0);
 
-
-    console.log(totalPrice+"===="+ discountedPrice)
+  console.log(totalPrice + "====" + discountedPrice);
 
   // Container for the whole component
   const MainContainer = styled.div`
@@ -437,7 +447,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
 
     @media (max-width: 800px) {
       padding: 5px; // Reduce padding on smaller screens
-       display: flex;
+      display: flex;
     }
   `;
 
@@ -563,8 +573,8 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
           totalOrderAmount: totalOrderAmount,
           selectedDishQuantities: JSON.stringify(selectedDishQuantities),
           selectedOption: selectedOption,
-        }
-        });
+        },
+      });
     } else {
       router.push({
         pathname: "/party-food-delivery-live-catering-buffet-checkout",
@@ -576,7 +586,7 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
           totalOrderAmount: totalOrderAmount,
           selectedDishQuantities: JSON.stringify(selectedDishQuantities),
           selectedOption: selectedOption,
-        }
+        },
       });
     }
   };
@@ -586,8 +596,8 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
       setIsMobile(window.innerWidth < 800);
     };
     handleResize(); // Check initial size
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const LeftTabContent = ({ selectedOption }) => {
@@ -614,7 +624,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -635,7 +649,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -656,7 +674,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -684,7 +706,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -704,7 +730,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -727,7 +757,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -747,7 +781,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -767,7 +805,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -808,7 +850,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -828,7 +874,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -848,7 +898,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -942,22 +996,30 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
   };
 
   const RenderDishQuantity = ({ item }) => {
-    const itemCount = Object.values(data).filter(x =>
-      x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
-      x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
-      x.mealId[0] === "63edc4757e1b370928b149b3"
+    const itemCount = Object.values(data).filter(
+      (x) =>
+        x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
+        x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
+        x.mealId[0] === "63edc4757e1b370928b149b3"
     ).length;
 
-    const mainCourseItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de").length;
-    const appetizerItemCount = Object.values(data).filter(x => x.mealId[0] === "63f1b39a4082ee76673a0a9f").length;
-    const breadItemCount = Object.values(data).filter(x => x.mealId[0] === "63edc4757e1b370928b149b3").length;
+    const mainCourseItemCount = Object.values(data).filter(
+      (x) => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de"
+    ).length;
+    const appetizerItemCount = Object.values(data).filter(
+      (x) => x.mealId[0] === "63f1b39a4082ee76673a0a9f"
+    ).length;
+    const breadItemCount = Object.values(data).filter(
+      (x) => x.mealId[0] === "63edc4757e1b370928b149b3"
+    ).length;
 
     let quantity = item.quantity * peopleCount;
 
-    if (item.id && (
-      (item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
-      (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
-      (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1))
+    if (
+      item.id &&
+      ((item.id[0] === "63f1b6b7ed240f7a09f7e2de" && mainCourseItemCount > 1) ||
+        (item.id[0] === "63f1b39a4082ee76673a0a9f" && appetizerItemCount > 1) ||
+        (item.id[0] === "63edc4757e1b370928b149b3" && breadItemCount > 1))
     ) {
       if (itemCount <= 5) {
         quantity = quantity;
@@ -968,9 +1030,9 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
       } else if (itemCount === 9 || itemCount === 10) {
         quantity = quantity * (1 - 0.35);
       } else if (itemCount === 11) {
-        quantity = quantity * (1 - 0.40);
+        quantity = quantity * (1 - 0.4);
       } else if (itemCount === 12) {
-        quantity = quantity * (1 - 0.50);
+        quantity = quantity * (1 - 0.5);
       } else if (itemCount === 13) {
         quantity = quantity * (1 - 0.53);
       } else if (itemCount === 15) {
@@ -982,36 +1044,81 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
     let unit = item.unit;
     if (quantity >= 1000) {
       quantity = quantity / 1000;
-      if (unit === 'Gram') {
-        unit = 'KG';
-      } else if (unit === 'ml') {
-        unit = 'L';
-      }
-      else if (unit === 'Peices') {
-        unit = 'PCS';
+      if (unit === "Gram") {
+        unit = "KG";
+      } else if (unit === "ml") {
+        unit = "L";
+      } else if (unit === "Peices") {
+        unit = "PCS";
       }
     }
 
     return (
-      <div style={{ width: "23%", alignItems: 'center', borderRadius: 5, border: "1px solid #DADADA", flexDirection: 'row', padding: "10px", display: "flex", marginBottom: "20px" }} className='ingredientsec'>
-        <div style={{ marginLeft: 5, width: "45%", height: "auto", backgroundColor: '#F0F0F0', borderRadius: "10px", alignItems: 'center', padding: "5%", justifyContent: 'center', marginRight: 15 }} className='ingredientleftsec'>
-          <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} style={styles.image} width={100} height={60} />
+      <div
+        style={{
+          width: "23%",
+          alignItems: "center",
+          borderRadius: 5,
+          border: "1px solid #DADADA",
+          flexDirection: "row",
+          padding: "10px",
+          display: "flex",
+          marginBottom: "20px",
+        }}
+        className="ingredientsec"
+      >
+        <div
+          style={{
+            marginLeft: 5,
+            width: "45%",
+            height: "auto",
+            backgroundColor: "#F0F0F0",
+            borderRadius: "10px",
+            alignItems: "center",
+            padding: "5%",
+            justifyContent: "center",
+            marginRight: 15,
+          }}
+          className="ingredientleftsec"
+        >
+          <Image
+            src={`https://horaservices.com/api/uploads/${item.image}`}
+            alt={item.name}
+            style={styles.image}
+            width={100}
+            height={60}
+          />
         </div>
-        <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
-          <div style={{ fontSize: "80%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
-          {
-            selectedOption === 'party-food-delivery' ? 
-            <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
-            :
-            null
-          }
+        <div
+          style={{ flexDirection: "column", marginLeft: 1, width: 80 }}
+          className="ingredientrightsec"
+        >
+          <div
+            style={{ fontSize: "80%", fontWeight: "500", color: "#414141" }}
+            className="ingredientrightsecheading"
+          >
+            {item.name}
+          </div>
+          {selectedOption === "party-food-delivery" ? (
+            <div
+              style={{
+                fontSize: "110%",
+                fontWeight: "700",
+                color: "#9252AA",
+                textTransform: "uppercase",
+              }}
+              className="ingredientrightsecsibheading"
+            >
+              {quantity + " " + unit}
+            </div>
+          ) : null}
         </div>
       </div>
     );
   };
 
-
   const RightTabContent = ({ selected_dish_quantities }) => {
+    console.log(selected_dish_quantities, "seleectedadusgq");
     if (!selected_dish_quantities) {
       // console.log('selectedDishQuantities is not an object:', selected_dish_quantities);
       return null;
@@ -1046,14 +1153,28 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
             }}
             className="dishes-selected"
           >
-            {Object.keys(selected_dish_quantities).length > 0 ? (
+            {/* {Object.keys(selected_dish_quantities).length > 0 ? (
               Object.keys(selected_dish_quantities).map((key, index) => (
                 <RenderDishQuantity
                   key={index}
                   item={selected_dish_quantities[key]}
                 />
               ))
-            ) : null}
+            ) : null} */}
+
+            {Object.keys(selected_dish_quantities).length > 0
+              ? Object.keys(selected_dish_quantities).map((key, index) => {
+                  console.log("Current key:", key);
+                  console.log("Index of key:", index);
+                  console.log("Current item:", selected_dish_quantities[key]);
+                  return (
+                    <RenderDishQuantity
+                      key={index}
+                      item={selected_dish_quantities[key]}
+                    />
+                  );
+                })
+              : (console.log("No items in selected_dish_quantities"), null)}
           </div>
         </div>
 
@@ -1085,19 +1206,19 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
         </div>
 
         <div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: "#9252AA",
-                      fontWeight: "400",
-                      padding: "10px 5px 0",
-                    }}
-                  >
-                    Dish quantities vary based on guest count and selections.
-                    Over 5 dishes: 550-700g per person. Under 5 dishes: 100g per
-                    person per dish
-                  </div>
-                </div>
+          <div
+            style={{
+              fontSize: 11,
+              color: "#9252AA",
+              fontWeight: "400",
+              padding: "10px 5px 0",
+            }}
+          >
+            Dish quantities vary based on guest count and selections. Over 5
+            dishes: 550-700g per person. Under 5 dishes: 100g per person per
+            dish
+          </div>
+        </div>
       </div>
     );
   };
@@ -1128,7 +1249,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
           padding: "10px 0",
         }}
       >
-        <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
+        <Image
+          style={{ width: "20px", height: "20px", marginRight: "10px" }}
+          src={InfoIcon}
+          alt="info"
+        />
         <p
           style={{
             color: "#676767",
@@ -1144,17 +1269,29 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
 
       <Container className="range-bar">
         <Step active={true.toString()}>
-          <Image src={SelectDishes} alt="Select Dishes" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectDishes}
+            alt="Select Dishes"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label active={true.toString()}>Select Dishes</Label>
         </Step>
         <Line active={true.toString()} />
         <Step>
-          <Image src={SelectDateTime} alt="Select Date & Time" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectDateTime}
+            alt="Select Date & Time"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label active={true.toString()}>Select Date & Time</Label>
         </Step>
         <Line />
         <Step>
-          <Image src={SelectConfirmOrder} alt="Confirm Order" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectConfirmOrder}
+            alt="Confirm Order"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label>Select Confirm Order</Label>
         </Step>
       </Container>
@@ -1182,7 +1319,11 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
             className="peoplecontsec"
           >
             <div
-              style={{ display: "flex", flexDirection: "column", marginTop: 13 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: 13,
+              }}
             >
               <div>
                 <div
@@ -1210,44 +1351,50 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                   >
                     How many people you are hosting?
                   </p>
-                  <div style={{ display:"flex" , justifyContent:"center" , alignItems:"center"}}>
-                  <button
-                    onClick={decreasePeopleCount}
-                    style={{ backgroundColor: "transparent", border: "none" }}
-                  >
-                    <Image
-                      src={MinusIcon}
-                      style={{ height: 25, width: 25, marginLeft: 5 }}
-                      alt="minus icon"
-                       className="quantiy-icon"
-                    />
-                  </button>
-                  <p
+                  <div
                     style={{
-                      marginLeft: 5,
-                      lineHeight: "23px",
-                      fontSize: 18,
-                      marginTop: "0",
-                      marginBottom:"0",
-                      width: 22,
-                      textAlign: "center",
-                      color: "black",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
-                    className="totalcount"
                   >
-                    {peopleCount}
-                  </p>
-                  <button
-                    onClick={increasePeopleCount}
-                    style={{ backgroundColor: "transparent", border: "none" }}
-                  >
-                    <Image
-                      src={PlusIcon}
-                      style={{ height: 25, width: 25, marginLeft: 5 }}
-                      alt="plus icon"
-                      className="quantiy-icon"
-                    />
-                  </button>
+                    <button
+                      onClick={decreasePeopleCount}
+                      style={{ backgroundColor: "transparent", border: "none" }}
+                    >
+                      <Image
+                        src={MinusIcon}
+                        style={{ height: 25, width: 25, marginLeft: 5 }}
+                        alt="minus icon"
+                        className="quantiy-icon"
+                      />
+                    </button>
+                    <p
+                      style={{
+                        marginLeft: 5,
+                        lineHeight: "23px",
+                        fontSize: 18,
+                        marginTop: "0",
+                        marginBottom: "0",
+                        width: 22,
+                        textAlign: "center",
+                        color: "black",
+                      }}
+                      className="totalcount"
+                    >
+                      {peopleCount}
+                    </p>
+                    <button
+                      onClick={increasePeopleCount}
+                      style={{ backgroundColor: "transparent", border: "none" }}
+                    >
+                      <Image
+                        src={PlusIcon}
+                        style={{ height: 25, width: 25, marginLeft: 5 }}
+                        alt="plus icon"
+                        className="quantiy-icon"
+                      />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1276,36 +1423,56 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
                 </div>
               </div>
 
-
               <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: " baseline",
-                justifyContent: " space-between",
-                paddingTop: 12,
-                width:"100%",
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: " baseline",
+                    justifyContent: " space-between",
+                    paddingTop: 12,
+                    width: "100%",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "#222",
+                      marginBottom: 0,
+                    }}
+                  >
+                    Need more info?
+                  </p>
 
-              }}
-            >
-              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
-                Need more info?
-              </p>
-           
-                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
-           
+                  <button
+                    className="button-cta whatsapp-cta"
+                    onClick={contactUsRedirection}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-message-circle icon-cta"
+                    >
+                      <path
+                        d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+                        className="whatsapp-iconimg"
+                      ></path>
+                    </svg>
+                    Whatsapp
+                  </button>
+                </div>
+              </div>
             </div>
-
-          </div>
-            </div>
-
-      
           </div>
 
-
-       
           <div
             style={{
               flexDirection: "row",
@@ -1352,8 +1519,6 @@ const dishCount = selectedMealList.filter(x => x.mealId == "63f1b6b7ed240f7a09f7
             </button>
             {renderTabContent(selectedDishQuantities)}
           </div>
-
-       
         </div>
       </div>
       <Row>
