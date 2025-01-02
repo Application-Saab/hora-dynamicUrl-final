@@ -824,13 +824,13 @@ console.log(dishCount)
         quantity = quantity * (1 - 0.35);
       } else if (itemCount === 11) {
         quantity = quantity * (1 - 0.40);
-      } else if (itemCount === 12) {
-        quantity = quantity * (1 - 0.50);
-      } else if (itemCount === 13) {
-        quantity = quantity * (1 - 0.53);
-      } else if (itemCount === 15) {
-        quantity = quantity * (1 - 0.55);
-      }
+      } else if (itemCount == 12 || itemCount == 13) {
+        quantity = quantity * (1 - 0.50)
+    } else if (itemCount == 14) {
+        quantity = quantity * (1 - 0.53)
+    } else if (itemCount == 15) {
+        quantity = quantity * (1 - 0.55)
+    }
     }
 
     quantity = Math.round(quantity);

@@ -277,13 +277,11 @@ const FoodDeliveryCheckout = () => {
             else if (itemCount == 11) {
                 quantity = quantity * (1 - 0.40)
             }
-            else if (itemCount == 12) {
+            else if (itemCount == 12 || itemCount == 13) {
                 quantity = quantity * (1 - 0.50)
-            }
-            else if (itemCount == 13) {
+            } else if (itemCount == 14) {
                 quantity = quantity * (1 - 0.53)
-            }
-            else if (itemCount == 15) {
+            } else if (itemCount == 15) {
                 quantity = quantity * (1 - 0.55)
             }
         }
