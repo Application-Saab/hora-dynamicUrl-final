@@ -1244,7 +1244,6 @@ const FoodDeliveryCheckout = () => {
                     },
                 });
 
-
                 window.location.href = response2.data
 
             } else {
