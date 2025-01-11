@@ -40,7 +40,8 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
   const [showCookingTime, setShowCookingTime] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedTab, setSelectedTab] = useState("Appliances");
-  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] = useState(false);
+  const [isWarningVisibleForTotalAmount, setWarningVisibleForTotalAmount] =
+    useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   let {
@@ -53,8 +54,11 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     selectedDishQuantities,
   } = router.query;
 
+  console.log(selectedDishQuantities,"selecteddishquantites2");
+  console.log(selectedDishDictionary,"selectedDishDictionary23");
+
   const [peopleCount, setPeopleCount] = useState(
-    selectedOption === 'party-live-buffet-catering' ? 20 : 10
+    selectedOption === "party-live-buffet-catering" ? 20 : 10
   );
 
   if (selectedDishDictionary) {
@@ -62,108 +66,99 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
       selectedDishDictionary = JSON.parse(selectedDishDictionary);
       selectedDishQuantities = JSON.parse(selectedDishQuantities);
     } catch (error) {
-      console.error('Error parsing selectedDishDictionary:', error);
+      console.error("Error parsing selectedDishDictionary:", error);
     }
   } // Accessing subCategory and itemName safely
   // selectedDishQuantities = Array.isArray(selectedDishQuantities) ? selectedDishQuantities : [];
   const data = selectedDishDictionary;
+  console.log(data, "dataaa");
   const [dishPrice, setDishPrice] = useState(selectedDishPrice);
 
-  const selectedMealList = Object.values(data).map(dish => {
+  console.log(selectedDishQuantities, "selecteddishquantites");
+
+  const selectedMealList = Object.values(data).map((dish) => {
     return {
-        name: dish.name,
-        image: dish.image,
-        price: Number(dish.cuisineArray[0]),
-        id: dish._id,
-        mealId: dish.mealId
+      name: dish.name,
+      image: dish.image,
+      price: Number(dish.cuisineArray[0]),
+      id: dish._id,
+      mealId: dish.mealId,
     };
-});
+  });
+  console.log(selectedMealList, "selectedmeallist");
 
-const dishObject = selectedMealList.filter(x =>
-  x.name !== "Tawa Rotis" &&
-  x.name !== "Rumali Rotis"
-)
+  const dishObject = selectedMealList.filter(
+    (x) => x.name !== "Tawa Rotis" && x.name !== "Rumali Rotis"
+  );
 
-
-const dishCount = dishObject.filter(x => x.mealId == "63f1b6b7ed240f7a09f7e2de" || x.mealId == "63f1b39a4082ee76673a0a9f" || x.mealId == "63edc4757e1b370928b149b3").length;
-console.log(dishCount)
-    function calculateDiscountPercentage(peopleCount) {
-      console.log(peopleCount)
-      if (peopleCount <= 39){
-        return 1
-      }
-      else if (peopleCount >= 40 && peopleCount <= 59){
-        return 0.93
-      }
-      else if (peopleCount >= 60){
-        return 0.9
-      }
+  const dishCount = dishObject.filter(
+    (x) =>
+      x.mealId == "63f1b6b7ed240f7a09f7e2de" ||
+      x.mealId == "63f1b39a4082ee76673a0a9f" ||
+      x.mealId == "63edc4757e1b370928b149b3"
+  ).length;
+  console.log(dishCount);
+  function calculateDiscountPercentage(peopleCount) {
+    console.log(peopleCount);
+    if (peopleCount <= 39) {
+      return 1;
+    } else if (peopleCount >= 40 && peopleCount <= 59) {
+      return 0.93;
+    } else if (peopleCount >= 60) {
+      return 0.9;
     }
+  }
 
-    function calculateDiscountPercentageQuantity(dishCount){
-      if (dishCount == 4)
-        return 1.15
-      else if (dishCount == 5)
-        return 1
-      else if (dishCount == 6 || dishCount == 7)
-        return 0.85
-      else if (dishCount == 8)
-        return 0.75
-      else if (dishCount == 9 || dishCount == 10)
-        return 0.65
-      else if (dishCount == 11)
-        return 0.6
-      else if (dishCount == 12 || dishCount == 13)
-        return 0.5
-      else if (dishCount == 14)
-        return 0.47
-      else if (dishCount == 15)
-        return 0.45
-      else 
-        return 1
+  function calculateDiscountPercentageQuantity(dishCount) {
+    if (dishCount == 4) return 1.15;
+    else if (dishCount == 5) return 1;
+    else if (dishCount == 6 || dishCount == 7) return 0.85;
+    else if (dishCount == 8) return 0.75;
+    else if (dishCount == 9 || dishCount == 10) return 0.65;
+    else if (dishCount == 11) return 0.6;
+    else if (dishCount == 12 || dishCount == 13) return 0.5;
+    else if (dishCount == 14) return 0.47;
+    else if (dishCount == 15) return 0.45;
+    else return 1;
+  }
+
+  const validMealIds = [
+    "63f1b6b7ed240f7a09f7e2de",
+    "63f1b39a4082ee76673a0a9f",
+    "63edc4757e1b370928b149b3",
+  ];
+
+  console.log(selectedMealList);
+
+  const discountPercentagePrice = calculateDiscountPercentage(peopleCount);
+
+  const discountPercentageQuantity =
+    calculateDiscountPercentageQuantity(dishCount);
+
+  var newTotalPrice = 0;
+  var totalPrice = 0;
+  selectedMealList.forEach((dish) => {
+    console.log(dish);
+    if (
+      dish.name !== "Tawa Rotis" &&
+      dish.name !== "Rumali Rotis" &&
+      dish.mealId.some((id) => validMealIds.includes(id))
+    ) {
+      newTotalPrice += dish.price * peopleCount * discountPercentageQuantity;
+    } else {
+      newTotalPrice += dish.price * peopleCount;
     }
+    totalPrice = totalPrice + dish.price * peopleCount;
+  });
 
+  console.log(newTotalPrice);
+  console.log(totalPrice);
+  newTotalPrice = newTotalPrice * discountPercentagePrice;
 
-    const validMealIds = [
-      "63f1b6b7ed240f7a09f7e2de",
-      "63f1b39a4082ee76673a0a9f",
-      "63edc4757e1b370928b149b3"
-    ];
-
-
-
-
-    console.log(selectedMealList)
-    
-    
-    const discountPercentagePrice = calculateDiscountPercentage(peopleCount);
-    
-    const discountPercentageQuantity = calculateDiscountPercentageQuantity(dishCount)
-
-    var newTotalPrice = 0
-    var totalPrice = 0
-    selectedMealList.forEach((dish) => {
-      console.log(dish)
-      if (
-        dish.name !== "Tawa Rotis" &&
-        dish.name !== "Rumali Rotis" &&
-        dish.mealId.some((id) => validMealIds.includes(id))
-      ) {
-        
-         newTotalPrice += dish.price * peopleCount * discountPercentageQuantity
-      }
-      else {
-        newTotalPrice += dish.price * peopleCount
-      }
-      totalPrice = totalPrice + dish.price * peopleCount
-    });
-
-    console.log(newTotalPrice)
-    console.log(totalPrice)
-    newTotalPrice = newTotalPrice * discountPercentagePrice
-
-
-    var discountedPrice = selectedOption === 'party-live-buffet-catering' ?  ((newTotalPrice) * 1.1 + 6500).toFixed(0) : newTotalPrice.toFixed(0);
+  var discountedPrice =
+    selectedOption === "party-live-buffet-catering"
+      ? (newTotalPrice * 1.1 + 6500).toFixed(0)
+      : newTotalPrice.toFixed(0);
 
   // Container for the whole component
   const MainContainer = styled.div`
@@ -284,7 +279,7 @@ console.log(dishCount)
 
     @media (max-width: 800px) {
       padding: 5px; // Reduce padding on smaller screens
-       display: flex;
+      display: flex;
     }
   `;
 
@@ -339,7 +334,8 @@ console.log(dishCount)
     button: "",
   });
 
-  const minPeopleCount = selectedOption === 'party-live-buffet-catering' ? 20 : 10;
+  const minPeopleCount =
+    selectedOption === "party-live-buffet-catering" ? 20 : 10;
   const maxPeopleCount = 100;
   const step = 5;
 
@@ -410,8 +406,8 @@ console.log(dishCount)
           totalOrderAmount: totalOrderAmount,
           selectedDishQuantities: JSON.stringify(selectedDishQuantities),
           selectedOption: selectedOption,
-        }
-        });
+        },
+      });
     } else {
       router.push({
         pathname: "/party-food-delivery-live-catering-buffet-checkout",
@@ -423,7 +419,7 @@ console.log(dishCount)
           totalOrderAmount: totalOrderAmount,
           selectedDishQuantities: JSON.stringify(selectedDishQuantities),
           selectedOption: selectedOption,
-        }
+        },
       });
     }
   };
@@ -433,8 +429,8 @@ console.log(dishCount)
       setIsMobile(window.innerWidth < 800);
     };
     handleResize(); // Check initial size
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const LeftTabContent = ({ selectedOption }) => {
@@ -461,7 +457,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -482,7 +482,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -503,7 +507,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={checkImage} alt="Info" style={{ height: 13, width: 13, marginRight: 10 }} />
+                <Image
+                  src={checkImage}
+                  alt="Info"
+                  style={{ height: 13, width: 13, marginRight: 10 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -531,7 +539,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -551,7 +563,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -574,7 +590,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -594,7 +614,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -614,7 +638,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -655,7 +683,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -675,7 +707,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -695,7 +731,11 @@ console.log(dishCount)
                   width: "100%",
                 }}
               >
-                <Image src={TickIcon} alt="tick" style={{ height: 16, width: 16 }} />
+                <Image
+                  src={TickIcon}
+                  alt="tick"
+                  style={{ height: 16, width: 16 }}
+                />
                 <p
                   style={{
                     color: "#9252AA",
@@ -789,82 +829,127 @@ console.log(dishCount)
   };
 
   const RenderDishQuantity = ({ item }) => {
+    console.log(item);
+    const dishObject = Object.values(data).filter(
+      (x) =>
+        x._id !== "641540d58c62c01319fcccae" &&
+        x._id !== "641540da8c62c01319fccef8"
+    );
 
-    console.log(item)
-    const dishObject = Object.values(data).filter(x =>
-      x._id !== "641540d58c62c01319fcccae" &&
-      x._id !== "641540da8c62c01319fccef8"
-    )
-
-    const itemCount = dishObject.filter(x =>
-      x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
-      x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
-      x.mealId[0] === "63edc4757e1b370928b149b3"
+    const itemCount = dishObject.filter(
+      (x) =>
+        x.mealId[0] === "63f1b6b7ed240f7a09f7e2de" ||
+        x.mealId[0] === "63f1b39a4082ee76673a0a9f" ||
+        x.mealId[0] === "63edc4757e1b370928b149b3"
     ).length;
 
-    const mainCourseItemCount = dishObject.filter(x => x.mealId[0] === "63f1b6b7ed240f7a09f7e2de").length;
-    const appetizerItemCount = dishObject.filter(x => x.mealId[0] === "63f1b39a4082ee76673a0a9f").length;
-    const breadItemCount = dishObject.filter(x => x.mealId[0] === "63edc4757e1b370928b149b3").length;
-
     let quantity = item.quantity * peopleCount;
+    console.log(quantity, "all the quanititi");
 
-    
-    if (item.name !== "Tawa Rotis" && item.name !== "Rumali Rotis" && item.id && (
-      (item.id[0] === "63f1b6b7ed240f7a09f7e2de") ||
-      (item.id[0] === "63f1b39a4082ee76673a0a9f") ||
-      (item.id[0] === "63edc4757e1b370928b149b3"))
+    if (
+      item.name !== "Tawa Rotis" &&
+      item.name !== "Rumali Rotis" &&
+      item.id &&
+      (item.id[0] === "63f1b6b7ed240f7a09f7e2de" ||
+        item.id[0] === "63f1b39a4082ee76673a0a9f" ||
+        item.id[0] === "63edc4757e1b370928b149b3")
     ) {
       if (itemCount == 4) {
         quantity = quantity * (1 + 0.15);
       } else if (itemCount === 6 || itemCount === 7) {
         quantity = quantity * (1 - 0.15);
+        console.log(quantity,"all the quanity mujhe chahiye");
       } else if (itemCount === 8) {
         quantity = quantity * (1 - 0.25);
       } else if (itemCount === 9 || itemCount === 10) {
         quantity = quantity * (1 - 0.35);
       } else if (itemCount === 11) {
-        quantity = quantity * (1 - 0.40);
+        quantity = quantity * (1 - 0.4);
       } else if (itemCount == 12 || itemCount == 13) {
-        quantity = quantity * (1 - 0.50)
-    } else if (itemCount == 14) {
-        quantity = quantity * (1 - 0.53)
-    } else if (itemCount == 15) {
-        quantity = quantity * (1 - 0.55)
-    }
+        quantity = quantity * (1 - 0.5);
+      } else if (itemCount == 14) {
+        quantity = quantity * (1 - 0.53);
+      } else if (itemCount == 15) {
+        quantity = quantity * (1 - 0.55);
+      }
     }
 
     quantity = Math.round(quantity);
     let unit = item.unit;
     if (quantity >= 1000) {
       quantity = quantity / 1000;
-      if (unit === 'Gram') {
-        unit = 'KG';
-      } else if (unit === 'ml') {
-        unit = 'L';
-      }
-      else if (unit === 'Peices') {
-        unit = 'PCS';
+      if (unit === "Gram") {
+        unit = "KG";
+      } else if (unit === "ml") {
+        unit = "L";
+      } else if (unit === "Peices") {
+        unit = "PCS";
       }
     }
 
     return (
-      <div style={{ width: "23%", alignItems: 'center', borderRadius: 5, border: "1px solid #DADADA", flexDirection: 'row', padding: "10px", display: "flex", marginBottom: "20px" }} className='ingredientsec'>
-        <div style={{ marginLeft: 5, width: "45%", height: "auto", backgroundColor: '#F0F0F0', borderRadius: "10px", alignItems: 'center', padding: "5%", justifyContent: 'center', marginRight: 15 }} className='ingredientleftsec'>
-          <Image src={`https://horaservices.com/api/uploads/${item.image}`} alt={item.name} style={styles.image} width={100} height={60} />
+      <div
+        style={{
+          width: "23%",
+          alignItems: "center",
+          borderRadius: 5,
+          border: "1px solid #DADADA",
+          flexDirection: "row",
+          padding: "10px",
+          display: "flex",
+          marginBottom: "20px",
+        }}
+        className="ingredientsec"
+      >
+        <div
+          style={{
+            marginLeft: 5,
+            width: "45%",
+            height: "auto",
+            backgroundColor: "#F0F0F0",
+            borderRadius: "10px",
+            alignItems: "center",
+            padding: "5%",
+            justifyContent: "center",
+            marginRight: 15,
+          }}
+          className="ingredientleftsec"
+        >
+          <Image
+            src={`https://horaservices.com/api/uploads/${item.image}`}
+            alt={item.name}
+            style={styles.image}
+            width={100}
+            height={60}
+          />
         </div>
-        <div style={{ flexDirection: 'column', marginLeft: 1, width: 80 }} className='ingredientrightsec'>
-          <div style={{ fontSize: "80%", fontWeight: '500', color: '#414141' }} className='ingredientrightsecheading'>{item.name}</div>
-          {
-            selectedOption === 'party-food-delivery' ? 
-            <div style={{ fontSize: "110%", fontWeight: '700', color: '#9252AA' , textTransform:"uppercase"}} className='ingredientrightsecsibheading'>{quantity + ' ' + unit}</div>
-            :
-            null
-          }
+        <div
+          style={{ flexDirection: "column", marginLeft: 1, width: 80 }}
+          className="ingredientrightsec"
+        >
+          <div
+            style={{ fontSize: "80%", fontWeight: "500", color: "#414141" }}
+            className="ingredientrightsecheading"
+          >
+            {item.name}
+          </div>
+          {selectedOption === "party-food-delivery" ? (
+            <div
+              style={{
+                fontSize: "110%",
+                fontWeight: "700",
+                color: "#9252AA",
+                textTransform: "uppercase",
+              }}
+              className="ingredientrightsecsibheading"
+            >
+              {quantity + " " + unit}
+            </div>
+          ) : null}
         </div>
       </div>
     );
   };
-
 
   const RightTabContent = ({ selected_dish_quantities }) => {
     if (!selected_dish_quantities) {
@@ -901,14 +986,14 @@ console.log(dishCount)
             }}
             className="dishes-selected"
           >
-            {Object.keys(selected_dish_quantities).length > 0 ? (
-              Object.keys(selected_dish_quantities).map((key, index) => (
-                <RenderDishQuantity
-                  key={index}
-                  item={selected_dish_quantities[key]}
-                />
-              ))
-            ) : null}
+            {Object.keys(selected_dish_quantities).length > 0
+              ? Object.keys(selected_dish_quantities).map((key, index) => (
+                  <RenderDishQuantity
+                    key={index}
+                    item={selected_dish_quantities[key]}
+                  />
+                ))
+              : null}
           </div>
         </div>
 
@@ -940,19 +1025,19 @@ console.log(dishCount)
         </div>
 
         <div>
-                  <div
-                    style={{
-                      fontSize: 11,
-                      color: "#9252AA",
-                      fontWeight: "400",
-                      padding: "10px 5px 0",
-                    }}
-                  >
-                    Dish quantities vary based on guest count and selections.
-                    Over 5 dishes: 550-700g per person. Under 5 dishes: 100g per
-                    person per dish
-                  </div>
-                </div>
+          <div
+            style={{
+              fontSize: 11,
+              color: "#9252AA",
+              fontWeight: "400",
+              padding: "10px 5px 0",
+            }}
+          >
+            Dish quantities vary based on guest count and selections. Over 5
+            dishes: 550-700g per person. Under 5 dishes: 100g per person per
+            dish
+          </div>
+        </div>
       </div>
     );
   };
@@ -983,7 +1068,11 @@ console.log(dishCount)
           padding: "10px 0",
         }}
       >
-        <Image style={{ width: "20px", height: "20px", marginRight: "10px" }} src={InfoIcon} alt="info" />
+        <Image
+          style={{ width: "20px", height: "20px", marginRight: "10px" }}
+          src={InfoIcon}
+          alt="info"
+        />
         <p
           style={{
             color: "#676767",
@@ -999,17 +1088,29 @@ console.log(dishCount)
 
       <Container className="range-bar">
         <Step active={true.toString()}>
-          <Image src={SelectDishes} alt="Select Dishes" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectDishes}
+            alt="Select Dishes"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label active={true.toString()}>Select Dishes</Label>
         </Step>
         <Line active={true.toString()} />
         <Step>
-          <Image src={SelectDateTime} alt="Select Date & Time" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectDateTime}
+            alt="Select Date & Time"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label active={true.toString()}>Select Date & Time</Label>
         </Step>
         <Line />
         <Step>
-          <Image src={SelectConfirmOrder} alt="Confirm Order" style={isMobile ? styles.mobileDish : styles.webDish} />
+          <Image
+            src={SelectConfirmOrder}
+            alt="Confirm Order"
+            style={isMobile ? styles.mobileDish : styles.webDish}
+          />
           <Label>Select Confirm Order</Label>
         </Step>
       </Container>
@@ -1037,7 +1138,11 @@ console.log(dishCount)
             className="peoplecontsec"
           >
             <div
-              style={{ display: "flex", flexDirection: "column", marginTop: 13 }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: 13,
+              }}
             >
               <div>
                 <div
@@ -1065,44 +1170,50 @@ console.log(dishCount)
                   >
                     How many people you are hosting?
                   </p>
-                  <div style={{ display:"flex" , justifyContent:"center" , alignItems:"center"}}>
-                  <button
-                    onClick={decreasePeopleCount}
-                    style={{ backgroundColor: "transparent", border: "none" }}
-                  >
-                    <Image
-                      src={MinusIcon}
-                      style={{ height: 25, width: 25, marginLeft: 5 }}
-                      alt="minus icon"
-                       className="quantiy-icon"
-                    />
-                  </button>
-                  <p
+                  <div
                     style={{
-                      marginLeft: 5,
-                      lineHeight: "23px",
-                      fontSize: 18,
-                      marginTop: "0",
-                      marginBottom:"0",
-                      width: 22,
-                      textAlign: "center",
-                      color: "black",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
-                    className="totalcount"
                   >
-                    {peopleCount}
-                  </p>
-                  <button
-                    onClick={increasePeopleCount}
-                    style={{ backgroundColor: "transparent", border: "none" }}
-                  >
-                    <Image
-                      src={PlusIcon}
-                      style={{ height: 25, width: 25, marginLeft: 5 }}
-                      alt="plus icon"
-                      className="quantiy-icon"
-                    />
-                  </button>
+                    <button
+                      onClick={decreasePeopleCount}
+                      style={{ backgroundColor: "transparent", border: "none" }}
+                    >
+                      <Image
+                        src={MinusIcon}
+                        style={{ height: 25, width: 25, marginLeft: 5 }}
+                        alt="minus icon"
+                        className="quantiy-icon"
+                      />
+                    </button>
+                    <p
+                      style={{
+                        marginLeft: 5,
+                        lineHeight: "23px",
+                        fontSize: 18,
+                        marginTop: "0",
+                        marginBottom: "0",
+                        width: 22,
+                        textAlign: "center",
+                        color: "black",
+                      }}
+                      className="totalcount"
+                    >
+                      {peopleCount}
+                    </p>
+                    <button
+                      onClick={increasePeopleCount}
+                      style={{ backgroundColor: "transparent", border: "none" }}
+                    >
+                      <Image
+                        src={PlusIcon}
+                        style={{ height: 25, width: 25, marginLeft: 5 }}
+                        alt="plus icon"
+                        className="quantiy-icon"
+                      />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1131,36 +1242,56 @@ console.log(dishCount)
                 </div>
               </div>
 
-
               <div className="d-flex flex-column flex-lg-row align-items-between justify-content-center  align-items-lg-center justify-content-lg-between">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: " baseline",
-                justifyContent: " space-between",
-                paddingTop: 12,
-                width:"100%",
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: " baseline",
+                    justifyContent: " space-between",
+                    paddingTop: 12,
+                    width: "100%",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: "#222",
+                      marginBottom: 0,
+                    }}
+                  >
+                    Need more info?
+                  </p>
 
-              }}
-            >
-              <p style={{ fontSize: 16, fontWeight: 600, color: "#222"   , marginBottom:0}}>
-                Need more info?
-              </p>
-           
-                <button className="button-cta whatsapp-cta"  onClick={contactUsRedirection}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle icon-cta"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" className="whatsapp-iconimg"></path></svg>Whatsapp</button>
-           
+                  <button
+                    className="button-cta whatsapp-cta"
+                    onClick={contactUsRedirection}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-message-circle icon-cta"
+                    >
+                      <path
+                        d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+                        className="whatsapp-iconimg"
+                      ></path>
+                    </svg>
+                    Whatsapp
+                  </button>
+                </div>
+              </div>
             </div>
-
-          </div>
-            </div>
-
-      
           </div>
 
-
-       
           <div
             style={{
               flexDirection: "row",
@@ -1207,8 +1338,6 @@ console.log(dishCount)
             </button>
             {renderTabContent(selectedDishQuantities)}
           </div>
-
-       
         </div>
       </div>
       <Row>

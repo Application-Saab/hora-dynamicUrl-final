@@ -214,6 +214,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
           'Content-Type': 'application/json',
         },
       });
+      console.log(response, "response12");
       if (response.status == API_SUCCESS_CODE) {
         // Assuming response is your API response
         const filteredMealList = response.data.data.map(item => ({
@@ -227,7 +228,7 @@ const FoodDeliveryCreateOrder = (currentStep) => {
     } catch (error) {
       console.log('Error Fetching Data:', error.message);
     } finally {
-      setLoading(false); // Set loading to false when the API request is completed
+      setLoading(false); 
     }
   };
 
