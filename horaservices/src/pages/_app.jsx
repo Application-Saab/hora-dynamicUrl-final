@@ -1,6 +1,4 @@
-// pages/_app.tsx
 import {React, useEffect} from "react";
-
 import '../app/globals.css';
 import PageLayout from '@/components/pagelayout';
 import { Provider } from 'react-redux';
@@ -41,9 +39,9 @@ function MyApp({ Component, pageProps }) {
           style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
       </noscript>
-            <Link href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">
+            {/* <Link href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services" target="_blank">
               <Image className='whatappicon' src={whatsppicon} alt="WhatsApp Icon" />
-            </Link>
+            </Link> */}
           </div>
         </PageLayout>
       </PersistGate>

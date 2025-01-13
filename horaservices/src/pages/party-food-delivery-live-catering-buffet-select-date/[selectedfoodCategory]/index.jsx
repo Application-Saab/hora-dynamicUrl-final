@@ -79,6 +79,13 @@ const FoodDeliveryselectDate = ({ history, currentStep }) => {
     };
 });
 
+
+
+    const [isEventPushed, setIsEventPushed] = useState(false);
+    const phoneNumber = localStorage.getItem('mobileNumber');
+
+
+
 const dishObject = selectedMealList.filter(x =>
   x.name !== "Tawa Rotis" &&
   x.name !== "Rumali Rotis"
@@ -371,7 +378,43 @@ console.log(dishCount)
       "https://wa.me/917338584828?text=Hello%20I%20have%20some%20queries%20for%20food%20delivery%20and%20live%20catering%20service"
     );
   };
+
+  const pushToGTM = () => {
+    if (selectedMealList.length > 0 && selectedOption && !isEventPushed) {
+      const productsData = selectedMealList.map(meal => ({
+        name: meal.name
+      }));
+  
+      window.dataLayer = window.dataLayer || [];
+  
+      let eventName = '';
+      let pageUrl = ''; 
+  
+      if (selectedOption === 'party-food-delivery') {
+        eventName = 'party_food_delivery_checkout_page';
+        pageUrl = "/fooddelivery"; 
+      } else if (selectedOption === 'party-live-buffet-catering') {
+        eventName = 'party_live_buffet_catering_checkout_page';
+        pageUrl = "/livecatering";
+      }
+  
+      if (eventName) {
+        window.dataLayer.push({
+          event: eventName,
+          pageUrl: pageUrl,
+          UserPhoneNumber: phoneNumber,
+          products: productsData 
+        });
+  
+        setIsEventPushed(true);
+  
+        console.log(window.dataLayer, "products data sent to GTM for event:", eventName);
+      }
+    }
+  };
+  
   const onContinueClick = () => {
+    pushToGTM();
     const totalOrderAmount =
       selectedOption === "party-live-buffet-catering"
         ? (discountedPrice * 1.1 + 6500).toFixed(0)

@@ -871,7 +871,7 @@ export default function Home() {
           </Slider>
         </div>
       </div>
-      <div>
+      {/* <div>
         <Link
           href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services"
           target="_blank"
@@ -881,6 +881,28 @@ export default function Home() {
             src={whatsppicon}
             alt="WhatsApp Icon"
           />
+        </Link>
+      </div> */}
+
+
+      <div>
+        <Link
+          href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services"
+          target="_blank"
+          onClick={() => {
+            dataLayer.push({
+              'event': 'homepage_whatsapp_click',
+              'page_url': '/homepage',
+              'page_title': 'This is home page WhatsApp click'
+            });
+          }}
+        >
+          <Image
+            className="whatappicon"
+            src={whatsppicon}
+            alt="WhatsApp Icon"
+          />
+          
         </Link>
       </div>
     </>

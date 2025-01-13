@@ -481,7 +481,7 @@ const FoodDeliveryCheckout = () => {
         setLoading(true)
         const apiUrl = BASE_URL + PAYMENT;
         const storedUserID = await localStorage.getItem('userID');
-        const phoneNumber = await localStorage.getItem('mobileNumber')
+        const phoneNumber = await localStorage.getItem('mobileNumber');
         let merchantTransactionId;
         const advance = calculateAdvancePayment();
         const total = calculateFinalTotal();

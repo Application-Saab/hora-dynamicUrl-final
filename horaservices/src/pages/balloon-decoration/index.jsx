@@ -29,6 +29,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { sendGTMEvent } from "@next/third-parties/google";
 import dec1 from "../../assets/dec1.png";
 import dec2 from "../../assets/dec3.png";
+import Link from 'next/link';
+import whatsppicon from "../../assets/whatsapp-icon.png";
 
 const decCat = [
   {
@@ -742,6 +744,16 @@ const Decoration = () => {
     }
   };
 
+
+  const DecorationHandleClick = () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "decoration_page_whatsappclick", 
+      pageUrl: window.location.href,          
+      productName: "decoration page whatsapp button clicked", 
+    });
+  }
+
   const SliderSection = ({ title, data, handleViewMore, viewLink }) => {
 
     const handleItemClick = (item) => {
@@ -1105,6 +1117,17 @@ let lastEvent = window.dataLayer[window.dataLayer.length - 1];
     ))}
 </div>
 
+<Link
+      href="https://wa.me/+917338584828/?text=Hi%2CI%20saw%20your%20website%20and%20want%20to%20know%20more%20about%20the%20services"
+      target="_blank"
+    >
+      <Image
+        className='whatappicon'
+        src={whatsppicon}
+        alt="WhatsApp Icon"
+        onClick={DecorationHandleClick}
+      />
+    </Link>
       <div className="page-width decorationlanding-slider">
         <SliderSection
           title="Kids Birthday Decoration"
