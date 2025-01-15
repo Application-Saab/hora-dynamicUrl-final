@@ -381,21 +381,27 @@ console.log(dishCount)
 
   const pushToGTM = () => {
     if (selectedMealList.length > 0 && selectedOption && !isEventPushed) {
-      const productsData = selectedMealList.map(meal => ({
-        name: meal.name
-      }));
+      const itemsData = selectedMealList.map(meal => 
+        `${meal.name}`
+      ).join(', ');
   
       window.dataLayer = window.dataLayer || [];
   
       let eventName = '';
       let pageUrl = ''; 
-  
+      let page_location = '';
+      let _url = '';
+      
       if (selectedOption === 'party-food-delivery') {
         eventName = 'party_food_delivery_checkout_page';
         pageUrl = "/fooddelivery"; 
+        page_location = "pagelocation";
+        _url = "_url";            
       } else if (selectedOption === 'party-live-buffet-catering') {
         eventName = 'party_live_buffet_catering_checkout_page';
         pageUrl = "/livecatering";
+        page_location = "pagelocation";
+        _url = "_url"; 
       }
   
       if (eventName) {
@@ -403,7 +409,9 @@ console.log(dishCount)
           event: eventName,
           pageUrl: pageUrl,
           UserPhoneNumber: phoneNumber,
-          products: productsData 
+          items: itemsData,
+          page_location: page_location,
+          _url: _url
         });
   
         setIsEventPushed(true);
@@ -412,6 +420,7 @@ console.log(dishCount)
       }
     }
   };
+  
   
   const onContinueClick = () => {
     pushToGTM();
